@@ -19,12 +19,122 @@
             "targets": [
               {
                 "artifacts": [
+                  "/home/jiang/git/aero-node/build/an-core/lib/liban_core_lib.so"
+                ],
+                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/lib",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g -fPIC  ",
+                    "defines": [
+                      "an_core_lib_EXPORTS"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/usr/include/python3.5m"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "system_info_impl.cc"
+                    ]
+                  }
+                ],
+                "fullName": "liban_core_lib.so",
+                "linkerLanguage": "CXX",
+                "name": "an_core_lib",
+                "sourceDirectory": "/home/jiang/git/aero-node/an-core/lib",
+                "type": "SHARED_LIBRARY"
+              },
+              {
+                "artifacts": [
+                  "/home/jiang/git/aero-node/build/an-core/swig/_system_info.so"
+                ],
+                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/swig",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g -fPIC  ",
+                    "defines": [
+                      "_system_info_EXPORTS"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/usr/include/python3.5m"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/include"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/swig"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "../lib/system_info_impl.cc"
+                    ]
+                  },
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "system_info_swig.i"
+                    ]
+                  },
+                  {
+                    "isGenerated": true,
+                    "sources": [
+                      "../../build/an-core/swig/system_info.py"
+                    ]
+                  },
+                  {
+                    "compileFlags": "-g -fPIC  ",
+                    "defines": [
+                      "_system_info_EXPORTS"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/usr/include/python3.5m"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/include"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/swig"
+                      }
+                    ],
+                    "isGenerated": true,
+                    "language": "CXX",
+                    "sources": [
+                      "../../build/an-core/swig/system_info_swigPYTHON_wrap.cxx"
+                    ]
+                  }
+                ],
+                "fullName": "_system_info.so",
+                "linkLibraries": "-lpython3.5m",
+                "linkerLanguage": "CXX",
+                "name": "_system_info",
+                "sourceDirectory": "/home/jiang/git/aero-node/an-core/swig",
+                "type": "MODULE_LIBRARY"
+              },
+              {
+                "artifacts": [
                   "/home/jiang/git/aero-node/build/an-core/app/qa_system_info"
                 ],
                 "buildDirectory": "/home/jiang/git/aero-node/build/an-core/app",
                 "fileGroups": [
                   {
                     "compileFlags": "-g  ",
+                    "includePath": [
+                      {
+                        "path": "/usr/include/python3.5m"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/include"
+                      }
+                    ],
                     "isGenerated": false,
                     "language": "CXX",
                     "sources": [
@@ -39,37 +149,13 @@
                 "name": "qa_system_info",
                 "sourceDirectory": "/home/jiang/git/aero-node/an-core/app",
                 "type": "EXECUTABLE"
-              },
-              {
-                "artifacts": [
-                  "/home/jiang/git/aero-node/build/an-core/lib/liban_core_lib.so"
-                ],
-                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/lib",
-                "fileGroups": [
-                  {
-                    "compileFlags": "-g -fPIC  ",
-                    "defines": [
-                      "an_core_lib_EXPORTS"
-                    ],
-                    "isGenerated": false,
-                    "language": "CXX",
-                    "sources": [
-                      "system_info.cc"
-                    ]
-                  }
-                ],
-                "fullName": "liban_core_lib.so",
-                "linkerLanguage": "CXX",
-                "name": "an_core_lib",
-                "sourceDirectory": "/home/jiang/git/aero-node/an-core/lib",
-                "type": "SHARED_LIBRARY"
               }
             ]
           }
         ]
       }
     ],
-    "cookie": "0.321455732477536",
+    "cookie": "0.004199941066990176",
     "inReplyTo": "codemodel",
     "type": "reply"
   }
