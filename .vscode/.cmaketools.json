@@ -1,0 +1,76 @@
+{
+  "variant": {
+    "label": "Debug",
+    "keywordSettings": {
+      "buildType": "debug"
+    },
+    "description": "Emit debug information without performing optimizations"
+  },
+  "activeEnvironments": [],
+  "codeModel": {
+    "configurations": [
+      {
+        "name": "Debug",
+        "projects": [
+          {
+            "buildDirectory": "/home/jiang/git/aero-node/build",
+            "name": "Aero-Node",
+            "sourceDirectory": "/home/jiang/git/aero-node",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/jiang/git/aero-node/build/an-core/app/qa_system_info"
+                ],
+                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/app",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g  ",
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "qa_system_info.cc"
+                    ]
+                  }
+                ],
+                "fullName": "qa_system_info",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "-Wl,-rpath,/home/jiang/git/aero-node/build/an-core/lib -rdynamic ../lib/liban_core_lib.so",
+                "linkerLanguage": "CXX",
+                "name": "qa_system_info",
+                "sourceDirectory": "/home/jiang/git/aero-node/an-core/app",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/jiang/git/aero-node/build/an-core/lib/liban_core_lib.so"
+                ],
+                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/lib",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g -fPIC  ",
+                    "defines": [
+                      "an_core_lib_EXPORTS"
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "system_info.cc"
+                    ]
+                  }
+                ],
+                "fullName": "liban_core_lib.so",
+                "linkerLanguage": "CXX",
+                "name": "an_core_lib",
+                "sourceDirectory": "/home/jiang/git/aero-node/an-core/lib",
+                "type": "SHARED_LIBRARY"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cookie": "0.321455732477536",
+    "inReplyTo": "codemodel",
+    "type": "reply"
+  }
+}

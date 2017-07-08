@@ -1,0 +1,2 @@
+add_executable(qa_system_info qa_system_info.cc)
+target_link_libraries(qa_system_info an_core_lib)
