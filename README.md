@@ -27,3 +27,5 @@ make doc
 - [ ] video\_enc,video\_dec
 - [ ] qtgui
 - [ ] router
+- [ ] cross compile
+- [ ] swig
