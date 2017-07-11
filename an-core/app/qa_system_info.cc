@@ -9,11 +9,12 @@ using namespace an::core;
 int main()
 {
 	char sys_info[80] = "";
+	std::string sys_info2;
 	system_info s;
 
-	s.os_info(sys_info);
+	s.os_info(sys_info2);
 
-	std::cout << sys_info << std::endl;
+	std::cout << sys_info2 << std::endl;
 
 	long mem_used, mem_total;
 
@@ -23,7 +24,11 @@ int main()
 	s.memory_total(mem_total);
 	std::cout << mem_total << "\n";
 
-	printf("%.2lf%\n", ((double)mem_used / (double)mem_total * 100));
+	printf("%.2lf%%\n", ((double)mem_used / (double)mem_total * 100));
+
+	char cpu0_info[200] = "";
+	s.cpu_info(cpu0_info);
+	std::cout << cpu0_info << "\n";
 
 	getchar();
 

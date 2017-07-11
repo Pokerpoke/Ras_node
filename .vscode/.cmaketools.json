@@ -18,35 +18,20 @@
             "sourceDirectory": "/home/jiang/git/aero-node",
             "targets": [
               {
-                "artifacts": [
-                  "/home/jiang/git/aero-node/build/bin/qa_system_info"
-                ],
-                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/app",
+                "buildDirectory": "/home/jiang/git/aero-node/build",
                 "fileGroups": [
                   {
-                    "compileFlags": "-g  ",
-                    "includePath": [
-                      {
-                        "path": "/usr/include/python3.5m"
-                      },
-                      {
-                        "path": "/home/jiang/git/aero-node/an-core/include"
-                      }
-                    ],
-                    "isGenerated": false,
-                    "language": "CXX",
+                    "isGenerated": true,
                     "sources": [
-                      "qa_system_info.cc"
+                      "build/CMakeFiles/doc",
+                      "build/CMakeFiles/doc.rule"
                     ]
                   }
                 ],
-                "fullName": "qa_system_info",
-                "linkLanguageFlags": "-g",
-                "linkLibraries": "-Wl,-rpath,/home/jiang/git/aero-node/build/an-core/lib -rdynamic ../lib/liban_core_lib.so",
-                "linkerLanguage": "CXX",
-                "name": "qa_system_info",
-                "sourceDirectory": "/home/jiang/git/aero-node/an-core/app",
-                "type": "EXECUTABLE"
+                "fullName": "doc",
+                "name": "doc",
+                "sourceDirectory": "/home/jiang/git/aero-node",
+                "type": "UTILITY"
               },
               {
                 "artifacts": [
@@ -79,13 +64,44 @@
                 "name": "an_core_lib",
                 "sourceDirectory": "/home/jiang/git/aero-node/an-core/lib",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "artifacts": [
+                  "/home/jiang/git/aero-node/build/bin/qa_system_info"
+                ],
+                "buildDirectory": "/home/jiang/git/aero-node/build/an-core/app",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g  ",
+                    "includePath": [
+                      {
+                        "path": "/usr/include/python3.5m"
+                      },
+                      {
+                        "path": "/home/jiang/git/aero-node/an-core/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "qa_system_info.cc"
+                    ]
+                  }
+                ],
+                "fullName": "qa_system_info",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "-Wl,-rpath,/home/jiang/git/aero-node/build/an-core/lib -rdynamic ../lib/liban_core_lib.so",
+                "linkerLanguage": "CXX",
+                "name": "qa_system_info",
+                "sourceDirectory": "/home/jiang/git/aero-node/an-core/app",
+                "type": "EXECUTABLE"
               }
             ]
           }
         ]
       }
     ],
-    "cookie": "0.42232288814324637",
+    "cookie": "0.9920495902303521",
     "inReplyTo": "codemodel",
     "type": "reply"
   }
