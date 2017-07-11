@@ -52,6 +52,7 @@ int system_info::popen_to_char(const char *cmd, char *out)
 			{
 				index++;
 			}
+			// TODO:输出数据大小检测，目前需要手动分配足够大的空间。
 			// if (index > len)
 			// {
 			// 	break;
