@@ -2,6 +2,7 @@ project(Aero-Node)
 
 cmake_minimum_required(VERSION 2.6)
 
+# 添加Swig库
 find_package(SWIG)
 	if(SWIG_FOUND)
 		include(${SWIG_USE_FILE})
@@ -10,6 +11,7 @@ find_package(SWIG)
 find_package(PythonLibs 3)
 include_directories(${PYTHON_INCLUDE_PATH})
 
+# 添加Boost库
 find_package(Boost
 	COMPONENTS system
 	REQUIRED
@@ -17,6 +19,16 @@ find_package(Boost
 	if(Boost_FOUND)
 		include_directories(${Boost_INCLUDE_DIRS})
 	endif(Boost_FOUND)
+
+# 添加pthread
+find_package(Threads REQUIRED)
+
+# 添加glog库
+find_package(glog)
+	if(glog_FOUND)
+		include_directories(${glog_INCLUDE_DIRS})
+	endif(glog_FOUND)
+	
 
 # 使用doxygen来生成文档
 find_package(Doxygen)
@@ -27,7 +39,7 @@ find_package(Doxygen)
 		# 生成配置文件
 		configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 
-		message("-- Doxygen build started.")
+		message("Doxygen build started.")
 		# 生成文档
 		add_custom_target(doc
 		${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}

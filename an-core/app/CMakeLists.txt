@@ -5,6 +5,7 @@ add_executable(qa_udp_client qa_udp_client.cc)
 target_link_libraries(qa_udp_client 
 	an_core_lib 
 	${Boost_LIBRARIES}
+	pthread
 )
 
 add_executable(qa_tcp_client_c qa_tcp_client_c.cc)
