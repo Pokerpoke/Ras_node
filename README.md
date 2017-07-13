@@ -6,7 +6,6 @@
 	- [Graphviz](http://www.graphviz.org/)
 
 ## 2.编译方法
-<!-- @brief 编译前先阅读此文件 -->
 - 编译可执行
 ```shell
 mkdir build
