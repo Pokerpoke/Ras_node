@@ -16,14 +16,14 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "tcp_client_c.h"
+#include "tcp_client.h"
 
 namespace an
 {
 namespace core
 {
 
-tcp_client_c::tcp_client_c()
+tcp_client::tcp_client()
 {
 }
 
@@ -34,7 +34,7 @@ tcp_client_c::tcp_client_c()
  * @param 目标ip
  * @return 成功返回0，socket创建失败返回-1，连接失败返回-2
  */
-int tcp_client_c::tcp_client_init( const char *dest_ip, int dest_port)
+int tcp_client::tcp_client_init( const char *dest_ip, int dest_port)
 {
 	struct sockaddr_in dest;
 
@@ -70,7 +70,7 @@ int tcp_client_c::tcp_client_init( const char *dest_ip, int dest_port)
  * @param char类型的数据信息
  * @return 成功返回0
  */
-int tcp_client_c::tcp_client_send_data(const char *dest_ip, int dest_port, const char *data)
+int tcp_client::tcp_client_send_data(const char *dest_ip, int dest_port, const char *data)
 {
 
 	tcp_client_init( dest_ip, dest_port);
@@ -82,7 +82,7 @@ int tcp_client_c::tcp_client_send_data(const char *dest_ip, int dest_port, const
 
 // TODO:文件流传输
 
-tcp_client_c::~tcp_client_c()
+tcp_client::~tcp_client()
 {
 	close(this_socket);
 }

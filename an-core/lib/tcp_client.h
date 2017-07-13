@@ -8,18 +8,18 @@
  * @version 1.0.0
  * 
  */
-#ifndef _TCP_CLIENT_C_H_
-#define _TCP_CLIENT_C_H_
+#ifndef _TCP_CLIENT_H_
+#define _TCP_CLIENT_H_
 
 namespace an
 {
 namespace core
 {
-class tcp_client_c
+class tcp_client
 {
 public:
-	tcp_client_c();
-	~tcp_client_c();
+	tcp_client();
+	~tcp_client();
 	int tcp_client_send_data(const char *dest_ip, int dest_port, const char *data);
 
 private:
