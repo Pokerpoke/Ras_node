@@ -33,4 +33,4 @@ class tcp_client
 }
 }
 
-#endif
+#endif // !_TCP_CLIENT_H_
