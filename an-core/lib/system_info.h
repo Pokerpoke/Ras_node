@@ -17,9 +17,12 @@ namespace an
 {
 namespace core
 {
+/**
+ * @brief 系统信息
+ */
 class system_info
 {
-  public:
+public:
 	system_info();
 	~system_info();
 
@@ -29,7 +32,7 @@ class system_info
 	int memory_used(long &out);
 	int memory_total(long &out);
 
-  private:
+private:
 	int popen_to_char(const char *cmd, char *out);
 	int popen_to_string(const char *cmd, std::string &out);
 };

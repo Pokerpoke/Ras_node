@@ -1,3 +1,15 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file     tcp_server.h
+ * @author   姜阳
+ * @date     2017.07
+ * @brief    创建一个tcp服务端，用以接受数据。
+ * @version  1.0.0
+ * 
+ */
+
 #include <iostream>
 #include <string.h>
 #include <errno.h>
@@ -18,6 +30,14 @@ tcp_server::tcp_server(int server_port)
 	tcp_server_init(server_port);
 }
 
+/**
+ * tcp服务器初始化。
+ * @param : 服务端监听端口
+ * @TODO: - 异常捕获
+ * 		  - 错误代码
+ * @return 成功返回0
+ * 
+ */
 int tcp_server::tcp_server_init(int server_port)
 {
 	if ((listen_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
@@ -49,6 +69,12 @@ int tcp_server::tcp_server_init(int server_port)
 	return 0;
 }
 
+/**
+ * 开始监听
+ * @param 输出数组
+ * @return 正常结束返回0。
+ * 
+ */
 int tcp_server::tcp_listen(char *out)
 {
 	std::clog << "Waiting for client's request ...";

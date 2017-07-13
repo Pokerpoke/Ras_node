@@ -15,14 +15,17 @@ namespace an
 {
 namespace core
 {
+/**
+ * @brief TCP客户端
+ */
 class tcp_client
 {
-public:
+  public:
 	tcp_client();
 	~tcp_client();
 	int tcp_client_send_data(const char *dest_ip, int dest_port, const char *data);
 
-private:
+  private:
 	int this_socket;
 
 	int tcp_client_init(const char *dest_ip, int dest_port);
