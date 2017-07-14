@@ -2,10 +2,10 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      udp_server.h
+ * @file
  * @author    姜阳
  * @date      2017.07
- * @brief     创建一个UDP服务端
+ * @brief     UDP服务端
  * @version   1.0.0
  * 
  */
@@ -22,7 +22,7 @@ namespace an
 namespace core
 {
 /**
- * UDP服务端
+ * @brief	UDP服务端
  * 
  */
 class udp_server

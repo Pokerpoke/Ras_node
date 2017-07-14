@@ -2,7 +2,7 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      udp_server.cc
+ * @file
  * @author    姜阳
  * @date      2017.07
  * @brief     创建一个UDP服务端

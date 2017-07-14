@@ -8,7 +8,7 @@ int main()
 {
 	const char *dest_ip = "127.0.0.1";
 	int dest_port = 13374;
-	const char *msg = "hello";
+	const char *msg = "hello\n";
 
 	udp_client client(dest_ip, dest_port);
 	client.send_data(msg);

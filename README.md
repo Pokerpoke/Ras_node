@@ -15,14 +15,15 @@ make
 ```
 示例程序位于`build/bin/`目录下
 - 生成API文档
-```
+```shell
 cd build
 make doc
 ```
 
 ## 3.TODO:
-- [X] system\_info,cpu\_info
-- [ ] tcp,udp clien,server
+- [X] ~~*system\_info,cpu\_info*~~
+- [X] ~~*tcp,udp client,server*~~
+- [ ] thread pool
 - [ ] file_transfer
 - [ ] image\_enc,image\_dec
 - [ ] video\_enc,video\_dec

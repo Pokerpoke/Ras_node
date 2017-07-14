@@ -2,7 +2,7 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      udp_client.h
+ * @file
  * @author    姜阳
  * @date      2017.07
  * @brief     UDP客户端
@@ -20,6 +20,9 @@ namespace an
 {
 namespace core
 {
+/**
+ * @brief	UDP客户端
+ */
 class udp_client
 {
   public:

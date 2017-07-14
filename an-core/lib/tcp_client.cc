@@ -1,9 +1,8 @@
-
 /**
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      tcp_client.cc
+ * @file
  * @author    姜阳
  * @date      2017.07
  * @brief     建立tcp连接并传递数据信息
@@ -26,9 +25,15 @@ namespace an
 namespace core
 {
 
+/** 
+ * 
+ * @param[in]   目标IP地址
+ * @param[in]   目标端口
+ * 
+ */
 tcp_client::tcp_client(const char *dest_ip, int dest_port)
 {
-	std::memset(&server_addr, 0, sizeof(server_addr));
+	memset(&server_addr, 0, sizeof(server_addr));
 
 	// 设置协议类型
 	server_addr.sin_family = AF_INET;
@@ -36,14 +41,18 @@ tcp_client::tcp_client(const char *dest_ip, int dest_port)
 	server_addr.sin_port = htons(dest_port);
 	// 设置目标IP
 	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
+
+	init();
 }
 
 /**
  * 初始化tcp连接
- * @param socked字
- * @param 目标地址
- * @param 目标ip
- * @return 成功返回0，socket创建失败返回-1，连接失败返回-2
+ * 
+ * @param	socked字
+ * @return	初始化结果
+ * @retval	0	连接成功
+ * @retval	-1	Socket创建失败
+ * @retval	-2	连接失败
  */
 int tcp_client::init()
 {
@@ -55,11 +64,14 @@ int tcp_client::init()
 		return -1;
 	}
 
-	if (connect(t_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) != 0)
+	if (connect(t_socket,
+				(struct sockaddr *)&server_addr,
+				sizeof(server_addr)) != 0)
 	{
 		std::cerr << "Connected failed.\n";
 		return -2;
 	}
+
 	std::clog << "Connected.\n";
 
 	return 0;
@@ -67,20 +79,14 @@ int tcp_client::init()
 
 /**
  * 发送数据信息
- * @param 目标ip
- * @param 目标端口
- * @param char类型的数据信息
- * @return 成功返回0
+ * @param[in]	 char类型的数据信息
+ * @return		 成功返回0
  */
 int tcp_client::send_data(const char *data)
 {
 
-	if (init() < 0)
-	{
-		return -1;
-	}
+	std::clog << "Sending data...\n";
 
-	std::clog << "Sending data.\n";
 	send(t_socket, data, sizeof(data) - 1, 0);
 
 	return 0;

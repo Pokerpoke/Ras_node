@@ -2,7 +2,7 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      udp_client.cc
+ * @file
  * @author    姜阳
  * @date      2017.07
  * @brief     UDP客户端
@@ -51,7 +51,6 @@ int udp_client::init()
 	if ((t_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
 		std::cerr << "Socket create failed.\n";
-		// std::cerr << strerror(errno) << "\n";
 		return -1;
 	}
 	return 0;

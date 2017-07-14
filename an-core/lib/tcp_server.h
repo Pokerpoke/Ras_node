@@ -1,11 +1,11 @@
 /**
- * 
+ *
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file     tcp_server.h
+ * @file
  * @author   姜阳
  * @date     2017.07
- * @brief    创建一个TCP服务端，用以接受数据。
+ * @brief    TCP服务端
  * @version  1.0.0
  * 
  */
@@ -20,20 +20,32 @@ namespace an
 {
 namespace core
 {
-/**
- * TCP服务端
+/** 
+ * @brief	TCP服务端
+ * 
+ * 创建一个TCP服务端，监听给定的端口。
+ * 
  */
 class tcp_server
 {
-public:
+  public:
 	tcp_server(int server_port);
 	~tcp_server();
-	int tcp_listen(char *out);
 
-private:
-	int tcp_server_init(int server_port);
-	int listen_socket, conn_socket;
+	int tcp_receive(char *out, int len);
+	int is_connected();
+	int close_connect();
+
+  private:
+	int listen_socket;
+	int conn_socket;
+
+	bool LISTEN_SOCKET_IS_CLOSED;
+	bool CONN_SOCKET_IS_CLOSED;
+
 	struct sockaddr_in server_addr;
+
+	int init();
 };
 }
 }
