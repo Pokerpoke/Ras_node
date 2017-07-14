@@ -2,7 +2,7 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file     tcp_server.h
+ * @file     tcp_server.cc
  * @author   姜阳
  * @date     2017.07
  * @brief    创建一个tcp服务端，用以接受数据。
@@ -32,7 +32,7 @@ tcp_server::tcp_server(int server_port)
 
 /**
  * tcp服务器初始化。
- * @param : 服务端监听端口
+ * @param   服务端监听端口
  * @TODO: - 异常捕获
  * 		  - 错误代码
  * @return 成功返回0
@@ -40,10 +40,10 @@ tcp_server::tcp_server(int server_port)
  */
 int tcp_server::tcp_server_init(int server_port)
 {
-	if ((listen_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+	if ((listen_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
-		std::cerr << "Create cocket error.";
-		return 1;
+		std::cerr << "Create cocket error.\n";
+		return -1;
 	}
 
 	// memset(server_addr, 0, sizeof(server_addr));
@@ -52,18 +52,18 @@ int tcp_server::tcp_server_init(int server_port)
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_addr.sin_port = htons(server_port);
 
-	if (bind(listen_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
+	if (bind(listen_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
 	{
-		std::cerr << "Bind socket error";
-		return 2;
+		std::cerr << "Bind socket error.\n";
+		return -2;
 	}
 
 	int t_backlog = 10;
 
-	if (listen(listen_socket, t_backlog) == -1)
+	if (listen(listen_socket, t_backlog) < 0)
 	{
-		std::cerr << "Listen socket error.";
-		return 3;
+		std::cerr << "Listen socket error.\n";
+		return -3;
 	}
 
 	return 0;
@@ -77,15 +77,15 @@ int tcp_server::tcp_server_init(int server_port)
  */
 int tcp_server::tcp_listen(char *out)
 {
-	std::clog << "Waiting for client's request ...";
+	std::clog << "Waiting for client's request ...\n";
 
 	char buff[4096];
 
 	while (1)
 	{
-		if ((conn_socket = accept(listen_socket, (struct sockaddr *)NULL, NULL)) == -1)
+		if ((conn_socket = accept(listen_socket, (struct sockaddr *)NULL, NULL)) < 0)
 		{
-			std::cerr << "Accept socket error.";
+			std::cerr << "Accept socket error.\n";
 			continue;
 		}
 		recv(conn_socket, buff, 4096, 0);
