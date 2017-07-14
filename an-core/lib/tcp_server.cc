@@ -5,7 +5,7 @@
  * @file     tcp_server.cc
  * @author   姜阳
  * @date     2017.07
- * @brief    创建一个tcp服务端，用以接受数据。
+ * @brief    创建一个TCP服务端，用以接受数据。
  * @version  1.0.0
  * 
  */
@@ -90,7 +90,6 @@ int tcp_server::tcp_listen(char *out)
 		}
 		recv(conn_socket, buff, 4096, 0);
 		std::cout << buff;
-		close(conn_socket);
 	}
 
 	return 0;
@@ -98,6 +97,7 @@ int tcp_server::tcp_listen(char *out)
 
 tcp_server::~tcp_server()
 {
+	close(conn_socket);
 	close(listen_socket);
 }
 }

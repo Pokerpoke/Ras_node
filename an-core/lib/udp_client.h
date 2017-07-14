@@ -5,7 +5,7 @@
  * @file      udp_client.h
  * @author    姜阳
  * @date      2017.07
- * @brief     udp客户端
+ * @brief     UDP客户端
  * @version   1.0.0
  * 
  */

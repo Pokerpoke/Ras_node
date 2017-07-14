@@ -1,7 +1,7 @@
 OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc_doxygen/
 INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/ @CMAKE_CURRENT_SOURCE_DIR@/../docs
 OUTPUT_LANGUAGE        = Chinese
-# EXTRACT_ALL            = YES
+EXTRACT_ALL            = YES
 # EXTRACT_PRIVATE        = YES
 RECURSIVE              = YES
 EXCLUDE                = @CMAKE_CURRENT_SOURCE_DIR@/build/

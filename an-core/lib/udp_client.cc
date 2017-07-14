@@ -5,7 +5,7 @@
  * @file      udp_client.cc
  * @author    姜阳
  * @date      2017.07
- * @brief     udp客户端
+ * @brief     UDP客户端
  * @version   1.0.0
  * 
  */
@@ -14,6 +14,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <errno.h>
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
@@ -36,6 +37,13 @@ udp_client::udp_client(const char *dest_ip, int dest_port)
 	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
 }
 
+/**
+ * UDP客户端初始化
+ * 
+ * @param   NULL
+ * @return  成功返回0，失败返回-1。
+ * 
+ */
 int udp_client::init()
 {
 
@@ -43,11 +51,19 @@ int udp_client::init()
 	if ((t_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
 		std::cerr << "Socket create failed.\n";
+		// std::cerr << strerror(errno) << "\n";
 		return -1;
 	}
 	return 0;
 }
 
+/**
+ * 通过UDP协议发送数据
+ * 
+ * @param   待发送数据
+ * @return  成功返回0，初始化失败返回-1。
+ * 
+ */
 int udp_client::send_data(const char *data)
 {
 
@@ -57,7 +73,15 @@ int udp_client::send_data(const char *data)
 	}
 
 	std::clog << "Sending data...\n";
-	sendto(t_socket, data, sizeof(data), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
+	if (sendto(t_socket,							// Socket
+			   data,								// 发送信息		
+			   sizeof(data),						// 信息大小
+			   0,									// 标志位
+			   (struct sockaddr *)&server_addr,		// 接收端地址
+			   sizeof(server_addr)) != 0)			// 接收端地址大小
+	{
+		std::cerr << strerror(errno) << "\n";
+	}
 
 	return 0;
 }
