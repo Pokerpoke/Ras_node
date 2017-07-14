@@ -29,6 +29,7 @@ system_info::system_info()
 
 /**
  * 使用popen执行命令
+ * 
  * @param shell指令
  * @param 输出数组
  * @return 正常结束返回0，管道打开失败返回-1。

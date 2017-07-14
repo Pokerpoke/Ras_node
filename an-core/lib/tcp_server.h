@@ -2,11 +2,11 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file    : tcp_server.h
- * @author  : 姜阳
- * @date    : 2017.07
- * @brief   : 创建一个tcp服务端，用以接受数据。
- * @version : 1.0.0
+ * @file     tcp_server.h
+ * @author   姜阳
+ * @date     2017.07
+ * @brief    创建一个TCP服务端，用以接受数据。
+ * @version  1.0.0
  * 
  */
 
@@ -21,7 +21,7 @@ namespace an
 namespace core
 {
 /**
- * @brief TCP服务端
+ * TCP服务端
  */
 class tcp_server
 {

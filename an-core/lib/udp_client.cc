@@ -1,41 +1,94 @@
-// #include <iostream>
-// #include <string>
-// #include <boost/array.hpp>
-// #include <boost/asio.hpp>
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      udp_client.cc
+ * @author    姜阳
+ * @date      2017.07
+ * @brief     UDP客户端
+ * @version   1.0.0
+ * 
+ */
 
-// #include "udp_client.h"
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <errno.h>
+#include <unistd.h>
+#include <iostream>
+#include <cstring>
 
-// using boost::asio::ip::udp;
+#include "udp_client.h"
 
-// namespace an
-// {
-// namespace core
-// {
+namespace an
+{
+namespace core
+{
+udp_client::udp_client(const char *dest_ip, int dest_port)
+{
+	std::memset(&server_addr, 0, sizeof(server_addr));
 
-// boost::asio::io_service io_service;
-// udp::socket socket(io_service);
-// udp::endpoint endpoint;
+	// 设置协议类型
+	server_addr.sin_family = AF_INET;
+	// 设置目标端口
+	server_addr.sin_port = htons(dest_port);
+	// 设置目标IP
+	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
+}
 
-// udp_client::udp_client(const void *t_dest_ip, const void *t_dest_port)
-// {
-// 	const char *dest_ip = (const char *)t_dest_ip;
-// 	const char *dest_port = (const char *)t_dest_port;
+/**
+ * UDP客户端初始化
+ * 
+ * @param   NULL
+ * @return  成功返回0，失败返回-1。
+ * 
+ */
+int udp_client::init()
+{
 
-// 	udp::resolver resolver(io_service);
-// 	udp::resolver::query query(udp::v4(), dest_ip, dest_port);
-// 	endpoint = *resolver.resolve(query);
-// 	socket.open(udp::v4());
-// }
+	// 设置传输模式
+	if ((t_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
+	{
+		std::cerr << "Socket create failed.\n";
+		// std::cerr << strerror(errno) << "\n";
+		return -1;
+	}
+	return 0;
+}
 
-// int udp_client::send(const void *t_msg)
-// {
-// 	const std::string *msg = (const std::string *)t_msg;
-// 	socket.send_to(boost::asio::buffer(msg, sizeof(msg) - 1), endpoint);
-// }
+/**
+ * 通过UDP协议发送数据
+ * 
+ * @param   待发送数据
+ * @return  成功返回0，初始化失败返回-1。
+ * 
+ */
+int udp_client::send_data(const char *data)
+{
 
-// udp_client::~udp_client()
-// {
-// 	socket.close();
-// }
-// }
-// }
+	if (init() < 0)
+	{
+		return -1;
+	}
+
+	std::clog << "Sending data...\n";
+	if (sendto(t_socket,							// Socket
+			   data,								// 发送信息		
+			   sizeof(data),						// 信息大小
+			   0,									// 标志位
+			   (struct sockaddr *)&server_addr,		// 接收端地址
+			   sizeof(server_addr)) != 0)			// 接收端地址大小
+	{
+		std::cerr << strerror(errno) << "\n";
+	}
+
+	return 0;
+}
+
+udp_client::~udp_client()
+{
+	close(t_socket);
+}
+}
+}

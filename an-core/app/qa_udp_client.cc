@@ -1,16 +1,17 @@
 #include <iostream>
+
 #include "udp_client.h"
 
 using namespace an::core;
 
-int main(int argc, char **argv)
+int main()
 {
 	const char *dest_ip = "127.0.0.1";
-	const char *dest_port = "13374";
+	int dest_port = 13374;
 	const char *msg = "hello";
 
 	udp_client client(dest_ip, dest_port);
-	client.send(msg);
+	client.send_data(msg);
 
 	getchar();
 	return 0;

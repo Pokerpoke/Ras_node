@@ -1,11 +1,13 @@
+
 /**
+ * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file
- * @author 姜阳
- * @date 2017.07
- * @brief 建立tcp连接并传递数据信息
- * @version 1.0.0
+ * @file      tcp_client.cc
+ * @author    姜阳
+ * @date      2017.07
+ * @brief     建立tcp连接并传递数据信息
+ * @version   1.0.0
  * 
  */
 
@@ -15,6 +17,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include <cstring>
 
 #include "tcp_client.h"
 
@@ -23,8 +26,16 @@ namespace an
 namespace core
 {
 
-tcp_client::tcp_client()
+tcp_client::tcp_client(const char *dest_ip, int dest_port)
 {
+	std::memset(&server_addr, 0, sizeof(server_addr));
+
+	// 设置协议类型
+	server_addr.sin_family = AF_INET;
+	// 设置目标端口
+	server_addr.sin_port = htons(dest_port);
+	// 设置目标IP
+	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
 }
 
 /**
@@ -34,31 +45,22 @@ tcp_client::tcp_client()
  * @param 目标ip
  * @return 成功返回0，socket创建失败返回-1，连接失败返回-2
  */
-int tcp_client::tcp_client_init( const char *dest_ip, int dest_port)
+int tcp_client::init()
 {
-	struct sockaddr_in dest;
 
-	dest.sin_family = AF_INET;
-	//设置传输模式
-	this_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	if (this_socket < 0)
+	// 设置传输模式
+	if ((t_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 	{
-		fprintf(stderr, "Socket creation failed.");
+		std::cerr << "Socket creation failed.\n";
 		return -1;
 	}
 
-	//设置目标端口
-	dest.sin_port = htons(dest_port);
-	//设置目标IP
-	dest.sin_addr.s_addr = inet_addr(dest_ip);
-	if (connect(this_socket, (struct sockaddr *)&dest, sizeof(dest)) != 0)
+	if (connect(t_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) != 0)
 	{
-		fprintf(stderr, "Connected failed.");
-		if (this_socket)
-			close(this_socket);
+		std::cerr << "Connected failed.\n";
 		return -2;
 	}
-	fprintf(stderr, "Connected.");
+	std::clog << "Connected.\n";
 
 	return 0;
 }
@@ -70,12 +72,16 @@ int tcp_client::tcp_client_init( const char *dest_ip, int dest_port)
  * @param char类型的数据信息
  * @return 成功返回0
  */
-int tcp_client::tcp_client_send_data(const char *dest_ip, int dest_port, const char *data)
+int tcp_client::send_data(const char *data)
 {
 
-	tcp_client_init( dest_ip, dest_port);
+	if (init() < 0)
+	{
+		return -1;
+	}
 
-	send(this_socket, data, sizeof(data) - 1, 0);
+	std::clog << "Sending data.\n";
+	send(t_socket, data, sizeof(data) - 1, 0);
 
 	return 0;
 }
@@ -84,7 +90,7 @@ int tcp_client::tcp_client_send_data(const char *dest_ip, int dest_port, const c
 
 tcp_client::~tcp_client()
 {
-	close(this_socket);
+	close(t_socket);
 }
 }
 }

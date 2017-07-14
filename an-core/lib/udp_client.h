@@ -1,21 +1,39 @@
-// #ifndef _UDP_CLIENT_H_
-// #define _UDP_CLIENT_H_
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      udp_client.h
+ * @author    姜阳
+ * @date      2017.07
+ * @brief     UDP客户端
+ * @version   1.0.0
+ * 
+ */
 
-// namespace an
-// {
-// namespace core
-// {
-// class udp_client
-// {
-//   public:
-// 	udp_client(const void *t_dest_ip, const void *t_dest_port);
-// 	~udp_client();
+#ifndef _UDP_CLIENT_H_
+#define _UDP_CLIENT_H_
 
-// 	int send(const void *t_msg);
+#include <netinet/in.h>
+#include <sys/socket.h>
 
-//   private:
-// };
-// }
-// }
+namespace an
+{
+namespace core
+{
+class udp_client
+{
+  public:
+	udp_client(const char *dest_ip, int dest_port);
+	~udp_client();
+	int send_data(const char *data);
 
-// #endif
+  private:
+	int t_socket;
+	struct sockaddr_in server_addr;
+
+	int init();
+};
+}
+}
+
+#endif // !_UDP_CLIENT_H_
