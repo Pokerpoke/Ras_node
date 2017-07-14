@@ -1,0 +1,2 @@
+aux_source_directory(. AN_TRANSFER_LIB)
+add_library(an_transfer_lib SHARED AN_TRANSFER_LIB)
