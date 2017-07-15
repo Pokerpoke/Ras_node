@@ -1,14 +1,14 @@
-#ifndef _UDP_SEND_FILE_CLIENT_H_
-#define _UDP_SEND_FILE_CLIENT_H_
+#ifndef _TCP_SEND_FILE_CLIENT_H_
+#define _TCP_SEND_FILE_CLIENT_H_
 
 #include <fstream>
-#include "udp_client.h"
+#include "tcp_client.h"
 
 namespace an
 {
 namespace transfer
 {
-namespace udp
+namespace tcp
 {
 
 class send_file
@@ -20,10 +20,10 @@ public:
 	int send(const char *file_name);
 
 private:
-	an::core::udp_client client;
+	an::core::tcp_client client;
 };
 }
 }
 }
 
-#endif // !_UDP_SEND_FILE_CLIENT_H_
+#endif // !_TCP_SEND_FILE_CLIENT_H_

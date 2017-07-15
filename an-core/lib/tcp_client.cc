@@ -42,6 +42,8 @@ tcp_client::tcp_client(const char *dest_ip, int dest_port)
 	// 设置目标IP
 	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
 
+	IS_CONNECTED = false;
+
 	init();
 }
 
@@ -81,9 +83,11 @@ int tcp_client::is_connected()
 				(struct sockaddr *)&server_addr,
 				sizeof(server_addr)) != 0)
 	{
+		IS_CONNECTED = false;
 		std::cerr << "Connected failed.\n";
 		return -1;
 	}
+	IS_CONNECTED = true;
 	std::clog << "Connected.\n";
 	return 0;
 }
@@ -97,6 +101,12 @@ int tcp_client::is_connected()
  */
 int tcp_client::send_data(const char *data)
 {
+	if (!IS_CONNECTED)
+	{
+		while (is_connected() == 0)
+		{
+		}
+	}
 
 	std::clog << "Sending data...\n";
 
@@ -117,6 +127,12 @@ int tcp_client::send_data(const char *data)
 
 int tcp_client::send_data(std::string data)
 {
+	if (!IS_CONNECTED)
+	{
+		while (is_connected() != 0)
+		{
+		}
+	}
 
 	std::clog << "Sending data...\n";
 

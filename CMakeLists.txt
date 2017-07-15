@@ -50,6 +50,7 @@ find_package(Doxygen)
 		message("Doxygen need to be installed to generate the doxygen documentation")
 	endif(DOXYGEN_FOUND)
 
+# 设置可执行文件输出目录
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(an-core)

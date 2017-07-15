@@ -2,10 +2,9 @@
 #include <fstream>
 #include <string>
 #include <streambuf>
-#include <unistd.h>
 
-#include "udp_client.h"
-#include "udp_send_file_client.h"
+#include "tcp_client.h"
+#include "tcp_send_file_client.h"
 
 using namespace an::core;
 
@@ -13,11 +12,11 @@ namespace an
 {
 namespace transfer
 {
-namespace udp
+namespace tcp
 {
 
 send_file::send_file(const char *dest_ip, int dest_port)
-	: client(udp_client(dest_ip, dest_port))
+	: client(tcp_client(dest_ip, dest_port))
 {
 }
 

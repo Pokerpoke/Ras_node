@@ -36,6 +36,8 @@ class tcp_client
   private:
 	int t_socket;
 	struct sockaddr_in server_addr;
+	bool IS_CONNECTED;
+	// unsigned int connect_times;
 
 	int init();
 };
