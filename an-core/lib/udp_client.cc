@@ -35,6 +35,8 @@ udp_client::udp_client(const char *dest_ip, int dest_port)
 	server_addr.sin_port = htons(dest_port);
 	// 设置目标IP
 	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
+
+	init();
 }
 
 /**
@@ -60,26 +62,53 @@ int udp_client::init()
  * 通过UDP协议发送数据
  * 
  * @param   待发送数据
- * @return  成功返回0，初始化失败返回-1。
+ * @return  成功返回0
+ * @retval	0	发送成功
+ * @retval	-1	发送失败
  * 
  */
 int udp_client::send_data(const char *data)
 {
 
-	if (init() < 0)
+	std::clog << "Sending data...\n";
+
+	if (sendto(t_socket,						// Socket
+			   data,							// 发送信息
+			   sizeof(data),					// 信息大小
+			   0,								// 标志位
+			   (struct sockaddr *)&server_addr, // 接收端地址
+			   sizeof(server_addr)) != 0)		// 接收端地址大小
 	{
+		std::cerr << strerror(errno) << "\n";
 		return -1;
 	}
 
+	return 0;
+}
+
+/**
+ * 通过UDP协议发送数据
+ * 
+ * @param   待发送数据
+ * @return  成功返回0
+ * @retval	0	发送成功
+ * @retval	-1	发送失败
+ * 
+ */
+int udp_client::send_data(std::string data)
+{
+
 	std::clog << "Sending data...\n";
-	if (sendto(t_socket,							// Socket
-			   data,								// 发送信息		
-			   sizeof(data),						// 信息大小
-			   0,									// 标志位
-			   (struct sockaddr *)&server_addr,		// 接收端地址
-			   sizeof(server_addr)) != 0)			// 接收端地址大小
+
+	if (sendto(t_socket,						// Socket
+			   data.data(),						// 发送信息
+			   data.size(),						// 信息大小
+			   0,								// 标志位
+			   (struct sockaddr *)&server_addr, // 接收端地址
+			   sizeof(server_addr)) != 0)		// 接收端地址大小
 	{
 		std::cerr << strerror(errno) << "\n";
+		return -1;
 	}
 
 	return 0;

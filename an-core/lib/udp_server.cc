@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
+#include <vector>
 
 #include "udp_server.h"
 
@@ -55,7 +56,9 @@ udp_server::udp_server(int server_port)
  */
 int udp_server::init()
 {
-	if ((t_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
+	if ((t_socket = socket(AF_INET,
+						   SOCK_DGRAM,
+						   IPPROTO_UDP)) < 0)
 	{
 		std::cerr << "Socket create failed\n";
 		return -1;

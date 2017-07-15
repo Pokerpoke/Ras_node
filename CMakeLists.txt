@@ -1,6 +1,6 @@
 project(Aero-Node)
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.0)
 
 # 添加Swig库
 # find_package(SWIG)

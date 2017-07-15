@@ -101,7 +101,7 @@ int tcp_server::is_connected()
 	}
 	else
 	{
-		std::cerr << "Socket accepted.\n";
+		std::clog << "Socket accepted.\n";
 		return 0;
 	}
 }

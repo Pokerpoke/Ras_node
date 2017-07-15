@@ -27,13 +27,13 @@ namespace core
  */
 class udp_server
 {
-public:
+  public:
 	udp_server(int server_port);
 	~udp_server();
 
 	int udp_listen(char *out, int len);
 
-private:
+  private:
 	int t_socket;
 	socklen_t t_len;
 

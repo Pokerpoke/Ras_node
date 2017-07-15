@@ -28,7 +28,10 @@ class tcp_client
   public:
 	tcp_client(const char *dest_ip, int dest_port);
 	~tcp_client();
+
 	int send_data(const char *data);
+	int send_data(std::string data);
+	int is_connected();
 
   private:
 	int t_socket;

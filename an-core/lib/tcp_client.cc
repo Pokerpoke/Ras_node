@@ -52,44 +52,87 @@ tcp_client::tcp_client(const char *dest_ip, int dest_port)
  * @return	初始化结果
  * @retval	0	连接成功
  * @retval	-1	Socket创建失败
- * @retval	-2	连接失败
  */
 int tcp_client::init()
 {
 
 	// 设置传输模式
-	if ((t_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+	if ((t_socket = socket(AF_INET,
+						   SOCK_STREAM,
+						   IPPROTO_TCP)) < 0)
 	{
 		std::cerr << "Socket creation failed.\n";
 		return -1;
 	}
 
+	return 0;
+}
+
+/** 连接状态
+ * 
+ * @return  连接状态
+ * @retval	0	成功
+ * @retval	-1	连接失败
+ * 
+ */
+int tcp_client::is_connected()
+{
 	if (connect(t_socket,
 				(struct sockaddr *)&server_addr,
 				sizeof(server_addr)) != 0)
 	{
 		std::cerr << "Connected failed.\n";
-		return -2;
+		return -1;
 	}
-
 	std::clog << "Connected.\n";
-
 	return 0;
 }
 
 /**
  * 发送数据信息
  * @param[in]	 char类型的数据信息
- * @return		 成功返回0
+ * @return		 发送状态
+ * @retval		 0	发送成功
+ * @retval		 -1	发送失败
  */
 int tcp_client::send_data(const char *data)
 {
 
 	std::clog << "Sending data...\n";
 
-	send(t_socket, data, sizeof(data) - 1, 0);
+	if (send(t_socket,
+			 data,
+			 sizeof(data) - 1,
+			 0) < 0)
+	{
+		std::clog << "Send failed.\n";
+		return -1;
+	}
+	else
+	{
+		std::clog << "Send success.\n";
+		return 0;
+	}
+}
 
-	return 0;
+int tcp_client::send_data(std::string data)
+{
+
+	std::clog << "Sending data...\n";
+
+	if (send(t_socket,
+			 data.data(),
+			 data.size(),
+			 0) < 0)
+	{
+		std::clog << "Send failed.\n";
+		return -1;
+	}
+	else
+	{
+		std::clog << "Send success.\n";
+		return 0;
+	}
 }
 
 // TODO:文件流传输

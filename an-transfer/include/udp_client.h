@@ -29,7 +29,6 @@ class udp_client
 	udp_client(const char *dest_ip, int dest_port);
 	~udp_client();
 	int send_data(const char *data);
-	int send_data(std::string data);
 
   private:
 	int t_socket;
