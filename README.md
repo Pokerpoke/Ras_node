@@ -24,7 +24,8 @@ make doc
 - [X] ~~*system\_info,cpu\_info*~~
 - [X] ~~*tcp,udp client,server*~~
 - [ ] thread pool
-- [ ] file_transfer
+- [X] ~~*file_transfer*~~
+	- [ ] Cannot transfer large file. Maybe fix later.
 - [ ] image\_enc,image\_dec
 - [ ] video\_enc,video\_dec
 - [ ] qtgui

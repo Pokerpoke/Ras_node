@@ -92,8 +92,8 @@ int tcp_client::is_connected()
 	return 0;
 }
 
-/**
- * 发送数据信息
+/** 发送数据信息
+ * 
  * @param[in]	 char类型的数据信息
  * @return		 发送状态
  * @retval		 0	发送成功
@@ -103,7 +103,7 @@ int tcp_client::send_data(const char *data)
 {
 	if (!IS_CONNECTED)
 	{
-		while (is_connected() == 0)
+		while (is_connected() != 0)
 		{
 		}
 	}
@@ -125,6 +125,13 @@ int tcp_client::send_data(const char *data)
 	}
 }
 
+/** 发送数据信息
+ * 
+ * @param[in]	 string类型的数据信息
+ * @return		 发送状态
+ * @retval		 0	发送成功
+ * @retval		 -1	发送失败
+ */
 int tcp_client::send_data(std::string data)
 {
 	if (!IS_CONNECTED)

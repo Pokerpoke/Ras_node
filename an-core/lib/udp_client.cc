@@ -114,6 +114,9 @@ int udp_client::send_data(std::string data)
 	return 0;
 }
 
+/** 关闭Socket
+ * 
+ */
 udp_client::~udp_client()
 {
 	close(t_socket);

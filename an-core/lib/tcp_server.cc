@@ -138,6 +138,10 @@ int tcp_server::close_connect()
 	return 0;
 }
 
+/**
+ * 关闭Socket
+ * 
+ */
 tcp_server::~tcp_server()
 {
 	if (!CONN_SOCKET_IS_CLOSED)
