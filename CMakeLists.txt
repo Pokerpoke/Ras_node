@@ -47,7 +47,7 @@ find_package(Doxygen)
 		# 生成配置文件
 		configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 
-		message("Doxygen build started.")
+		message(STATUS "Doxygen build started.")
 		# 生成文档
 		add_custom_target(doc
 		${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
@@ -55,11 +55,24 @@ find_package(Doxygen)
 		COMMENT "Generating API documentation with Doxygen" VERBATIM
 		)
 	else (DOXYGEN_FOUND)
-		message("Doxygen need to be installed to generate the doxygen documentation")
+		message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
 	endif(DOXYGEN_FOUND)
 
 # 设置可执行文件输出目录
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
+include_directories(
+	${LOG_4_CPP_INCLUDE_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/an-core/include
+	${CMAKE_CURRENT_SOURCE_DIR}/an-transfer/include
+)
+
 add_subdirectory(an-core)
 add_subdirectory(an-transfer)
+
+
+# 显示include directories
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  message(STATUS "include dir='${dir}'")
+endforeach()
