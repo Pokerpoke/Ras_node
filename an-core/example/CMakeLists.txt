@@ -1,6 +1,7 @@
 add_executable(qa_system_info qa_system_info.cc)
 target_link_libraries(qa_system_info 
 	an_core_lib
+	${LOG4CPP_LIBRARIES}
 	)
 
 add_executable(qa_udp_client qa_udp_client.cc)

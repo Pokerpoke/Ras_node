@@ -2,6 +2,10 @@ project(Aero-Node)
 
 cmake_minimum_required(VERSION 2.8.0)
 
+set(CMAKE_MODULE_PATH 
+	APPEND "${CMAKE_SOURCE_DIR}/cmake/Modules/"
+	)
+
 # 添加Swig库
 # find_package(SWIG)
 # 	if(SWIG_FOUND)
@@ -29,6 +33,10 @@ cmake_minimum_required(VERSION 2.8.0)
 # 		include_directories(${glog_INCLUDE_DIRS})
 # 	endif(glog_FOUND)
 	
+
+# 添加log4cpp库
+find_package(log4cpp REQUIRED)
+include_directories(${LOG_4_CPP_INCLUDE_DIR})
 
 # 使用doxygen来生成文档
 find_package(Doxygen)
