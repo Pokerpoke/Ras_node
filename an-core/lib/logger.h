@@ -24,4 +24,20 @@ inline void logger_init()
 	root.addAppender(appender);
 }
 
+inline void logger_init(const char *log_path)
+{
+	// log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
+	log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
+	// log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
+
+	log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
+	patternLayout->setConversionPattern("%d [%p] - %m%n");
+
+	appender->setLayout(patternLayout);
+
+	log4cpp::Category &root = log4cpp::Category::getRoot();
+	root.setPriority(log4cpp::Priority::NOTICE);
+	root.addAppender(appender);
+}
+
 #endif // !_LOGGER_H_

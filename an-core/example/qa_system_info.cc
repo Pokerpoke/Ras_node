@@ -9,7 +9,8 @@ using namespace an::core;
 
 int main()
 {
-	logger_init();
+	// logger_init();
+	logger_init("./log/test.log");
 
 	char sys_info[80] = "";
 	std::string sys_info2;
