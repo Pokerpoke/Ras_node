@@ -2,12 +2,16 @@
 #include <string>
 #include <stdio.h>
 
+#include "logger.h"
 #include "system_info.h"
 
 using namespace an::core;
 
 int main()
 {
+	// logger_init();
+	logger_init("./log/test.log");
+
 	char sys_info[80] = "";
 	std::string sys_info2;
 	system_info s;
@@ -15,6 +19,7 @@ int main()
 	s.os_info(sys_info2);
 
 	std::cout << sys_info2 << std::endl;
+	LOG(WARN) << "test";
 
 	long mem_used, mem_total;
 
