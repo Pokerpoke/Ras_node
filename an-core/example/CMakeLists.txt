@@ -27,3 +27,9 @@ target_link_libraries(qa_tcp_server
 	an_core_lib
 	${LOG4CPP_LIBRARIES}
 	)
+
+add_executable(qa_cam_capture qa_cam_capture.cc)
+target_link_libraries(qa_cam_capture
+	an_core_lib
+	${LOG4CPP_LIBRARIES}
+	)

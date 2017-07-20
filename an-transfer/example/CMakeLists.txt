@@ -13,13 +13,6 @@ target_link_libraries(qa_tcp_send_file_client
 	)
 
 
-add_executable(qa_cam_capture qa_cam_capture.cc)
-target_link_libraries(qa_cam_capture
-	an_transfer_lib
-	an_core_lib
-	${LOG4CPP_LIBRARIES}
-	)
-
 file(COPY test.txt
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
