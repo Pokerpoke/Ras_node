@@ -27,15 +27,13 @@ class cam_capture
 	int set_picture_format();
 	int request_buffers();
 	int query_buffer();
-	// int memory_map(void *buffer);
-	int memory_map(void *buffer);
+	int memory_map(auto &buffer);
 	int queue_buffer();
 	int stream_on();
 	int stream_off();
 	int set_time_out();
 	int read_data();
-	int capture(void *out);
-	// int capture(void *out);
+	int capture(auto &out);
 	int capture_to_file(const char *output_file);
 
   private:

@@ -158,7 +158,7 @@ int cam_capture::query_buffer()
  * @param	buffer	映射用户地址
  * 
  */
-int cam_capture::memory_map(void *buffer)
+int cam_capture::memory_map(auto &buffer)
 {
 	buffer = mmap(NULL,
 				  buf.length,
@@ -258,7 +258,7 @@ int cam_capture::read_data()
 /**
  * 
  */
-int cam_capture::capture(void *out)
+int cam_capture::capture(auto &out)
 {
 	set_picture_format();
 	request_buffers();
@@ -279,12 +279,6 @@ int cam_capture::capture_to_file(const char *output_file)
 	int output_fd;
 	void *buffer;
 	capture(buffer);
-	buffer = mmap(NULL,
-				  buf.length,
-				  PROT_READ | PROT_WRITE,
-				  MAP_SHARED,
-				  fd,
-				  buf.m.offset);
 	if ((output_fd = open(output_file,
 						  O_RDWR | O_CREAT,
 						  0666)) < 0)
