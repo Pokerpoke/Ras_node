@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      
+ * @author    姜阳
+ * @date      2017.07
+ * @brief     摄像头捕获类
+ * @version   1.0.0
+ * 
+ */
 #ifndef _CAM_CAPTURE_H_
 #define _CAM_CAPTURE_H_
 
@@ -11,6 +22,11 @@ namespace core
 {
 namespace cam
 {
+
+/** 摄像头捕获类
+ * 
+ * @brief	摄像头捕获类
+ */
 class cam_capture
 {
   public:
@@ -22,18 +38,11 @@ class cam_capture
 	cam_capture &operator=(const cam_capture &) = default;
 	~cam_capture();
 
-	int cam_open(const char *dev);
-	int query_capabilities();
-	int set_picture_format();
-	int request_buffers();
-	int query_buffer();
-	int memory_map(auto &buffer);
-	int queue_buffer();
 	int stream_on();
 	int stream_off();
-	int set_time_out();
-	int read_data();
-	int capture(auto &out);
+	int cam_open(const char *dev);
+	int memory_map(void **buffer);
+	int capture(void **out, size_t &len);
 	int capture_to_file(const char *output_file);
 
   private:
@@ -44,6 +53,15 @@ class cam_capture
 	struct v4l2_requestbuffers req;
 	struct v4l2_buffer buf;
 	struct timeval tv;
+
+	int capture(void **out);
+	int query_capabilities();
+	int set_picture_format();
+	int request_buffers();
+	int query_buffer();
+	int queue_buffer();
+	int set_time_out();
+	int read_data();
 };
 }
 }

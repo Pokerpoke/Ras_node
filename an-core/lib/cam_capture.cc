@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      
+ * @author    姜阳
+ * @date      2017.07
+ * @brief     摄像头捕获类
+ * @version   1.0.0
+ * 
+ */
 #include <unistd.h>
 #include <string.h>
 #include <linux/videodev2.h>
@@ -158,14 +169,14 @@ int cam_capture::query_buffer()
  * @param	buffer	映射用户地址
  * 
  */
-int cam_capture::memory_map(auto &buffer)
+int cam_capture::memory_map(void **buffer)
 {
-	buffer = mmap(NULL,
-				  buf.length,
-				  PROT_READ | PROT_WRITE,
-				  MAP_SHARED,
-				  fd,
-				  buf.m.offset);
+	*buffer = mmap(NULL,
+				   buf.length,
+				   PROT_READ | PROT_WRITE,
+				   MAP_SHARED,
+				   fd,
+				   buf.m.offset);
 	return 0;
 }
 
@@ -255,10 +266,10 @@ int cam_capture::read_data()
 	}
 }
 
-/**
+/**	私有捕获函数，不传递buffer的长度,用于类内部捕获
  * 
  */
-int cam_capture::capture(auto &out)
+int cam_capture::capture(void **out)
 {
 	set_picture_format();
 	request_buffers();
@@ -268,17 +279,37 @@ int cam_capture::capture(auto &out)
 	stream_on();
 	set_time_out();
 	read_data();
+
+	return 0;
+}
+
+/**	捕获函数
+ * 
+ * @param	out	输出指针
+ * @param	len	内存映射后的长度
+ * @return	成功返回0
+ * 
+ */
+int cam_capture::capture(void **out, size_t &len)
+{
+	capture(out);
+	len = buf.length;
+
 	return 0;
 }
 
 /**	捕获并输出到文件
+ * 
+ * @param	output_file	输出文件名
+ * @return	成功返回0
  * 
  */
 int cam_capture::capture_to_file(const char *output_file)
 {
 	int output_fd;
 	void *buffer;
-	capture(buffer);
+	capture(&buffer);
+
 	if ((output_fd = open(output_file,
 						  O_RDWR | O_CREAT,
 						  0666)) < 0)
