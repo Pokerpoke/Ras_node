@@ -30,38 +30,49 @@ namespace cam
 
 cam_capture::cam_capture(const char *dev)
 {
-	memset(&cap, 0, sizeof(cap));
-	memset(&fmt, 0, sizeof(fmt));
-	memset(&req, 0, sizeof(req));
-	memset(&buf, 0, sizeof(buf));
-	memset(&tv, 0, sizeof(tv));
-
-	FD_ZERO(&fds);
-	FD_SET(fd, &fds);
-
-	cam_open(dev);
-	query_capabilities();
+	cam_init(dev);
 }
 
 cam_capture::cam_capture()
 {
+	cam_init("/dev/video0");
+}
+
+/** 初始化相机
+ * 
+ * @param   dev	设备地址，如/dev/video0
+ * 
+ */
+int cam_capture::cam_init(const char *dev)
+{
+	// 初始化相关结构体
 	memset(&cap, 0, sizeof(cap));
 	memset(&fmt, 0, sizeof(fmt));
 	memset(&req, 0, sizeof(req));
 	memset(&buf, 0, sizeof(buf));
 	memset(&tv, 0, sizeof(tv));
 
+	// 超时初始化
 	FD_ZERO(&fds);
 	FD_SET(fd, &fds);
 
+	// 初始化标志位
+	seted_pic_width = false;
+	seted_pic_height = false;
+	seted_time_out = false;
+
 	cam_open("/dev/video0");
+
 	query_capabilities();
+
+	return 0;
 }
 
 /** 打开摄像头
  * 
- * @param   设备地址
- * @return  成功返回0
+ * @param   dev	设备地址，如/dev/video0
+ * @retval  0	成功
+ * @retval  -1	打开设备失败
  * 
  */
 int cam_capture::cam_open(const char *dev)
@@ -79,6 +90,9 @@ int cam_capture::cam_open(const char *dev)
 }
 
 /** 查询设备信息
+ * 
+ * @retval	0	成功
+ * @retval	-1	查询失败
  * 
  */
 int cam_capture::query_capabilities()
@@ -100,16 +114,26 @@ int cam_capture::query_capabilities()
 	}
 }
 
-/** 设置图像格式
+/** 设置抓取图片格式
+ * 
+ * @retval	0	成功
+ * @retval	-1	设置格式失败
  * 
  */
 int cam_capture::set_picture_format()
 {
+
 	fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	fmt.fmt.pix.width = 600;
-	fmt.fmt.pix.height = 800;
 	fmt.fmt.pix.field = V4L2_FIELD_NONE;
 	fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
+	if (!seted_pic_width)
+	{
+		set_pic_width(600);
+	}
+	if (!seted_pic_height)
+	{
+		set_pic_height(800);
+	}
 
 	if (ioctl(fd, VIDIOC_S_FMT, &fmt) < 0)
 	{
@@ -123,8 +147,33 @@ int cam_capture::set_picture_format()
 	}
 }
 
+/** 设置图片宽度
+ * 
+ * @param	width	宽度
+ * @retval	0		成功
+ */
+int cam_capture::set_pic_width(int width)
+{
+	fmt.fmt.pix.width = width;
+	return 0;
+}
+
+/** 设置图片高度
+ * 
+ * @param	height	高度
+ * @retval	0		成功
+ */
+int cam_capture::set_pic_height(int height)
+{
+	fmt.fmt.pix.height = height;
+	return 0;
+}
+
 /** 请求缓存
  * 
+ * @retval	0	成功
+ * @retval	-1	请求失败
+ * @note	内存映射模式
  */
 int cam_capture::request_buffers()
 {
@@ -171,15 +220,26 @@ int cam_capture::query_buffer()
  */
 int cam_capture::memory_map(void **buffer)
 {
-	*buffer = mmap(NULL,
-				   buf.length,
-				   PROT_READ | PROT_WRITE,
-				   MAP_SHARED,
-				   fd,
-				   buf.m.offset);
+	*buffer = mmap(NULL,				   // 映射区开始地址
+				   buf.length,			   // 映射区长度
+				   PROT_READ | PROT_WRITE, // 期望的内存保护模式
+										   // PROT_EXEC、PROT_READ、PROT_WRITE、PROT_NONE
+				   MAP_SHARED,			   // 映射对象类型
+				   fd,					   // 有效的文件描述符
+				   buf.m.offset);		   // 别映射内容的起点
 	return 0;
 }
 
+int cam_capture::memory_unmap(void **buffer)
+{
+	if (munmap(*buffer, buf.length) < 0)
+	{
+		LOG(ERROR) << "Memory unmap failed.";
+		return -1;
+	}
+	LOG(INFO) << "Memory unmap success.";
+	return 0;
+}
 /** 缓存队列
  * 
  */
@@ -271,14 +331,18 @@ int cam_capture::read_data()
  */
 int cam_capture::capture(void **out)
 {
-	set_picture_format();
-	request_buffers();
-	query_buffer();
-	memory_map(out);
-	queue_buffer();
-	stream_on();
-	set_time_out();
-	read_data();
+	if (set_picture_format() ||
+		request_buffers() ||
+		query_buffer() ||
+		memory_map(out) ||
+		queue_buffer() ||
+		stream_on() ||
+		set_time_out() ||
+		read_data() ||
+		memory_unmap(out) < 0)
+	{
+		return -1;
+	}
 
 	return 0;
 }
@@ -292,9 +356,11 @@ int cam_capture::capture(void **out)
  */
 int cam_capture::capture(void **out, size_t &len)
 {
-	capture(out);
+	if (capture(out) < 0)
+	{
+		return -1;
+	}
 	len = buf.length;
-
 	return 0;
 }
 
@@ -308,7 +374,10 @@ int cam_capture::capture_to_file(const char *output_file)
 {
 	int output_fd;
 	void *buffer;
-	capture(&buffer);
+	if (capture(&buffer) < 0)
+	{
+		return -1;
+	}
 
 	if ((output_fd = open(output_file,
 						  O_RDWR | O_CREAT,
@@ -316,7 +385,7 @@ int cam_capture::capture_to_file(const char *output_file)
 	{
 		LOG(ERROR) << "Output file open failed.";
 		close(output_fd);
-		return -1;
+		return -2;
 	}
 	else
 	{

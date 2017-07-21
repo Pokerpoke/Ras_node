@@ -41,7 +41,8 @@ class cam_capture
 	int stream_on();
 	int stream_off();
 	int cam_open(const char *dev);
-	int memory_map(void **buffer);
+	int set_pic_width(int width);
+	int set_pic_height(int height);
 	int capture(void **out, size_t &len);
 	int capture_to_file(const char *output_file);
 
@@ -54,10 +55,17 @@ class cam_capture
 	struct v4l2_buffer buf;
 	struct timeval tv;
 
+	bool seted_pic_width;
+	bool seted_pic_height;
+	bool seted_time_out;
+
+	int cam_init(const char *dev);
 	int capture(void **out);
 	int query_capabilities();
 	int set_picture_format();
 	int request_buffers();
+	int memory_map(void **buffer);
+	int memory_unmap(void **buffer);
 	int query_buffer();
 	int queue_buffer();
 	int set_time_out();

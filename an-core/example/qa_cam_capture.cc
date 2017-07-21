@@ -11,8 +11,6 @@ int main()
 
 	cam_capture cam;
 
-	// cam.capture_to_file("test.jpg");
-
 	int output_fd;
 	size_t len;
 	void *buffer;
