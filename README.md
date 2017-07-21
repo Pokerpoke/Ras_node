@@ -1,7 +1,8 @@
 # README
 ## 1.依赖
-- [CMake](https://cmake.org/)
-- [Doxygen](www.doxygen.org/)  
+- 编译工具：[CMake](https://cmake.org/)
+- 日志记录：[log4cpp](http://log4cpp.sourceforge.net/)
+- 文档生成：[Doxygen](www.doxygen.org/)  
 	Doxygen依赖Graphviz生成调用关系图
 	- [Graphviz](http://www.graphviz.org/)
 
@@ -26,7 +27,7 @@ make doc
 - [ ] thread pool
 - [X] ~~*file_transfer*~~
 	- [ ] Cannot transfer large file. Maybe fix later.
-- [ ] image\_enc,image\_dec
+- [X] ~~*capture_image*~~
 - [ ] video\_enc,video\_dec
 - [ ] qtgui
 - [ ] router
