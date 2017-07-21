@@ -2,6 +2,9 @@ project(Aero-Node)
 
 cmake_minimum_required(VERSION 2.8.0)
 
+# 使用C++11编译
+set(CMAKE_CXX_STANDARD 11)
+
 set(CMAKE_MODULE_PATH 
 	APPEND "${CMAKE_SOURCE_DIR}/cmake/Modules/"
 	)
