@@ -338,8 +338,7 @@ int cam_capture::capture(void **out)
 		queue_buffer() ||
 		stream_on() ||
 		set_time_out() ||
-		read_data() ||
-		memory_unmap(out) < 0)
+		read_data() < 0)
 	{
 		return -1;
 	}
