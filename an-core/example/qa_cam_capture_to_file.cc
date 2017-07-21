@@ -9,7 +9,11 @@ int main()
 
 	cam_capture cam;
 
-	cam.capture_to_file("test.jpg");
+	if (cam.capture_to_file("test.jpg") < 0)
+	{
+		LOG(ERROR) << "Capture failed.";
+		return -1;
+	}
 
 	return 0;
 }
