@@ -65,7 +65,7 @@ inline void logger_init()
 	appender->setLayout(patternLayout);
 
 	log4cpp::Category &root = log4cpp::Category::getRoot();
-	root.setPriority(log4cpp::Priority::NOTICE);
+	root.setPriority(log4cpp::Priority::INFO);
 	root.addAppender(appender);
 }
 

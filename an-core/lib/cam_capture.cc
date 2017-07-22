@@ -105,10 +105,12 @@ int cam_capture::query_capabilities()
 	else
 	{
 		LOG(INFO) << "Query capabilities success.\n\t"
-				  << "Drive: " << cap.driver << "\n\t"
-				  << "Card: " << cap.card << "\n\t"
-				  << "Bus info: " << cap.bus_info << "\n\t"
-				  << "Version: " << cap.version << "\n\t"
+				  << "Driver:       " << cap.driver << "\n\t"
+				  << "Card:         " << cap.card << "\n\t"
+				  << "Bus info:     " << cap.bus_info << "\n\t"
+				  << "Version:      " << (cap.version >> 16 & 0xFF)
+				  << "." << (cap.version >> 8 & 0xFF)
+				  << "." << (cap.version & 0xFF) << "\n\t"
 				  << "Capabilities: " << cap.capabilities;
 		return 0;
 	}
@@ -155,6 +157,7 @@ int cam_capture::set_picture_format()
 int cam_capture::set_pic_width(int width)
 {
 	fmt.fmt.pix.width = width;
+	seted_pic_width = true;
 	return 0;
 }
 
@@ -166,6 +169,7 @@ int cam_capture::set_pic_width(int width)
 int cam_capture::set_pic_height(int height)
 {
 	fmt.fmt.pix.height = height;
+	seted_pic_height = true;
 	return 0;
 }
 

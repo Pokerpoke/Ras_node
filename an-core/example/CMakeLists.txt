@@ -39,3 +39,9 @@ target_link_libraries(qa_cam_capture_to_file
 	an_core_lib
 	${LOG4CPP_LIBRARIES}
 	)
+
+add_executable(qa_cam_capture_video qa_cam_capture_video.cc)
+target_link_libraries(qa_cam_capture_video
+	an_core_lib
+	${LOG4CPP_LIBRARIES}
+	)
