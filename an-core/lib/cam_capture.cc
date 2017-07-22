@@ -52,6 +52,8 @@ int cam_capture::cam_init(const char *dev)
 	memset(&buf, 0, sizeof(buf));
 	memset(&tv, 0, sizeof(tv));
 
+	cam_open("/dev/video0");
+
 	// 超时初始化
 	FD_ZERO(&fds);
 	FD_SET(fd, &fds);
@@ -60,8 +62,6 @@ int cam_capture::cam_init(const char *dev)
 	seted_pic_width = false;
 	seted_pic_height = false;
 	seted_time_out = false;
-
-	cam_open("/dev/video0");
 
 	query_capabilities();
 
