@@ -52,10 +52,11 @@ int cam_capture::cam_init(const char *dev)
 	memset(&buf, 0, sizeof(buf));
 	memset(&tv, 0, sizeof(tv));
 
+	fd = 0;
+
 	cam_open("/dev/video0");
 
 	// 超时初始化
-	fd = 0;
 	FD_ZERO(&fds);
 	FD_SET(fd, &fds);
 
