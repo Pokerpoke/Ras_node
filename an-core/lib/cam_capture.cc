@@ -55,6 +55,7 @@ int cam_capture::cam_init(const char *dev)
 	cam_open("/dev/video0");
 
 	// 超时初始化
+	fd = 0;
 	FD_ZERO(&fds);
 	FD_SET(fd, &fds);
 
