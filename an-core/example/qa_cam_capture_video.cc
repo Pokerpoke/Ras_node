@@ -179,8 +179,9 @@ int read_frame()
 		}
 
 		string output_file = "test";
-		output_file += to_string(i);
+		// output_file += to_string(i);
 		output_file += ".jpg";
+		// usleep(50 * 1000);
 		ofstream image(output_file);
 		image.write((char *)buffers[i].data, buffers[i].size);
 		image.close();
