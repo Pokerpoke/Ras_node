@@ -151,8 +151,10 @@ int main()
 		LOG(INFO) << "Set time out success.";
 	}
 
-	read_frame();
-
+	while (1)
+	{
+		read_frame();
+	}
 
 	close(fd);
 	getchar();
