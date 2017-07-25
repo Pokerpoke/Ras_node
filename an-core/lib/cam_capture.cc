@@ -253,12 +253,12 @@ int cam_capture::queue_buffer()
 {
 	if (ioctl(fd, VIDIOC_QBUF, &buf) < 0)
 	{
-		LOG(ERROR) << "Queen buffer failed.";
+		LOG(ERROR) << "Queue buffer failed.";
 		return -1;
 	}
 	else
 	{
-		LOG(INFO) << "Queen buffer success.";
+		LOG(INFO) << "Queue buffer success.";
 		return 0;
 	}
 }
