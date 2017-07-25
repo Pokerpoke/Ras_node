@@ -6,6 +6,7 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/mman.h>
+#include <string>
 #include <sys/time.h>
 
 #include "logger.h"
@@ -16,7 +17,13 @@ int read_frame();
 fd_set fds;
 struct timeval tv;
 unsigned int n_buffers;
-int fd;
+int fd = 0;
+struct buffer
+{
+	void *data;
+	size_t size;
+};
+struct buffer *buffers;
 
 int main()
 {
@@ -53,7 +60,7 @@ int main()
 	fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	fmt.fmt.pix.width = 640;
 	fmt.fmt.pix.height = 480;
-	fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MPEG4;
+	fmt.fmt.pix.pixelformat = V4L2_PIX_FMT_MJPEG;
 	fmt.fmt.pix.field = V4L2_FIELD_ANY;
 
 	if (ioctl(fd, VIDIOC_S_FMT, &fmt) < 0)
@@ -69,7 +76,7 @@ int main()
 
 	// Request buffer
 	struct v4l2_requestbuffers req = {0};
-	req.count = 1;
+	req.count = 4;
 	req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	req.memory = V4L2_MEMORY_MMAP;
 	if (ioctl(fd, VIDIOC_REQBUFS, &req) < 0)
@@ -82,12 +89,6 @@ int main()
 	}
 
 	// Query buffer and Map buffer and Stream on
-	struct buffer
-	{
-		void *data;
-		size_t size;
-	};
-	struct buffer *buffers;
 	buffers = (buffer *)calloc(req.count, sizeof(*buffers));
 
 	for (n_buffers = 0; n_buffers < req.count; n_buffers++)
@@ -127,7 +128,6 @@ int main()
 				LOG(INFO) << "Qbuf success.";
 			}
 		}
-
 		if ((ioctl(fd, VIDIOC_STREAMON, &buf.type) < 0) &&
 			(n_buffers == req.count - 1))
 		{
@@ -141,7 +141,7 @@ int main()
 
 	FD_ZERO(&fds);
 	FD_SET(fd, &fds);
-	tv.tv_sec = 1;
+	tv.tv_sec = 2;
 	if (select(fd + 1, &fds, NULL, NULL, &tv) < 0)
 	{
 		LOG(ERROR) << "Set time out failed.";
@@ -152,10 +152,9 @@ int main()
 	}
 
 	read_frame();
-	ofstream image("test.ppm");
-	image.write((char *)buffers->data, buffers->size);
-	image.close();
 
+
+	close(fd);
 	getchar();
 	return 0;
 }
@@ -176,6 +175,14 @@ int read_frame()
 		{
 			LOG(INFO) << "Dqbuf success.";
 		}
+
+		string output_file = "test";
+		output_file += to_string(i);
+		output_file += ".jpg";
+		ofstream image(output_file);
+		image.write((char *)buffers[i].data, buffers[i].size);
+		image.close();
+
 		if (ioctl(fd, VIDIOC_QBUF, &buf) < 0)
 		{
 			LOG(ERROR) << "qbuf failed." << i;
