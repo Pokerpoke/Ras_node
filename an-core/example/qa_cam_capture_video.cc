@@ -172,10 +172,12 @@ int read_frame()
 		if (ioctl(fd, VIDIOC_DQBUF, &buf) < 0)
 		{
 			LOG(ERROR) << "Dqbuf failed.";
+			return -1;
 		}
 		else
 		{
 			LOG(INFO) << "Dqbuf success.";
+			return 0;
 		}
 
 		string output_file = "test";
@@ -189,10 +191,12 @@ int read_frame()
 		if (ioctl(fd, VIDIOC_QBUF, &buf) < 0)
 		{
 			LOG(ERROR) << "qbuf failed." << i;
+			return -1;
 		}
 		else
 		{
 			LOG(INFO) << "qbuf success." << i;
+			return 0;
 		}
 	}
 }
