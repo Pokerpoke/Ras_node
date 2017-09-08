@@ -27,14 +27,22 @@ namespace core
 {
 namespace cam
 {
+buffers::buffers()
+{
+}
+buffers::~buffers()
+{
+}
 
 cam_capture::cam_capture(const char *dev)
 {
+	inited_cam = false;
 	cam_init(dev);
 }
 
 cam_capture::cam_capture()
 {
+	inited_cam = false;
 	cam_init("/dev/video0");
 }
 
@@ -45,6 +53,8 @@ cam_capture::cam_capture()
  */
 int cam_capture::cam_init(const char *dev)
 {
+	if (inited_cam)
+		return 0;
 	// 初始化相关结构体
 	memset(&cap, 0, sizeof(cap));
 	memset(&fmt, 0, sizeof(fmt));
@@ -53,6 +63,9 @@ int cam_capture::cam_init(const char *dev)
 	memset(&tv, 0, sizeof(tv));
 
 	fd = 0;
+	nbuffers = 4;
+
+	buffers *buffer = new buffers[nbuffers];
 
 	cam_open("/dev/video0");
 
@@ -64,8 +77,11 @@ int cam_capture::cam_init(const char *dev)
 	seted_pic_width = false;
 	seted_pic_height = false;
 	seted_time_out = false;
+	capture_stream = false;
 
 	query_capabilities();
+
+	inited_cam = true;
 
 	return 0;
 }
@@ -84,11 +100,8 @@ int cam_capture::cam_open(const char *dev)
 		LOG(ERROR) << "Open device failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Open device success.";
-		return 0;
-	}
+	LOG(INFO) << "Open device success.";
+	return 0;
 }
 
 /** 查询设备信息
@@ -104,18 +117,15 @@ int cam_capture::query_capabilities()
 		LOG(ERROR) << "Query capabilities failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Query capabilities success.\n\t"
-				  << "Driver:       " << cap.driver << "\n\t"
-				  << "Card:         " << cap.card << "\n\t"
-				  << "Bus info:     " << cap.bus_info << "\n\t"
-				  << "Version:      " << (cap.version >> 16 & 0xFF)
-				  << "." << (cap.version >> 8 & 0xFF)
-				  << "." << (cap.version & 0xFF) << "\n\t"
-				  << "Capabilities: " << cap.capabilities;
-		return 0;
-	}
+	LOG(INFO) << "Query capabilities success.\n\t"
+			  << "Driver:       " << cap.driver << "\n\t"
+			  << "Card:         " << cap.card << "\n\t"
+			  << "Bus info:     " << cap.bus_info << "\n\t"
+			  << "Version:      " << (cap.version >> 16 & 0xFF)
+			  << "." << (cap.version >> 8 & 0xFF)
+			  << "." << (cap.version & 0xFF) << "\n\t"
+			  << "Capabilities: " << cap.capabilities;
+	return 0;
 }
 
 /** 设置抓取图片格式
@@ -133,10 +143,12 @@ int cam_capture::set_picture_format()
 	if (!seted_pic_width)
 	{
 		set_pic_width(600);
+		seted_pic_width = true;
 	}
 	if (!seted_pic_height)
 	{
-		set_pic_height(800);
+		set_pic_height(480);
+		seted_pic_height = true;
 	}
 
 	if (ioctl(fd, VIDIOC_S_FMT, &fmt) < 0)
@@ -144,11 +156,8 @@ int cam_capture::set_picture_format()
 		LOG(ERROR) << "Set pixel format failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Set pixel format success.";
-		return 0;
-	}
+	LOG(INFO) << "Set pixel format success.";
+	return 0;
 }
 
 /** 设置图片宽度
@@ -183,20 +192,17 @@ int cam_capture::set_pic_height(int height)
  */
 int cam_capture::request_buffers()
 {
-	req.count = 1;
+	req.count = nbuffers;
 	req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	req.memory = V4L2_MEMORY_MMAP;
 
 	if (ioctl(fd, VIDIOC_REQBUFS, &req) < 0)
 	{
-		LOG(ERROR) << "Require buffer failed.";
+		LOG(ERROR) << "Request buffer failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Require buffer success.";
-		return 0;
-	}
+	LOG(INFO) << "Request buffer success.";
+	return 0;
 }
 
 /** 查询缓存
@@ -206,17 +212,17 @@ int cam_capture::query_buffer()
 {
 	buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	buf.memory = V4L2_MEMORY_MMAP;
-	buf.index = 0;
-	if (ioctl(fd, VIDIOC_QUERYBUF, &buf) < 0)
+	for (size_t i = 0; i < req.count; i++)
 	{
-		LOG(ERROR) << "Query buffer failed.";
-		return -1;
-	}
-	else
-	{
+		buf.index = i;
+		if (ioctl(fd, VIDIOC_QUERYBUF, &buf) < 0)
+		{
+			LOG(ERROR) << "Query buffer failed.";
+			return -1;
+		}
 		LOG(INFO) << "Query buffer success.";
-		return 0;
 	}
+	return 0;
 }
 
 /**	内存映射
@@ -233,6 +239,24 @@ int cam_capture::memory_map(void **buffer)
 				   MAP_SHARED,			   // 映射对象类型
 				   fd,					   // 有效的文件描述符
 				   buf.m.offset);		   // 别映射内容的起点
+	if (buffer == MAP_FAILED)
+	{
+		LOG(ERROR) << "Memory map failed.";
+		return -1;
+	}
+	LOG(INFO) << "Memory map success.";
+	return 0;
+}
+
+int cam_capture::memory_map()
+{
+	for (size_t i = 0; i < nbuffers; i++)
+	{
+		buffer[i].size = buf.length;
+		buf.index = i;
+		if (memory_map(&buffer[i].data) < 0)
+			return -1;
+	}
 	return 0;
 }
 
@@ -246,6 +270,17 @@ int cam_capture::memory_unmap(void **buffer)
 	LOG(INFO) << "Memory unmap success.";
 	return 0;
 }
+
+int cam_capture::memory_unmap()
+{
+	for (size_t i = 0; i < nbuffers; i++)
+	{
+		if (memory_unmap(&buffer[i].data) < 0)
+			return -1;
+	}
+	return 0;
+}
+
 /** 缓存队列
  * 
  */
@@ -256,11 +291,8 @@ int cam_capture::queue_buffer()
 		LOG(ERROR) << "Queue buffer failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Queue buffer success.";
-		return 0;
-	}
+	LOG(INFO) << "Queue buffer success.";
+	return 0;
 }
 
 /**	打开串流
@@ -273,11 +305,8 @@ int cam_capture::stream_on()
 		LOG(ERROR) << "Start capture failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Start capture...";
-		return 0;
-	}
+	LOG(INFO) << "Start capture...";
+	return 0;
 }
 
 /**	关闭串流
@@ -290,49 +319,56 @@ int cam_capture::stream_off()
 		LOG(ERROR) << "Stop capture failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Stop capture...";
-		return 0;
-	}
+	LOG(INFO) << "Stop capture...";
+	return 0;
 }
 
-/** 设置访问设备超时
- * 
- */
 int cam_capture::set_time_out()
 {
-	tv.tv_sec = 2;
+	if (seted_time_out)
+		return 0;
+	if (set_time_out(2) < 0)
+		return -1;
+	return 0;
+}
+
+/** 
+ * 设置访问设备超时
+ * 
+ */
+int cam_capture::set_time_out(int t)
+{
+	if (seted_time_out)
+		return 0;
+	tv.tv_sec = t;
+	tv.tv_usec = 0;
 	if (select(fd + 1, &fds, NULL, NULL, &tv) < 0)
 	{
 		LOG(ERROR) << "Camera time out.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Waiting for frame...";
-		return 0;
-	}
+	LOG(INFO) << "Set time out success.";
+	seted_time_out = true;
+	return 0;
 }
 
 /**	从设备读取数据
  * 
  */
-int cam_capture::read_data()
+int cam_capture::read_frame()
 {
 	if (ioctl(fd, VIDIOC_DQBUF, &buf) < 0)
 	{
 		LOG(ERROR) << "Retrive frame failed.";
 		return -1;
 	}
-	else
-	{
-		LOG(INFO) << "Retriving frame.";
-		return 0;
-	}
+	LOG(INFO) << "Retriving frame.";
+	queue_buffer();
+	return 0;
 }
 
-/**	私有捕获函数，不传递buffer的长度,用于类内部捕获
+/**	
+ * 私有捕获函数，不传递buffer的长度,用于类内部捕获复用
  * 
  */
 int cam_capture::capture(void **out)
@@ -340,19 +376,18 @@ int cam_capture::capture(void **out)
 	if (set_picture_format() ||
 		request_buffers() ||
 		query_buffer() ||
-		memory_map(out) ||
+		memory_map() ||
 		queue_buffer() ||
 		stream_on() ||
 		set_time_out() ||
-		read_data() < 0)
-	{
+		read_frame() < 0)
+		// queue_buffer() < 0)
 		return -1;
-	}
-
 	return 0;
 }
 
-/**	捕获函数
+/**	
+ * 捕获函数
  * 
  * @param	out	输出指针
  * @param	len	内存映射后的长度
@@ -369,7 +404,8 @@ int cam_capture::capture(void **out, size_t &len)
 	return 0;
 }
 
-/**	捕获并输出到文件
+/**	
+ * 捕获并输出到文件
  * 
  * @param	output_file	输出文件名
  * @return	成功返回0
@@ -378,11 +414,8 @@ int cam_capture::capture(void **out, size_t &len)
 int cam_capture::capture_to_file(const char *output_file)
 {
 	int output_fd;
-	void *buffer;
-	if (capture(&buffer) < 0)
-	{
+	if (capture(&buffer[0].data) < 0)
 		return -1;
-	}
 
 	if ((output_fd = open(output_file,
 						  O_RDWR | O_CREAT,
@@ -392,17 +425,54 @@ int cam_capture::capture_to_file(const char *output_file)
 		close(output_fd);
 		return -2;
 	}
-	else
-	{
-		LOG(INFO) << "Writing to file: " << output_file;
-		write(output_fd, buffer, buf.length);
-		close(output_fd);
+
+	LOG(INFO) << "Writing to file: " << output_file;
+	write(output_fd, buffer[0].data, buffer[0].size);
+	if (capture_stream)
 		return 0;
+	close(output_fd);
+
+	return 0;
+}
+
+int cam_capture::capture_stream_to_file(const char *output_file, int pic_num)
+{
+	int output_fd;
+	if (capture(&buffer[0].data) < 0)
+		return -1;
+	if ((output_fd = open(output_file,
+						  O_RDWR | O_CREAT,
+						  0666)) < 0)
+	{
+		LOG(ERROR) << "Output file open failed.";
+		close(output_fd);
+		return -2;
 	}
+	LOG(INFO) << "Writing to file: " << output_file;
+	// write(output_fd, buffer[0].data, buffer[0].size);
+	// close(output_fd);
+
+	// capture(&buffer[0].data);
+
+	capture_stream = true;
+
+	for (size_t i = 1; i < pic_num - 1; i++)
+	{
+		buf.index = i % nbuffers;
+		read_frame();
+		write(output_fd, buffer[i % nbuffers].data, buffer[i % nbuffers].size);
+		// queue_buffer();
+		close(output_fd);
+	}
+
+	close(output_fd);
+	return 0;
 }
 
 cam_capture::~cam_capture()
 {
+	stream_off();
+	delete[] buffer;
 	close(fd);
 }
 }

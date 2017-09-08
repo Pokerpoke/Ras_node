@@ -23,6 +23,16 @@ namespace core
 namespace cam
 {
 
+class buffers
+{
+  public:
+	buffers();
+	~buffers();
+
+	void *data;
+	size_t size;
+};
+
 /** 摄像头捕获类
  * 
  * @brief	摄像头捕获类
@@ -38,16 +48,17 @@ class cam_capture
 	cam_capture &operator=(const cam_capture &) = default;
 	~cam_capture();
 
-	int stream_on();
-	int stream_off();
 	int cam_open(const char *dev);
 	int set_pic_width(int width);
 	int set_pic_height(int height);
+	int set_time_out(int t);
 	int capture(void **out, size_t &len);
 	int capture_to_file(const char *output_file);
+	int capture_stream_to_file(const char *output_file, int pic_num);
 
   private:
 	int fd;
+	int nbuffers;
 	fd_set fds;
 	struct v4l2_capability cap;
 	struct v4l2_format fmt;
@@ -55,9 +66,13 @@ class cam_capture
 	struct v4l2_buffer buf;
 	struct timeval tv;
 
+	buffers *buffer;
+
+	bool inited_cam;
 	bool seted_pic_width;
 	bool seted_pic_height;
 	bool seted_time_out;
+	bool capture_stream;
 
 	int cam_init(const char *dev);
 	int capture(void **out);
@@ -65,11 +80,15 @@ class cam_capture
 	int set_picture_format();
 	int request_buffers();
 	int memory_map(void **buffer);
+	int memory_map();
 	int memory_unmap(void **buffer);
+	int memory_unmap();
 	int query_buffer();
 	int queue_buffer();
 	int set_time_out();
-	int read_data();
+	int read_frame();
+	int stream_on();
+	int stream_off();
 };
 }
 }

@@ -166,6 +166,7 @@ int read_frame()
 	for (size_t i = 0; i < n_buffers; i++)
 	{
 		struct v4l2_buffer buf = {0};
+		buf.index = i;
 		buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		buf.memory = V4L2_MEMORY_MMAP;
 
@@ -177,7 +178,7 @@ int read_frame()
 		else
 		{
 			LOG(INFO) << "Dqbuf success.";
-			return 0;
+			// return 0;
 		}
 
 		string output_file = "test";
@@ -196,7 +197,6 @@ int read_frame()
 		else
 		{
 			LOG(INFO) << "qbuf success." << i;
-			return 0;
 		}
 	}
 }
