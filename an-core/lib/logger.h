@@ -50,7 +50,7 @@
 #endif // !AN_LOG_NOTSET
 
 // 使用 LOG(WARN) << "message" 来记录日志
-#define LOG(__level) log4cpp::Category::getRoot() << log4cpp::Priority::__level << "\n\t" << __FILE__ << " " << __LINE__ << " "
+#define LOG(__level) log4cpp::Category::getRoot() << log4cpp::Priority::__level << "\n\t" << __FILE__ << " " << __LINE__ << ": "
 
 /** 输出日志到std::cout
  * 
