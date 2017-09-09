@@ -41,6 +41,10 @@ set(CMAKE_MODULE_PATH
 find_package(log4cpp REQUIRED)
 include_directories(${LOG_4_CPP_INCLUDE_DIR})
 
+# 添加alsa库
+find_package(ALSA REQUIRED)
+include_directories(${ALSA_INCLUDE_DIR})
+
 # 使用doxygen来生成文档
 find_package(Doxygen)
 	if(DOXYGEN_FOUND)
@@ -65,7 +69,8 @@ find_package(Doxygen)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 include_directories(
-	${LOG_4_CPP_INCLUDE_DIR}
+	# ${ALSA_INCLUDE_DIR}
+	# ${LOG_4_CPP_INCLUDE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/an-core/include
 	${CMAKE_CURRENT_SOURCE_DIR}/an-transfer/include
 )
@@ -77,5 +82,5 @@ add_subdirectory(an-transfer)
 # 显示include directories
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
-  message(STATUS "include dir='${dir}'")
+  message(STATUS "Include dir='${dir}'")
 endforeach()
