@@ -51,3 +51,10 @@ target_link_libraries(qa_cam_capture_stream_to_file
 	an_core_lib
 	${LOG4CPP_LIBRARIES}
 	)
+
+add_executable(qa_voice_capture qa_voice_capture.cc)
+target_link_libraries(qa_voice_capture
+	an_core_lib
+	${LOG4CPP_LIBRARIES}
+	${ALSA_LIBRARIES}
+	)
