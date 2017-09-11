@@ -2,7 +2,7 @@
 ## 1.依赖
 - 编译工具：[CMake](https://cmake.org/)
 - 日志记录：[log4cpp](http://log4cpp.sourceforge.net/)
-- 文档生成：[Doxygen](www.doxygen.org/)  
+- 文档生成：[Doxygen](www.doxygen.org/)  
 	Doxygen依赖Graphviz生成调用关系图
 	- [Graphviz](http://www.graphviz.org/)
 
