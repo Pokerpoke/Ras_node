@@ -1,4 +1,4 @@
-# README
+# README[![Build Status](https://travis-ci.org/Pokerpoke/Ras_node.svg?branch=master)](https://travis-ci.org/Pokerpoke/Ras_node)
 ## 1.依赖
 - 编译工具：[CMake](https://cmake.org/)
 - 日志记录：[log4cpp](http://log4cpp.sourceforge.net/)
