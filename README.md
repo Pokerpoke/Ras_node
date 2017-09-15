@@ -7,7 +7,7 @@
 	- [Graphviz](http://www.graphviz.org/)
 
 - 其他依赖：
-	- ALSA：`sudo apt install libasound2-dev`
+	- [ALSA](https://www.alsa-project.org/main/index.php/Main_Page)：`sudo apt install libasound2-dev`
 
 ## 2.编译方法
 - 编译可执行

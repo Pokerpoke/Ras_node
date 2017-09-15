@@ -1,6 +1,7 @@
 language: cpp
 install:
   - sudo apt install liblog4cpp5-dev
+  - sudo apt install libasound2-dev
 script:
   - mkdir build
   - cd build
