@@ -6,6 +6,9 @@
 	Doxygen依赖Graphviz生成调用关系图
 	- [Graphviz](http://www.graphviz.org/)
 
+- 其他依赖：
+	- ALSA：`sudo apt install libasound2-dev`
+
 ## 2.编译方法
 - 编译可执行
 ```shell
