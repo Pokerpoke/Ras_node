@@ -123,11 +123,11 @@ int main()
 		LOG(INFO) << "Set parameters success.";
 	}
 
-	int loop_sec = 10;
+	int loop_sec = 30;
 	unsigned long loop_limit;
 	loop_limit = loop_sec * rate;
-	int latency_min = 8196;
-	int latency_max = 8196;
+	int latency_min = 32;
+	int latency_max = 2048;
 	// int frames = 32;
 	size_t frames;
 	int latency;
@@ -138,7 +138,7 @@ int main()
 	buffer = (char *)malloc(latency_max * snd_pcm_format_width(format) / 8 * 2);
 
 	int fd;
-	fd = open("test.pcm", O_WRONLY | O_CREAT, 0664);
+	fd = open("test.pcm", O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
 	for (size_t i = 0; i < loop_limit; i++)
 	{
@@ -153,7 +153,7 @@ int main()
 			i += r;
 			LOG(INFO) << "Read frames success.";
 			snd_pcm_writei(phandle, buffer, latency);
-			write(fd, buffer, latency);
+			write(fd, buffer, r * snd_pcm_format_width(format) / 8 * 2);
 		}
 	}
 
@@ -165,8 +165,4 @@ int main()
 
 	getchar();
 	return 0;
-}
-
-void set_riff()
-{
 }
