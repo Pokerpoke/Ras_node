@@ -2,6 +2,7 @@
 #define _VOICE_CAPTURE_H_
 
 #include <alsa/asoundlib.h>
+#include <iostream>
 
 namespace an
 {
@@ -12,7 +13,7 @@ class voice_capture
   public:
 	char *output_buffer;
 	int channels;
-	int frames_to_read;
+	int frames_to_read, frames_readed;
 	unsigned int output_buffer_size;
 	unsigned int rate;
 
@@ -24,11 +25,14 @@ class voice_capture
 	voice_capture &operator=(const voice_capture &) = default;
 	~voice_capture();
 
+	friend std::ostream &operator<<(std::ostream &out, voice_capture &in);
+
 	int capture();
+	int capture_for(int sec);
 
   private:
 	char *device;
-	int err, frames_readed;
+	int err;
 	bool DEVICE_OPENED;
 	bool PARAMS_SETED;
 	snd_pcm_t *handle;
@@ -36,6 +40,7 @@ class voice_capture
 	snd_pcm_format_t format;
 	snd_pcm_access_t access_type;
 
+	int init(const char *t_device);
 	int open_device();
 	int set_params();
 };
