@@ -45,7 +45,7 @@ int main()
 		output << capture;
 		i += capture.frames_readed;
 	}
-	output << capture;
+	
 	output.close();
 
 	getchar();

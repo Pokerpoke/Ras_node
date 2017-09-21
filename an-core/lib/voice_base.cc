@@ -1,59 +1,27 @@
-#include "voice_capture.h"
 #include "logger.h"
+#include "voice_base.h"
 
 namespace an
 {
 namespace core
 {
-
-voice_capture::voice_capture()
+VoiceBase::VoiceBase(const std::string &dev)
 {
-	init("default");
-}
-
-voice_capture::voice_capture(const char *m_device)
-{
-	init(m_device);
-}
-
-int voice_capture::init(const char *m_device)
-{
-	device = new char[20];
-	strcpy(device, m_device);
-
-	format = SND_PCM_FORMAT_S16_LE;
+	device = dev.c_str();
 	channels = 2;
-	access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
 	rate = 44100;
-	frames_to_read = 32;
+	frames = 32;
+	soft_resample = 1;
+	format = SND_PCM_FORMAT_S16_LE;
+	access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
 
 	DEVICE_OPENED = false;
 	PARAMS_SETED = false;
 
-	output_buffer_size = frames_to_read * snd_pcm_format_width(format) / 8 * 2;
-	output_buffer = (char *)malloc(output_buffer_size);
-
-	return 0;
+	default_buffer_size = frames * snd_pcm_format_width(format) / 8 * 2;
 }
 
-int voice_capture::open_device()
-{
-
-	if ((err = snd_pcm_open(&handle, device, SND_PCM_STREAM_CAPTURE, 0)) < 0)
-	{
-		LOG(ERROR) << "Capture device open error.";
-		DEVICE_OPENED = false;
-		return -1;
-	}
-	else
-	{
-		LOG(INFO) << "Device \"" << device << "\" open success.";
-		DEVICE_OPENED = true;
-	}
-	return 0;
-}
-
-int voice_capture::set_params()
+int VoiceBase::set_params()
 {
 	snd_pcm_hw_params_alloca(&params);
 
@@ -87,7 +55,6 @@ int voice_capture::set_params()
 		LOG(INFO) << "Set format success.";
 	}
 
-	channels = 2;
 	if ((err = snd_pcm_hw_params_set_channels(handle, params, channels)) < 0)
 	{
 		LOG(ERROR) << "Set channels error.";
@@ -126,36 +93,7 @@ int voice_capture::set_params()
 	}
 	return 0;
 }
-
-int voice_capture::capture()
-{
-	if (!DEVICE_OPENED)
-		open_device();
-	if (!PARAMS_SETED)
-		set_params();
-
-	if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames_to_read)) < 0)
-	{
-		LOG(ERROR) << "Read frame error.";
-		return -1;
-	}
-	else
-	{
-#ifdef ENABLE_DEBUG
-		LOG(INFO) << "Read frames success.";
-#endif
-		return frames_readed;
-	}
-}
-
-std::ostream &operator<<(std::ostream &out, voice_capture &in)
-{
-	in.capture();
-	out.write(in.output_buffer, in.output_buffer_size);
-	return out;
-}
-
-voice_capture::~voice_capture()
+VoiceBase::~VoiceBase()
 {
 	if (DEVICE_OPENED)
 	{
@@ -168,8 +106,6 @@ voice_capture::~voice_capture()
 			LOG(INFO) << "Close Device success.";
 		}
 	}
-	free(output_buffer);
-	delete[] device;
 }
 }
 }

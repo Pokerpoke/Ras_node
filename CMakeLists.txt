@@ -2,6 +2,12 @@ project(Aero-Node)
 
 cmake_minimum_required(VERSION 2.8.0)
 
+# # 设置目标系统
+# set(CMAKE_SYSTEM_NAME Linux)
+
+# set(CMAKE_C_COMPILE "arm-linux-gcc")
+# set(CMAKE_CXX_COMPILE "arm-linux-g++")
+
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")

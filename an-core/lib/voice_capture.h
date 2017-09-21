@@ -18,7 +18,7 @@ class voice_capture
 	unsigned int rate;
 
 	voice_capture();
-	voice_capture(const char *t_device);
+	voice_capture(const char *m_device);
 	voice_capture(voice_capture &&) = default;
 	voice_capture(const voice_capture &) = default;
 	voice_capture &operator=(voice_capture &&) = default;

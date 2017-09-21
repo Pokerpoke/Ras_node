@@ -58,3 +58,10 @@ target_link_libraries(qa_voice_capture
 	${LOG4CPP_LIBRARIES}
 	${ALSA_LIBRARIES}
 	)
+
+add_executable(qa_voice_playback qa_voice_playback.cc)
+target_link_libraries(qa_voice_playback
+	an_core_lib
+	${LOG4CPP_LIBRARIES}
+	${ALSA_LIBRARIES}
+	)
