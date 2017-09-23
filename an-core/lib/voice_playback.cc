@@ -12,6 +12,7 @@ VoicePlayback::VoicePlayback(const std::string &device)
 	if (!PARAMS_SETED)
 		set_params();
 }
+
 VoicePlayback::~VoicePlayback()
 {
 }
@@ -29,20 +30,20 @@ int VoicePlayback::open_device()
 	}
 	else
 	{
-		LOG(INFO) << "Device \"" << device << "\" open success.";
+		LOG(INFO) << "Playback device \"" << device << "\" open success.";
 		DEVICE_OPENED = true;
-		snd_pcm_prepare(handle);
 	}
+
 	return 0;
 }
-int VoicePlayback::playback(const char *input_buffer, int input_buffer_size)
+
+int VoicePlayback::playback(const char *input_buffer, const long input_buffer_size) const
 {
 	int err;
-	int r = input_buffer_size;
+	long r = input_buffer_size / bytes_per_frame;
+
 	while (r > 0)
 	{
-		// err = snd_pcm_writei(handle, input_buffer, input_buffer_size);
-		// err = snd_pcm_writei(handle, input_buffer, frames-4);
 		err = snd_pcm_writei(handle, input_buffer, frames);
 		if (err == -EPIPE)
 		{
@@ -55,10 +56,9 @@ int VoicePlayback::playback(const char *input_buffer, int input_buffer_size)
 			return -1;
 		}
 		r -= err;
-		input_buffer += err * 4;
+		input_buffer += err * bytes_per_frame;
 #ifdef ENABLE_DEBUG
 		LOG(INFO) << "Write buffer success.";
-		LOG(INFO) << snd_pcm_avail(handle);
 #endif
 	}
 	return 0;

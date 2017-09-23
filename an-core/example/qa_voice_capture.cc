@@ -31,21 +31,21 @@ int main()
 
 	// close(fd);
 
-	voice_capture capture;
+	VoiceCapture c;
 
 	ofstream output("test.pcm", ios::trunc | ios::binary);
 
 	int loop_sec;
 	loop_sec = 10;
 	unsigned long loop_limit;
-	loop_limit = loop_sec * capture.rate;
+	loop_limit = loop_sec * c.rate;
 
 	for (size_t i = 0; i < loop_limit; i++)
 	{
-		output << capture;
-		i += capture.frames_readed;
+		output << c;
+		i += c.frames_readed;
 	}
-	
+
 	output.close();
 
 	getchar();

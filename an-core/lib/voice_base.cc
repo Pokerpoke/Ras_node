@@ -18,11 +18,26 @@ VoiceBase::VoiceBase(const std::string &dev)
 	DEVICE_OPENED = false;
 	PARAMS_SETED = false;
 
-	default_buffer_size = frames * snd_pcm_format_width(format) / 8 * 2;
+	bytes_per_frame = snd_pcm_format_width(format) / 8 * 2;
+
+	default_buffer_size = frames * bytes_per_frame;
+	default_period_size = default_buffer_size / 2;
+
+	buffer_size = static_cast<snd_pcm_uframes_t>(default_buffer_size);
+	period_size = static_cast<snd_pcm_uframes_t>(default_period_size);
 }
 
 int VoiceBase::set_params()
 {
+	// Update some params
+	bytes_per_frame = snd_pcm_format_width(format) / 8 * 2;
+
+	default_buffer_size = frames * bytes_per_frame;
+	default_period_size = default_buffer_size / 2;
+
+	buffer_size = static_cast<snd_pcm_uframes_t>(default_buffer_size);
+	period_size = static_cast<snd_pcm_uframes_t>(default_period_size);
+
 	snd_pcm_hw_params_alloca(&params);
 
 	if ((err = snd_pcm_hw_params_any(handle, params)) < 0)
@@ -79,6 +94,28 @@ int VoiceBase::set_params()
 		{
 			LOG(WARN) << "Rate " << rrate << "Hz not available, get " << rate << "Hz.";
 		}
+	}
+
+	buffer_size = period_size / 2;
+	if ((err = snd_pcm_hw_params_set_buffer_size_near(handle, params, &buffer_size)) < 0)
+	{
+		LOG(ERROR) << "Set buffer size error.";
+		return -1;
+	}
+	else
+	{
+		LOG(INFO) << "Set buffer size success.";
+	}
+
+	period_size = buffer_size / 2;
+	if ((err = snd_pcm_hw_params_set_period_size_near(handle, params, &period_size, 0)) < 0)
+	{
+		LOG(ERROR) << "Set period size error.";
+		return -1;
+	}
+	else
+	{
+		LOG(INFO) << "Set period size success.";
 	}
 
 	if ((err = snd_pcm_hw_params(handle, params)) < 0)

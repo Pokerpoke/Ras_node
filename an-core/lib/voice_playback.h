@@ -9,14 +9,14 @@ namespace core
 {
 class VoicePlayback : public VoiceBase
 {
-public:
+  public:
 	VoicePlayback(const std::string &device = "default");
 	~VoicePlayback();
 
 	int open_device();
-	int playback(const char *input_buffer,const int input_buffer_size);
+	int playback(const char *input_buffer, const long input_buffer_size) const;
 
-private:
+  private:
 	int err;
 };
 }

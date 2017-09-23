@@ -10,17 +10,21 @@ namespace core
 {
 class VoiceBase
 {
-public:
+  public:
 	VoiceBase(const std::string &device = "default");
 	virtual ~VoiceBase();
 
 	unsigned int rate;
-	unsigned int frames;
 	unsigned int channels;
 	unsigned int soft_resample;
 	unsigned int default_buffer_size;
+	unsigned int default_period_size;
+	unsigned int bytes_per_frame;
+	snd_pcm_uframes_t frames;
+	snd_pcm_uframes_t buffer_size;
+	snd_pcm_uframes_t period_size;
 
-protected:
+  protected:
 	const char *device;
 
 	snd_pcm_t *handle;
@@ -35,7 +39,7 @@ protected:
 	int set_params();
 	virtual int open_device() = 0;
 
-private:
+  private:
 	int err;
 };
 }
