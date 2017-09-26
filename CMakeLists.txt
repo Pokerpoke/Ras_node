@@ -1,12 +1,10 @@
+# if(CMAKE_BUILD_TYPE STREQUAL Arm)
+	set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
+# endif() 
+
 project(Aero-Node)
 
 cmake_minimum_required(VERSION 2.8.0)
-
-# # 设置目标系统
-# set(CMAKE_SYSTEM_NAME Linux)
-
-# set(CMAKE_C_COMPILE "arm-linux-gcc")
-# set(CMAKE_CXX_COMPILE "arm-linux-g++")
 
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
@@ -21,7 +19,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 set(CMAKE_MODULE_PATH 
-	APPEND "${CMAKE_SOURCE_DIR}/cmake/Modules/"
+	APPEND "${CMAKE_SOURCE_DIR}/cmake/modules/"
 	)
 
 # 添加Swig库
@@ -51,14 +49,17 @@ set(CMAKE_MODULE_PATH
 # 		include_directories(${glog_INCLUDE_DIRS})
 # 	endif(glog_FOUND)
 	
-
 # 添加log4cpp库
-find_package(log4cpp REQUIRED)
-include_directories(${LOG_4_CPP_INCLUDE_DIR})
+find_package(LOG4CPP REQUIRED)
+include_directories(${LOG4CPP_INCLUDE_DIR})
 
 # 添加alsa库
 find_package(ALSA REQUIRED)
 include_directories(${ALSA_INCLUDE_DIR})
+
+# # 添加v4l2库
+# find_package(V4L2 REQUIRED)
+# include_directories(${V4L2_INCLUDE_DIR})
 
 # 使用doxygen来生成文档
 find_package(Doxygen)

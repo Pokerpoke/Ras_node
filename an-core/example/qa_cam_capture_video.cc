@@ -2,12 +2,13 @@
 #include <unistd.h>
 #include <string.h>
 #include <linux/videodev2.h>
-#include <linux/v4l2-mediabus.h>
+// #include <linux/v4l2-mediabus.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <string>
 #include <sys/time.h>
+#include <stdio.h>
 
 #include "logger.h"
 
@@ -38,7 +39,8 @@ int main()
 		LOG(INFO) << "Open device success.";
 	}
 
-	struct v4l2_capability cap = {0};
+	struct v4l2_capability cap;
+	// cap = malloc(sizeof(cap));
 	if (ioctl(fd, VIDIOC_QUERYCAP, &cap) < 0)
 	{
 		LOG(ERROR) << "Query capabilities failed.";
@@ -56,7 +58,7 @@ int main()
 	}
 
 	// Set format
-	struct v4l2_format fmt = {0};
+	struct v4l2_format fmt;
 	fmt.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	fmt.fmt.pix.width = 640;
 	fmt.fmt.pix.height = 480;

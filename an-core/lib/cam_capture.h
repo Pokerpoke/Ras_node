@@ -42,10 +42,6 @@ class cam_capture
   public:
 	cam_capture(const char *dev);
 	cam_capture();
-	cam_capture(cam_capture &&) = default;
-	cam_capture(const cam_capture &) = default;
-	cam_capture &operator=(cam_capture &&) = default;
-	cam_capture &operator=(const cam_capture &) = default;
 	~cam_capture();
 
 	int cam_open(const char *dev);
