@@ -96,7 +96,7 @@ int VoiceBase::set_params()
 		}
 	}
 
-	buffer_size = period_size / 2;
+	buffer_size = period_size * 2;
 	if ((err = snd_pcm_hw_params_set_buffer_size_near(handle, params, &buffer_size)) < 0)
 	{
 		LOG(ERROR) << "Set buffer size error.";
