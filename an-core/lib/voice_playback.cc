@@ -5,7 +5,7 @@ namespace an
 {
 namespace core
 {
-VoicePlayback::VoicePlayback(const std::string &device)
+VoicePlayback::VoicePlayback(const std::string &dev) : VoiceBase(dev)
 {
 	if (!DEVICE_OPENED)
 		open_device();

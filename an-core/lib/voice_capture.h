@@ -15,7 +15,7 @@ class VoiceCapture : public VoiceBase
 	int frames_to_read;
 	int frames_readed;
 
-	VoiceCapture(const std::string &device = "default");
+	VoiceCapture(const std::string &dev = "default");
 	~VoiceCapture();
 
 	friend std::ostream &operator<<(std::ostream &out, VoiceCapture &in);

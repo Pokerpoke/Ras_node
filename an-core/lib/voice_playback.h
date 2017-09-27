@@ -10,7 +10,7 @@ namespace core
 class VoicePlayback : public VoiceBase
 {
   public:
-	VoicePlayback(const std::string &device = "default");
+	VoicePlayback(const std::string &dev = "default");
 	~VoicePlayback();
 
 	int open_device();

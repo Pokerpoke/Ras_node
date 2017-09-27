@@ -11,15 +11,17 @@ int main()
 {
 	logger_init();
 
-	// VoicePlayback p();
-	VoicePlayback p("111");
-	VoiceCapture c("11");
+	// VoicePlayback p("hw:0,0");
+	// VoiceCapture c("hw:0,0");
+	VoicePlayback p("default");
+	VoiceCapture c("default");
 
-	// while (1)
-	// {
+	while (1)
+	{
 		c.capture();
 		p.playback(c.output_buffer, c.output_buffer_size);
-	// }
+		p.playback(c.output_buffer, c.output_buffer_size);
+	}
 
 	getchar();
 

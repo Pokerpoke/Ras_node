@@ -5,7 +5,7 @@ namespace an
 {
 namespace core
 {
-VoiceCapture::VoiceCapture(const std::string &device)
+VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 {
 	frames_to_read = 32;
 
