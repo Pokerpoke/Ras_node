@@ -31,7 +31,7 @@ int main()
 
 	// close(fd);
 
-	VoiceCapture c;
+	VoiceCapture c("default");
 
 	ofstream output("test.pcm", ios::trunc | ios::binary);
 
