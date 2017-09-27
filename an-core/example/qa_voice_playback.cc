@@ -11,14 +11,15 @@ int main()
 {
 	logger_init();
 
-	VoicePlayback p;
-	VoiceCapture c;
+	// VoicePlayback p();
+	VoicePlayback p("111");
+	VoiceCapture c("11");
 
-	while (1)
-	{
+	// while (1)
+	// {
 		c.capture();
 		p.playback(c.output_buffer, c.output_buffer_size);
-	}
+	// }
 
 	getchar();
 
