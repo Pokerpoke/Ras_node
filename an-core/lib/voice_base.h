@@ -11,7 +11,7 @@ namespace core
 class VoiceBase
 {
   public:
-	VoiceBase(const std::string &device = "default");
+	VoiceBase(const std::string &device);
 	virtual ~VoiceBase();
 
 	unsigned int rate;

@@ -20,7 +20,6 @@ int main()
 	{
 		c.capture();
 		p.playback(c.output_buffer, c.output_buffer_size);
-		p.playback(c.output_buffer, c.output_buffer_size);
 	}
 
 	getchar();

@@ -1,6 +1,6 @@
-# if(CMAKE_BUILD_TYPE STREQUAL Arm)
+# if(CMAKE_BUILD_TYPE STREQUAL Tiny4412)
 	set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
-# endif() 
+# endif()
 
 project(Aero-Node)
 
@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Debug)
-endif() 
+endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	add_definitions(-DENABLE_DEBUG)
@@ -95,8 +95,8 @@ add_subdirectory(an-core)
 add_subdirectory(an-transfer)
 
 
-# 显示include directories
-get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-  message(STATUS "Include dir='${dir}'")
-endforeach()
+# 显示include directories，测试用
+# get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+# foreach(dir ${dirs})
+#   message(STATUS "Include dir='${dir}'")
+# endforeach()

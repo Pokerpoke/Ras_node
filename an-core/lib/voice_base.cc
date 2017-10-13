@@ -8,8 +8,9 @@ namespace core
 VoiceBase::VoiceBase(const std::string &dev)
 {
 	device = dev.c_str();
-	channels = 2;
-	rate = 44100;
+	channels = 1;
+	// rate = 44100;
+	rate = 8000;
 	frames = 32;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
@@ -18,7 +19,7 @@ VoiceBase::VoiceBase(const std::string &dev)
 	DEVICE_OPENED = false;
 	PARAMS_SETED = false;
 
-	bytes_per_frame = snd_pcm_format_width(format) / 8 * 2;
+	bytes_per_frame = snd_pcm_format_width(format) / 8 * channels;
 
 	default_buffer_size = frames * bytes_per_frame;
 	default_period_size = default_buffer_size / 2;
@@ -29,8 +30,11 @@ VoiceBase::VoiceBase(const std::string &dev)
 
 int VoiceBase::set_params()
 {
-	// Update some params
-	bytes_per_frame = snd_pcm_format_width(format) / 8 * 2;
+	if (!DEVICE_OPENED)
+		return -1;
+
+	// Update some params, TODO: remove
+	bytes_per_frame = snd_pcm_format_width(format) / 8 * channels;
 
 	default_buffer_size = frames * bytes_per_frame;
 	default_period_size = default_buffer_size / 2;
@@ -133,8 +137,8 @@ int VoiceBase::set_params()
 VoiceBase::~VoiceBase()
 {
 	if (DEVICE_OPENED)
-	{
-		if ((err = snd_pcm_close(handle)) < 0)
+{
+	if ((err = snd_pcm_close(handle)) < 0)
 		{
 			LOG(ERROR) << "Close Device error.";
 		}

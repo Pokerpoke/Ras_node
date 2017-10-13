@@ -9,8 +9,8 @@ VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 {
 	frames_to_read = 32;
 
-	output_buffer = (char *)malloc(frames_to_read * bytes_per_frame);
 	output_buffer_size = frames_to_read * bytes_per_frame;
+	output_buffer = (char *)malloc(output_buffer_size);
 
 	if (!DEVICE_OPENED)
 		open_device();
@@ -45,17 +45,26 @@ int VoiceCapture::open_device()
 
 int VoiceCapture::capture()
 {
-	if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames_to_read)) < 0)
+	while(1)
 	{
-		LOG(ERROR) << "Read frame error.";
-		return -1;
-	}
-	else
-	{
+		if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames_to_read)) < 0)
+		{
+			// Overrun happened
+			if (frames_readed == -EPIPE)
+			{
+				snd_pcm_recover(handle, frames_readed, 0);
+				continue;
+			}
+			LOG(ERROR) << "Read frame error for: " << snd_strerror(frames_readed);
+			return -1;
+		}
+		else
+		{
 #ifdef ENABLE_DEBUG
-		LOG(INFO) << "Read frames success.";
+			LOG(INFO) << "Read frames success.";
 #endif
-		return frames_readed;
+			return frames_readed;
+		}
 	}
 }
 

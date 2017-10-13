@@ -45,9 +45,10 @@ int VoicePlayback::playback(const char *input_buffer, const long input_buffer_si
 	while (r > 0)
 	{
 		err = snd_pcm_writei(handle, input_buffer, frames);
+		// Underrun happened
 		if (err == -EPIPE)
 		{
-			snd_pcm_prepare(handle);
+			snd_pcm_recover(handle, err, 0);
 			continue;
 		}
 		if (err < 0)

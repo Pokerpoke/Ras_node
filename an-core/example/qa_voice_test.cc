@@ -666,7 +666,7 @@ int main(int argc, char *argv[])
                 showstat(chandle, frames_in);
                 showinmax(in_max);
                 if (p_tstamp.tv_sec == p_tstamp.tv_sec &&
-                    p_tstamp.tv_usec == c_tstamp.tv_usec
+                    p_tstamp.tv_usec == c_tstamp.tv_usec)
                         printf("Hardware sync\n");
                 snd_pcm_drop(chandle);
                 snd_pcm_nonblock(phandle, 0);
