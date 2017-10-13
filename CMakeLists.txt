@@ -1,5 +1,5 @@
 # if(CMAKE_BUILD_TYPE STREQUAL Tiny4412)
-	set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
+	# set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
 # endif()
 
 project(Aero-Node)
