@@ -8,7 +8,7 @@ namespace core
 VoiceBase::VoiceBase(const std::string &dev)
 {
 	device = dev.c_str();
-	channels = 1;
+	channels = 2;
 	// rate = 44100;
 	rate = 8000;
 	frames = 32;
@@ -37,7 +37,7 @@ int VoiceBase::set_params()
 	bytes_per_frame = snd_pcm_format_width(format) / 8 * channels;
 
 	default_buffer_size = frames * bytes_per_frame;
-	default_period_size = default_buffer_size / 2;
+	default_period_size = default_buffer_size * 2;
 
 	buffer_size = static_cast<snd_pcm_uframes_t>(default_buffer_size);
 	period_size = static_cast<snd_pcm_uframes_t>(default_period_size);
@@ -86,7 +86,7 @@ int VoiceBase::set_params()
 
 	unsigned int rrate;
 	rrate = rate;
-	if ((err = snd_pcm_hw_params_set_rate_near(handle, params, &rate, 0)) < 0)
+	if ((err = snd_pcm_hw_params_set_rate_near(handle, params, &rrate, 0)) < 0)
 	{
 		LOG(ERROR) << "Set rate error.";
 		return -1;
@@ -100,7 +100,7 @@ int VoiceBase::set_params()
 		}
 	}
 
-	buffer_size = period_size * 2;
+	buffer_size = period_size / 2;
 	if ((err = snd_pcm_hw_params_set_buffer_size_near(handle, params, &buffer_size)) < 0)
 	{
 		LOG(ERROR) << "Set buffer size error.";
@@ -111,7 +111,7 @@ int VoiceBase::set_params()
 		LOG(INFO) << "Set buffer size success.";
 	}
 
-	period_size = buffer_size / 2;
+	period_size = buffer_size * 2;
 	if ((err = snd_pcm_hw_params_set_period_size_near(handle, params, &period_size, 0)) < 0)
 	{
 		LOG(ERROR) << "Set period size error.";
