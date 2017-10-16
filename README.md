@@ -1,4 +1,6 @@
-# README[![Build Status](https://travis-ci.org/Pokerpoke/Ras_node.svg?branch=master)](https://travis-ci.org/Pokerpoke/Ras_node)
+# README
+[![Build Status](https://travis-ci.org/Pokerpoke/Ras_node.svg?branch=master)](https://travis-ci.org/Pokerpoke/Ras_node)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/633f642c57ff4768bac4a6deed91313d)](https://www.codacy.com/app/Pokerpoke/Ras_node?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Pokerpoke/Ras_node&amp;utm_campaign=Badge_Grade)
 ## 1.依赖
 - 编译工具：[CMake](https://cmake.org/)
 - 日志记录：[log4cpp](http://log4cpp.sourceforge.net/)
