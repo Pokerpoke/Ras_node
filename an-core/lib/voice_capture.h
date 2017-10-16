@@ -12,7 +12,7 @@ class VoiceCapture : public VoiceBase
   public:
 	char *output_buffer;
 	unsigned int output_buffer_size;
-	int frames_to_read;
+	// int frames_to_read;
 	int frames_readed;
 
 	VoiceCapture(const std::string &dev);

@@ -39,23 +39,27 @@ int VoicePlayback::open_device()
 
 int VoicePlayback::playback(const char *input_buffer, const long input_buffer_size) const
 {
-	int err;
+	int err = 0;
 	long r = input_buffer_size / bytes_per_frame;
 
 	while (r > 0)
 	{
-		err = snd_pcm_writei(handle, input_buffer, frames);
-		// Underrun happened
-		if (err == -EPIPE)
+		do
 		{
-			snd_pcm_recover(handle, err, 0);
-			continue;
-		}
-		if (err < 0)
-		{
-			LOG(ERROR) << "Write buffer error for: " << snd_strerror(err);
-			return -1;
-		}
+			err = snd_pcm_writei(handle, input_buffer, frames);
+			// Underrun happened
+			if (err == -EPIPE)
+			{
+				// snd_pcm_recover(handle, err, 0);
+				snd_pcm_prepare(handle);
+				continue;
+			}
+			// if (err < 0)
+			// {
+			// 	LOG(ERROR) << "Write buffer error for: " << snd_strerror(err);
+			// 	return -1;
+			// }
+		} while (err < 0);
 		r -= err;
 		input_buffer += err * bytes_per_frame;
 #ifdef ENABLE_DEBUG

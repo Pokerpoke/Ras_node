@@ -7,9 +7,9 @@ namespace core
 {
 VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 {
-	frames_to_read = 32;
+	// frames_to_read = 32;
 
-	output_buffer_size = frames_to_read * bytes_per_frame;
+	output_buffer_size = frames * bytes_per_frame;
 	output_buffer = (char *)malloc(output_buffer_size);
 
 	if (!DEVICE_OPENED)
@@ -45,14 +45,15 @@ int VoiceCapture::open_device()
 
 int VoiceCapture::capture()
 {
-	while(1)
+	while (1)
 	{
-		if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames_to_read)) < 0)
+		if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames)) < 0)
 		{
 			// Overrun happened
 			if (frames_readed == -EPIPE)
 			{
-				snd_pcm_recover(handle, frames_readed, 0);
+				// snd_pcm_recover(handle, frames_readed, 0);
+				snd_pcm_prepare(handle);
 				continue;
 			}
 			LOG(ERROR) << "Read frame error for: " << snd_strerror(frames_readed);
