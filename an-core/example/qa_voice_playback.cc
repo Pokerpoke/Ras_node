@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      
+ * @author    姜阳
+ * @date      2017.10
+ * @brief     音频采集、回放例程
+ * @version   1.0.0
+ * 
+ */
 #include <stdio.h>
 #include <sched.h>
 

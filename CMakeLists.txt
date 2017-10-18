@@ -10,9 +10,9 @@ cmake_minimum_required(VERSION 2.8.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Debug)
-endif()
+# if(NOT CMAKE_BUILD_TYPE)
+# 	set(CMAKE_BUILD_TYPE Debug)
+# endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	add_definitions(-DENABLE_DEBUG)

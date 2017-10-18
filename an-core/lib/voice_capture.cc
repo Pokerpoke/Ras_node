@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      
+ * @author    姜阳
+ * @date      2017.10
+ * @brief     音频捕获
+ * @version   1.0.0
+ * 
+ */
 #include "logger.h"
 #include "voice_capture.h"
 
@@ -5,6 +16,12 @@ namespace an
 {
 namespace core
 {
+/** 
+ * @brief 音频捕获构造函数，分配输出缓存空间
+ * 
+ * @param	dev 设备名称，可以传入default
+ * 
+ */
 VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 {
 	// frames_to_read = 32;
@@ -18,11 +35,22 @@ VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 		set_params();
 }
 
+/** 
+ * @brief 音频捕获析构函数，释放输出缓存
+ * 
+ */
 VoiceCapture::~VoiceCapture()
 {
 	free(output_buffer);
 }
 
+/** 
+ * @brief 打开设备
+ * 
+ * @retval	0	成功 
+ * @retval	-1	失败	  
+ * 
+ */
 int VoiceCapture::open_device()
 {
 	if ((err = snd_pcm_open(&handle,
@@ -43,6 +71,14 @@ int VoiceCapture::open_device()
 	return 0;
 }
 
+/** 
+ * @brief 音频捕获
+ * 
+ * 使用capture.output_buffer和capture.output_buffer_size来获取输出数据
+ * 
+ * @todo 返回类或者结构体
+ * 
+ */
 int VoiceCapture::capture()
 {
 	while (1)
@@ -69,6 +105,10 @@ int VoiceCapture::capture()
 	}
 }
 
+/** 
+ * 重载<<运算符
+ * 
+ */
 std::ostream &operator<<(std::ostream &out, VoiceCapture &in)
 {
 	in.capture();

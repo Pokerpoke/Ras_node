@@ -1,3 +1,14 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
+ * 
+ * @file      
+ * @author    姜阳
+ * @date      2017.10
+ * @brief     音频回放
+ * @version   1.0.0
+ * 
+ */
 #include "logger.h"
 #include "voice_playback.h"
 
@@ -5,6 +16,12 @@ namespace an
 {
 namespace core
 {
+/** 
+ * @brief 音频回放构造函数，设定相关参数
+ * 
+ * @param	dev 设备名称，可以传入default
+ * 
+ */
 VoicePlayback::VoicePlayback(const std::string &dev) : VoiceBase(dev)
 {
 	if (!DEVICE_OPENED)
@@ -13,10 +30,21 @@ VoicePlayback::VoicePlayback(const std::string &dev) : VoiceBase(dev)
 		set_params();
 }
 
+/** 
+ * @brief 音频回放析构函数，分配输出缓存空间
+ * 
+ */
 VoicePlayback::~VoicePlayback()
 {
 }
 
+/** 
+ * @brief 打开设备
+ * 
+ * @retval	0	成功
+ * @retval	-1	失败
+ * 
+ */
 int VoicePlayback::open_device()
 {
 	if ((err = snd_pcm_open(&handle,
@@ -37,6 +65,17 @@ int VoicePlayback::open_device()
 	return 0;
 }
 
+/** 
+ * @brief 音频回放
+ * 
+ * 音频回放，将buffer中的音频信息播放出来
+ * 
+ * @param[in]   *input_buffer	输入缓存
+ * @param[in]	input_buffer_size	输入缓存大小
+ * @retval  0	success
+ * @todo	添加出错时的返回值，写入次数限制，避免死循环
+ * 
+ */
 int VoicePlayback::playback(const char *input_buffer, const long input_buffer_size) const
 {
 	int err = 0;
