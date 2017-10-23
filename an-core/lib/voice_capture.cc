@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.10
  * @brief     音频捕获
- * @version   1.0.0
+ * @version   0.0.1
  * 
  */
 #include "logger.h"
@@ -106,7 +106,7 @@ int VoiceCapture::capture()
 }
 
 /** 
- * 重载<<运算符
+ * @brief 重载<<运算符
  * 
  */
 std::ostream &operator<<(std::ostream &out, VoiceCapture &in)

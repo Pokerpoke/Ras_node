@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.10
  * @brief     音频采集、回放基类，设定相关参数
- * @version   1.0.0
+ * @version   0.0.1
  * 
  */
 #ifndef _VOICE_BASE_H_

@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.07
  * @brief     建立tcp连接并传递数据信息
- * @version   1.0.0
+ * @version   0.0.1
  * 
  */
 

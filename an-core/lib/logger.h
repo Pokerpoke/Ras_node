@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.07
  * @brief     日志记录头文件
- * @version   1.0.0
+ * @version   0.0.1
  * 
  */
 #ifndef _LOGGER_H_
@@ -52,7 +52,8 @@
 // 使用 LOG(WARN) << "message" 来记录日志
 #define LOG(__level) log4cpp::Category::getRoot() << log4cpp::Priority::__level << "\n\t" << __FILE__ << " " << __LINE__ << ": "
 
-/** 输出日志到std::cout
+/**
+ * @brief 输出日志到std::cout
  * 
  */
 inline void logger_init()
@@ -69,9 +70,10 @@ inline void logger_init()
 	root.addAppender(appender);
 }
 
-/** 输出日志到指定文件
+/**
+ * @brief 输出日志到指定文件
  * 
- * @param   log_path	文件路径
+ * @param[in]   log_path	文件路径
  */
 inline void logger_init(const char *log_path)
 {
@@ -89,10 +91,11 @@ inline void logger_init(const char *log_path)
 	root.addAppender(appender);
 }
 
-/** 输出日志到指定路径并指定优先级
+/**
+ * @brief 输出日志到指定路径并指定优先级
  * 
- * @param   log_path	文件路径
- * @param   p_level		log优先级
+ * @param[in]   log_path	文件路径
+ * @param[in]   p_level		log优先级
  */
 inline void logger_init(const char *log_path, log4cpp::Priority::PriorityLevel p_level)
 {
@@ -111,9 +114,10 @@ inline void logger_init(const char *log_path, log4cpp::Priority::PriorityLevel p
 	root.addAppender(appender);
 }
 
-/** 输出日志到std::cout并指定优先级
+/** 
+ * @brief 输出日志到std::cout并指定优先级
  * 
- * @param   p_level		log优先级
+ * @param[in]   p_level		log优先级
  */
 inline void logger_init(log4cpp::Priority::PriorityLevel p_level)
 {

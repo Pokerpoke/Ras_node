@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.10
  * @brief     音频回放
- * @version   1.0.0
+ * @version   0.0.1
  * @example   qa_voice_playback.cc
  * 
  */

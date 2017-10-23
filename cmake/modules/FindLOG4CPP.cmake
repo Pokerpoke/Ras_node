@@ -11,37 +11,45 @@ if (LOG4CPP_INCLUDE_DIR)
   set(LOG4CPP_FIND_QUIETLY TRUE)
 endif ()
 
-if(CMAKE_CROSSCOMPILING)
-  find_path(LOG4CPP_INCLUDE_DIR log4cpp/Category.hh
-    ${TOOL_CHAIN_INCLUDE}
-  )
-else()
-  find_path(LOG4CPP_INCLUDE_DIR log4cpp/Category.hh
-    /opt/local/include
-    /usr/local/include
-    /usr/include
-  )
-endif()
+# if(CMAKE_CROSSCOMPILING)
+#   find_path(LOG4CPP_INCLUDE_DIR log4cpp/Category.hh
+#     ${TOOL_CHAIN_INCLUDE}
+#   )
+# else()
+#   find_path(LOG4CPP_INCLUDE_DIR log4cpp/Category.hh
+#     /opt/local/include
+#     /usr/local/include
+#     /usr/include
+#   )
+# endif()
+find_path(LOG4CPP_INCLUDE_DIR
+  NAMES Category.hh
+  PATH_SUFFIXES log4cpp
+  DOC "Log4cpp include directories"
+)
 
-set(LOG4CPP_NAMES log4cpp)
+find_library(LOG4CPP_LIBRARY
+  NAMES log4cpp
+  DOC "Log4cpp library"
+)
 
-if(CMAKE_CROSSCOMPILING)
-  find_library(LOG4CPP_LIBRARY
-    NAMES ${LOG4CPP_NAMES}
-    PATHS
-      ${TOOL_CHAIN_LIB}
-  )
-else(CMAKE_CROSSCOMPILING)
-  find_library(LOG4CPP_LIBRARY
-    NAMES ${LOG4CPP_NAMES}
-    PATHS
-      /usr/lib
-      /usr/local/lib
-      /opt/local/lib
-  )
-endif(CMAKE_CROSSCOMPILING)
+# set(LOG4CPP_NAMES log4cpp)
 
-
+# if(CMAKE_CROSSCOMPILING)
+#   find_library(LOG4CPP_LIBRARY
+#     NAMES ${LOG4CPP_NAMES}
+#     PATHS
+#       ${TOOL_CHAIN_LIB}
+#   )
+# else(CMAKE_CROSSCOMPILING)
+#   find_library(LOG4CPP_LIBRARY
+#     NAMES ${LOG4CPP_NAMES}
+#     PATHS
+#       /usr/lib
+#       /usr/local/lib
+#       /opt/local/lib
+#   )
+# endif(CMAKE_CROSSCOMPILING)
 
 if (LOG4CPP_INCLUDE_DIR AND LOG4CPP_LIBRARY)
   set(LOG4CPP_FOUND TRUE)

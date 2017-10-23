@@ -6,7 +6,7 @@
  * @author    姜阳
  * @date      2017.10
  * @brief     音频采集、回放例程
- * @version   1.0.0
+ * @version   0.0.1
  * 
  */
 #include <stdio.h>

@@ -57,6 +57,10 @@ include_directories(${LOG4CPP_INCLUDE_DIR})
 find_package(ALSA REQUIRED)
 include_directories(${ALSA_INCLUDE_DIR})
 
+# 添加jrtp库
+find_package(JRTPLIB REQUIRED)
+include_directories(${JRTPLIB_INCLUDE_DIR})
+
 # # 添加v4l2库
 # find_package(V4L2 REQUIRED)
 # include_directories(${V4L2_INCLUDE_DIR})
@@ -83,6 +87,7 @@ find_package(Doxygen)
 
 # 设置可执行文件输出目录
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(
 	# ${ALSA_INCLUDE_DIR}
@@ -92,7 +97,7 @@ include_directories(
 )
 
 add_subdirectory(an-core)
-add_subdirectory(an-transfer)
+# add_subdirectory(an-transfer)
 
 
 # 显示include directories，测试用
