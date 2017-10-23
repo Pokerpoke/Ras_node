@@ -5,8 +5,7 @@ namespace an
 {
 namespace core
 {
-RTPReceiver::RTPReceiver(const std::string &ip,
-						 const int _portbase)
+RTPReceiver::RTPReceiver(const int _portbase)
 {
 	portbase = _portbase;
 	time_stamp = 10.0;
@@ -35,8 +34,44 @@ int RTPReceiver::init()
 	return 0;
 }
 
+int RTPReceiver::read()
+{
+	session.BeginDataAccess();
+
+	if (session.GotoFirstSourceWithData())
+	{
+		do
+		{
+			while ((output_packet = session.GetNextPacket()) != NULL)
+			{
+				// 在这里处理数据
+				output_buffer_size = output_packet->GetPayloadLength();
+				output_buffer = (uint8_t *)calloc(1, output_buffer_size);
+				// output_buffer = output_packet->GetPayloadData();
+				memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
+// #ifdef ENABLE_DEBUG
+// 				LOG(INFO) << "Got packet";
+// #endif
+				// 不再需要这个包了，删除之
+				session.DeletePacket(output_packet);
+			}
+		} while (session.GotoNextSourceWithData());
+	}
+
+	session.EndDataAccess();
+
+	if ((err = session.Poll()) < 0)
+	{
+		LOG(ERROR) << jrtplib::RTPGetErrorString(err);
+	}
+
+	return 0;
+}
+
 RTPReceiver::~RTPReceiver()
 {
+	free(output_buffer);
+	session.BYEDestroy(jrtplib::RTPTime(10, 0), 0, 0);
 }
 }
 }

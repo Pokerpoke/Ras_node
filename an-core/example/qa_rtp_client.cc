@@ -53,7 +53,6 @@ int main()
 	transparams.SetPortbase(hostport);
 
 	int err;
-	// status = session.Create(sessionparams, &transparams);
 	if ((err = session.Create(sessionparams, &transparams)) < 0)
 	{
 		LOG(ERROR) << RTPGetErrorString(err);
@@ -82,41 +81,15 @@ int main()
 			continue;
 		}
 
-		// session.BeginDataAccess();
-
-		// if (session.GotoFirstSourceWithData())
-		// {
-		// 	do
-		// 	{
-		// 		RTPPacket *pack;
-
-		// 		while ((pack = session.GetNextPacket()) != NULL)
-		// 		{
-		// 			// You can examine the data here
-		// 			// cout << pack->GetPayloadData();
-		// 			p.playback((char *)pack->GetPayloadData(), pack->GetPayloadLength());
-		// 			// cout << pack->GetPayloadData();
-		// 			printf("Got packet !\n");
-
-		// 			// we don't longer need the packet, so
-		// 			// we'll delete it
-		// 			session.DeletePacket(pack);
-		// 		}
-		// 	} while (session.GotoNextSourceWithData());
-		// }
-
-		// session.EndDataAccess();
-
-		// if ((err = session.Poll()) < 0)
-		// {
-		// 	LOG(ERROR) << RTPGetErrorString(err);
-		// }
+		if ((err = session.Poll()) < 0)
+		{
+			LOG(ERROR) << RTPGetErrorString(err);
+		}
 
 		// RTPTime::Wait(RTPTime(1, 0));
 	}
 
 	session.BYEDestroy(RTPTime(10, 0), 0, 0);
 
-	getchar();
 	return 0;
 }

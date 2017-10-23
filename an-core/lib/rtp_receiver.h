@@ -8,6 +8,7 @@
 #include <rtperrors.h>
 #include <rtplibraryversion.h>
 #include <rtppacket.h>
+#include <stdlib.h>
 
 namespace an
 {
@@ -16,21 +17,28 @@ namespace core
 class RTPReceiver
 {
   public:
-	RTPReceiver(const std::string &ip,
-				const int _portbase = 13374);
-	~RTPReceiver();
+    RTPReceiver(const int _portbase = 13374);
+    ~RTPReceiver();
+
+    int read();
+
+    // char *output_buffer;
+    uint8_t *output_buffer;
+    uint32_t output_buffer_size;
 
   private:
-	int init();
+    int init();
 
-	jrtplib::RTPSession session;
-	jrtplib::RTPUDPv4TransmissionParams transparams;
-	jrtplib::RTPSessionParams sessionparams;
+    jrtplib::RTPSession session;
+    jrtplib::RTPUDPv4TransmissionParams transparams;
+    jrtplib::RTPSessionParams sessionparams;
 
-	double time_stamp;
-	int err;
-	int payload_type;
-	int portbase;
+    double time_stamp;
+    int err;
+    int payload_type;
+    int portbase;
+
+    jrtplib::RTPPacket *output_packet;
 };
 }
 }
