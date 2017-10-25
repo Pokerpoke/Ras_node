@@ -28,6 +28,9 @@ public:
     std::string dest_ip;
     int dest_port;
     int host_port;
+    int payload_type;
+    double time_stamp;
+    bool mark;
 
 private:
     int init();
@@ -36,9 +39,7 @@ private:
     jrtplib::RTPUDPv4TransmissionParams transparams;
     jrtplib::RTPSessionParams sessionparams;
 
-    double time_stamp;
     int err;
-    int payload_type;
 };
 }
 }

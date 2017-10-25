@@ -26,19 +26,21 @@ class RTPReceiver
     uint8_t *output_buffer;
     uint32_t output_buffer_size;
 
+    double time_stamp;
+    int payload_type;
+    int portbase;
+    bool mark;
+
   private:
     int init();
 
     jrtplib::RTPSession session;
     jrtplib::RTPUDPv4TransmissionParams transparams;
     jrtplib::RTPSessionParams sessionparams;
-
-    double time_stamp;
-    int err;
-    int payload_type;
-    int portbase;
-
     jrtplib::RTPPacket *output_packet;
+
+    int err;
+
 };
 }
 }

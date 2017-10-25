@@ -8,8 +8,11 @@ namespace core
 RTPReceiver::RTPReceiver(const int _portbase)
 {
 	portbase = _portbase;
-	time_stamp = 10.0;
+	time_stamp = 8000.0;
 	payload_type = 0;
+	mark = false;
+	output_buffer_size = 0;
+	output_buffer = NULL;
 
 	init();
 }
@@ -17,7 +20,7 @@ RTPReceiver::RTPReceiver(const int _portbase)
 int RTPReceiver::init()
 {
 	sessionparams.SetOwnTimestampUnit(1.0 / time_stamp);
-	// sessionparams.SetAcceptOwnPackets(true);
+	sessionparams.SetAcceptOwnPackets(true);
 
 	transparams.SetPortbase(portbase);
 
@@ -28,7 +31,7 @@ int RTPReceiver::init()
 	}
 
 	session.SetDefaultPayloadType(payload_type);
-	session.SetDefaultMark(false);
+	session.SetDefaultMark(mark);
 	session.SetDefaultTimestampIncrement(time_stamp);
 
 	return 0;
@@ -47,11 +50,12 @@ int RTPReceiver::read()
 				// 在这里处理数据
 				output_buffer_size = output_packet->GetPayloadLength();
 				output_buffer = (uint8_t *)calloc(1, output_buffer_size);
-				// output_buffer = output_packet->GetPayloadData();
 				memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
-// #ifdef ENABLE_DEBUG
-// 				LOG(INFO) << "Got packet";
-// #endif
+
+#ifdef ENABLE_DEBUG
+				LOG(INFO) << "Got packet";
+#endif
+
 				// 不再需要这个包了，删除之
 				session.DeletePacket(output_packet);
 			}
@@ -60,10 +64,13 @@ int RTPReceiver::read()
 
 	session.EndDataAccess();
 
+#ifndef RTP_SUPPORT_THREAD
 	if ((err = session.Poll()) < 0)
 	{
 		LOG(ERROR) << jrtplib::RTPGetErrorString(err);
+		return -1;
 	}
+#endif //! RTP_SUPPORT_THREAD
 
 	return 0;
 }

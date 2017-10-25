@@ -19,15 +19,15 @@ namespace core
 /** 
  * @brief 音频捕获、回放构造函数
  * 
- * @param	dev	设备名称，可以传入default来使用默认设备
+ * @param[in]	dev	设备名称，可以传入default来使用默认设备
  * 
  */
 VoiceBase::VoiceBase(const std::string &dev)
 {
 	device = dev.c_str();
 	channels = 2;
-	rate = 44100;
-	// rate = 8000;
+	// rate = 44100;
+	rate = 8000;
 	frames = 32;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
@@ -55,11 +55,11 @@ VoiceBase::~VoiceBase()
 	{
 		if ((err = snd_pcm_close(handle)) < 0)
 		{
-			LOG(ERROR) << "Close Device error.";
+			LOG(ERROR) << "Close device error.";
 		}
 		else
 		{
-			LOG(INFO) << "Close Device success.";
+			LOG(INFO) << "Device has been closed.";
 		}
 	}
 }
