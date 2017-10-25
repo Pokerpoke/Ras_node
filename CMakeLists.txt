@@ -1,6 +1,6 @@
-# if(CMAKE_BUILD_TYPE STREQUAL Tiny4412)
-	# set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
-# endif()
+if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
+endif()
 
 project(Aero-Node)
 
@@ -19,8 +19,8 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 set(CMAKE_MODULE_PATH 
-	APPEND "${CMAKE_SOURCE_DIR}/cmake/modules/"
-	)
+    APPEND "${CMAKE_SOURCE_DIR}/cmake/modules/"
+    )
 
 # 添加Swig库
 # find_package(SWIG)
@@ -48,7 +48,7 @@ set(CMAKE_MODULE_PATH
 # 	if(glog_FOUND)
 # 		include_directories(${glog_INCLUDE_DIRS})
 # 	endif(glog_FOUND)
-	
+    
 # 添加log4cpp库
 find_package(LOG4CPP REQUIRED)
 include_directories(${LOG4CPP_INCLUDE_DIR})
@@ -67,33 +67,33 @@ include_directories(${JRTPLIB_INCLUDE_DIR})
 
 # 使用doxygen来生成文档
 find_package(Doxygen)
-	if(DOXYGEN_FOUND)
-		# 设置doxygen.in
-		set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in)
-		set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
-		# 生成配置文件
-		configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+    if(DOXYGEN_FOUND)
+        # 设置doxygen.in
+        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in)
+        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+        # 生成配置文件
+        configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 
-		message(STATUS "Doxygen build started.")
-		# 生成文档
-		add_custom_target(doc
-		${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Generating API documentation with Doxygen" VERBATIM
-		)
-	else (DOXYGEN_FOUND)
-		message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
-	endif(DOXYGEN_FOUND)
+        message(STATUS "Doxygen build started.")
+        # 生成文档
+        add_custom_target(doc
+        ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen" VERBATIM
+        )
+    else (DOXYGEN_FOUND)
+        message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
+    endif(DOXYGEN_FOUND)
 
 # 设置可执行文件输出目录
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(
-	# ${ALSA_INCLUDE_DIR}
-	# ${LOG_4_CPP_INCLUDE_DIR}
-	${CMAKE_CURRENT_SOURCE_DIR}/an-core/include
-	${CMAKE_CURRENT_SOURCE_DIR}/an-transfer/include
+    # ${ALSA_INCLUDE_DIR}
+    # ${LOG_4_CPP_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/an-core/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/an-transfer/include
 )
 
 add_subdirectory(an-core)

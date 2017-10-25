@@ -34,4 +34,6 @@ else()
 	message(WARNING "JRTPLIB not found")
 endif()
 
-mark_as_advanced(JRTPLIB_INCLUDE_DIR JRTPLIB_LIBRARY)
+mark_as_advanced(
+	JRTPLIB_INCLUDE_DIR 
+	JRTPLIB_LIBRARY)
