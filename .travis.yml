@@ -1,13 +1,14 @@
 language: cpp
 before_install:
-  - cd ~
+  - cd /tmp
   - git clone https://github.com/j0r1/JThread.git && cd JThread && mkdir build && cd build && cmake ..  && make && sudo make install
-  - cd ~
+  - cd /tmp
   - git clone https://github.com/ebarnard/JRTPLIB.git && cd JRTPLIB && mkdir build && cd build && cmake ..  && make && sudo make install
-  - cd ~
 install:
   - sudo apt install liblog4cpp5-dev
   - sudo apt install libasound2-dev
+before_script:
+  - cd ~/build/Pokerpoke/Ras_node
 script:
   - mkdir build
   - cd build
