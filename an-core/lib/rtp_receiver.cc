@@ -8,8 +8,9 @@ namespace core
 RTPReceiver::RTPReceiver(const int _portbase)
 {
 	portbase = _portbase;
-	time_stamp = 8000.0;
-	payload_type = 0;
+	// time_stamp = 8000.0;
+	time_stamp = 44100.0;
+	payload_type = 11;
 	mark = false;
 	output_buffer_size = 0;
 	output_buffer = NULL;

@@ -9,7 +9,7 @@ int main()
 {
 	logger_init();
 
-	RTPSender s("192.168.0.22", 13374);
+	RTPSender s("192.168.0.7", 13374);
 	VoiceCapture c("default");
 
 
