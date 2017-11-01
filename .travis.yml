@@ -1,15 +1,15 @@
 language: cpp
 before_install:
-  - git clone https://github.com/ebarnard/JRTPLIB.git
-  - cd JRTPLIB
+  - git clone https://github.com/j0r1/JThread.git
+  - cd JThread
   - mkdir build
   - cd build
   - cmake ..
   - make
   - sudo make install
 before_install:
-  - git clone https://github.com/j0r1/JThread.git
-  - cd JThread
+  - git clone https://github.com/ebarnard/JRTPLIB.git
+  - cd JRTPLIB
   - mkdir build
   - cd build
   - cmake ..
