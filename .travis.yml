@@ -1,6 +1,5 @@
 language: cpp
 before_install:
-  - pwd
   - cd /tmp
   - git clone https://github.com/j0r1/JThread.git && cd JThread && mkdir build && cd build && cmake ..  && make && sudo make install
   - cd /tmp
@@ -9,10 +8,8 @@ install:
   - sudo apt install liblog4cpp5-dev
   - sudo apt install libasound2-dev
 before_script:
-  - pwd
   - cd ~/build/Pokerpoke/Ras_node
 script:
-  - pwd
   - mkdir build
   - cd build
   - cmake ..
