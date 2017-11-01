@@ -1,8 +1,8 @@
 language: cpp
 before_install:
-  - cd /tmp
+  - cd ~
   - git clone https://github.com/j0r1/JThread.git && cd JThread && mkdir build && cd build && cmake ..  && make && sudo make install
-  - cd /tmp
+  - cd ~
   - git clone https://github.com/ebarnard/JRTPLIB.git && cd JRTPLIB && mkdir build && cd build && cmake ..  && make && sudo make install
 install:
   - sudo apt install liblog4cpp5-dev
