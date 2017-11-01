@@ -7,6 +7,14 @@ before_install:
   - cmake ..
   - make
   - sudo make install
+before_install:
+  - git clone https://github.com/j0r1/JThread.git
+  - cd JThread
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - sudo make install
 install:
   - sudo apt install liblog4cpp5-dev
   - sudo apt install libasound2-dev
