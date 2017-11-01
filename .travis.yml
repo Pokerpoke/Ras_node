@@ -1,4 +1,12 @@
 language: cpp
+before_install:
+  - git clone https://github.com/ebarnard/JRTPLIB.git
+  - cd JRTPLIB
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - sudo make install
 install:
   - sudo apt install liblog4cpp5-dev
   - sudo apt install libasound2-dev
