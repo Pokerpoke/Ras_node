@@ -29,6 +29,7 @@
 	
 	```shell
 	git clone https://github.com/j0r1/JRTPLIB.git
+	cd JRTPLIB
 	mkdir build
 	cd build
 	cmake ..
@@ -40,6 +41,7 @@
 	
 	```shell
 	git clone https://github.com/j0r1/JThread.git
+	cd JThread
 	mkdir build
 	cd build
 	cmake ..
