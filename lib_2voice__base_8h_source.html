@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Aero Node: /home/jiang/git/aero-node/an-core/lib/voice_base.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Aero Node
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('lib_2voice__base_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">voice_base.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="lib_2voice__base_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef _VOICE_BASE_H_</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define _VOICE_BASE_H_</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;alsa/asoundlib.h&gt;</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacean.html">an</a></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>core</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span>VoiceBase</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="classan_1_1core_1_1VoiceBase.html#ae63337278a680c4e4cbc47f6952c9a5a">VoiceBase</a>(<span class="keyword">const</span> std::string &amp;<a class="code" href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">device</a>);</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a887c2eb3cca624e0000c52bdffa674aa">~VoiceBase</a>();</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a8fc304fb7d8c8e506498a12f66d80cb8">rate</a>;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#ae649a6d39bdac50dd10c6db2d1e0885a">channels</a>;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a55cc977e64b415944dcb64f22b76dab2">soft_resample</a>;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a361d1c1c6d838c86371c6ff0fdc1604d">bytes_per_frame</a>;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#ad28dfe6a17d1c303ff27ff7856fdc33b">default_buffer_size</a>;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a616634f16c4fbdd993dbdd55d01a264b">default_period_size</a>;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  snd_pcm_uframes_t <a class="code" href="classan_1_1core_1_1VoiceBase.html#aa04fecd028f847b81e867fcbf463f50c">frames</a>;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  snd_pcm_uframes_t <a class="code" href="classan_1_1core_1_1VoiceBase.html#a07713605873dfb9bc973fff4250b4224">buffer_size</a>;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  snd_pcm_uframes_t <a class="code" href="classan_1_1core_1_1VoiceBase.html#af4d60d686fb044d46e9990ad0883390b">period_size</a>;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">protected</span>:</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">device</a>;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  snd_pcm_t *<a class="code" href="classan_1_1core_1_1VoiceBase.html#a64d7a46cc0bdac297c01e2fe4bcfd1f1">handle</a>;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  snd_pcm_hw_params_t *<a class="code" href="classan_1_1core_1_1VoiceBase.html#a386ed6b382fbbca6348aa9f78f1b4025">params</a>;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  snd_pcm_format_t <a class="code" href="classan_1_1core_1_1VoiceBase.html#a79208eae42d8bfb263c5502ced5a3aac">format</a>;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  snd_pcm_access_t <a class="code" href="classan_1_1core_1_1VoiceBase.html#ac8f60ef9a88c66a67e84882888b8985a">access_type</a>;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">// Flags</span></div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">bool</span> PARAMS_SETED;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">bool</span> DEVICE_OPENED;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="classan_1_1core_1_1VoiceBase.html#a46a39b3fac494fc77ac007a86ff8c18d">set_params</a>();</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">int</span> open_device() = 0;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">int</span> err;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif // !_VOICE_BASE_H_</span></div><div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a616634f16c4fbdd993dbdd55d01a264b"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a616634f16c4fbdd993dbdd55d01a264b">an::core::VoiceBase::default_period_size</a></div><div class="ttdeci">unsigned int default_period_size</div><div class="ttdoc">默认时间段大小 </div><div class="ttdef"><b>Definition:</b> voice_base.h:45</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a79208eae42d8bfb263c5502ced5a3aac"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a79208eae42d8bfb263c5502ced5a3aac">an::core::VoiceBase::format</a></div><div class="ttdeci">snd_pcm_format_t format</div><div class="ttdoc">采样格式 </div><div class="ttdef"><b>Definition:</b> voice_base.h:62</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a25fb22d7c53598c84b1e7825e6013bdd"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">an::core::VoiceBase::device</a></div><div class="ttdeci">const char * device</div><div class="ttdoc">设备名称 </div><div class="ttdef"><b>Definition:</b> voice_base.h:55</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a64d7a46cc0bdac297c01e2fe4bcfd1f1"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a64d7a46cc0bdac297c01e2fe4bcfd1f1">an::core::VoiceBase::handle</a></div><div class="ttdeci">snd_pcm_t * handle</div><div class="ttdoc">设备句柄 </div><div class="ttdef"><b>Definition:</b> voice_base.h:58</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_ad28dfe6a17d1c303ff27ff7856fdc33b"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#ad28dfe6a17d1c303ff27ff7856fdc33b">an::core::VoiceBase::default_buffer_size</a></div><div class="ttdeci">unsigned int default_buffer_size</div><div class="ttdoc">默认缓存大小 </div><div class="ttdef"><b>Definition:</b> voice_base.h:43</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a07713605873dfb9bc973fff4250b4224"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a07713605873dfb9bc973fff4250b4224">an::core::VoiceBase::buffer_size</a></div><div class="ttdeci">snd_pcm_uframes_t buffer_size</div><div class="ttdoc">缓存大小 </div><div class="ttdef"><b>Definition:</b> voice_base.h:49</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a386ed6b382fbbca6348aa9f78f1b4025"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a386ed6b382fbbca6348aa9f78f1b4025">an::core::VoiceBase::params</a></div><div class="ttdeci">snd_pcm_hw_params_t * params</div><div class="ttdoc">硬件参数结构体 </div><div class="ttdef"><b>Definition:</b> voice_base.h:60</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_ac8f60ef9a88c66a67e84882888b8985a"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#ac8f60ef9a88c66a67e84882888b8985a">an::core::VoiceBase::access_type</a></div><div class="ttdeci">snd_pcm_access_t access_type</div><div class="ttdoc">访问方式 </div><div class="ttdef"><b>Definition:</b> voice_base.h:64</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_aa04fecd028f847b81e867fcbf463f50c"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#aa04fecd028f847b81e867fcbf463f50c">an::core::VoiceBase::frames</a></div><div class="ttdeci">snd_pcm_uframes_t frames</div><div class="ttdoc">帧数 </div><div class="ttdef"><b>Definition:</b> voice_base.h:47</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a887c2eb3cca624e0000c52bdffa674aa"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a887c2eb3cca624e0000c52bdffa674aa">an::core::VoiceBase::~VoiceBase</a></div><div class="ttdeci">virtual ~VoiceBase()</div><div class="ttdoc">音频捕获、回放基类析构函数 </div><div class="ttdef"><b>Definition:</b> voice_base.cc:52</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a46a39b3fac494fc77ac007a86ff8c18d"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a46a39b3fac494fc77ac007a86ff8c18d">an::core::VoiceBase::set_params</a></div><div class="ttdeci">int set_params()</div><div class="ttdoc">设置硬件参数 </div><div class="ttdef"><b>Definition:</b> voice_base.cc:76</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_af4d60d686fb044d46e9990ad0883390b"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#af4d60d686fb044d46e9990ad0883390b">an::core::VoiceBase::period_size</a></div><div class="ttdeci">snd_pcm_uframes_t period_size</div><div class="ttdoc">时间段大小 </div><div class="ttdef"><b>Definition:</b> voice_base.h:51</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a361d1c1c6d838c86371c6ff0fdc1604d"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a361d1c1c6d838c86371c6ff0fdc1604d">an::core::VoiceBase::bytes_per_frame</a></div><div class="ttdeci">unsigned int bytes_per_frame</div><div class="ttdoc">每帧数据大小 </div><div class="ttdef"><b>Definition:</b> voice_base.h:41</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a55cc977e64b415944dcb64f22b76dab2"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a55cc977e64b415944dcb64f22b76dab2">an::core::VoiceBase::soft_resample</a></div><div class="ttdeci">unsigned int soft_resample</div><div class="ttdoc">软件重采样 </div><div class="ttdef"><b>Definition:</b> voice_base.h:39</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_ae649a6d39bdac50dd10c6db2d1e0885a"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#ae649a6d39bdac50dd10c6db2d1e0885a">an::core::VoiceBase::channels</a></div><div class="ttdeci">unsigned int channels</div><div class="ttdoc">通道数 </div><div class="ttdef"><b>Definition:</b> voice_base.h:37</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_ae63337278a680c4e4cbc47f6952c9a5a"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#ae63337278a680c4e4cbc47f6952c9a5a">an::core::VoiceBase::VoiceBase</a></div><div class="ttdeci">VoiceBase(const std::string &amp;device)</div><div class="ttdoc">音频捕获、回放构造函数 </div><div class="ttdef"><b>Definition:</b> voice_base.cc:25</div></div>
+<div class="ttc" id="namespacean_html"><div class="ttname"><a href="namespacean.html">an</a></div><div class="ttdef"><b>Definition:</b> cam_capture.h:19</div></div>
+<div class="ttc" id="classan_1_1core_1_1VoiceBase_html_a8fc304fb7d8c8e506498a12f66d80cb8"><div class="ttname"><a href="classan_1_1core_1_1VoiceBase.html#a8fc304fb7d8c8e506498a12f66d80cb8">an::core::VoiceBase::rate</a></div><div class="ttdeci">unsigned int rate</div><div class="ttdoc">码率 </div><div class="ttdef"><b>Definition:</b> voice_base.h:35</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_30fb483e72003eef670c3ffb35053eb7.html">an-core</a></li><li class="navelem"><a class="el" href="dir_78df53fb4c1e0cf4ec373c1c4003946c.html">lib</a></li><li class="navelem"><a class="el" href="lib_2voice__base_8h.html">voice_base.h</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

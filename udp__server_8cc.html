@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Aero Node: README</title>
+<title>Aero Node: /home/jiang/git/aero-node/an-core/lib/udp_server.cc 文件参考</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('udp__server_8cc.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -80,53 +80,42 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">README </div>  </div>
+<div class="title">udp_server.cc 文件参考</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/Pokerpoke/Ras_node"></a> <a href="https://www.codacy.com/app/Pokerpoke/Ras_node?utm_source=github.com&amp;amp;utm_medium=referral&amp;amp;utm_content=Pokerpoke/Ras_node&amp;amp;utm_campaign=Badge_Grade"></a></p>
-<h2>1.依赖</h2>
-<ul>
-<li>编译工具：<a href="https://cmake.org/">CMake</a></li>
-<li>日志记录：<a href="http://log4cpp.sourceforge.net/">Log4cpp</a></li>
-<li><p class="startli">文档生成：<a href="www.doxygen.org/">Doxygen</a></p><ul>
-<li>Doxygen依赖<a href="http://www.graphviz.org/">Graphviz</a>生成调用关系图</li>
-</ul>
-<p class="startli">```shell sudo apt install graphviz ```</p>
-</li>
-<li><p class="startli">其他依赖：</p><ul>
-<li><a href="https://www.alsa-project.org/main/index.php/Main_Page">ALSA</a></li>
-</ul>
-<p class="startli">```shell sudo apt install libasound2-dev ```</p><ul>
-<li><a href="http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html">JRTPLIB</a></li>
-</ul>
-<p class="startli">```shell git clone <a href="https://github.com/j0r1/JRTPLIB.git">https://github.com/j0r1/JRTPLIB.git</a> mkdir build cd build cmake .. make sudo make install ```</p><ul>
-<li>JRTPLIB依赖<a href="http://research.edm.uhasselt.be/jori/page/CS/Jthread.html">JThread</a></li>
-</ul>
-<p class="startli">```shell git clone <a href="https://github.com/j0r1/JThread.git">https://github.com/j0r1/JThread.git</a> mkdir build cd build cmake .. make sudo make install ```</p>
-</li>
-</ul>
-<h2>2.编译</h2>
-<ul>
-<li>编译可执行程序</li>
-</ul>
-<div class="fragment"><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div></div><!-- fragment --><p>示例程序位于<code>build/bin/</code>目录下</p>
-<ul>
-<li>启用Debug</li>
-</ul>
-<div class="fragment"><div class="line">cmake -DCMAKE_BUILD_TYPE=Debug ..</div></div><!-- fragment --><ul>
-<li><p class="startli">交叉编译</p><ul>
-<li>Tiny4412</li>
-</ul>
-<p class="startli">修改<code>cmake/toolschain/CMakeLists.txt</code>中的<code>TOOL_CHAIN_DIR</code>为相应地址</p>
-<p class="startli">```shell cmake -DCMAKE_BUILD_TARGET=Tiny4412 .. ```</p>
-</li>
-<li>生成API文档</li>
-</ul>
-<div class="fragment"><div class="line">make doc</div></div><!-- fragment --> </div></div><!-- contents -->
+
+<p>创建一个UDP服务端  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="lib_2udp__server_8h_source.html">udp_server.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+udp_server.cc 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="udp__server_8cc__incl.png" border="0" usemap="#_2home_2jiang_2git_2aero-node_2an-core_2lib_2udp__server_8cc" alt=""/></div>
+<map name="_2home_2jiang_2git_2aero-node_2an-core_2lib_2udp__server_8cc" id="_2home_2jiang_2git_2aero-node_2an-core_2lib_2udp__server_8cc">
+<area shape="rect" id="node11" href="lib_2udp__server_8h.html" title="UDP服务端 " alt="" coords="97,109,194,136"/>
+</map>
+</div>
+</div><a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>创建一个UDP服务端 </p>
+<p>Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室</p>
+<dl class="section author"><dt>作者</dt><dd>姜阳 </dd></dl>
+<dl class="section date"><dt>日期</dt><dd>2017.07 </dd></dl>
+<dl class="section version"><dt>版本</dt><dd>0.0.1 </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_30fb483e72003eef670c3ffb35053eb7.html">an-core</a></li><li class="navelem"><a class="el" href="dir_78df53fb4c1e0cf4ec373c1c4003946c.html">lib</a></li><li class="navelem"><a class="el" href="udp__server_8cc.html">udp_server.cc</a></li>
     <li class="footer">制作者
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>

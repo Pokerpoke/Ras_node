@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Aero Node: README</title>
+<title>Aero Node: 相关页面</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('pages.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -80,49 +80,16 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">README </div>  </div>
+<div class="title">相关页面</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.org/Pokerpoke/Ras_node"></a> <a href="https://www.codacy.com/app/Pokerpoke/Ras_node?utm_source=github.com&amp;amp;utm_medium=referral&amp;amp;utm_content=Pokerpoke/Ras_node&amp;amp;utm_campaign=Badge_Grade"></a></p>
-<h2>1.依赖</h2>
-<ul>
-<li>编译工具：<a href="https://cmake.org/">CMake</a></li>
-<li>日志记录：<a href="http://log4cpp.sourceforge.net/">Log4cpp</a></li>
-<li><p class="startli">文档生成：<a href="www.doxygen.org/">Doxygen</a></p><ul>
-<li>Doxygen依赖<a href="http://www.graphviz.org/">Graphviz</a>生成调用关系图</li>
-</ul>
-<p class="startli">```shell sudo apt install graphviz ```</p>
-</li>
-<li><p class="startli">其他依赖：</p><ul>
-<li><a href="https://www.alsa-project.org/main/index.php/Main_Page">ALSA</a></li>
-</ul>
-<p class="startli">```shell sudo apt install libasound2-dev ```</p><ul>
-<li><a href="http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html">JRTPLIB</a></li>
-</ul>
-<p class="startli">```shell git clone <a href="https://github.com/j0r1/JRTPLIB.git">https://github.com/j0r1/JRTPLIB.git</a> mkdir build cd build cmake .. make sudo make install ```</p><ul>
-<li>JRTPLIB依赖<a href="http://research.edm.uhasselt.be/jori/page/CS/Jthread.html">JThread</a></li>
-</ul>
-<p class="startli">```shell git clone <a href="https://github.com/j0r1/JThread.git">https://github.com/j0r1/JThread.git</a> mkdir build cd build cmake .. make sudo make install ```</p>
-</li>
-</ul>
-<h2>2.编译</h2>
-<ul>
-<li>编译可执行程序</li>
-</ul>
-<div class="fragment"><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake ..</div><div class="line">make</div></div><!-- fragment --><p>示例程序位于<code>build/bin/</code>目录下</p>
-<ul>
-<li>启用Debug</li>
-</ul>
-<div class="fragment"><div class="line">cmake -DCMAKE_BUILD_TYPE=Debug ..</div></div><!-- fragment --><ul>
-<li><p class="startli">交叉编译</p><ul>
-<li>Tiny4412</li>
-</ul>
-<p class="startli">修改<code>cmake/toolschain/CMakeLists.txt</code>中的<code>TOOL_CHAIN_DIR</code>为相应地址</p>
-<p class="startli">```shell cmake -DCMAKE_BUILD_TARGET=Tiny4412 .. ```</p>
-</li>
-<li>生成API文档</li>
-</ul>
-<div class="fragment"><div class="line">make doc</div></div><!-- fragment --> </div></div><!-- contents -->
+<div class="textblock">这里列出了所有相关页面:</div><div class="directory">
+<table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md__home_jiang_git_aero-node_an-gui_web_README.html" target="_self">README</a></td><td class="desc"></td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="todo.html" target="_self">待办事项列表</a></td><td class="desc"></td></tr>
+</table>
+</div><!-- directory -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

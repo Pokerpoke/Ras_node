@@ -1,1 +1,0 @@
-../lib/cam_capture.h

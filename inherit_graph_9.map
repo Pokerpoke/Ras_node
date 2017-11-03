@@ -1,0 +1,5 @@
+<map id="类继承关系图" name="类继承关系图">
+<area shape="rect" id="node1" href="$classan_1_1core_1_1VoiceBase.html" title="音频捕获、回放基类 " alt="" coords="5,31,145,57"/>
+<area shape="rect" id="node2" href="$classan_1_1core_1_1VoiceCapture.html" title="音频捕获类 " alt="" coords="197,5,353,32"/>
+<area shape="rect" id="node3" href="$classan_1_1core_1_1VoicePlayback.html" title="音频回放类 " alt="" coords="193,56,357,83"/>
+</map>
