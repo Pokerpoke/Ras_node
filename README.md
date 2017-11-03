@@ -49,7 +49,7 @@ make
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 ```
 - 交叉编译
-	-- Tiny4412
+	- Tiny4412  
 	修改`cmake/toolschain/CMakeLists.txt`中的`TOOL_CHAIN_DIR`为相应地址
 	```shell
 	cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..
