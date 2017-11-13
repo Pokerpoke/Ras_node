@@ -22,8 +22,8 @@ class RTPReceiver
 
     int read();
 
-    // char *output_buffer;
-    uint8_t *output_buffer;
+    char *output_buffer;
+    // uint8_t *output_buffer;
     uint32_t output_buffer_size;
 
     double time_stamp;

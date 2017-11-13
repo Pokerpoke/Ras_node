@@ -50,8 +50,9 @@ int RTPReceiver::read()
 			{
 				// 在这里处理数据
 				output_buffer_size = output_packet->GetPayloadLength();
-				output_buffer = (uint8_t *)calloc(1, output_buffer_size);
-				memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
+				// output_buffer = (uint8_t *)calloc(1, output_buffer_size);
+				// memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
+				output_buffer = (char *)output_packet->GetPayloadData();
 
 #ifdef ENABLE_DEBUG
 				LOG(INFO) << "Got packet";
