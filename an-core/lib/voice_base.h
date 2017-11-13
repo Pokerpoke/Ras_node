@@ -47,8 +47,10 @@ public:
   snd_pcm_uframes_t frames;
   /// 缓存大小
   snd_pcm_uframes_t buffer_size;
+  snd_pcm_uframes_t buffer_frames;
   /// 时间段大小
   snd_pcm_uframes_t period_size;
+  snd_pcm_uframes_t period_frames;
 
 protected:
   /// 设备名称

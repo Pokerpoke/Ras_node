@@ -41,8 +41,13 @@ VoiceBase::VoiceBase(const std::string &dev)
 	default_buffer_size = frames * bytes_per_frame;
 	default_period_size = default_buffer_size / 2;
 
+	// 以Byte为单位
 	buffer_size = static_cast<snd_pcm_uframes_t>(default_buffer_size);
-	period_size = static_cast<snd_pcm_uframes_t>(default_period_size);
+	period_size = static_cast<snd_pcm_uframes_t>(buffer_size / 2);
+
+	// 以frames为单位
+	buffer_frames = static_cast<snd_pcm_uframes_t>(frames);
+	period_frames = static_cast<snd_pcm_uframes_t>(frames / 2);
 }
 
 /** 
@@ -150,49 +155,50 @@ int VoiceBase::set_params()
 		}
 	}
 
-	// 设置缓存大小，计算公式为：frames * bytes_per_frame
+	// 设置缓存大小，以Byte为单位的计算公式为：frames * bytes_per_frame
+	// 以frames为单位
 	if ((err = snd_pcm_hw_params_set_buffer_size_near(handle,
 													  params,
-													  &buffer_size)) < 0)
+													  &buffer_frames)) < 0)
 	{
 		LOG(ERROR) << "Set buffer size error.";
 		return -1;
 	}
 	else
 	{
-		snd_pcm_uframes_t t_buffer_size;
-		snd_pcm_hw_params_get_buffer_size(params, &t_buffer_size);
-		if (t_buffer_size != buffer_size)
+		snd_pcm_uframes_t t_buffer_frames;
+		snd_pcm_hw_params_get_buffer_size(params, &t_buffer_frames);
+		if (t_buffer_frames != buffer_frames)
 		{
-			LOG(WARN) << "Buffer size " << buffer_size
-					  << " not available, get " << t_buffer_size << " frames.";
+			LOG(WARN) << "Buffer size " << buffer_frames
+					  << " not available, get " << t_buffer_frames << " frames.";
 		}
 		else
 		{
-			LOG(INFO) << "Buffer size set to " << buffer_size << " frames.";
+			LOG(INFO) << "Buffer size set to " << buffer_frames << " frames.";
 		}
 	}
 
-	// 设置段大小，一般为buffer_size的1/2或者1/4；
+	// 设置段大小，一般为buffer_size或buffer_frames的1/2或者1/4；
 	if ((err = snd_pcm_hw_params_set_period_size_near(handle,
 													  params,
-													  &period_size, 0)) < 0)
+													  &period_frames, 0)) < 0)
 	{
 		LOG(ERROR) << "Set period size error.";
 		return -1;
 	}
 	else
 	{
-		snd_pcm_uframes_t t_period_size;
-		snd_pcm_hw_params_get_period_size(params, &t_period_size, 0);
-		if (t_period_size != period_size)
+		snd_pcm_uframes_t t_period_frames;
+		snd_pcm_hw_params_get_period_size(params, &t_period_frames, 0);
+		if (t_period_frames != period_frames)
 		{
-			LOG(WARN) << "Period size " << period_size
-					  << " not available, get " << t_period_size << " frames.";
+			LOG(WARN) << "Period size " << period_frames
+					  << " not available, get " << t_period_frames << " frames.";
 		}
 		else
 		{
-			LOG(INFO) << "Period size set to " << period_size << " frames.";
+			LOG(INFO) << "Period size set to " << period_frames << " frames.";
 		}
 	}
 
