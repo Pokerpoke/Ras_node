@@ -1,50 +1,37 @@
-/**
- * 
- * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
- * 
- * @file      
- * @author    姜阳
- * @date      2017.10
- * @brief     音频采集、回放例程
- * @version   0.0.1
- * 
- */
 #include <stdio.h>
-#include <sched.h>
 
-#include "voice_playback.h"
-#include "voice_capture.h"
 #include "logger.h"
+#include "voice_playback.h"
 
 using namespace std;
 using namespace an::core;
 
-int main()
+int main(int argc, char *argv[])
 {
 	logger_init();
 
-	struct sched_param sched_param;
-	if (sched_getparam(0, &sched_param) < 0)
+	VoicePlayback p("default");
+
+	int fd = open("test.pcm", O_RDONLY);
+
+	if (fd < 0)
 	{
-		LOG(ERROR) << "Set scheduler failed.";
+		LOG(ERROR) << "File open failed";
 		return -1;
 	}
-	sched_param.sched_priority = sched_get_priority_max(SCHED_RR);
-	if (!sched_setscheduler(0, SCHED_RR, &sched_param))
+
+	int input_buffer_size = p.default_buffer_size;
+	char *input_buffer;
+
+	input_buffer = (char *)malloc(input_buffer_size);
+
+	while (read(fd, input_buffer, input_buffer_size) > 0)
 	{
-		LOG(INFO) << "Set priority to " << sched_param.sched_priority;
+		p.playback(input_buffer, input_buffer_size);
 	}
 
-	VoicePlayback p("default");
-	VoiceCapture c("default");
-
-	while (1)
-	{
-		c.capture();
-		p.playback(c.output_buffer, c.output_buffer_size);
-	}
-
-	getchar();
+	close(fd);
+	free(input_buffer);
 
 	return 0;
 }

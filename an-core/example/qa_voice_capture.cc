@@ -14,8 +14,7 @@ int main()
 	// int fd;
 	// fd = open("test.pcm", O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
-	// voice_capture capture;
-	// voice_capture capture("default");
+	// VoiceCapture capture("default");
 
 	// int r, loop_sec;
 	// loop_sec = 10;
