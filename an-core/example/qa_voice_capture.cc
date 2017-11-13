@@ -47,7 +47,5 @@ int main()
 
 	output.close();
 
-	getchar();
-
 	return 0;
 }

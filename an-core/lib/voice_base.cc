@@ -25,9 +25,10 @@ namespace core
 VoiceBase::VoiceBase(const std::string &dev)
 {
 	device = dev.c_str();
-	channels = 2;
-	rate = 44100;
-	// rate = 8000;
+	// channels = 2;
+	channels = 1;
+	// rate = 44100;
+	rate = 8000;
 	frames = 32;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
