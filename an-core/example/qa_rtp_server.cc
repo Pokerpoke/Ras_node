@@ -96,6 +96,8 @@ int main()
 	while(1)
 	{
         r.read();
+		if(r.outputbuffer == 0)
+			break;
 		cout.write((char *)r.output_buffer, r.output_buffer_size);
 		// if (r.output_buffer_size == 0)
 		// 	continue;
