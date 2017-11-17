@@ -10,10 +10,34 @@
 #include <rtppacket.h>
 #include <stdlib.h>
 
+#include "logger.h"
+
 namespace an
 {
 namespace core
 {
+class RTPSession : public jrtplib::RTPSession 
+{
+  public:
+    char *output_buffer;
+    int output_buffer_size;
+
+  protected:
+    void OnValidatedRTPPacket(jrtplib::RTPSourceData *srcdat, 
+                              jrtplib::RTPPacket *rtppack, 
+                              bool isonprobation, 
+                              bool *ispackethandled)
+    {
+        output_buffer_size = rtppack->GetPayloadLength();
+        output_buffer = (char *)calloc(1, output_buffer_size);
+        LOG(INFO) << output_buffer_size;
+        memcpy(output_buffer, rtppack->GetPayloadData(), output_buffer_size);
+
+		DeletePacket(rtppack);
+		*ispackethandled = true;
+    }
+};
+
 class RTPReceiver
 {
   public:
@@ -23,7 +47,6 @@ class RTPReceiver
     int read();
 
     char *output_buffer;
-    // uint8_t *output_buffer;
     uint32_t output_buffer_size;
 
     double time_stamp;
@@ -34,13 +57,17 @@ class RTPReceiver
   private:
     int init();
 
-    jrtplib::RTPSession session;
+    RTPSession session;
     jrtplib::RTPUDPv4TransmissionParams transparams;
     jrtplib::RTPSessionParams sessionparams;
     jrtplib::RTPPacket *output_packet;
 
-    int err;
+    // jrtplib::RTPSession session;
+    // jrtplib::RTPUDPv4TransmissionParams transparams;
+    // jrtplib::RTPSessionParams sessionparams;
+    // jrtplib::RTPPacket *output_packet;
 
+    int err;
 };
 }
 }
