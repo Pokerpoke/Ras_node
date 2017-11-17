@@ -107,19 +107,11 @@ int main()
 	logger_init();
 
 	RTPSender s("127.0.0.1", 13374);
-	// RTPSender s("192.168.0.22", 13374);
 
-
-	char t[10];
 	for (int i = 0; i < 10; i++)
 	{
-		t[i] = i;
-		cout << t[i];
-		// s.write(t, sizeof(t));
-		// s.write((char *)"123", 3);
+		s.write((char *)"123\n", 4);
 	}
-
-	getchar();
 
 	return 0;
 }

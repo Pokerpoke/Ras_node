@@ -9,8 +9,9 @@ RTPReceiver::RTPReceiver(const int _portbase)
 {
 	portbase = _portbase;
 	// time_stamp = 8000.0;
-	time_stamp = 44100.0;
-	payload_type = 11;
+	time_stamp = 8000.0;
+	// payload_type = 11;
+	payload_type = 0;
 	mark = false;
 	output_buffer_size = 0;
 	output_buffer = NULL;
@@ -40,6 +41,11 @@ int RTPReceiver::init()
 
 int RTPReceiver::read()
 {
+	output_buffer_size = 1;
+	output_buffer = (char *)calloc(1, output_buffer_size);
+	// memset(output_buffer, 0, 1);
+	// output_buffer = 0;
+
 	session.BeginDataAccess();
 
 	if (session.GotoFirstSourceWithData())
@@ -50,12 +56,12 @@ int RTPReceiver::read()
 			{
 				// 在这里处理数据
 				output_buffer_size = output_packet->GetPayloadLength();
-				// output_buffer = (uint8_t *)calloc(1, output_buffer_size);
-				// memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
-				output_buffer = (char *)output_packet->GetPayloadData();
+				output_buffer = (char *)calloc(1, output_buffer_size);
+				// output_buffer = (char *)calloc(output_buffer_size, 1);
+				memcpy(output_buffer, output_packet->GetPayloadData(), output_buffer_size);
 
 #ifdef ENABLE_DEBUG
-				LOG(INFO) << "Got packet";
+				LOG(INFO) << "Got packet.";
 #endif
 
 				// 不再需要这个包了，删除之
