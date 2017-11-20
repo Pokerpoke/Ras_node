@@ -34,7 +34,6 @@ int main(void)
 	uint16_t portbase = 13374;
 	int status;
 	int time_stamp = 8000;
-	portbase = 13374;
 
 	// Now, we'll create a RTP session, set the destination, send some
 	// packets and poll for incoming data.
