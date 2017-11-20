@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 	RTPSession sess;
 	VoiceCapture c("default");
-	uint16_t destport = 13374;
+	uint16_t destport = 8338;
 	uint32_t destip;
 	std::string ipstr;
 	int status;

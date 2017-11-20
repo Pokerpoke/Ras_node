@@ -31,7 +31,7 @@ int main(void)
 
 	RTPSession sess;
 	VoicePlayback p("default");
-	uint16_t portbase = 13374;
+	uint16_t portbase = 8338;
 	int status;
 	int time_stamp = 8000;
 
