@@ -9,7 +9,11 @@
 #include <iostream>
 #include <string>
 
+#include "logger.h"
+#include "voice_capture.h"
+
 using namespace jrtplib;
+using namespace an::core;
 
 void checkerror(int rtperr)
 {
@@ -22,23 +26,23 @@ void checkerror(int rtperr)
 
 int main(void)
 {
-#ifdef RTP_SOCKETTYPE_WINSOCK
-	WSADATA dat;
-	WSAStartup(MAKEWORD(2, 2), &dat);
-#endif // RTP_SOCKETTYPE_WINSOCK
+#ifdef ENABLE_DEBUG
+	logger_init();
+#else
+	logger_init("send_test.log", AN_LOG_WARN);
+#endif
 
 	RTPSession sess;
+	VoiceCapture c("default");
 	uint16_t portbase = 13372;
 	uint16_t destport = 13374;
 	uint32_t destip;
 	std::string ipstr = "127.0.0.1";
 	int status, i;
-	int num = 10;
+	// int num = 10;
 	int payload_type = 0;
 	int time_stamp = 10;
 	bool mark = false;
-
-	// std::cout << "Using version " << RTPLibraryVersion::GetVersion().GetVersionString() << std::endl;
 
 	destip = inet_addr(ipstr.c_str());
 	if (destip == INADDR_NONE)
@@ -54,7 +58,6 @@ int main(void)
 
 	// Now, we'll create a RTP session, set the destination, send some
 	// packets and poll for incoming data.
-
 	RTPUDPv4TransmissionParams transparams;
 	RTPSessionParams sessparams;
 
@@ -78,48 +81,16 @@ int main(void)
 	sess.SetDefaultMark(mark);
 	sess.SetDefaultTimestampIncrement(time_stamp);
 
-	for (i = 1; i <= num; i++)
+	// for (i = 1; i <= num; i++)
+	while (1)
 	{
-		printf("\nSending packet %d/%d\n", i, num);
-
 		// send the packet
-		status = sess.SendPacket((void *)"123456789\n", 10);
+		c.capture();
+		status = sess.SendPacket((void *)c.output_buffer, c.output_buffer_size);
 		checkerror(status);
-
-		sess.BeginDataAccess();
-
-		// check incoming packets
-		if (sess.GotoFirstSourceWithData())
-		{
-			do
-			{
-				RTPPacket *pack;
-
-				while ((pack = sess.GetNextPacket()) != NULL)
-				{
-					// You can examine the data here
-					printf("Got packet !\n");
-
-					// we don't longer need the packet, so
-					// we'll delete it
-					sess.DeletePacket(pack);
-				}
-			} while (sess.GotoNextSourceWithData());
-		}
-
-		sess.EndDataAccess();
-
-#ifndef RTP_SUPPORT_THREAD
-		status = sess.Poll();
-		checkerror(status);
-#endif // RTP_SUPPORT_THREAD
-
 	}
 
 	sess.BYEDestroy(RTPTime(10, 0), 0, 0);
 
-#ifdef RTP_SOCKETTYPE_WINSOCK
-	WSACleanup();
-#endif // RTP_SOCKETTYPE_WINSOCK
 	return 0;
 }

@@ -3,6 +3,9 @@ if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
 endif()
 
 project(Aero-Node)
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 0)
+set(VERSION_DEBUG 3)
 
 cmake_minimum_required(VERSION 2.8.0)
 

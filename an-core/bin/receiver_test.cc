@@ -10,7 +10,11 @@
 #include <iostream>
 #include <string>
 
+#include "logger.h"
+#include "voice_playback.h"
+
 using namespace jrtplib;
+using namespace an::core;
 
 void checkerror(int rtperr)
 {
@@ -23,24 +27,22 @@ void checkerror(int rtperr)
 
 int main(void)
 {
-#ifdef RTP_SOCKETTYPE_WINSOCK
-	WSADATA dat;
-	WSAStartup(MAKEWORD(2, 2), &dat);
-#endif // RTP_SOCKETTYPE_WINSOCK
+#ifdef ENABLE_DEBUG
+	logger_init();
+#else
+	logger_init("send_test.log", AN_LOG_WARN);
+#endif
 
 	RTPSession sess;
+	VoicePlayback p("default");
 	uint16_t portbase = 13374;
 	std::string ipstr = "127.0.0.1";
 	int status;
 	int time_stamp = 10;
-
-	// std::cout << "Using version " << RTPLibraryVersion::GetVersion().GetVersionString() << std::endl;
-
 	portbase = 13374;
 
 	// Now, we'll create a RTP session, set the destination, send some
 	// packets and poll for incoming data.
-
 	RTPUDPv4TransmissionParams transparams;
 	RTPSessionParams sessparams;
 
@@ -71,7 +73,7 @@ int main(void)
 				while ((pack = sess.GetNextPacket()) != NULL)
 				{
 					// You can examine the data here
-					std::cout << (char *)pack->GetPayloadData();
+					p.playback((char *)pack->GetPayloadData(), pack->GetPayloadLength());
 
 					// we don't longer need the packet, so
 					// we'll delete it
@@ -90,9 +92,5 @@ int main(void)
 	}
 
 	sess.BYEDestroy(RTPTime(10, 0), 0, 0);
-
-#ifdef RTP_SOCKETTYPE_WINSOCK
-	WSACleanup();
-#endif // RTP_SOCKETTYPE_WINSOCK
 	return 0;
 }

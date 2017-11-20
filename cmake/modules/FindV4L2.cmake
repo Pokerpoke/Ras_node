@@ -19,42 +19,44 @@
 #=============================================================================
 
 if (V4L2_INCLUDE_DIR)
-  # Already in cache, be silent
-  set(V4L2_FIND_QUIETLY TRUE)
+    # Already in cache, be silent
+    set(V4L2_FIND_QUIETLY TRUE)
 endif ()
 # SET (V4L2_FOUND 0)
 
 find_path (V4L2_INCLUDE_DIR
-  NAMES libv4l2.h libv4lconvert.h
-  PATH_SUFFIXES v4l2 video4linux
-  DOC "The Video4Linux Version 2 (v4l2) include directory"
+    NAMES libv4l2.h libv4lconvert.h
+    PATH_SUFFIXES v4l2 video4linux
+    DOC "The Video4Linux Version 2 (v4l2) include directory"
 )
 
 find_path (_videodev2
-  NAMES videodev2.h
-  PATH_SUFFIXES linux
-  DOC "Video for Linux Two header file include directory"
+    NAMES videodev2.h
+    PATH_SUFFIXES linux
+    DOC "Video for Linux Two header file include directory"
 )
 
 find_library (V4L2_LIBRARY
-  NAMES v4l2 v4lconvert
-  DOC "The Video4Linux Version 2 (v4l2) library"
+    NAMES v4l2 v4lconvert
+    DOC "The Video4Linux Version 2 (v4l2) library"
 )
 
 # handle the QUIETLY and REQUIRED arguments and set V4L2_FOUND to TRUE if all listed variables are TRUE
-include (FindPackageHandleStandardArgs)
-find_package_handle_standard_args (V4L2 DEFAULT_MSG V4L2_LIBRARY V4L2_INCLUDE_DIR)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(V4L2
+                                  REQUIRED_VARS V4L2_LIBRARY V4L2_INCLUDE_DIR
+                                  VERSION_VAR V4L2_VERSION_STRING)
 
 if (V4L2_FOUND)
-  set (V4L2_LIBRARIES ${V4L2_LIBRARY})
-  set (V4L2_INCLUDE_DIRS ${V4L2_INCLUDE_DIR})
+    set (V4L2_LIBRARIES ${V4L2_LIBRARY})
+    set (V4L2_INCLUDE_DIRS ${V4L2_INCLUDE_DIR})
 else (V4L2_FOUND)
-  message (WARNING "libv4l2 or libv4lconvert libraries from http://linuxtv.org not found!")
+    message (WARNING "libv4l2 or libv4lconvert libraries from http://linuxtv.org not found!")
 endif (V4L2_FOUND)
 
 if (NOT _videodev2)
-  message (WARNING "videodev2.h kernel header not found!")
-  set (V4L2_FOUND 0)
+    message (WARNING "videodev2.h kernel header not found!")
+    set (V4L2_FOUND 0)
 endif(NOT _videodev2)
 
 mark_as_advanced (V4L2_INCLUDE_DIR V4L2_LIBRARY)
