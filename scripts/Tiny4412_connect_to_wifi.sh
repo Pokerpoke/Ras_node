@@ -7,7 +7,7 @@ cat > /etc/wpa_supplicant/wpa_supplicant.conf << EOF
 ctrl_interface=/var/run/wpa_supplicant
 ap_scan=1
 
-network{
+network={
     ssid="411-D-Link"
     psk="aerolab411"
 }
