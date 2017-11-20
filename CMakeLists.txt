@@ -7,7 +7,7 @@ set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_DEBUG 3)
 
-cmake_minimum_required(VERSION 2.8.0)
+cmake_minimum_required(VERSION 2.8.6)
 
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
@@ -46,12 +46,6 @@ set(CMAKE_MODULE_PATH
 # # 添加pthread
 # find_package(Threads REQUIRED)
 
-# 添加glog库
-# find_package(glog)
-# 	if(glog_FOUND)
-# 		include_directories(${glog_INCLUDE_DIRS})
-# 	endif(glog_FOUND)
-    
 # 添加log4cpp库
 find_package(LOG4CPP REQUIRED)
 include_directories(${LOG4CPP_INCLUDE_DIR})
@@ -89,22 +83,14 @@ find_package(Doxygen)
     endif(DOXYGEN_FOUND)
 
 # 设置可执行文件输出目录
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(
-    # ${ALSA_INCLUDE_DIR}
-    # ${LOG_4_CPP_INCLUDE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/an-core/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/an-transfer/include
+    ${CMAKE_SOURCE_DIR}/an-core/include
+    ${CMAKE_SOURCE_DIR}/an-transfer/include
 )
 
 add_subdirectory(an-core)
 # add_subdirectory(an-transfer)
-
-
-# 显示include directories，测试用
-# get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-# foreach(dir ${dirs})
-#   message(STATUS "Include dir='${dir}'")
-# endforeach()

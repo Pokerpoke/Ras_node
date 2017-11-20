@@ -14,6 +14,7 @@
 
 using namespace jrtplib;
 using namespace an::core;
+using namespace std;
 
 void checkerror(int rtperr)
 {
@@ -24,25 +25,28 @@ void checkerror(int rtperr)
 	}
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
-#ifdef ENABLE_DEBUG
 	logger_init();
-#else
-	logger_init("send_test.log", AN_LOG_WARN);
-#endif
 
 	RTPSession sess;
 	VoiceCapture c("default");
-	uint16_t portbase = 13372;
 	uint16_t destport = 13374;
 	uint32_t destip;
-	std::string ipstr = "127.0.0.1";
-	int status, i;
-	// int num = 10;
+	std::string ipstr;
+	int status;
 	int payload_type = 0;
-	int time_stamp = 10;
+	int time_stamp = 8000;
 	bool mark = false;
+
+	if (argc == 1)
+	{
+		ipstr = "127.0.0.1";
+	}
+	else
+	{
+		ipstr = argv[1];
+	}
 
 	destip = inet_addr(ipstr.c_str());
 	if (destip == INADDR_NONE)
@@ -68,7 +72,7 @@ int main(void)
 	sessparams.SetOwnTimestampUnit(1.0 / 8000.0);
 
 	sessparams.SetAcceptOwnPackets(true);
-	transparams.SetPortbase(portbase);
+	// transparams.SetPortbase(portbase);
 	status = sess.Create(sessparams, &transparams);
 	checkerror(status);
 
@@ -81,7 +85,6 @@ int main(void)
 	sess.SetDefaultMark(mark);
 	sess.SetDefaultTimestampIncrement(time_stamp);
 
-	// for (i = 1; i <= num; i++)
 	while (1)
 	{
 		// send the packet
