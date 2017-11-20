@@ -16,7 +16,7 @@ namespace an
 {
 namespace core
 {
-class RTPSession : public jrtplib::RTPSession 
+class RTPSession : public jrtplib::RTPSession
 {
   public:
     char *output_buffer;
@@ -30,7 +30,6 @@ class RTPSession : public jrtplib::RTPSession
     {
         output_buffer_size = rtppack->GetPayloadLength();
         output_buffer = (char *)calloc(1, output_buffer_size);
-        LOG(INFO) << output_buffer_size;
         memcpy(output_buffer, rtppack->GetPayloadData(), output_buffer_size);
 
 		DeletePacket(rtppack);
@@ -61,11 +60,6 @@ class RTPReceiver
     jrtplib::RTPUDPv4TransmissionParams transparams;
     jrtplib::RTPSessionParams sessionparams;
     jrtplib::RTPPacket *output_packet;
-
-    // jrtplib::RTPSession session;
-    // jrtplib::RTPUDPv4TransmissionParams transparams;
-    // jrtplib::RTPSessionParams sessionparams;
-    // jrtplib::RTPPacket *output_packet;
 
     int err;
 };
