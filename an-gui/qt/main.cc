@@ -1,16 +1,16 @@
 #include <QApplication>
 #include <QWidget>
 
-#include "ui_developer_tools.h"
+#include "developer_tools.h"
 
 int main(int argc, char *argv[]) {
     
     QApplication app(argc, argv);
 
-    QMainWindow window;
-    Ui::developer_tools ui;
-    ui.setupUi(&window);
-    window.show();
+    // QMainWindow window;
+    DeveloperTools ui;
+    // ui.setupUi(&window);
+    ui.show();
 
     return app.exec();
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>developer_tools</class>
- <widget class="QMainWindow" name="developer_tools">
+ <class>DeveloperTools</class>
+ <widget class="QMainWindow" name="DeveloperTools">
   <property name="geometry">
    <rect>
     <x>0</x>
