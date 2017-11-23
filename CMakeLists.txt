@@ -1,8 +1,11 @@
+# cross compile settings
 if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
 endif()
 
+# project name
 project(Aero-Node)
+# set version
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_DEBUG 3)
@@ -13,38 +16,14 @@ cmake_minimum_required(VERSION 2.8.6)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
-# if(NOT CMAKE_BUILD_TYPE)
-# 	set(CMAKE_BUILD_TYPE Debug)
-# endif()
-
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	add_definitions(-DENABLE_DEBUG)
 endif()
 
+# add module path
 set(CMAKE_MODULE_PATH 
     APPEND "${CMAKE_SOURCE_DIR}/cmake/modules/"
     )
-
-# 添加Swig库
-# find_package(SWIG)
-# 	if(SWIG_FOUND)
-# 		include(${SWIG_USE_FILE})
-# 	endif(SWIG_FOUND)
-
-# find_package(PythonLibs 3)
-# include_directories(${PYTHON_INCLUDE_PATH})
-
-# 添加Boost库
-# find_package(Boost
-# 	COMPONENTS system
-# 	REQUIRED
-# 	)
-# 	if(Boost_FOUND)
-# 		include_directories(${Boost_INCLUDE_DIRS})
-# 	endif(Boost_FOUND)
-
-# # 添加pthread
-# find_package(Threads REQUIRED)
 
 # 添加log4cpp库
 find_package(LOG4CPP REQUIRED)
@@ -57,10 +36,6 @@ include_directories(${ALSA_INCLUDE_DIR})
 # 添加jrtp库
 find_package(JRTPLIB REQUIRED)
 include_directories(${JRTPLIB_INCLUDE_DIR})
-
-# # 添加v4l2库
-# find_package(V4L2 REQUIRED)
-# include_directories(${V4L2_INCLUDE_DIR})
 
 # 使用doxygen来生成文档
 find_package(Doxygen)
@@ -93,4 +68,5 @@ include_directories(
 )
 
 add_subdirectory(an-core)
+add_subdirectory(an-gui)
 # add_subdirectory(an-transfer)

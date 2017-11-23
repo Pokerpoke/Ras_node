@@ -1,0 +1,4 @@
+#ifndef _DEVELOPER_TOOLS_H_
+#define _DEVELOPER_TOOLS_H_
+
+#endif // !_DEVELOPER_TOOLS_H_
