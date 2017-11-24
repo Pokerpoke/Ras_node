@@ -1,7 +1,6 @@
 #ifndef _DEVELOPER_TOOLS_H_
 #define _DEVELOPER_TOOLS_H_
 
-#include <QMainWindow>
 #include <QWidget>
 
 namespace Ui
@@ -9,15 +8,25 @@ namespace Ui
 class DeveloperTools;
 }
 
-class DeveloperTools : public QMainWindow
+namespace an
+{
+namespace gui
+{
+namespace qt
+{
+class DeveloperTools : public QWidget
 {
     Q_OBJECT
 
   public:
-    explicit DeveloperTools(QMainWindow *parent = 0);
+    explicit DeveloperTools(QWidget *parent = 0);
     ~DeveloperTools();
+
   private:
     Ui::DeveloperTools *ui;
 };
+}
+}
+}
 
 #endif // !_DEVELOPER_TOOLS_H_

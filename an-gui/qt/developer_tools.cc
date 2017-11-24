@@ -2,9 +2,14 @@
 
 #include "ui_developer_tools.h"
 
-DeveloperTools::DeveloperTools(QMainWindow *parent):
-    QMainWindow(parent),
-    ui(new Ui::DeveloperTools)
+namespace an
+{
+namespace gui
+{
+namespace qt
+{
+DeveloperTools::DeveloperTools(QWidget *parent) : QWidget(parent),
+                                                  ui(new Ui::DeveloperTools)
 {
     ui->setupUi(this);
 }
@@ -12,4 +17,7 @@ DeveloperTools::DeveloperTools(QMainWindow *parent):
 DeveloperTools::~DeveloperTools()
 {
     delete ui;
+}
+}
+}
 }
