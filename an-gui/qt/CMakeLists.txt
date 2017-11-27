@@ -2,7 +2,7 @@
 # find_package(Qt5Widgets REQUIRED)
 # find_package(Qt5Gui REQUIRED)
 
-find_package(Qt4 REQUIRED)
+find_package(Qt4 4.8 REQUIRED)
 include_directories(${QT_INCLUDES})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

@@ -2,6 +2,11 @@
 #define _DEVELOPER_TOOLS_H_
 
 #include <QWidget>
+#include <QColor>
+#include <QString>
+#include <QProcess>
+
+#include <string>
 
 namespace Ui
 {
@@ -24,6 +29,18 @@ class DeveloperTools : public QWidget
 
   private:
     Ui::DeveloperTools *ui;
+
+    QString output_buffer;
+    QString program;
+    QProcess *cmd;
+    QProcess *cmd1;
+    QProcess *cmd2;
+
+  private slots:
+    void run();
+    void voice_receive();
+    void voice_send();
+    void output_print();
 };
 }
 }

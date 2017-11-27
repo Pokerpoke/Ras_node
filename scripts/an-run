@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# echo "Enter Qt program path : "
+# read PROGRAM
+
+. /bin/setqt4env
+
+hotplug
+
+echo "$1"
+
+$1 -qws

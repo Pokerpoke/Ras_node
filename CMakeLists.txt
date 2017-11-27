@@ -37,6 +37,10 @@ include_directories(${ALSA_INCLUDE_DIR})
 find_package(JRTPLIB REQUIRED)
 include_directories(${JRTPLIB_INCLUDE_DIR})
 
+# 添加jthread库
+find_package(JTHREAD REQUIRED)
+include_directories(${JTHREAD_INCLUDE_DIR})
+
 # 使用doxygen来生成文档
 find_package(Doxygen)
     if(DOXYGEN_FOUND)

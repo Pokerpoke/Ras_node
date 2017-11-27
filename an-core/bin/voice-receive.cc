@@ -18,73 +18,73 @@ using namespace an::core;
 
 void checkerror(int rtperr)
 {
-	if (rtperr < 0)
-	{
-		std::cout << "ERROR: " << RTPGetErrorString(rtperr) << std::endl;
-		exit(-1);
-	}
+    if (rtperr < 0)
+    {
+        std::cout << "ERROR: " << RTPGetErrorString(rtperr) << std::endl;
+        exit(-1);
+    }
 }
 
 int main(void)
 {
-	logger_init();
+    logger_init();
 
-	RTPSession sess;
-	VoicePlayback p("default");
-	uint16_t portbase = 8338;
-	int status;
-	int time_stamp = 8000;
+    RTPSession sess;
+    VoicePlayback p("default");
+    uint16_t portbase = 8338;
+    int status;
+    int time_stamp = 8000;
 
-	// Now, we'll create a RTP session, set the destination, send some
-	// packets and poll for incoming data.
-	RTPUDPv4TransmissionParams transparams;
-	RTPSessionParams sessparams;
+    // Now, we'll create a RTP session, set the destination, send some
+    // packets and poll for incoming data.
+    RTPUDPv4TransmissionParams transparams;
+    RTPSessionParams sessparams;
 
-	// IMPORTANT: The local timestamp unit MUST be set, otherwise
-	//            RTCP Sender Report info will be calculated wrong
-	// In this case, we'll be sending 10 samples each second, so we'll
-	// put the timestamp unit to (1.0/10.0)
-	sessparams.SetOwnTimestampUnit(1.0 / time_stamp);
+    // IMPORTANT: The local timestamp unit MUST be set, otherwise
+    //            RTCP Sender Report info will be calculated wrong
+    // In this case, we'll be sending 10 samples each second, so we'll
+    // put the timestamp unit to (1.0/10.0)
+    sessparams.SetOwnTimestampUnit(1.0 / time_stamp);
 
-	sessparams.SetAcceptOwnPackets(true);
-	transparams.SetPortbase(portbase);
-	status = sess.Create(sessparams, &transparams);
-	checkerror(status);
+    sessparams.SetAcceptOwnPackets(true);
+    transparams.SetPortbase(portbase);
+    status = sess.Create(sessparams, &transparams);
+    checkerror(status);
 
-	while (1)
-	{
-		checkerror(status);
+    while (1)
+    {
+        checkerror(status);
 
-		sess.BeginDataAccess();
+        sess.BeginDataAccess();
 
-		// check incoming packets
-		if (sess.GotoFirstSourceWithData())
-		{
-			do
-			{
-				RTPPacket *pack;
+        // check incoming packets
+        if (sess.GotoFirstSourceWithData())
+        {
+            do
+            {
+                RTPPacket *pack;
 
-				while ((pack = sess.GetNextPacket()) != NULL)
-				{
-					// You can examine the data here
-					p.playback((char *)pack->GetPayloadData(), pack->GetPayloadLength());
+                while ((pack = sess.GetNextPacket()) != NULL)
+                {
+                    // You can examine the data here
+                    p.playback((char *)pack->GetPayloadData(), pack->GetPayloadLength());
 
-					// we don't longer need the packet, so
-					// we'll delete it
-					sess.DeletePacket(pack);
-				}
-			} while (sess.GotoNextSourceWithData());
-		}
+                    // we don't longer need the packet, so
+                    // we'll delete it
+                    sess.DeletePacket(pack);
+                }
+            } while (sess.GotoNextSourceWithData());
+        }
 
-		sess.EndDataAccess();
+        sess.EndDataAccess();
 
 #ifndef RTP_SUPPORT_THREAD
 		status = sess.Poll();
 		checkerror(status);
 #endif // RTP_SUPPORT_THREAD
 
-	}
+    }
 
-	sess.BYEDestroy(RTPTime(10, 0), 0, 0);
-	return 0;
+    sess.BYEDestroy(RTPTime(10, 0), 0, 0);
+    return 0;
 }

@@ -6,7 +6,7 @@
 
 if(JRTPLIB_INCLUDE_DIR)
     # Already in cache, be silent
-    set(JRTP_LIB_FIND_QUIETLY TRUE)
+    set(JRTPLIB_FIND_QUIETLY TRUE)
 endif()
 
 find_path(JRTPLIB_INCLUDE_DIR
