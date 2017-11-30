@@ -5,8 +5,8 @@ foreach(T_FILE_NAME ${EXAMPLE_EXECUTABLE})
 	add_executable(${EXECUTABLE_NAME} ${T_FILE_NAME})
 	target_link_libraries(${EXECUTABLE_NAME}
 		an_core
-		${LOG4CPP_LIBRARIES}
-		${JRTPLIB_LIBRARIES}
-		${ALSA_LIBRARIES}
+		# ${LOG4CPP_LIBRARIES}
+		# ${JRTPLIB_LIBRARIES}
+		# ${ALSA_LIBRARIES}
 	)
 endforeach()

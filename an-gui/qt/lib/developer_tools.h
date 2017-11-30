@@ -6,8 +6,6 @@
 #include <QString>
 #include <QProcess>
 
-#include <string>
-
 namespace Ui
 {
 class DeveloperTools;
@@ -32,15 +30,16 @@ class DeveloperTools : public QWidget
 
     QString output_buffer;
     QString program;
-    QProcess *cmd;
+    QProcess *cmd0;
     QProcess *cmd1;
     QProcess *cmd2;
 
   private slots:
     void run();
+    void stop();
+    void clear();
     void voice_receive();
     void voice_send();
-    void output_print();
 };
 }
 }

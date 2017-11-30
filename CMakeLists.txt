@@ -1,6 +1,9 @@
 # cross compile settings
 if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
+    set(AN_BUILD_TARGET "#define AN_TARGET_TINY4412")
+else()
+    set(AN_BUILD_TARGET "#define AN_TARGET_X86")
 endif()
 
 # project name
@@ -9,12 +12,22 @@ project(Aero-Node)
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_DEBUG 3)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_DEBUG}")
 
 cmake_minimum_required(VERSION 2.8.6)
 
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
+# include some modules
+include(CheckIncludeFile)
+include(CheckIncludeFileCXX)
+
+configure_file(${CMAKE_SOURCE_DIR}/config.h.in 
+               ${CMAKE_BINARY_DIR}/config.h
+               )
+include_directories(${CMAKE_BINARY_DIR})
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
 	add_definitions(-DENABLE_DEBUG)
@@ -69,6 +82,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 include_directories(
     ${CMAKE_SOURCE_DIR}/an-core/include
     ${CMAKE_SOURCE_DIR}/an-transfer/include
+    ${CMAKE_SOURCE_DIR}/an-gui/qt/include
 )
 
 add_subdirectory(an-core)
