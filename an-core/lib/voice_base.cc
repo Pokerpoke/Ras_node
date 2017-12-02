@@ -2,11 +2,14 @@
  * 
  * Copyright (c) 2017-2018 南京航空航天 航空通信网络研究室
  * 
- * @file      
- * @author    姜阳
- * @date      2017.10
- * @brief     音频采集、回放基类，设定相关参数
- * @version   0.0.1
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-11
+ * @brief    音频采集、回放基类，设定相关参数
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-02
+ * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #include "logger.h"
