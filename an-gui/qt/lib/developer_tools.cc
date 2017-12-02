@@ -18,13 +18,13 @@ DeveloperTools::DeveloperTools(QWidget *parent) : QWidget(parent),
     cmd1 = new QProcess(this);
     cmd2 = new QProcess(this);
 
-    QColor white(255, 255, 255);
-    ui->output->setTextColor(white);
+    ui->output->append("Command Line Output:");
 
     connect(ui->run, SIGNAL(clicked()), this, SLOT(run()));
     connect(ui->stop, SIGNAL(clicked()), this, SLOT(stop()));
-    connect(ui->clear, SIGNAL(clicked()), this, SLOT(clear()));
-    // connect(ui->quit, SIGNAL(clicked()), this, SLOT(quit()));
+    connect(ui->clear_output, SIGNAL(clicked()), this, SLOT(clear_output()));
+    // connect(ui->quit, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->quit, SIGNAL(clicked()), this, SLOT(stop_all()));
     connect(ui->voice_send, SIGNAL(clicked()), this, SLOT(voice_send()));
     connect(ui->voice_receive, SIGNAL(clicked()), this, SLOT(voice_receive()));
 }
@@ -34,6 +34,9 @@ void DeveloperTools::run()
     program = "/home/jiang/git/aero-node/build/bin/voice-receive";
 
     cmd0->start(program);
+    
+    program += " starting...";
+    ui->output->append(program);
 }
 
 void DeveloperTools::stop()
@@ -41,6 +44,25 @@ void DeveloperTools::stop()
     program = "/home/jiang/git/aero-node/build/bin/voice-receive";
 
     cmd0->kill();
+
+    program += " stopped";
+    ui->output->append(program);
+}
+
+void DeveloperTools::stop_all()
+{
+    if (cmd0->state() == QProcess::Running)
+    {
+        cmd0->kill();
+    }
+    if (cmd1->state() == QProcess::Running)
+    {
+        cmd1->kill();
+    }
+    if (cmd2->state() == QProcess::Running)
+    {
+        cmd2->kill();
+    }
 }
 
 void DeveloperTools::voice_send()
@@ -49,7 +71,7 @@ void DeveloperTools::voice_send()
 
     cmd1->start(program);
 
-    ui->output->append("voice-send");
+    ui->output->append(program);
 }
 
 void DeveloperTools::voice_receive()
@@ -58,10 +80,10 @@ void DeveloperTools::voice_receive()
 
     cmd2->start(program);
 
-    ui->output->append("voice-receive");
+    ui->output->append(program);
 }
 
-void DeveloperTools::clear()
+void DeveloperTools::clear_output()
 {
     ui->output->clear();
     ui->output->append("Command Line Output:");
@@ -69,6 +91,18 @@ void DeveloperTools::clear()
 
 DeveloperTools::~DeveloperTools()
 {
+    if (cmd0->state() == QProcess::Running)
+    {
+        cmd0->kill();
+    }
+    if (cmd1->state() == QProcess::Running)
+    {
+        cmd1->kill();
+    }
+    if (cmd2->state() == QProcess::Running)
+    {
+        cmd2->kill();
+    }
     delete ui;
     delete cmd0;
     delete cmd1;

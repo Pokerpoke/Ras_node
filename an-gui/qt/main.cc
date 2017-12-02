@@ -16,11 +16,10 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     // Load an application style
-    // QFile styleFile("/home/jiang/git/aero-node/an-gui/qt/themes/light.qss");
 #ifdef ENABLE_DEBUG
     QFile styleFile("an-gui/qt/themes/light.qss");
 #else
-    QFile styleFile("themes/light.qss");
+    QFile styleFile("themes/light-tiny4412.qss");
 #endif
     if (!styleFile.open(QFile::ReadOnly))
     {

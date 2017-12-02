@@ -14,8 +14,7 @@
    <string>Developer Tools</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"># background-color: rgb(114, 159, 207);
-font: 11pt &quot;Roboto&quot;;</string>
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -26,6 +25,13 @@ font: 11pt &quot;Roboto&quot;;</string>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QToolButton" name="backward">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
@@ -66,7 +72,7 @@ font: 11pt &quot;Roboto&quot;;</string>
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>0</height>
+               <height>4</height>
               </size>
              </property>
              <property name="autoFillBackground">
@@ -87,20 +93,19 @@ font: 11pt &quot;Roboto&quot;;</string>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QPushButton" name="run">
-               <property name="styleSheet">
-                <string notr="true">
-</string>
+              <widget class="QToolButton" name="run">
+               <property name="enabled">
+                <bool>true</bool>
                </property>
                <property name="text">
-                <string>Run</string>
+                <string/>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="stop">
+              <widget class="QToolButton" name="stop">
                <property name="text">
-                <string>Stop</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -115,14 +120,14 @@ font: 11pt &quot;Roboto&quot;;</string>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QPushButton" name="voice_send">
+            <widget class="QToolButton" name="voice_send">
              <property name="text">
               <string>Voice_send</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="voice_receive">
+            <widget class="QToolButton" name="voice_receive">
              <property name="text">
               <string>Voice_receive</string>
              </property>
@@ -133,16 +138,16 @@ font: 11pt &quot;Roboto&quot;;</string>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QPushButton" name="clear">
+            <widget class="QToolButton" name="clear_output">
              <property name="text">
-              <string>CLEAR</string>
+              <string/>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="quit">
+            <widget class="QToolButton" name="quit">
              <property name="text">
-              <string>QUIT</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -153,26 +158,11 @@ font: 11pt &quot;Roboto&quot;;</string>
       </layout>
      </item>
      <item>
-      <widget class="QTextBrowser" name="output">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(85, 87, 83);</string>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;Command Line Output:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
+      <widget class="QTextBrowser" name="output"/>
      </item>
     </layout>
    </item>
   </layout>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>horizontalSpacer</zorder>
-  <zorder>clear</zorder>
  </widget>
  <resources/>
  <connections/>

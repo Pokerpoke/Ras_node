@@ -27,7 +27,11 @@ void checkerror(int rtperr)
 
 int main(int argc, char *argv[])
 {
+#ifdef AN_TARGET_TINY4412
+	logger_init("voice-send.log", AN_LOG_INFO);
+#else
 	logger_init();
+#endif
 
 	RTPSession sess;
 	VoiceCapture c("default");

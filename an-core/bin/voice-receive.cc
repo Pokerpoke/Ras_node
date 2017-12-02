@@ -27,7 +27,11 @@ void checkerror(int rtperr)
 
 int main(void)
 {
+#ifdef AN_TARGET_TINY4412
+    logger_init("voice-receive.log", AN_LOG_INFO);
+#else
     logger_init();
+#endif
 
     RTPSession sess;
     VoicePlayback p("default");
@@ -79,10 +83,9 @@ int main(void)
         sess.EndDataAccess();
 
 #ifndef RTP_SUPPORT_THREAD
-		status = sess.Poll();
-		checkerror(status);
+        status = sess.Poll();
+        checkerror(status);
 #endif // RTP_SUPPORT_THREAD
-
     }
 
     sess.BYEDestroy(RTPTime(10, 0), 0, 0);

@@ -37,7 +37,8 @@ class DeveloperTools : public QWidget
   private slots:
     void run();
     void stop();
-    void clear();
+    void stop_all();
+    void clear_output();
     void voice_receive();
     void voice_send();
 };

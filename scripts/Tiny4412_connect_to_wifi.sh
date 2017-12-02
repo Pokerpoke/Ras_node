@@ -22,3 +22,22 @@ wpa_supplicant -B -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
 
 ifconfig wlan0 down
 ifconfig wlan0 up
+
+#!/bin/sh
+
+base=led-player
+
+# See how we were called.
+case "$1" in
+  start)
+                /usr/bin/$base &
+        ;;
+  stop)
+        pid=`/bin/pidof $base`
+        if [ -n "$pid" ]; then
+                kill -9 $pid
+        fi
+        ;;
+esac
+
+exit 0

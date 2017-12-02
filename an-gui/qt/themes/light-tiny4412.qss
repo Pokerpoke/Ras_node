@@ -1,6 +1,6 @@
 QWidget {
 	background-color: #eeeeee;
-	/* color: #546e7a; */
+	color: #546e7a;
 	/* font: 11px "Roboto"; */
 	font: "SourceHanSansSC";
 }
@@ -29,22 +29,6 @@ QToolButton {
 }
 
 #run {
-	background-image: url(an-gui/qt/themes/icons/ic_send_black.png);
-}
-
-#stop,#close,#quit {
-	background-image: url(an-gui/qt/themes/icons/ic_close_black.png);
-}
-
-#clear_output {
-	background-image: url(an-gui/qt/themes/icons/ic_refresh_black.png);
-}
-
-#backward {
-	background-image: url(an-gui/qt/themes/icons/ic_arrow_back_black.png);
-}
-
-/* #run {
 	background-image: url(themes/icons/ic_send_black.png);
 }
 
@@ -58,7 +42,8 @@ QToolButton {
 
 #backward {
 	background-image: url(themes/icons/ic_arrow_back_black.png);
-} */
+}
+
 
 QLineEdit {
 	border: 2px solid;
@@ -66,8 +51,8 @@ QLineEdit {
 }
 
 #command {
-	border: transparent;
-	border-color: transparent;
+	border: 1px solid;
+	border-color: #455a64;
 }
 
 #output {
