@@ -5,8 +5,8 @@
 
 . /bin/setqt4env
 
-hotplug
+export LOGNAME=root
 
-echo "$1"
+hotplug
 
 $1 -qws
