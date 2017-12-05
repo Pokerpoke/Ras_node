@@ -9,17 +9,25 @@ SYS_ROOT_DIR="/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root"
 # echo ${CMAKE_SOURCE_DIR}
 cd scripts
 
-# cross compile need i386 libraries
-dpkg --get-selections | grep lib32z1
-if [ $? -ne 0 ]
-then
-    echo "lib32z1 is required, but not installed, going to install it."
-    sudo apt install -y lib32z1
+# cross compile necessary libraries
+DEPENDENCIES=(
+    git
+    lib32z1
+    cmake
+)
+
+for DEP in DEPENDENCIES ; do
+    dpkg --get-selections | grep ${DEP}
     if [ $? -ne 0 ]
     then
-        exit 1
+        echo "${DEP} is required, but not installed, going to install it."
+        sudo apt install -y ${DEP}
+        if [ $? -ne 0 ]
+        then
+            exit 1
+        fi
     fi
-fi
+done
 
 # if exist, clean it
 if [ -d aero-node-tools ]
@@ -32,7 +40,7 @@ fi
 # git clone https://github.com/Pokerpoke/aero-node-tools.git
 # for a high speed, will use git repository of lab instead
 # TODO: use git
-# git clone http://192.168.0.3000/pokerpoke/aero-node-tools.git
+# git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
 mkdir aero-node-tools && cd aero-node-tools
 wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz
 wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/target-qte-4.8.5-to-hostpc.tgz
