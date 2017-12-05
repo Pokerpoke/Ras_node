@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # get scripts directory
 CMAKE_SOURCE_DIR=$(dirname $(readlink -f $0))
@@ -11,13 +11,13 @@ cd scripts
 
 # cross compile necessary libraries
 DEPENDENCIES=(
-    git
-    lib32z1
-    cmake
-)
+              "git"
+              "lib32z1"
+              "cmake"
+              )
 
-for DEP in DEPENDENCIES ; do
-    dpkg --get-selections | grep ${DEP}
+for DEP in ${DEPENDENCIES[@]} ; do
+    dpkg --get-selections | grep "${DEP}"
     if [ $? -ne 0 ]
     then
         echo "${DEP} is required, but not installed, going to install it."
