@@ -41,9 +41,10 @@ fi
 # for a high speed, will use git repository of lab instead
 # TODO: use git
 # git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
-mkdir aero-node-tools && cd aero-node-tools
-wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz
-wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/target-qte-4.8.5-to-hostpc.tgz
+git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
+# mkdir aero-node-tools && cd aero-node-tools
+# wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz
+# wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/target-qte-4.8.5-to-hostpc.tgz
 if [ $? -ne 0 ]
 then
     echo "wget failed, plaese try again"
@@ -51,7 +52,7 @@ then
 fi
 
 # need root permitted
-# cd aero-node-tools
+cd aero-node-tools
 sudo tar xvzf ./arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz -C /
 sudo tar xvzf ./target-qte-4.8.5-to-hostpc.tgz -C /
 
