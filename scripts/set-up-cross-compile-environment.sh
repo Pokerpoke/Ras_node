@@ -72,13 +72,13 @@ tar xvzf log4cpp-1.1.3.tar.gz && cd log4cpp
 # rm log4cpp-1.1.3.tar.gz
 
 # build and clean for host
-./configure && make -j && sudo make install && make clean
+./configure && make && sudo make install && make clean
 
 # build for cross compile toolschain
 ./configure --host=arm-linux \
             --prefix=/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr \
 
-make -j
+make
 
 # it is unable to pass environment variable to sudo commands
 # so, I use a shell script to run make install
@@ -109,7 +109,7 @@ then
 fi
 cd JThread
 # build for host
-mkdir build && cd build && cmake .. && make -j && sudo make install && cd .. && rm -rf build
+mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
 # build for cross compile toolschain
 # copy toolschain file
 mkdir cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
@@ -125,7 +125,7 @@ then
     echo "cmake build failed, please check output for more infomation."
     exit 1
 fi
-make -j && sudo make install
+make && sudo make install
 
 # clean and go back to cmake source directory
 cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JThread
@@ -148,7 +148,7 @@ then
 fi
 cd JRTPLIB
 # build for host
-mkdir build && cd build && cmake .. && make -j && sudo make install && cd .. && rm -rf build
+mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
 # build for cross compile toolschain
 # copy toolschain file
 mkdir cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
@@ -164,7 +164,7 @@ then
     echo "cmake build failed, please check output for more infomation."
     exit 1
 fi
-make -j && sudo make install
+make && sudo make install
 
 # clean and go back to cmake source directory
 cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
