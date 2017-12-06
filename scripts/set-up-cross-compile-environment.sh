@@ -85,7 +85,7 @@ make
 sudo bash ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
 
 # clean
-cd ..
+cd ${CMAKE_SOURCE_DIR}/scripts 
 rm -rf aero-node-tools
 
 # add to path
@@ -93,6 +93,7 @@ export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 
 # build JThread
 # if exist, clean it
+cd ${CMAKE_SOURCE_DIR}/scripts 
 if [ -d JThread ]
 then
     rm -rf JThread
@@ -131,6 +132,7 @@ cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JThread
 
 # build JRTPLIB
 # if exist, clean it
+cd ${CMAKE_SOURCE_DIR}/scripts 
 if [ -d JRTPLIB ]
 then
     rm -rf JRTPLIB
