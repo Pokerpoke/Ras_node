@@ -48,7 +48,7 @@ git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
 # wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/target-qte-4.8.5-to-hostpc.tgz
 if [ $? -ne 0 ]
 then
-    echo "wget failed, plaese try again"
+    echo "git clone failed, plaese try again"
     exit 1
 fi
 
@@ -56,6 +56,33 @@ fi
 cd aero-node-tools
 sudo tar xvzf ./arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz -C /
 sudo tar xvzf ./target-qte-4.8.5-to-hostpc.tgz -C /
+
+# build log4cpp
+# use wget to download log4cpp.tar.gz
+# try for 5 times
+# wget -c -t 5 --secure-protocol=TLSv1 \
+#              https://sourceforge.net/projects/log4cpp/files/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz
+if [ $? -ne 0 ]
+then
+    echo "log4cpp download failed, please try again"
+    exit 1
+fi
+tar xvzf log4cpp-1.1.3.tar.gz && cd log4cpp
+# delete it
+# rm log4cpp-1.1.3.tar.gz
+
+# build and clean for host
+./configure && make && sudo make install && make clean
+
+# build for cross compile toolschain
+./configure --host=arm-linux \
+            --prefix=/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr \
+
+make
+
+# it is unable to pass environment variable to sudo commands
+# so, I use a shell script to run make install
+sudo bash ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
 
 # clean
 cd ..
@@ -139,36 +166,3 @@ make && sudo make install
 
 # clean and go back to cmake source directory
 cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
-
-# build log4cpp
-# use wget to download log4cpp.tar.gz
-# try for 5 times
-wget -c -t 5 --secure-protocol=TLSv1 \
-             https://sourceforge.net/projects/log4cpp/files/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz
-            #  --no-check-certificate \
-if [ $? -ne 0 ]
-then
-    echo "log4cpp download failed, please try again"
-    exit 1
-fi
-tar xvzf log4cpp-1.1.3.tar.gz
-# delete it
-rm log4cpp-1.1.3.tar.gz
-
-cd log4cpp
-
-# build for host
-./configure && make && sudo make install && make clean
-
-# build for cross compile toolschain
-./configure --host=arm-linux \
-            --prefix=/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr \
-
-make
-
-# it is unable to pass environment variable to sudo commands
-# so, I use a shell script to run make install
-sudo bash ../make-install.sh
-
-# clean
-cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf log4cpp
