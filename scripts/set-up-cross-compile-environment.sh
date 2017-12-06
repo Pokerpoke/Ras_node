@@ -143,8 +143,7 @@ cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
 # build log4cpp
 # use wget to download log4cpp.tar.gz
 # try for 5 times
-wget -c -t 5 --user-agent="Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0" \
-             --secure-protocol=TLSv1 \
+wget -c -t 5 --secure-protocol=TLSv1 \
              https://sourceforge.net/projects/log4cpp/files/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz
             #  --no-check-certificate \
 if [ $? -ne 0 ]
