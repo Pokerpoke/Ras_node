@@ -14,6 +14,7 @@ DEPENDENCIES=(
               "git"
               "lib32z1"
               "cmake"
+              "build-essential"
               )
 
 for DEP in ${DEPENDENCIES[@]} ; do
