@@ -6,7 +6,6 @@ cd ${CMAKE_SOURCE_DIR}/..
 # update work path
 CMAKE_SOURCE_DIR=$(pwd)
 SYS_ROOT_DIR="/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root"
-# echo ${CMAKE_SOURCE_DIR}
 cd scripts
 
 # cross compile necessary libraries
@@ -15,6 +14,7 @@ DEPENDENCIES=(
               "lib32z1"
               "cmake"
               "build-essential"
+              "liblog4cpp5-dev"
               )
 
 for DEP in ${DEPENDENCIES[@]} ; do
@@ -39,9 +39,7 @@ fi
 # clone repository
 # github repository
 # git clone https://github.com/Pokerpoke/aero-node-tools.git
-# for a high speed, will use git repository of lab instead
-# TODO: use git
-# git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
+# for a high speed, will use git repository of lab LAN instead
 git clone http://192.168.0.7:3000/pokerpoke/aero-node-tools.git
 # mkdir aero-node-tools && cd aero-node-tools
 # wget -c -t 5 https://raw.githubusercontent.com/Pokerpoke/aero-node-tools/master/arm-linux-gcc-4.5.1-v6-vfp-20120301.tgz
@@ -62,17 +60,22 @@ sudo tar xvzf ./target-qte-4.8.5-to-hostpc.tgz -C /
 # try for 5 times
 # wget -c -t 5 --secure-protocol=TLSv1 \
 #              https://sourceforge.net/projects/log4cpp/files/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz
-if [ $? -ne 0 ]
-then
-    echo "log4cpp download failed, please try again"
-    exit 1
-fi
+# if [ $? -ne 0 ]
+# then
+#     echo "log4cpp download failed, please try again"
+#     exit 1
+# fi
+
+# unpack
 tar xvzf log4cpp-1.1.3.tar.gz && cd log4cpp
-# delete it
+
+# if download delete it
+# if use git, will delete the project later
 # rm log4cpp-1.1.3.tar.gz
 
 # build and clean for host
-./configure && make && sudo make install && make clean
+# IMPORTANT: it will confilct while use suao apt install liblog4cpp
+# ./configure && make && sudo make install && make clean
 
 # build for cross compile toolschain
 ./configure --host=arm-linux \
@@ -81,8 +84,16 @@ tar xvzf log4cpp-1.1.3.tar.gz && cd log4cpp
 make
 
 # it is unable to pass environment variable to sudo commands
-# so, I use a shell script to run make install
+# so, use a shell script to run make install
+cat > ${CMAKE_SOURCE_DIR}/scripts/make-install.sh << EOF
+#!/bin/sh
+
+export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
+
+make install
+EOF
 sudo bash ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
+rm ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
 
 # clean
 cd ${CMAKE_SOURCE_DIR}/scripts 
@@ -166,5 +177,5 @@ then
 fi
 make && sudo make install
 
-# clean and go back to cmake source directory
+# clean
 cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
