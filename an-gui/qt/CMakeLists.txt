@@ -14,9 +14,6 @@ set(CMAKE_AUTORCC ON)
 
 add_subdirectory(lib)
 
-add_executable(index index.cc)
-target_link_libraries(index an_gui_qt)
-
 add_executable(main main.cc)
 target_link_libraries(main an_gui_qt)
 

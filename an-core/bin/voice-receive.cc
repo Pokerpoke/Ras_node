@@ -24,6 +24,8 @@
 #include <iostream>
 #include <string>
 
+#include "config.h"
+
 #include "logger.h"
 #include "voice_playback.h"
 
@@ -34,7 +36,7 @@ void checkerror(int rtperr)
 {
     if (rtperr < 0)
     {
-        std::cout << "ERROR: " << RTPGetErrorString(rtperr) << std::endl;
+        LOG(ERROR) << "ERROR: " << RTPGetErrorString(rtperr);
         exit(-1);
     }
 }

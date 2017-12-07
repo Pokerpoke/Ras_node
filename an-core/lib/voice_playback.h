@@ -8,6 +8,7 @@
  * @brief    音频回放
  * @version  0.0.1
  * @example  qa_voice_playback.cc
+ * @example  qa_voice_playback.cc
  * 
  * Last Modified:  2017-12-02
  * Modified By:    姜阳 (j824544269@gmail.com)

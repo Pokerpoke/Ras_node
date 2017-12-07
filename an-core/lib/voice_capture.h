@@ -8,6 +8,7 @@
  * @brief    音频捕获
  * @version  0.0.1
  * @example  qa_voice_capture_to_playback.cc
+ * @example  qa_voice_capture.cc
  * 
  * Last Modified:  2017-12-02
  * Modified By:    姜阳 (j824544269@gmail.com)
@@ -44,7 +45,22 @@ class VoiceCapture : public VoiceBase
 
 	friend std::ostream &operator<<(std::ostream &out, VoiceCapture &in);
 
+	/** 
+	 * @brief 打开设备
+	 * 
+	 * @retval	0	成功 
+	 * @retval	-1	失败	  
+	 * 
+	 */
 	int open_device();
+	/** 
+	 * @brief 音频捕获
+	 * 
+	 * 使用capture.output_buffer和capture.output_buffer_size来获取输出数据
+	 * 
+	 * @todo 返回类或者结构体
+	 * 
+	 */
 	int capture();
 
   private:

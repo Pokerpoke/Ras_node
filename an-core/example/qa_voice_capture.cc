@@ -1,4 +1,17 @@
-// #include <stdio.h>
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-12
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-07
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 #include <fstream>
 
 #include "voice_capture.h"
@@ -10,25 +23,6 @@ using namespace an::core;
 int main()
 {
 	logger_init();
-
-	// int fd;
-	// fd = open("test.pcm", O_WRONLY | O_CREAT | O_TRUNC, 0664);
-
-	// VoiceCapture capture("default");
-
-	// int r, loop_sec;
-	// loop_sec = 10;
-	// unsigned long loop_limit;
-	// loop_limit = loop_sec * capture.rate;
-
-	// for (size_t i = 0; i < loop_limit; i++)
-	// {
-	// 	r = capture.capture();
-	// 	write(fd, capture.output_buffer, capture.output_buffer_size);
-	// 	i += r;
-	// }
-
-	// close(fd);
 
 	VoiceCapture c("default");
 

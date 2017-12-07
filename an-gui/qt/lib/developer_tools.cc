@@ -1,3 +1,17 @@
+/**
+ * 
+ * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-12
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-07
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 #include "logger.h"
 #include "developer_tools.h"
 
@@ -24,6 +38,7 @@ DeveloperTools::DeveloperTools(QWidget *parent) : QWidget(parent),
     connect(ui->stop, SIGNAL(clicked()), this, SLOT(stop()));
     connect(ui->clear_output, SIGNAL(clicked()), this, SLOT(clear_output()));
     // connect(ui->quit, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->backward, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->quit, SIGNAL(clicked()), this, SLOT(stop_all()));
     connect(ui->voice_send, SIGNAL(clicked()), this, SLOT(voice_send()));
     connect(ui->voice_receive, SIGNAL(clicked()), this, SLOT(voice_receive()));
@@ -34,7 +49,7 @@ void DeveloperTools::run()
     program = "/home/jiang/git/aero-node/build/bin/voice-receive";
 
     cmd0->start(program);
-    
+
     program += " starting...";
     ui->output->append(program);
 }
@@ -51,18 +66,9 @@ void DeveloperTools::stop()
 
 void DeveloperTools::stop_all()
 {
-    if (cmd0->state() == QProcess::Running)
-    {
-        cmd0->kill();
-    }
-    if (cmd1->state() == QProcess::Running)
-    {
-        cmd1->kill();
-    }
-    if (cmd2->state() == QProcess::Running)
-    {
-        cmd2->kill();
-    }
+    cmd0->kill();
+    cmd1->kill();
+    cmd2->kill();
 }
 
 void DeveloperTools::voice_send()

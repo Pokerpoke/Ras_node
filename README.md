@@ -9,46 +9,46 @@
 
 - 日志记录：[Log4cpp](http://log4cpp.sourceforge.net/)
 
-- 文档生成：[Doxygen](www.doxygen.org/)  
+- 文档生成：[Doxygen](www.doxygen.org/)
 
-	- Doxygen依赖[Graphviz](http://www.graphviz.org/)生成调用关系图
-	
-	```shell
-	sudo apt install graphviz
-	```
+    - Doxygen依赖[Graphviz](http://www.graphviz.org/)生成调用关系图
+
+    ```shell
+    sudo apt install graphviz
+    ```
 
 - 其他依赖：
 
-	- [ALSA](https://www.alsa-project.org/main/index.php/Main_Page)
-	
-	```shell
-	sudo apt install libasound2-dev
-	```
-	
-	- [JRTPLIB](http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html)
-	
-	```shell
-	git clone https://github.com/j0r1/JRTPLIB.git
-	cd JRTPLIB
-	mkdir build
-	cd build
-	cmake ..
-	make
-	sudo make install
-	```
-	
-	- JRTPLIB依赖[JThread](http://research.edm.uhasselt.be/jori/page/CS/Jthread.html)
-	
-	```shell
-	git clone https://github.com/j0r1/JThread.git
-	cd JThread
-	mkdir build
-	cd build
-	cmake ..
-	make
-	sudo make install
-	```
-	
+    - [ALSA](https://www.alsa-project.org/main/index.php/Main_Page)
+
+    ```shell
+    sudo apt install libasound2-dev
+    ```
+
+    - [JRTPLIB](http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html)
+
+    ```shell
+    git clone https://github.com/j0r1/JRTPLIB.git
+    cd JRTPLIB
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+    ```
+
+    - JRTPLIB依赖[JThread](http://research.edm.uhasselt.be/jori/page/CS/Jthread.html)
+
+    ```shell
+    git clone https://github.com/j0r1/JThread.git
+    cd JThread
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+    ```
+
 
 ## 2.编译
 
@@ -71,14 +71,14 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 
 - 交叉编译
 
-	- Tiny4412  
-	
-	修改`cmake/toolschain/CMakeLists.txt`中的`TOOL_CHAIN_DIR`为相应地址
-	
-	```shell
-	cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..
-	```
-	
+    - Tiny4412
+
+    修改`cmake/toolschain/CMakeLists.txt`中的`TOOL_CHAIN_DIR`为相应地址
+
+    ```shell
+    cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..
+    ```
+
 - 生成API文档
 
 ```shell

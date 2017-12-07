@@ -5,7 +5,7 @@
  * @file
  * @author   姜阳 (j824544269@gmail.com)
  * @date     2017-11
- * @brief    
+ * @brief    RTP发送类
  * @version  0.0.1
  * 
  * Last Modified:  2017-12-02
@@ -48,7 +48,7 @@ int RTPSender::init()
     sessionparams.SetOwnTimestampUnit(1.0 / time_stamp);
     sessionparams.SetAcceptOwnPackets(true);
 
-    transparams.SetPortbase(host_port);
+    // transparams.SetPortbase(host_port);
 
     if ((err = session.Create(sessionparams, &transparams)) < 0)
     {

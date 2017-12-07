@@ -3,4 +3,5 @@
 *.cpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
 *.hpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
 *.c         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+*.cc        whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
 *.h         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
