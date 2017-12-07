@@ -28,7 +28,7 @@ RTPSender::RTPSender(const std::string ip,
     time_stamp = 8000.0;
     // payload_type = 11;
     payload_type = 0;
-    host_port = 13372;
+    // host_port = 13372;
     mark = false;
 
     init();
