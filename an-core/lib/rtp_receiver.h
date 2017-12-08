@@ -30,36 +30,36 @@ namespace an
 {
 namespace core
 {
-class RTPSession : public jrtplib::RTPSession
-{
-  public:
-    char *output_buffer;
-    int output_buffer_size;
+// class RTPSession : public jrtplib::RTPSession
+// {
+//   public:
+//     char *output_buffer;
+//     int output_buffer_size;
 
-  protected:
-    void OnValidatedRTPPacket(jrtplib::RTPSourceData *srcdat, 
-                              jrtplib::RTPPacket *rtppack, 
-                              bool isonprobation, 
-                              bool *ispackethandled)
-    {
-        output_buffer_size = rtppack->GetPayloadLength();
-        output_buffer = (char *)calloc(1, output_buffer_size);
-        memcpy(output_buffer, rtppack->GetPayloadData(), output_buffer_size);
+//   protected:
+//     void OnValidatedRTPPacket(jrtplib::RTPSourceData *srcdat,
+//                               jrtplib::RTPPacket *rtppack,
+//                               bool isonprobation,
+//                               bool *ispackethandled)
+//     {
+//         output_buffer_size = rtppack->GetPayloadLength();
+//         output_buffer = (char *)calloc(1, output_buffer_size);
+//         memcpy(output_buffer, rtppack->GetPayloadData(), output_buffer_size);
 
-		DeletePacket(rtppack);
-		*ispackethandled = true;
-    }
-};
+//         DeletePacket(rtppack);
+//         *ispackethandled = true;
+//     }
+// };
 
 class RTPReceiver
 {
   public:
     RTPReceiver(const int _portbase = 13374);
-    ~RTPReceiver();
+    virtual ~RTPReceiver();
 
-    int read();
+    // int read();
+    int start_listen();
 
-    char *output_buffer;
     uint32_t output_buffer_size;
 
     double time_stamp;
@@ -67,13 +67,18 @@ class RTPReceiver
     int portbase;
     bool mark;
 
+  protected:
+    virtual void payload_process() = 0;
+    jrtplib::RTPPacket *output_packet;
+    char *output_buffer;
+
   private:
     int init();
 
-    RTPSession session;
+    // RTPSession session;
+    jrtplib::RTPSession session;
     jrtplib::RTPUDPv4TransmissionParams transparams;
     jrtplib::RTPSessionParams sessionparams;
-    jrtplib::RTPPacket *output_packet;
 
     int err;
 };

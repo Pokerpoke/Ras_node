@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <sched.h>
+#include <iostream>
 
 #include "rtp_receiver.h"
 #include "voice_playback.h"
@@ -8,31 +9,28 @@
 using namespace std;
 using namespace an::core;
 
+VoicePlayback p("default");
+
+class rtpreceiver : public an::core::RTPReceiver
+{
+  public:
+	rtpreceiver(int port) : an::core::RTPReceiver(port)
+	{
+	}
+	void payload_process()
+	{
+		p.playback(output_buffer, output_buffer_size);
+	}
+};
+
 int main()
 {
 	logger_init();
 
-	struct sched_param sched_param;
-	if (sched_getparam(0, &sched_param) < 0)
-	{
-		LOG(ERROR) << "Set scheduler failed.";
-		return -1;
-	}
-	sched_param.sched_priority = sched_get_priority_max(SCHED_RR);
-	if (!sched_setscheduler(0, SCHED_RR, &sched_param))
-	{
-		LOG(INFO) << "Set priority to " << sched_param.sched_priority;
-	}
-
-	RTPReceiver r(13374);
+	rtpreceiver r(13374);
 	VoicePlayback p("default");
 
-	while (1)
-	{
-		r.read();
-		p.playback((char *)r.output_buffer, r.output_buffer_size);
-	}
+	r.start_listen();
 
-	getchar();
 	return 0;
 }

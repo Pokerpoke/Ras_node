@@ -9,6 +9,7 @@
  * @version  0.0.1
  * @example  qa_voice_capture_to_playback.cc
  * @example  qa_voice_capture.cc
+ * @example  voice-send.cc
  * 
  * Last Modified:  2017-12-02
  * Modified By:    姜阳 (j824544269@gmail.com)

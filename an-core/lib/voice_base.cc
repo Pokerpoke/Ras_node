@@ -32,7 +32,7 @@ VoiceBase::VoiceBase(const std::string &dev)
 	channels = 2;
 	// rate = 44100;
 	rate = 8000;
-	frames = 32;
+	frames = 32 * 2;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
 	access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
@@ -223,10 +223,10 @@ int VoiceBase::set_params()
 		LOG(INFO) << "Set parameters success.";
 		snd_pcm_uframes_t t_buffer_frames;
 		snd_pcm_hw_params_get_buffer_size(params, &t_buffer_frames);
-		LOG(INFO) << "Buffer size set to " << t_buffer_frames << " frames.";
+		LOG(INFO) << "Buffer size seted to " << t_buffer_frames << " frames.";
 		snd_pcm_uframes_t t_period_frames;
 		snd_pcm_hw_params_get_period_size(params, &t_period_frames, 0);
-		LOG(INFO) << "Period size set to " << t_period_frames << " frames.";
+		LOG(INFO) << "Period size seted to " << t_period_frames << " frames.";
 		PARAMS_SETED = true;
 	}
 	return 0;

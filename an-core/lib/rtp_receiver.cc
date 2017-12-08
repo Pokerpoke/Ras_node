@@ -53,17 +53,56 @@ int RTPReceiver::init()
 	return 0;
 }
 
-int RTPReceiver::read()
+// int RTPReceiver::read()
+// {
+// 	// output_buffer_size = session.output_buffer_size;
+// 	// if (output_buffer_size <= 0)
+// 	// {
+// 	// 	return -1;
+// 	// }
+// 	// output_buffer = (char *)calloc(1, output_buffer_size);
+// 	// memcpy(output_buffer, session.output_buffer, session.output_buffer_size);
+// 	// int i;
+// 	return 0;
+// }
+
+int RTPReceiver::start_listen()
 {
-	// output_buffer_size = session.output_buffer_size;
-	// if (output_buffer_size <= 0)
-	// {
-	// 	return -1;
-	// }
-	// output_buffer = (char *)calloc(1, output_buffer_size);
-	// memcpy(output_buffer, session.output_buffer, session.output_buffer_size);
-	// int i;
-	// return 0;
+	while (1)
+	{
+		session.BeginDataAccess();
+
+		if (session.GotoFirstSourceWithData())
+		{
+			do
+			{
+				while ((output_packet = session.GetNextPacket()) != NULL)
+				{
+					// #ifdef ENABLE_DEBUG
+					// 					LOG(INFO) << "Got packet.";
+					// #endif
+					// 在这里处理数据
+					output_buffer_size = output_packet->GetPayloadLength();
+					output_buffer = (char *)output_packet->GetPayloadData();
+					payload_process();
+					// 不再需要这个包了，删除之
+					session.DeletePacket(output_packet);
+				}
+			} while (session.GotoNextSourceWithData());
+		}
+
+		session.EndDataAccess();
+
+#ifndef RTP_SUPPORT_THREAD
+		if ((err = session.Poll()) < 0)
+		{
+			LOG(ERROR) << jrtplib::RTPGetErrorString(err);
+			return -1;
+		}
+#endif //! RTP_SUPPORT_THREAD
+	}
+
+	return 0;
 }
 
 // int RTPReceiver::read()

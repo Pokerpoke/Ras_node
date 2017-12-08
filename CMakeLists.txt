@@ -46,13 +46,16 @@ include_directories(${LOG4CPP_INCLUDE_DIR})
 find_package(ALSA REQUIRED)
 include_directories(${ALSA_INCLUDE_DIR})
 
+# 添加jthread库
+find_package(JTHREAD REQUIRED)
+include_directories(${JTHREAD_INCLUDE_DIR})
+
 # 添加jrtp库
 find_package(JRTPLIB REQUIRED)
 include_directories(${JRTPLIB_INCLUDE_DIR})
 
-# 添加jthread库
-find_package(JTHREAD REQUIRED)
-include_directories(${JTHREAD_INCLUDE_DIR})
+# 添加线程想关的库
+find_package(Threads REQUIRED)
 
 # 使用doxygen来生成文档
 find_package(Doxygen)
