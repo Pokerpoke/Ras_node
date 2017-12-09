@@ -90,14 +90,10 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1udp__server.html','
 <p>UDP服务端  
  <a href="classan_1_1core_1_1udp__server.html#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2udp__server_8h_source.html">udp_server.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="udp__server_8h_source.html">udp_server.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a8bf849c1ceefd75c4ac4b54d7f494e0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1udp__server.html#a8bf849c1ceefd75c4ac4b54d7f494e0e">udp_server</a> (int server_port)</td></tr>
-<tr class="separator:a8bf849c1ceefd75c4ac4b54d7f494e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad298ecae11716b4390aaf0510c5cd884"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1udp__server.html#ad298ecae11716b4390aaf0510c5cd884">udp_listen</a> (char *out, int len)</td></tr>
-<tr class="separator:ad298ecae11716b4390aaf0510c5cd884"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf849c1ceefd75c4ac4b54d7f494e0e"><td class="memItemLeft" align="right" valign="top"><a id="a8bf849c1ceefd75c4ac4b54d7f494e0e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>udp_server</b> (int server_port)</td></tr>
 <tr class="separator:a8bf849c1ceefd75c4ac4b54d7f494e0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,80 +103,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>udp_listen</b> (char *
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>UDP服务端 </p>
-</div><h2 class="groupheader">构造及析构函数说明</h2>
-<a id="a8bf849c1ceefd75c4ac4b54d7f494e0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bf849c1ceefd75c4ac4b54d7f494e0e">&#9670;&nbsp;</a></span>udp_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">an::core::udp_server::udp_server </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>server_port</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">server_port</td><td>监听端口 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">成员函数说明</h2>
-<a id="ad298ecae11716b4390aaf0510c5cd884"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad298ecae11716b4390aaf0510c5cd884">&#9670;&nbsp;</a></span>udp_listen()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::udp_server::udp_listen </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>out</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>开始监听端口</p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">out</td><td>输出数组 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>数组长度 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>成功返回0，失败返回-1 </dd></dl>
-<dl class="section warning"><dt>警告</dt><dd>调用之后首先将输出数组置零！ </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>接受成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>初始化失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="include_2udp__server_8h_source.html">udp_server.h</a></li>
-<li>/home/jiang/git/aero-node/an-core/lib/<a class="el" href="udp__server_8cc.html">udp_server.cc</a></li>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="udp__server_8h_source.html">udp_server.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

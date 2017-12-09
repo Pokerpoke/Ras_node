@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1VoiceBase.html','')
 <p>音频捕获、回放基类  
  <a href="classan_1_1core_1_1VoiceBase.html#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2voice__base_8h_source.html">voice_base.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="voice__base_8h_source.html">voice_base.h</a>&gt;</code></p>
 <div class="dynheader">
 类 an::core::VoiceBase 继承关系图:</div>
 <div class="dyncontent">
@@ -106,15 +106,8 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1VoiceBase.html','')
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ae63337278a680c4e4cbc47f6952c9a5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#ae63337278a680c4e4cbc47f6952c9a5a">VoiceBase</a> (const std::string &amp;<a class="el" href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">device</a>)</td></tr>
-<tr class="memdesc:ae63337278a680c4e4cbc47f6952c9a5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">音频捕获、回放构造函数  <a href="#ae63337278a680c4e4cbc47f6952c9a5a">更多...</a><br /></td></tr>
-<tr class="separator:ae63337278a680c4e4cbc47f6952c9a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a887c2eb3cca624e0000c52bdffa674aa"><td class="memItemLeft" align="right" valign="top"><a id="a887c2eb3cca624e0000c52bdffa674aa"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a887c2eb3cca624e0000c52bdffa674aa">~VoiceBase</a> ()</td></tr>
-<tr class="memdesc:a887c2eb3cca624e0000c52bdffa674aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">音频捕获、回放基类析构函数 <br /></td></tr>
-<tr class="separator:a887c2eb3cca624e0000c52bdffa674aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae63337278a680c4e4cbc47f6952c9a5a"><td class="memItemLeft" align="right" valign="top"><a id="ae63337278a680c4e4cbc47f6952c9a5a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VoiceBase</b> (const std::string &amp;<a class="el" href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">device</a>)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><b>VoiceBase</b> (const std::string &amp;<a class="el" href="classan_1_1core_1_1VoiceBase.html#a5b52ac947a25396b3a3d0ff144d884cc">device</a>)</td></tr>
 <tr class="separator:ae63337278a680c4e4cbc47f6952c9a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -151,19 +144,21 @@ snd_pcm_uframes_t&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 snd_pcm_uframes_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a07713605873dfb9bc973fff4250b4224">buffer_size</a></td></tr>
 <tr class="memdesc:a07713605873dfb9bc973fff4250b4224"><td class="mdescLeft">&#160;</td><td class="mdescRight">缓存大小 <br /></td></tr>
 <tr class="separator:a07713605873dfb9bc973fff4250b4224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4839839778f1cb6b7b5c138e642902b"><td class="memItemLeft" align="right" valign="top"><a id="ad4839839778f1cb6b7b5c138e642902b"></a>
+snd_pcm_uframes_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#ad4839839778f1cb6b7b5c138e642902b">buffer_frames</a></td></tr>
+<tr class="memdesc:ad4839839778f1cb6b7b5c138e642902b"><td class="mdescLeft">&#160;</td><td class="mdescRight">缓存大小 <br /></td></tr>
+<tr class="separator:ad4839839778f1cb6b7b5c138e642902b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4d60d686fb044d46e9990ad0883390b"><td class="memItemLeft" align="right" valign="top"><a id="af4d60d686fb044d46e9990ad0883390b"></a>
 snd_pcm_uframes_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#af4d60d686fb044d46e9990ad0883390b">period_size</a></td></tr>
 <tr class="memdesc:af4d60d686fb044d46e9990ad0883390b"><td class="mdescLeft">&#160;</td><td class="mdescRight">时间段大小 <br /></td></tr>
 <tr class="separator:af4d60d686fb044d46e9990ad0883390b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afddb2eb1cf7b947d59f6e4427df34d8f"><td class="memItemLeft" align="right" valign="top"><a id="afddb2eb1cf7b947d59f6e4427df34d8f"></a>
+snd_pcm_uframes_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#afddb2eb1cf7b947d59f6e4427df34d8f">period_frames</a></td></tr>
+<tr class="memdesc:afddb2eb1cf7b947d59f6e4427df34d8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">时间段大小 <br /></td></tr>
+<tr class="separator:afddb2eb1cf7b947d59f6e4427df34d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected 成员函数</h2></td></tr>
-<tr class="memitem:a46a39b3fac494fc77ac007a86ff8c18d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a46a39b3fac494fc77ac007a86ff8c18d">set_params</a> ()</td></tr>
-<tr class="memdesc:a46a39b3fac494fc77ac007a86ff8c18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置硬件参数  <a href="#a46a39b3fac494fc77ac007a86ff8c18d">更多...</a><br /></td></tr>
-<tr class="separator:a46a39b3fac494fc77ac007a86ff8c18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9b817a41628c1d36bb6fbeff8d8ccd2"><td class="memItemLeft" align="right" valign="top"><a id="ac9b817a41628c1d36bb6fbeff8d8ccd2"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>open_device</b> ()=0</td></tr>
-<tr class="separator:ac9b817a41628c1d36bb6fbeff8d8ccd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46a39b3fac494fc77ac007a86ff8c18d"><td class="memItemLeft" align="right" valign="top"><a id="a46a39b3fac494fc77ac007a86ff8c18d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>set_params</b> ()</td></tr>
 <tr class="separator:a46a39b3fac494fc77ac007a86ff8c18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,18 +168,18 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>open_device</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected 属性</h2></td></tr>
-<tr class="memitem:a25fb22d7c53598c84b1e7825e6013bdd"><td class="memItemLeft" align="right" valign="top"><a id="a25fb22d7c53598c84b1e7825e6013bdd"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a25fb22d7c53598c84b1e7825e6013bdd">device</a></td></tr>
-<tr class="memdesc:a25fb22d7c53598c84b1e7825e6013bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">设备名称 <br /></td></tr>
-<tr class="separator:a25fb22d7c53598c84b1e7825e6013bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64d7a46cc0bdac297c01e2fe4bcfd1f1"><td class="memItemLeft" align="right" valign="top"><a id="a64d7a46cc0bdac297c01e2fe4bcfd1f1"></a>
-snd_pcm_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a64d7a46cc0bdac297c01e2fe4bcfd1f1">handle</a></td></tr>
-<tr class="memdesc:a64d7a46cc0bdac297c01e2fe4bcfd1f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">设备句柄 <br /></td></tr>
-<tr class="separator:a64d7a46cc0bdac297c01e2fe4bcfd1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a386ed6b382fbbca6348aa9f78f1b4025"><td class="memItemLeft" align="right" valign="top"><a id="a386ed6b382fbbca6348aa9f78f1b4025"></a>
-snd_pcm_hw_params_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a386ed6b382fbbca6348aa9f78f1b4025">params</a></td></tr>
-<tr class="memdesc:a386ed6b382fbbca6348aa9f78f1b4025"><td class="mdescLeft">&#160;</td><td class="mdescRight">硬件参数结构体 <br /></td></tr>
-<tr class="separator:a386ed6b382fbbca6348aa9f78f1b4025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b52ac947a25396b3a3d0ff144d884cc"><td class="memItemLeft" align="right" valign="top"><a id="a5b52ac947a25396b3a3d0ff144d884cc"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a5b52ac947a25396b3a3d0ff144d884cc">device</a></td></tr>
+<tr class="memdesc:a5b52ac947a25396b3a3d0ff144d884cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">设备名称 <br /></td></tr>
+<tr class="separator:a5b52ac947a25396b3a3d0ff144d884cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e44199ecdfcdabfcd46186ed1476e3"><td class="memItemLeft" align="right" valign="top"><a id="a47e44199ecdfcdabfcd46186ed1476e3"></a>
+snd_pcm_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a47e44199ecdfcdabfcd46186ed1476e3">handle</a></td></tr>
+<tr class="memdesc:a47e44199ecdfcdabfcd46186ed1476e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">设备句柄 <br /></td></tr>
+<tr class="separator:a47e44199ecdfcdabfcd46186ed1476e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4cd25f977206b42e7b07c69669f87d"><td class="memItemLeft" align="right" valign="top"><a id="a3f4cd25f977206b42e7b07c69669f87d"></a>
+snd_pcm_hw_params_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a3f4cd25f977206b42e7b07c69669f87d">params</a></td></tr>
+<tr class="memdesc:a3f4cd25f977206b42e7b07c69669f87d"><td class="mdescLeft">&#160;</td><td class="mdescRight">硬件参数结构体 <br /></td></tr>
+<tr class="separator:a3f4cd25f977206b42e7b07c69669f87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79208eae42d8bfb263c5502ced5a3aac"><td class="memItemLeft" align="right" valign="top"><a id="a79208eae42d8bfb263c5502ced5a3aac"></a>
 snd_pcm_format_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1VoiceBase.html#a79208eae42d8bfb263c5502ced5a3aac">format</a></td></tr>
 <tr class="memdesc:a79208eae42d8bfb263c5502ced5a3aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">采样格式 <br /></td></tr>
@@ -203,72 +198,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>DEVICE_OPENED</b></td
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>音频捕获、回放基类 </p>
 <p>包含了音频捕获、回放所共有的一些参数，以及硬件参数设置，继承该类需要实现open_device() </p>
-</div><h2 class="groupheader">构造及析构函数说明</h2>
-<a id="ae63337278a680c4e4cbc47f6952c9a5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae63337278a680c4e4cbc47f6952c9a5a">&#9670;&nbsp;</a></span>VoiceBase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">an::core::VoiceBase::VoiceBase </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>dev</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>音频捕获、回放构造函数 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dev</td><td>设备名称，可以传入default来使用默认设备 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">成员函数说明</h2>
-<a id="a46a39b3fac494fc77ac007a86ff8c18d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46a39b3fac494fc77ac007a86ff8c18d">&#9670;&nbsp;</a></span>set_params()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::VoiceBase::set_params </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>设置硬件参数 </p>
-<p>设置相关的硬件参数</p>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="include_2voice__base_8h_source.html">voice_base.h</a></li>
-<li>/home/jiang/git/aero-node/an-core/lib/<a class="el" href="voice__base_8cc.html">voice_base.cc</a></li>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="voice__base_8h_source.html">voice_base.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

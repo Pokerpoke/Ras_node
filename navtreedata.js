@@ -1,8 +1,6 @@
 var NAVTREE =
 [
   [ "Aero Node", "index.html", [
-    [ "README", "index.html", null ],
-    [ "README", "md__home_jiang_git_aero-node_an-gui_web_README.html", null ],
     [ "待办事项列表", "todo.html", null ],
     [ "类", "annotated.html", [
       [ "类列表", "annotated.html", "annotated_dup" ],
@@ -11,8 +9,7 @@ var NAVTREE =
       [ "类成员", "functions.html", [
         [ "全部", "functions.html", null ],
         [ "函数", "functions_func.html", null ],
-        [ "变量", "functions_vars.html", null ],
-        [ "相关函数", "functions_rela.html", null ]
+        [ "变量", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "文件", null, [
@@ -28,8 +25,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-".html",
-"lib_2logger_8h.html#ae69e4ce5c0f8a17b867ef433520cce8d"
+".html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';

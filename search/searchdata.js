@@ -1,12 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "abcdfhilmopqrstuv~å",
+  0: "abcdfhlmoprstuvw~å",
   1: "bcrstuv",
-  2: "clqstuv",
-  3: "cilmoprstuv~",
-  4: "abcdfhoprs",
-  5: "o",
-  6: "rå"
+  2: "clrstuv",
+  3: "cloprsw~",
+  4: "abcdfhmoprst",
+  5: "å"
 };
 
 var indexSectionNames =
@@ -16,8 +15,7 @@ var indexSectionNames =
   2: "files",
   3: "functions",
   4: "variables",
-  5: "related",
-  6: "pages"
+  5: "pages"
 };
 
 var indexSectionLabels =
@@ -27,7 +25,6 @@ var indexSectionLabels =
   2: "文件",
   3: "函数",
   4: "变量",
-  5: "友元",
-  6: "页"
+  5: "页"
 };
 

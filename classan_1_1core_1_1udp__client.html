@@ -90,19 +90,10 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1udp__client.html','
 <p>UDP客户端  
  <a href="classan_1_1core_1_1udp__client.html#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2udp__client_8h_source.html">udp_client.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="udp__client_8h_source.html">udp_client.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a921ed02659c53897e92ff4eaeb2300d6"><td class="memItemLeft" align="right" valign="top"><a id="a921ed02659c53897e92ff4eaeb2300d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>udp_client</b> (const char *dest_ip, int dest_port)</td></tr>
-<tr class="separator:a921ed02659c53897e92ff4eaeb2300d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a099bb5178070fe94197fa0d07547e8d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1udp__client.html#a099bb5178070fe94197fa0d07547e8d8">~udp_client</a> ()</td></tr>
-<tr class="separator:a099bb5178070fe94197fa0d07547e8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a0dd19d61a39113db1d29bcaf64e01c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1udp__client.html#a4a0dd19d61a39113db1d29bcaf64e01c">send_data</a> (const char *data)</td></tr>
-<tr class="separator:a4a0dd19d61a39113db1d29bcaf64e01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc9f62f18b8722dd0381f7272fb0d002"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1udp__client.html#acc9f62f18b8722dd0381f7272fb0d002">send_data</a> (std::string data)</td></tr>
-<tr class="separator:acc9f62f18b8722dd0381f7272fb0d002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921ed02659c53897e92ff4eaeb2300d6"><td class="memItemLeft" align="right" valign="top"><a id="a921ed02659c53897e92ff4eaeb2300d6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>udp_client</b> (const char *dest_ip, int dest_port)</td></tr>
 <tr class="separator:a921ed02659c53897e92ff4eaeb2300d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,95 +106,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>send_data</b> (std::st
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>UDP客户端 </p>
-</div><h2 class="groupheader">构造及析构函数说明</h2>
-<a id="a099bb5178070fe94197fa0d07547e8d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a099bb5178070fe94197fa0d07547e8d8">&#9670;&nbsp;</a></span>~udp_client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">an::core::udp_client::~udp_client </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>关闭Socket </p>
-
-</div>
-</div>
-<h2 class="groupheader">成员函数说明</h2>
-<a id="a4a0dd19d61a39113db1d29bcaf64e01c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a0dd19d61a39113db1d29bcaf64e01c">&#9670;&nbsp;</a></span>send_data() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::udp_client::send_data </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>通过UDP协议发送数据</p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">待发送数据</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>成功返回0 </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>发送成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>发送失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="acc9f62f18b8722dd0381f7272fb0d002"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc9f62f18b8722dd0381f7272fb0d002">&#9670;&nbsp;</a></span>send_data() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::udp_client::send_data </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>通过UDP协议发送数据</p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">待发送数据</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>成功返回0 </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>发送成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>发送失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="include_2udp__client_8h_source.html">udp_client.h</a></li>
-<li>/home/jiang/git/aero-node/an-core/lib/<a class="el" href="udp__client_8cc.html">udp_client.cc</a></li>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="udp__client_8h_source.html">udp_client.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

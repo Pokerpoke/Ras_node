@@ -90,18 +90,10 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1tcp__client.html','
 <p>TCP客户端  
  <a href="classan_1_1core_1_1tcp__client.html#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2tcp__client_8h_source.html">tcp_client.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="tcp__client_8h_source.html">tcp_client.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:ad976a8117254d988ee51322315c4c94d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1tcp__client.html#ad976a8117254d988ee51322315c4c94d">tcp_client</a> (const char *dest_ip, int dest_port)</td></tr>
-<tr class="separator:ad976a8117254d988ee51322315c4c94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06b2641fe2dcd13f3d9b57ee92676da6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1tcp__client.html#a06b2641fe2dcd13f3d9b57ee92676da6">send_data</a> (const char *data)</td></tr>
-<tr class="separator:a06b2641fe2dcd13f3d9b57ee92676da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefefb0509213ac5f472a6ce9bf0a15bc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1tcp__client.html#aefefb0509213ac5f472a6ce9bf0a15bc">send_data</a> (std::string data)</td></tr>
-<tr class="separator:aefefb0509213ac5f472a6ce9bf0a15bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad38ab736d09989ab9ecd94123f0ae890"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1tcp__client.html#ad38ab736d09989ab9ecd94123f0ae890">is_connected</a> ()</td></tr>
-<tr class="separator:ad38ab736d09989ab9ecd94123f0ae890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad976a8117254d988ee51322315c4c94d"><td class="memItemLeft" align="right" valign="top"><a id="ad976a8117254d988ee51322315c4c94d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>tcp_client</b> (const char *dest_ip, int dest_port)</td></tr>
 <tr class="separator:ad976a8117254d988ee51322315c4c94d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,138 +109,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>is_connected</b> ()</t
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>TCP客户端 </p>
-</div><h2 class="groupheader">构造及析构函数说明</h2>
-<a id="ad976a8117254d988ee51322315c4c94d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad976a8117254d988ee51322315c4c94d">&#9670;&nbsp;</a></span>tcp_client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">an::core::tcp_client::tcp_client </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>dest_ip</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>dest_port</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">目标IP地址</td><td></td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">目标端口</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">成员函数说明</h2>
-<a id="ad38ab736d09989ab9ecd94123f0ae890"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad38ab736d09989ab9ecd94123f0ae890">&#9670;&nbsp;</a></span>is_connected()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::tcp_client::is_connected </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>连接状态</p>
-<dl class="section return"><dt>返回</dt><dd>连接状态 </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>连接失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a06b2641fe2dcd13f3d9b57ee92676da6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06b2641fe2dcd13f3d9b57ee92676da6">&#9670;&nbsp;</a></span>send_data() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::tcp_client::send_data </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>发送数据信息</p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">char类型的数据信息</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>发送状态 </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>发送成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>发送失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aefefb0509213ac5f472a6ce9bf0a15bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefefb0509213ac5f472a6ce9bf0a15bc">&#9670;&nbsp;</a></span>send_data() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::tcp_client::send_data </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>发送数据信息</p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">string类型的数据信息</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>发送状态 </dd></dl>
-<dl class="retval"><dt>返回值</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">0</td><td>发送成功 </td></tr>
-    <tr><td class="paramname">-1</td><td>发送失败 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="include_2tcp__client_8h_source.html">tcp_client.h</a></li>
-<li>/home/jiang/git/aero-node/an-core/lib/<a class="el" href="tcp__client_8cc.html">tcp_client.cc</a></li>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="tcp__client_8h_source.html">tcp_client.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -90,20 +90,10 @@ $(document).ready(function(){initNavTree('classan_1_1core_1_1system__info.html',
 <p>系统信息  
  <a href="classan_1_1core_1_1system__info.html#details">更多...</a></p>
 
-<p><code>#include &lt;<a class="el" href="include_2system__info_8h_source.html">system_info.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="system__info_8h_source.html">system_info.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a7860526bc429a25defa64a1ba5818f76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1system__info.html#a7860526bc429a25defa64a1ba5818f76">os_info</a> (char *out)</td></tr>
-<tr class="separator:a7860526bc429a25defa64a1ba5818f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1991707ad70dd70402f8cf766c1a8ff0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1system__info.html#a1991707ad70dd70402f8cf766c1a8ff0">os_info</a> (std::string &amp;out)</td></tr>
-<tr class="separator:a1991707ad70dd70402f8cf766c1a8ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae626338c01036de88cfb3a7cba9a333f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1system__info.html#ae626338c01036de88cfb3a7cba9a333f">cpu_info</a> (char *out)</td></tr>
-<tr class="separator:ae626338c01036de88cfb3a7cba9a333f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d05b24a67cfe40c8190f8ff29b2d519"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1system__info.html#a3d05b24a67cfe40c8190f8ff29b2d519">memory_used</a> (long &amp;out)</td></tr>
-<tr class="separator:a3d05b24a67cfe40c8190f8ff29b2d519"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d30b59d5a3167289586a359fb6a07f7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classan_1_1core_1_1system__info.html#a8d30b59d5a3167289586a359fb6a07f7">memory_total</a> (long &amp;out)</td></tr>
-<tr class="separator:a8d30b59d5a3167289586a359fb6a07f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7860526bc429a25defa64a1ba5818f76"><td class="memItemLeft" align="right" valign="top"><a id="a7860526bc429a25defa64a1ba5818f76"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>os_info</b> (char *out)</td></tr>
 <tr class="separator:a7860526bc429a25defa64a1ba5818f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,135 +112,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>memory_total</b> (long
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
 <div class="textblock"><p>系统信息 </p>
-</div><h2 class="groupheader">成员函数说明</h2>
-<a id="ae626338c01036de88cfb3a7cba9a333f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae626338c01036de88cfb3a7cba9a333f">&#9670;&nbsp;</a></span>cpu_info()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::system_info::cpu_info </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>使用"cat /proc/cpuinfo | grep name"获取cpu信息 </p><dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">输出到char</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>正常结束返回0。 </dd></dl>
-
-</div>
-</div>
-<a id="a8d30b59d5a3167289586a359fb6a07f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d30b59d5a3167289586a359fb6a07f7">&#9670;&nbsp;</a></span>memory_total()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::system_info::memory_total </td>
-          <td>(</td>
-          <td class="paramtype">long &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>使用"free | grep Mem"获取总内存 </p><dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">输出到long</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>正常结束返回0。 </dd></dl>
-
-</div>
-</div>
-<a id="a3d05b24a67cfe40c8190f8ff29b2d519"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d05b24a67cfe40c8190f8ff29b2d519">&#9670;&nbsp;</a></span>memory_used()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::system_info::memory_used </td>
-          <td>(</td>
-          <td class="paramtype">long &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>使用"free | grep Mem"获取已用内存 </p><dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">输出到long</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>正常结束返回0。 </dd></dl>
-
-</div>
-</div>
-<a id="a7860526bc429a25defa64a1ba5818f76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7860526bc429a25defa64a1ba5818f76">&#9670;&nbsp;</a></span>os_info() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::system_info::os_info </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>使用"uname -sr"获取系统版本 </p><dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">输出到char数组</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>正常结束返回0。 </dd></dl>
-
-</div>
-</div>
-<a id="a1991707ad70dd70402f8cf766c1a8ff0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1991707ad70dd70402f8cf766c1a8ff0">&#9670;&nbsp;</a></span>os_info() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int an::core::system_info::os_info </td>
-          <td>(</td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>out</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>使用"uname -sr"获取系统版本 </p><dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">输出到string</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>正常结束返回0。 </dd></dl>
-
-</div>
-</div>
-<hr/>该类的文档由以下文件生成:<ul>
-<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="include_2system__info_8h_source.html">system_info.h</a></li>
-<li>/home/jiang/git/aero-node/an-core/lib/<a class="el" href="system__info_8cc.html">system_info.cc</a></li>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>/home/jiang/git/aero-node/an-core/include/<a class="el" href="system__info_8h_source.html">system_info.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

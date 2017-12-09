@@ -16,15 +16,6 @@ var annotated_dup =
         [ "VoiceBase", "classan_1_1core_1_1VoiceBase.html", "classan_1_1core_1_1VoiceBase" ],
         [ "VoiceCapture", "classan_1_1core_1_1VoiceCapture.html", "classan_1_1core_1_1VoiceCapture" ],
         [ "VoicePlayback", "classan_1_1core_1_1VoicePlayback.html", "classan_1_1core_1_1VoicePlayback" ]
-      ] ],
-      [ "transfer", null, [
-        [ "tcp", null, [
-          [ "send_file", "classan_1_1transfer_1_1tcp_1_1send__file.html", "classan_1_1transfer_1_1tcp_1_1send__file" ]
-        ] ],
-        [ "udp", null, [
-          [ "send_file", "classan_1_1transfer_1_1udp_1_1send__file.html", "classan_1_1transfer_1_1udp_1_1send__file" ]
-        ] ]
       ] ]
-    ] ],
-    [ "buffer", "structbuffer.html", "structbuffer" ]
+    ] ]
 ];

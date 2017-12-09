@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['soft_5fresample',['soft_resample',['../classan_1_1core_1_1VoiceBase.html#a55cc977e64b415944dcb64f22b76dab2',1,'an::core::VoiceBase']]]
+  ['rate',['rate',['../classan_1_1core_1_1VoiceBase.html#a8fc304fb7d8c8e506498a12f66d80cb8',1,'an::core::VoiceBase']]]
 ];
