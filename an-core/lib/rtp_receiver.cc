@@ -24,7 +24,6 @@ RTPReceiver::RTPReceiver(const int _portbase)
 	portbase = _portbase;
 	// time_stamp = 8000.0;
 	time_stamp = 8000.0;
-	// payload_type = 11;
 	payload_type = 0;
 	mark = false;
 	output_buffer_size = 0;
@@ -52,19 +51,6 @@ int RTPReceiver::init()
 
 	return 0;
 }
-
-// int RTPReceiver::read()
-// {
-// 	// output_buffer_size = session.output_buffer_size;
-// 	// if (output_buffer_size <= 0)
-// 	// {
-// 	// 	return -1;
-// 	// }
-// 	// output_buffer = (char *)calloc(1, output_buffer_size);
-// 	// memcpy(output_buffer, session.output_buffer, session.output_buffer_size);
-// 	// int i;
-// 	return 0;
-// }
 
 int RTPReceiver::start_listen()
 {
@@ -99,7 +85,7 @@ int RTPReceiver::start_listen()
 			LOG(ERROR) << jrtplib::RTPGetErrorString(err);
 			return -1;
 		}
-#endif //! RTP_SUPPORT_THREAD
+#endif // !RTP_SUPPORT_THREAD
 	}
 
 	return 0;

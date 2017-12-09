@@ -8,6 +8,7 @@
  * @brief    RTP发送类
  * @version  0.0.1
  * @example  qa_rtp_sender.cc
+ * @example  qa_rtp_sender_to_receiver.cc
  * 
  * Last Modified:  2017-12-07
  * Modified By:    姜阳 (j824544269@gmail.com)
@@ -44,12 +45,12 @@ class RTPSender
 	 * 
 	 * 发送至目标地址的相应端口
 	 * 
-	 * @param   [in]   ip    目标地址
-	 * @param   [in]   port  目标端口
+	 * @param   [in]   ip    目标地址，默认是127.0.0.1
+	 * @param   [in]   port  目标端口，默认是8338
 	 * 
 	 */
-	RTPSender(const std::string ip,
-			  const int port = 13374);
+	RTPSender(const std::string ip = "127.0.0.1",
+			  const int port = 8338);
 	/** 
 	 * @brief   RTPSender析构函数
 	 * 
