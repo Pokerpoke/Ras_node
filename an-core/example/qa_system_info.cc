@@ -1,41 +1,56 @@
-#include <iostream>
-#include <string>
-#include <stdio.h>
-
-#include "logger.h"
+/**
+ * 
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-12
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-11
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 #include "system_info.h"
-
+#include "logger.h"
+using namespace std;
 using namespace an::core;
-
 int main()
 {
-	// logger_init();
-	logger_init("./log/test.log");
+	logger_init();
 
-	char sys_info[80] = "";
-	std::string sys_info2;
-	system_info s;
+	SystemInfo s;
+	s.update();
+	LOG(INFO) << "Print os info";
+	LOG(INFO) << s.os_info.sysname;
+	LOG(INFO) << s.os_info.nodename;
+	LOG(INFO) << s.os_info.release;
+	// LOG(INFO) << s.os_info.version;
+	LOG(INFO) << s.os_info.machine;
 
-	s.os_info(sys_info2);
+	LOG(INFO) << "Print mem info";
+	// s.mem_info.totalram / 1024 / 1024 -> s.mem_info.totalram >> 20
+	LOG(INFO) << "Total : "
+			  << (s.mem_info.totalram >> 20)
+			  << " MB";
+	LOG(INFO) << "Total : "
+			  << (s.mem_info.freeram >> 20)
+			  << " MB";
+	LOG(INFO) << "Usage : "
+			  << (s.mem_info.totalram >> 20) / (s.mem_info.freeram >> 20)
+			  << "%";
 
-	std::cout << sys_info2 << std::endl;
-	LOG(WARN) << "test";
-
-	long mem_used, mem_total;
-
-	s.memory_used(mem_used);
-	std::cout << mem_used << "\n";
-
-	s.memory_total(mem_total);
-	std::cout << mem_total << "\n";
-
-	printf("%.2lf%%\n", ((double)mem_used / (double)mem_total * 100));
-
-	char cpu0_info[200] = "";
-	s.cpu_info(cpu0_info);
-	std::cout << cpu0_info << "\n";
+	LOG(INFO) << "Print ip info";
+	// Tiny4412 don't support the follow syntax, sign.....
+	// for (auto i : s.ip_info)
+	map<string, string>::iterator i;
+	for (i = s.ip_info.begin(); i != s.ip_info.end(); i++)
+	{
+		LOG(INFO) << i->first
+				  << " : " << i->second;
+	}
 
 	getchar();
-
 	return 0;
 }

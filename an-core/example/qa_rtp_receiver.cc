@@ -1,3 +1,17 @@
+/**
+ * 
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-12
+ * @brief    rtp接收例程
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-09
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 #include <stdio.h>
 #include <sched.h>
 #include <iostream>

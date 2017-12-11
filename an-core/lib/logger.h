@@ -8,7 +8,7 @@
  * @brief    日志记录头文件
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2017-12-09
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */

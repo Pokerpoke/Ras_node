@@ -7,12 +7,13 @@
  * @date     2017-11
  * @brief    音频回放
  * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-09
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
  * @example  qa_voice_playback.cc
  * @example  qa_voice_playback.cc
  * @example  voice-receive.cc
- * 
- * Last Modified:  2017-12-02
- * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #ifndef _VOICE_PLAYBACK_H_

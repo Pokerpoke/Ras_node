@@ -1,14 +1,15 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "Aero Node"
 OUTPUT_DIRECTORY       = @CMAKE_BINARY_DIR@/doc/
-INPUT				   = @CMAKE_SOURCE_DIR@/an-core/include
-                         @CMAKE_SOURCE_DIR@/an-gui
+INPUT				   = @CMAKE_SOURCE_DIR@/an-core/include/
+INPUT				   += @CMAKE_SOURCE_DIR@/an-gui/qt/include/
+INPUT				   += @CMAKE_SOURCE_DIR@/
 OUTPUT_LANGUAGE        = Chinese
 # EXTRACT_PRIVATE        = YES
-RECURSIVE              = YES
+RECURSIVE              = NO
 EXCLUDE                = @CMAKE_SOURCE_DIR@/build/
-USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/README.md  
+USE_MDFILE_AS_MAINPAGE = @CMAKE_SOURCE_DIR@/README.md 
 GENERATE_TREEVIEW      = YES
 EXAMPLE_PATH           = @CMAKE_SOURCE_DIR@/an-core/example
-                         @CMAKE_SOURCE_DIR@/an-core/bin
+EXAMPLE_PATH           += @CMAKE_SOURCE_DIR@/an-core/bin
 EXAMPLE_RECURSIVE      = YES

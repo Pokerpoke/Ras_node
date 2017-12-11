@@ -1,40 +1,57 @@
+/**
+ * 
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2017-12
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-11
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 #include "logger.h"
 #include "voice_capture.h"
 #include "voice_playback.h"
 #include "rtp_receiver.h"
 #include "rtp_sender.h"
 #include <thread>
-#include <pthread.h>
-#include <unistd.h>
 #include <getopt.h>
 
 using namespace std;
 
-an::core::VoiceCapture c("default");
-an::core::VoicePlayback p("default");
-
 class RTPReceiver : public an::core::RTPReceiver
 {
   public:
+	an::core::VoicePlayback *p;
 	RTPReceiver(int port) : an::core::RTPReceiver(port)
 	{
+		p = new an::core::VoicePlayback("default");
+	}
+	~RTPReceiver()
+	{
+		delete p;
 	}
 
   private:
-	void payload_process();
+	void payload_process()
+	{
+		p->playback(output_buffer, output_buffer_size);
+	}
 };
-void RTPReceiver::payload_process()
-{
-	p.playback(output_buffer, output_buffer_size);
-}
 
 class RTPSender : public an::core::RTPSender
 {
   public:
-	RTPSender(const std::string ip, const int port) : an::core::RTPSender(ip, port)
+	RTPSender(const std::string ip,
+			  const int port) : an::core::RTPSender(ip, port)
 	{
 	}
 };
+
+void help(void);
 
 int main(int argc, char **argv)
 {
@@ -56,6 +73,8 @@ int main(int argc, char **argv)
 		switch (c)
 		{
 		case 'h':
+			help();
+			return 0;
 			break;
 		case 'i':
 			dest_ip = strdup(optarg);
@@ -71,6 +90,7 @@ int main(int argc, char **argv)
 		}
 	}
 	logger_init();
+	an::core::VoiceCapture c("default");
 	RTPReceiver r(listen_port);
 	RTPSender s(dest_ip, dest_port);
 	thread rt([&] { r.start_listen(); });
@@ -88,4 +108,13 @@ int main(int argc, char **argv)
 		st.join();
 
 	return 0;
+}
+
+void help(void)
+{
+	std::cout << "Usage: voice-call [OPTION]... \n"
+				 "-h,--help         show help\n"
+				 "-i,--dest-ip      set destnation ip address\n"
+				 "-p,--dest-port    set destnation port\n"
+				 "-l,--listen-port  set listen port\n";
 }

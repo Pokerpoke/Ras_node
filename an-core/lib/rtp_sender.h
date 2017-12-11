@@ -7,11 +7,12 @@
  * @date     2017-11
  * @brief    RTP发送类
  * @version  0.0.1
+ * 
+ * Last Modified:  2017-12-09
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
  * @example  qa_rtp_sender.cc
  * @example  qa_rtp_sender_to_receiver.cc
- * 
- * Last Modified:  2017-12-07
- * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #ifndef _RTP_SENDER_H_

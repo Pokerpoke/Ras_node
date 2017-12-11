@@ -1,176 +1,100 @@
 /**
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-11
- * @brief    用于获取系统的os版本，内存占用，cpu型号等信息。
- * @version  0.0.1
- * @note     使用shell命令获取，可能有些系统无法成功获取。定义输出的数组要足够大。
+ * @date     2017-07
+ * @brief    
+ * @version  0.0.2
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2017-12-09
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include <iostream>
-#include <string>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "system_info.h"
+#include "logger.h"
+
+#include <sys/types.h>
+#include <ifaddrs.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 namespace an
 {
 namespace core
 {
-
-system_info::system_info()
+SystemInfo::SystemInfo()
 {
-}
+	update();
+};
+SystemInfo::~SystemInfo(){
 
-/**
- * 使用popen执行命令
- * 
- * @param shell指令
- * @param 输出数组
- * @return 正常结束返回0，管道打开失败返回-1。
- * 
- */
-int system_info::popen_to_char(const char *cmd, char *out)
+};
+int SystemInfo::update()
 {
-	FILE *fp;
-	unsigned int index = 0;
-
-	if ((fp = popen(cmd, "r")) == NULL)
+	if ((err = get_os_info()) < 0)
 	{
-		fprintf(stderr, "Pipe open failed.");
+		LOG(ERROR) << "Get os info error.";
 		return -1;
 	}
-	else
+	if ((err = get_mem_info()) < 0)
 	{
-		fseek(fp, 0, SEEK_SET);
-		while (!feof(fp))
-		{
-			out[index] = fgetc(fp);
-			if (out[index] != '\0')
-			{
-				index++;
-			}
-			// TODO:输出数据大小检测，目前需要手动分配足够大的空间。
-			// if (index > len)
-			// {
-			// 	break;
-			// }
-		}
-		out = strtok(out, "\n");
+		LOG(ERROR) << "Get mem info error.";
+		return -1;
 	}
-
-	pclose(fp);
-
+	if ((err = get_ip_info()) < 0)
+	{
+		LOG(ERROR) << "Get ip info error.";
+		return -1;
+	}
 	return 0;
 }
-
-/**
- * 使用popen执行命令
- * @param shell指令
- * @param 输出到string
- * @return 正常结束返回0，管道打开失败返回-1。
- */
-int system_info::popen_to_string(const char *cmd, std::string &out)
+int SystemInfo::get_os_info()
 {
-	char temp[200];
-
-	popen_to_char(cmd, temp);
-	out = temp;
-
-	return 0;
+	return uname(&os_info);
 }
-
-/**
- * 使用"uname -sr"获取系统版本
- * @param 输出到char数组
- * @return 正常结束返回0。
- * 
- */
-int system_info::os_info(char *out)
+int SystemInfo::get_mem_info()
 {
-	const char *cmd = "uname -sr";
-
-	popen_to_char(cmd, out);
-
-	return 0;
+	return sysinfo(&mem_info);
 }
-
-/**
- * 使用"uname -sr"获取系统版本
- * @param 输出到string
- * @return 正常结束返回0。
- */
-int system_info::os_info(std::string &out)
+int SystemInfo::get_ip_info()
 {
-	const char *cmd = "uname -sr";
+	/// [get-the-ip-address-of-the-machine)](https://stackoverflow.com/questions/212528/get-the-ip-address-of-the-machine)
+	struct ifaddrs *ifAddrStruct = NULL;
+	struct ifaddrs *ifa = NULL;
+	void *tmpAddrPtr = NULL;
 
-	popen_to_string(cmd, out);
+	if (getifaddrs(&ifAddrStruct) < 0)
+		return -1;
 
+	for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next)
+	{
+		if (!ifa->ifa_addr)
+		{
+			continue;
+		}
+		if (ifa->ifa_addr->sa_family == AF_INET)
+		{ // check it is IP4
+			// is a valid IP4 Address
+			tmpAddrPtr = &((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
+			char addressBuffer[INET_ADDRSTRLEN];
+			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
+			// printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
+			ip_info[static_cast<std::string>(ifa->ifa_name)] = static_cast<std::string>(addressBuffer);
+		}
+		// else if (ifa->ifa_addr->sa_family == AF_INET6)
+		// { // check it is IP6
+		// 	// is a valid IP6 Address
+		// 	tmpAddrPtr = &((struct sockaddr_in6 *)ifa->ifa_addr)->sin6_addr;
+		// 	char addressBuffer[INET6_ADDRSTRLEN];
+		// 	inet_ntop(AF_INET6, tmpAddrPtr, addressBuffer, INET6_ADDRSTRLEN);
+		// 	printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
+		// }
+	}
+	if (ifAddrStruct != NULL)
+		freeifaddrs(ifAddrStruct);
 	return 0;
-}
-
-/**
- * 使用"free | grep Mem"获取已用内存
- * @param 输出到long
- * @return 正常结束返回0。
- */
-int system_info::memory_used(long &out)
-{
-	const char *cmd = "free | grep Mem";
-	char temp[80];
-
-	popen_to_char(cmd, temp);
-	strtok(temp, ":");
-	strtok(NULL, " ");
-	out = atoi(strtok(NULL, " "));
-
-	return 0;
-}
-
-/**
- * 使用"free | grep Mem"获取总内存
- * @param 输出到long
- * @return 正常结束返回0。
- */
-int system_info::memory_total(long &out)
-{
-	const char *cmd = "free | grep Mem";
-	char temp[80];
-
-	popen_to_char(cmd, temp);
-	strtok(temp, ":");
-	out = atoi(strtok(NULL, " "));
-
-	return 0;
-}
-
-/**
- * 使用"cat /proc/cpuinfo | grep name"获取cpu信息
- * @param 输出到char
- * @return 正常结束返回0。
- */
-int system_info::cpu_info(char *out)
-{
-	const char *cmd = "cat /proc/cpuinfo | grep name";
-
-	popen_to_char(cmd, out);
-	strtok(out, ":");
-	char *temp = strtok(NULL, "\n");
-	strcpy(out, temp);
-
-	return 0;
-}
-
-system_info::~system_info()
-{
 }
 }
 }
