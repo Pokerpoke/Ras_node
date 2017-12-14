@@ -12,19 +12,19 @@ var dir_618fab2ef5d7516a19faf6c4a8a1f038 =
       [ "RTPSender", "classan_1_1core_1_1RTPSender.html", "classan_1_1core_1_1RTPSender" ]
     ] ],
     [ "system_info.h", "system__info_8h.html", [
-      [ "system_info", "classan_1_1core_1_1system__info.html", "classan_1_1core_1_1system__info" ]
+      [ "SystemInfo", "classan_1_1core_1_1SystemInfo.html", "classan_1_1core_1_1SystemInfo" ]
     ] ],
     [ "tcp_client.h", "tcp__client_8h.html", [
-      [ "tcp_client", "classan_1_1core_1_1tcp__client.html", "classan_1_1core_1_1tcp__client" ]
+      [ "TCPClient", "classan_1_1core_1_1TCPClient.html", "classan_1_1core_1_1TCPClient" ]
     ] ],
     [ "tcp_server.h", "tcp__server_8h.html", [
-      [ "tcp_server", "classan_1_1core_1_1tcp__server.html", "classan_1_1core_1_1tcp__server" ]
+      [ "TCPServer", "classan_1_1core_1_1TCPServer.html", "classan_1_1core_1_1TCPServer" ]
     ] ],
     [ "udp_client.h", "udp__client_8h.html", [
-      [ "udp_client", "classan_1_1core_1_1udp__client.html", "classan_1_1core_1_1udp__client" ]
+      [ "UDPClient", "classan_1_1core_1_1UDPClient.html", "classan_1_1core_1_1UDPClient" ]
     ] ],
     [ "udp_server.h", "udp__server_8h.html", [
-      [ "udp_server", "classan_1_1core_1_1udp__server.html", "classan_1_1core_1_1udp__server" ]
+      [ "UDPServer", "classan_1_1core_1_1UDPServer.html", "classan_1_1core_1_1UDPServer" ]
     ] ],
     [ "voice_base.h", "voice__base_8h.html", [
       [ "VoiceBase", "classan_1_1core_1_1VoiceBase.html", "classan_1_1core_1_1VoiceBase" ]
