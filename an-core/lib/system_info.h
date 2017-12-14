@@ -9,7 +9,7 @@
  * @version  0.0.2
  * @note     使用shell命令获取，可能有些系统无法成功获取。定义输出的数组要足够大。
  * 
- * Last Modified:  2017-12-09
+ * Last Modified:  2017-12-11
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -82,7 +82,7 @@ class SystemInfo
 	// struct _ip_info ip_info;
 
   private:
-	int err;
+	int _err;
 
 	int get_ip_info();
 	int get_os_info();

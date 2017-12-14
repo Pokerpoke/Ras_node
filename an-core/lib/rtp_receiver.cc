@@ -8,10 +8,11 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2017-12-14
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
+#include <functional>
 #include "logger.h"
 #include "rtp_receiver.h"
 
@@ -54,6 +55,13 @@ int RTPReceiver::init()
 
 int RTPReceiver::start_listen()
 {
+	return start_listen([&] {
+		this->payload_process();
+	});
+}
+
+int RTPReceiver::start_listen(std::function<void(void)> _payload_process)
+{
 	while (1)
 	{
 		session.BeginDataAccess();
@@ -70,7 +78,7 @@ int RTPReceiver::start_listen()
 					// 在这里处理数据
 					output_buffer_size = output_packet->GetPayloadLength();
 					output_buffer = (char *)output_packet->GetPayloadData();
-					payload_process();
+					_payload_process();
 					// 不再需要这个包了，删除之
 					session.DeletePacket(output_packet);
 				}

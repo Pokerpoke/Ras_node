@@ -4,11 +4,11 @@
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-11
+ * @date     2017-07
  * @brief    创建一个UDP服务端
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2017-12-14
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -20,8 +20,9 @@
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
-#include <vector>
+#include <stdlib.h>
 
+#include "logger.h"
 #include "udp_server.h"
 
 namespace an
@@ -29,83 +30,120 @@ namespace an
 namespace core
 {
 
-/**
- * @param[in]   server_port		监听端口
+/** 
+ * @brief   构造函数
+ * 
+ * 初始化相关变量
+ * 
+ * @param[in]   server_port	监听端口
  * 
  */
-udp_server::udp_server(int server_port)
+UDPServer::UDPServer(const int server_port)
+	: _server_port(server_port)
 {
-	std::memset(&server_addr, 0, sizeof(server_addr));
+	memset(&_server_addr, 0, sizeof(_server_addr));
 
-	server_addr.sin_family = AF_INET;
-	server_addr.sin_port = htons(server_port);
-	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	_server_addr.sin_family = AF_INET;
+	_server_addr.sin_port = htons(_server_port);
+	_server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-	t_len = sizeof(server_addr);
+	output_buffer_size = 4096;
+	_SOCKET_CREATED = false;
+
+	_len = sizeof(_server_addr);
+	output_buffer = (char *)malloc(output_buffer_size);
 
 	init();
 }
 
-/**
- * UDP服务端初始化
+/** 
+ * @brief	初始化
  * 
- * @param   NULL
  * @return  0,-1,-2
  * @retval	0	正常结束
  * @retval	-1	Socket创建失败
  * @retval	-2	Socket绑定失败
  * 
  */
-int udp_server::init()
+int UDPServer::init()
 {
-	if ((t_socket = socket(AF_INET,
-						   SOCK_DGRAM,
-						   IPPROTO_UDP)) < 0)
+	_SOCKET_CREATED = false;
+	if ((_socket = socket(AF_INET,
+						  SOCK_DGRAM,
+						  IPPROTO_UDP)) < 0)
 	{
-		std::cerr << "Socket create failed\n";
+		LOG(ERROR) << "Socket create failed for: "
+				   << strerror(errno);
 		return -1;
 	}
 
-	if (bind(t_socket,
-			 (struct sockaddr *)&server_addr,
-			 sizeof(server_addr)) < 0)
+	if (bind(_socket,
+			 (struct sockaddr *)&_server_addr,
+			 sizeof(_server_addr)) < 0)
 	{
-		std::cerr << "Socket bind failed\n";
+		LOG(ERROR) << "Socket bind failed for: "
+				   << strerror(errno);
 		return -2;
 	}
+	_SOCKET_CREATED = true;
 	return 0;
+}
+
+/** 
+ * @brief   开始监听
+ * 
+ * 通过继承该类，并重载payload_process函数进行监听
+ * 
+ */
+int UDPServer::start_listen()
+{
+	return start_listen([&] {
+		this->payload_process();
+	});
+}
+
+/** 
+ * @brief   开始监听
+ * 
+ * 回调函数方式，传入函数指针或者lambda函数
+ * 
+ * @param[in]	_payload_process	数据处理函数
+ * 
+ */
+int UDPServer::start_listen(std::function<void(void)> _payload_process)
+{
+	while (1)
+	{
+		if ((_err = recvfrom(_socket,						   // 套接字
+							 output_buffer,					   // 输出缓存
+							 output_buffer_size,			   // 输出缓存大小
+							 0,								   // 标志位
+							 (struct sockaddr *)&_server_addr, // 发送方地址
+							 &_len)) < 0)					   // 地址长度
+		{
+			LOG(ERROR) << "Receive failed for: "
+					   << strerror(errno);
+		}
+		else
+		{
+			_payload_process();
+			// clear
+			memset(output_buffer, 0, output_buffer_size);
+		}
+	}
+	return _err;
 }
 
 /**
- * 开始监听端口
+ * @brief	析构函数
  * 
- * @param[in,out]		out		输出数组
- * @param[in]			len		数组长度
- * @return  			成功返回0，失败返回-1
- * @warning				调用之后首先将输出数组置零！
- * @retval				0	接受成功
- * @retval				-1	初始化失败
+ * 关闭Socket
  * 
  */
-int udp_server::udp_listen(char *out, int len)
+UDPServer::~UDPServer()
 {
-	memset(out, 0, len);
-	if (recvfrom(t_socket,
-				 out,
-				 len,
-				 0,
-				 (struct sockaddr *)&server_addr,
-				 &t_len) < 0)
-	{
-		std::cerr << "Receive failed\n";
-		return -1;
-	}
-	return 0;
-}
-
-udp_server::~udp_server()
-{
-	close(t_socket);
+	close(_socket);
+	free(output_buffer);
 }
 }
 }

@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.2
  * 
- * Last Modified:  2017-12-09
+ * Last Modified:  2017-12-11
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -33,17 +33,17 @@ SystemInfo::~SystemInfo(){
 };
 int SystemInfo::update()
 {
-	if ((err = get_os_info()) < 0)
+	if ((_err = get_os_info()) < 0)
 	{
 		LOG(ERROR) << "Get os info error.";
 		return -1;
 	}
-	if ((err = get_mem_info()) < 0)
+	if ((_err = get_mem_info()) < 0)
 	{
 		LOG(ERROR) << "Get mem info error.";
 		return -1;
 	}
-	if ((err = get_ip_info()) < 0)
+	if ((_err = get_ip_info()) < 0)
 	{
 		LOG(ERROR) << "Get ip info error.";
 		return -1;

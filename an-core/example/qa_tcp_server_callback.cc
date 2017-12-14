@@ -5,35 +5,34 @@
  * @file
  * @author   姜阳 (j824544269@gmail.com)
  * @date     2017-12
- * @brief    
+ * @brief    tcp服务端例程1，回调函数形式
  * @version  0.0.1
  * 
  * Last Modified:  2017-12-11
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include <iostream>
-#include <string>
-
-#include "tcp_client.h"
 #include "logger.h"
+#include "tcp_server.h"
 
 using namespace an::core;
-using namespace std;
+
+void foo(void)
+{
+	LOG(INFO) << "test";
+}
 
 int main()
 {
 	logger_init();
 
-	std::string data("123\n");
-	TCPClient s("127.0.0.1", 13374);
+	TCPServer s(13374);
+	// 传入lambda函数
+	s.start_listen([&] {
+		LOG(INFO) << s.output_buffer;
+	});
+	// 传入普通函数
+	// s.start_listen(foo);
 
-	for (int i = 0; i < 10; i++)
-	{
-		LOG(INFO) << "Sending packet " << i;
-		s.write(data.c_str());
-	}
-
-	getchar();
 	return 0;
 }

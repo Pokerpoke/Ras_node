@@ -1,170 +1,181 @@
 /**
- * 
+ *
  * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
- * 
+ *
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-11
+ * @date     2017-07
  * @brief    建立tcp连接并传递数据信息
  * @version  0.0.1
- * 
- * Last Modified:  2017-12-02
+ *
+ * Last Modified:  2017-12-11
  * Modified By:    姜阳 (j824544269@gmail.com)
+ *
+ * @example  qa_tcp_client.cc
  * 
  */
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <iostream>
 #include <cstring>
+#include <errno.h>
 
+#include "logger.h"
 #include "tcp_client.h"
 
 namespace an
 {
 namespace core
 {
-
-/** 
- * 
+/**
+ * @brief		构造函数
+ *
  * @param[in]   目标IP地址
  * @param[in]   目标端口
  * 
  */
-tcp_client::tcp_client(const char *dest_ip, int dest_port)
+TCPClient::TCPClient(const char *dest_ip,
+					 const int dest_port)
+	: _dest_ip(dest_ip),
+	  _dest_port(dest_port)
 {
-	memset(&server_addr, 0, sizeof(server_addr));
+	memset(&_server_addr, 0, sizeof(_server_addr));
 
 	// 设置协议类型
-	server_addr.sin_family = AF_INET;
+	_server_addr.sin_family = AF_INET;
 	// 设置目标端口
-	server_addr.sin_port = htons(dest_port);
+	_server_addr.sin_port = htons(_dest_port);
 	// 设置目标IP
-	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
+	_server_addr.sin_addr.s_addr = inet_addr(_dest_ip);
 
-	IS_CONNECTED = false;
+	_IS_CONNECTED = false;
+	_SOCKET_CREATED = false;
 
-	init();
+	// 创建套接字
+	if ((_socket = socket(AF_INET,
+						  SOCK_STREAM,
+						  IPPROTO_TCP)) < 0)
+	{
+		_SOCKET_CREATED = false;
+		LOG(ERROR) << "Socket creation failed for: "
+				   << strerror(errno);
+	}
+	else
+	{
+		try_to_connect();
+		_SOCKET_CREATED = true;
+	}
 }
 
 /**
- * 初始化tcp连接
- * 
- * @param	socked字
- * @return	初始化结果
- * @retval	0	连接成功
- * @retval	-1	Socket创建失败
- */
-int tcp_client::init()
-{
-
-	// 设置传输模式
-	if ((t_socket = socket(AF_INET,
-						   SOCK_STREAM,
-						   IPPROTO_TCP)) < 0)
-	{
-		std::cerr << "Socket creation failed.\n";
-		return -1;
-	}
-
-	return 0;
-}
-
-/** 连接状态
- * 
+ * @brief 	尝试连接
+ *
  * @return  连接状态
  * @retval	0	成功
  * @retval	-1	连接失败
  * 
  */
-int tcp_client::is_connected()
+int TCPClient::try_to_connect()
 {
-	if (connect(t_socket,
-				(struct sockaddr *)&server_addr,
-				sizeof(server_addr)) != 0)
+	if ((_err = connect(_socket,
+						(struct sockaddr *)&_server_addr,
+						sizeof(_server_addr))) < 0)
 	{
-		IS_CONNECTED = false;
-		std::cerr << "Connected failed.\n";
+		_IS_CONNECTED = false;
+		LOG(ERROR) << "Connect failed for: "
+				   << strerror(errno);
 		return -1;
 	}
-	IS_CONNECTED = true;
-	std::clog << "Connected.\n";
+	_IS_CONNECTED = true;
+	LOG(INFO) << "Connected to " << _dest_ip << ":" << _dest_port;
 	return 0;
 }
 
-/** 发送数据信息
+/**
+ * @brief   连接状态
+ *
+ * 检测连接状态
+ *
+ * @return	连接状态
+ * @retval  true	已连接
+ * @retval	false	未连接
  * 
- * @param[in]	 char类型的数据信息
- * @return		 发送状态
- * @retval		 0	发送成功
- * @retval		 -1	发送失败
  */
-int tcp_client::send_data(const char *data)
+bool TCPClient::is_connected()
 {
-	if (!IS_CONNECTED)
+	return _IS_CONNECTED;
+}
+
+/**
+ * @brief		发送数据信息
+ *
+ * @param[in]	input_buffer	输入缓存
+ * @return		发送状态
+ * @retval		0	发送成功
+ * @retval		-1	发送失败，打印错误信息
+ * 
+ */
+int TCPClient::write(const char *input_buffer)
+{
+	return this->write(input_buffer, sizeof(input_buffer) - 1);
+}
+
+/**
+ * @brief		发送数据信息
+ *
+ * @param[in]	input_buffer		输入缓存
+ * @param[in]	input_buffer_size	输入缓存大小
+ * @return		发送状态
+ * @retval		0	发送成功
+ * @retval		-1	发送失败，打印错误信息
+ * 
+ */
+int TCPClient::write(const char *input_buffer,
+					 const int input_buffer_size)
+{
+	if (!_SOCKET_CREATED)
 	{
-		while (is_connected() != 0)
+		return -1;
+	}
+	if (!_IS_CONNECTED)
+	{
+		int i;
+		// 尝试10次
+		while (try_to_connect() < 0)
 		{
+			if (i++ > 10)
+				return -1;
 		}
 	}
 
-	std::clog << "Sending data...\n";
+#ifdef ENABLE_DEBUG
+	LOG(INFO) << "Sending data...";
+#endif
 
-	if (send(t_socket,
-			 data,
-			 sizeof(data) - 1,
+	if (send(_socket,
+			 input_buffer,
+			 input_buffer_size,
 			 0) < 0)
 	{
-		std::clog << "Send failed.\n";
+		LOG(ERROR) << "Send failed for: "
+				   << strerror(errno);
 		return -1;
 	}
 	else
 	{
-		std::clog << "Send success.\n";
+#ifdef ENABLE_DEBUG
+		LOG(INFO) << "Send success.";
+#endif
 		return 0;
 	}
 }
 
-/** 发送数据信息
+/**
+ * @brief   析构函数
  * 
- * @param[in]	 string类型的数据信息
- * @return		 发送状态
- * @retval		 0	发送成功
- * @retval		 -1	发送失败
+ * 关闭套接字
+ *
  */
-int tcp_client::send_data(std::string data)
+TCPClient::~TCPClient()
 {
-	if (!IS_CONNECTED)
-	{
-		while (is_connected() != 0)
-		{
-		}
-	}
-
-	std::clog << "Sending data...\n";
-
-	if (send(t_socket,
-			 data.data(),
-			 data.size(),
-			 0) < 0)
-	{
-		std::clog << "Send failed.\n";
-		return -1;
-	}
-	else
-	{
-		std::clog << "Send success.\n";
-		return 0;
-	}
-}
-
-// TODO:文件流传输
-
-tcp_client::~tcp_client()
-{
-	close(t_socket);
+	close(_socket);
 }
 }
 }

@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-11
+ * Last Modified:  2017-12-14
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -19,37 +19,10 @@
 #include "rtp_sender.h"
 #include <thread>
 #include <getopt.h>
+#include <iostream>
 
 using namespace std;
-
-class RTPReceiver : public an::core::RTPReceiver
-{
-  public:
-	an::core::VoicePlayback *p;
-	RTPReceiver(int port) : an::core::RTPReceiver(port)
-	{
-		p = new an::core::VoicePlayback("default");
-	}
-	~RTPReceiver()
-	{
-		delete p;
-	}
-
-  private:
-	void payload_process()
-	{
-		p->playback(output_buffer, output_buffer_size);
-	}
-};
-
-class RTPSender : public an::core::RTPSender
-{
-  public:
-	RTPSender(const std::string ip,
-			  const int port) : an::core::RTPSender(ip, port)
-	{
-	}
-};
+using namespace an::core;
 
 void help(void);
 
@@ -86,14 +59,18 @@ int main(int argc, char **argv)
 			listen_port = atoi(optarg);
 			break;
 		default:
+			help();
 			break;
 		}
 	}
 	logger_init();
-	an::core::VoiceCapture c("default");
+	VoiceCapture c("default");
+	VoicePlayback p("default");
 	RTPReceiver r(listen_port);
 	RTPSender s(dest_ip, dest_port);
-	thread rt([&] { r.start_listen(); });
+	thread rt([&] { r.start_listen([&] {
+						p.playback(r.output_buffer, r.output_buffer_size);
+					}); });
 	thread st([&] {
 		while (1)
 		{

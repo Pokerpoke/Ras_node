@@ -1,16 +1,16 @@
 /**
- * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
- * 
+ *
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+ *
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-11
+ * @date     2017-07
  * @brief    UDP客户端
  * @version  0.0.1
- * 
- * Last Modified:  2017-12-02
+ *
+ * Last Modified:  2017-12-14
  * Modified By:    姜阳 (j824544269@gmail.com)
- * 
+ *
  */
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -18,110 +18,115 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <unistd.h>
-#include <iostream>
 #include <cstring>
 
+#include "logger.h"
 #include "udp_client.h"
 
 namespace an
 {
 namespace core
 {
-udp_client::udp_client(const char *dest_ip, int dest_port)
+/** 
+ * @brief   构造函数
+ * 
+ * 初始化相关变量
+ * 
+ * @param[in]	dest_ip		目标地址
+ * @param[in]	dest_port	目标端口
+ * 
+ */
+UDPClient::UDPClient(const char *dest_ip, const int dest_port)
+	: _dest_ip(dest_ip), _dest_port(dest_port)
 {
-	std::memset(&server_addr, 0, sizeof(server_addr));
+	std::memset(&_server_addr, 0, sizeof(_server_addr));
 
 	// 设置协议类型
-	server_addr.sin_family = AF_INET;
+	_server_addr.sin_family = AF_INET;
 	// 设置目标端口
-	server_addr.sin_port = htons(dest_port);
+	_server_addr.sin_port = htons(_dest_port);
 	// 设置目标IP
-	server_addr.sin_addr.s_addr = inet_addr(dest_ip);
+	_server_addr.sin_addr.s_addr = inet_addr(_dest_ip);
+
+	_SOCKET_CREATED = false;
 
 	init();
 }
 
-/**
- * UDP客户端初始化
+/** 
+ * @brief   初始化函数
  * 
- * @param   NULL
- * @return  成功返回0，失败返回-1。
+ * 创建套接字
+ * 
+ * @retval  0    成功
+ * @retval  -1   失败
  * 
  */
-int udp_client::init()
+int UDPClient::init()
 {
-
+	_SOCKET_CREATED = false;
 	// 设置传输模式
-	if ((t_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
+	if ((_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
-		std::cerr << "Socket create failed.\n";
+		LOG(ERROR) << "Socket create failed.";
 		return -1;
 	}
+	_SOCKET_CREATED = true;
 	return 0;
 }
 
-/**
- * 通过UDP协议发送数据
+/** 
+ * @brief   发送数据
  * 
- * @param   待发送数据
- * @return  成功返回0
- * @retval	0	发送成功
- * @retval	-1	发送失败
+ * @param[in]    input_buffer	输入缓存
+ * @return	发送成功返回发送的数据长度
+ * @retval  -1    发送失败
  * 
  */
-int udp_client::send_data(const char *data)
+int UDPClient::write(const char *input_buffer)
 {
-
-	std::clog << "Sending data...\n";
-
-	if (sendto(t_socket,						// Socket
-			   data,							// 发送信息
-			   sizeof(data),					// 信息大小
-			   0,								// 标志位
-			   (struct sockaddr *)&server_addr, // 接收端地址
-			   sizeof(server_addr)) != 0)		// 接收端地址大小
-	{
-		std::cerr << strerror(errno) << "\n";
-		return -1;
-	}
-
-	return 0;
+	return write(input_buffer, sizeof(input_buffer));
 }
 
-/**
- * 通过UDP协议发送数据
+/** 
+ * @brief   发送数据
  * 
- * @param   待发送数据
- * @return  成功返回0
- * @retval	0	发送成功
- * @retval	-1	发送失败
+ * @param[in]    input_buffer	输入缓存
+ * @param[in]    input_buffer_size	输入缓存大小
+ * @return	发送成功返回发送的数据长度
+ * @retval  -1    发送失败
  * 
  */
-int udp_client::send_data(std::string data)
+int UDPClient::write(const char *input_buffer, const int input_buffer_size)
 {
 
-	std::clog << "Sending data...\n";
+#ifdef ENABLE_DEBUG
+	LOG(INFO) << "Sending data ...";
+#endif
 
-	if (sendto(t_socket,						// Socket
-			   data.data(),						// 发送信息
-			   data.size(),						// 信息大小
-			   0,								// 标志位
-			   (struct sockaddr *)&server_addr, // 接收端地址
-			   sizeof(server_addr)) != 0)		// 接收端地址大小
+	if ((_err = sendto(_socket,							 // Socket
+					   input_buffer,					 // 发送信息
+					   input_buffer_size,				 // 信息大小
+					   0,								 // 标志位
+					   (struct sockaddr *)&_server_addr, // 接收端地址
+					   sizeof(_server_addr))) < 0)		 // 接收端地址大小
 	{
-		std::cerr << strerror(errno) << "\n";
+		LOG(ERROR) << "Send data failed for: "
+				   << strerror(errno);
 		return -1;
 	}
-
-	return 0;
+	return _err;
 }
 
-/** 关闭Socket
+/** 
+ * @brief   析构函数
+ * 
+ * 关闭socket
  * 
  */
-udp_client::~udp_client()
+UDPClient::~UDPClient()
 {
-	close(t_socket);
+	close(_socket);
 }
 }
 }
