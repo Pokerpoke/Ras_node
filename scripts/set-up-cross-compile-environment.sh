@@ -85,15 +85,15 @@ make
 
 # it is unable to pass environment variable to sudo commands
 # so, use a shell script to run make install
-cat > ${CMAKE_SOURCE_DIR}/scripts/make-install.sh << EOF
+cat > ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh << EOF
 #!/bin/sh
 
 export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 
 make install
 EOF
-sudo bash ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
-rm ${CMAKE_SOURCE_DIR}/scripts/make-install.sh
+sudo bash ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh
+rm ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh
 
 # clean
 cd ${CMAKE_SOURCE_DIR}/scripts 
@@ -179,3 +179,6 @@ make && sudo make install
 
 # clean
 cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
+
+# update ld configure
+sudo ldconfig
