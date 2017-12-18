@@ -22,3 +22,6 @@ wpa_supplicant -B -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
 
 ifconfig wlan0 down
 ifconfig wlan0 up
+
+# dhcp
+udhcpc -i wlan0
