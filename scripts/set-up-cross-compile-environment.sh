@@ -15,6 +15,8 @@ DEPENDENCIES=(
               "cmake"
               "build-essential"
               "liblog4cpp5-dev"
+              "qt4-dev-tools"
+              "libqtwebkit-dev"
               )
 
 for DEP in ${DEPENDENCIES[@]} ; do
@@ -58,6 +60,7 @@ sudo tar xvzf ./target-qte-4.8.5-to-hostpc.tgz -C /
 # build log4cpp
 # use wget to download log4cpp.tar.gz
 # try for 5 times
+# however it goes wrong from time to time
 # wget -c -t 5 --secure-protocol=TLSv1 \
 #              https://sourceforge.net/projects/log4cpp/files/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz
 # if [ $? -ne 0 ]
@@ -102,83 +105,57 @@ rm -rf aero-node-tools
 # add to path
 export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 
-# build JThread
-# if exist, clean it
-cd ${CMAKE_SOURCE_DIR}/scripts 
-if [ -d JThread ]
-then
-    rm -rf JThread
-fi
+function git_cmake()
+{
+    if test -z "$1"
+    then
+        echo "please input git repository"
+        exit 1
+    fi
 
-# preparation
-JTHREAD_DIR="${CMAKE_SOURCE_DIR}/scripts/JThread"
-git clone https://github.com/j0r1/JThread.git
-if [ $? -ne 0 ]
-then
-    echo "git clone failed, plaese try again"
-    exit 1
-fi
-cd JThread
-# build for host
-mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
-# build for cross compile toolschain
-# copy toolschain file
-mkdir cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
+    # if exist, clean it
+    cd ${CMAKE_SOURCE_DIR}/scripts 
+    if [ -d temp ]
+    then
+        rm -rf temp
+    fi
 
-# insert cmake toolschain file path into CMakeLists.txt
-sed -i "1i \
-set(CMAKE_TOOLCHAIN_FILE ${JTHREAD_DIR}/cmake/toolschain/Tiny4412.cmake)" CMakeLists.txt
+    # preparation
+    PROJECT_DIR="${CMAKE_SOURCE_DIR}/scripts/temp"
+    git clone $1 temp
+    if [ $? -ne 0 ]
+    then
+        echo "git clone failed, plaese try again"
+        exit 1
+    fi
+    cd ${PROJECT_DIR}
+    # build for host
+    mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
 
-# build
-mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=${SYS_ROOT_DIR}/usr/ ..
-if [ $? -ne 0 ]
-then
-    echo "cmake build failed, please check output for more infomation."
-    exit 1
-fi
-make && sudo make install
+    # build for cross compile toolschain
+    # copy toolschain file
+    mkdir -p cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
 
-# clean and go back to cmake source directory
-cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JThread
+    # insert cmake toolschain file path into CMakeLists.txt
+    sed -i "1i \
+    set(CMAKE_TOOLCHAIN_FILE ${PROJECT_DIR}/cmake/toolschain/Tiny4412.cmake)" CMakeLists.txt
 
-# build JRTPLIB
-# if exist, clean it
-cd ${CMAKE_SOURCE_DIR}/scripts 
-if [ -d JRTPLIB ]
-then
-    rm -rf JRTPLIB
-fi
+    # build
+    mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=${SYS_ROOT_DIR}/usr/ ..
+    if [ $? -ne 0 ]
+    then
+        echo "cmake build failed, please check output for more infomation."
+        exit 1
+    fi
+    make && sudo make install
 
-# preparation
-JRTPLIB_DIR="${CMAKE_SOURCE_DIR}/scripts/JRTPLIB"
-git clone https://github.com/j0r1/JRTPLIB.git
-if [ $? -ne 0 ]
-then
-    echo "git clone failed, plaese try again"
-    exit 1
-fi
-cd JRTPLIB
-# build for host
-mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
-# build for cross compile toolschain
-# copy toolschain file
-mkdir cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
+    # clean
+    cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
+}
 
-# insert cmake toolschain file path into CMakeLists.txt
-sed -i "1i \
-set(CMAKE_TOOLCHAIN_FILE ${JRTPLIB_DIR}/cmake/toolschain/Tiny4412.cmake)" CMakeLists.txt
+git_cmake https://github.com/j0r1/JThread.git
+git_cmake https://github.com/j0r1/JRTPLIB.git
+git_cmake https://github.com/BelledonneCommunications/bcg729.git
 
-# build
-mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=${SYS_ROOT_DIR}/usr/ ..
-if [ $? -ne 0 ]
-then
-    echo "cmake build failed, please check output for more infomation."
-    exit 1
-fi
-make && sudo make install
-
-# clean
-cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf JRTPLIB
-
-# update ld configure
+# update ldconfig
 sudo ldconfig
