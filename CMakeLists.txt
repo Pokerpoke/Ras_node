@@ -1,3 +1,18 @@
+################################################################################
+# 
+# Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+# 
+# @file
+# @author   姜阳 (j824544269@gmail.com)
+# @date     2017-12
+# @brief    
+# @version  0.0.1
+# 
+# Last Modified:  2017-12-25
+# Modified By:    姜阳 (j824544269@gmail.com)
+# 
+################################################################################
+
 # cross compile settings
 if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
@@ -54,6 +69,10 @@ include_directories(${JTHREAD_INCLUDE_DIR})
 find_package(JRTPLIB REQUIRED)
 include_directories(${JRTPLIB_INCLUDE_DIR})
 
+# 添加bcg729库
+find_package(BCG729 REQUIRED)
+include_directories(${BCG729_INCLUDE_DIR})
+
 # 添加线程想关的库
 find_package(Threads REQUIRED)
 
@@ -90,4 +109,5 @@ include_directories(
 
 add_subdirectory(an-core)
 add_subdirectory(an-gui)
+add_subdirectory(an-codec)
 # add_subdirectory(an-transfer)

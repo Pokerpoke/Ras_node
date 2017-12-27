@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # get the destation ip
-echo "Enter destation IP (Default : 192.168.0.22) : " 
+echo "Enter destination IP (Default : 192.168.0.22) : " 
 read DESTIP
 
 if test -z ${DESTIP}

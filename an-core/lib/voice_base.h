@@ -41,7 +41,7 @@ class VoiceBase
 	/// 软件重采样
 	unsigned int soft_resample;
 	/// 每帧数据大小
-	unsigned int bytes_per_frame;
+	mutable unsigned int bytes_per_frame;
 	/// 默认缓存大小
 	unsigned int default_buffer_size;
 	/// 默认时间段大小

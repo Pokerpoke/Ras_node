@@ -1,3 +1,18 @@
+################################################################################
+ # 
+ # Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
+ # 
+ # @file
+ # @author   姜阳 (j824544269@gmail.com)
+ # @date     2017-11
+ # @brief    
+ # @version  0.0.1
+ # 
+ # Last Modified:  2017-12-25
+ # Modified By:    姜阳 (j824544269@gmail.com)
+ # 
+################################################################################
+
 # - Find JRTPLIB library
 # Once done this will define
 # JRTPLIB_FOUND - system has JRTPLIB

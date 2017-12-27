@@ -4,11 +4,11 @@
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-12
+ * @date     2017-07
  * @brief    摄像头捕获类
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2017-12-14
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */

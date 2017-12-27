@@ -23,16 +23,16 @@ namespace core
  * @brief 音频捕获、回放构造函数
  * 
  * @param[in]	dev	设备名称，可以传入default来使用默认设备
- * @bug			channels不能设为1
  * 
  */
 VoiceBase::VoiceBase(const std::string &dev)
 {
 	device = dev.c_str();
 	channels = 2;
+	// channels = 1;
 	// rate = 44100;
 	rate = 8000;
-	frames = 32 * 2;
+	frames = 32;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
 	access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
