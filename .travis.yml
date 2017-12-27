@@ -4,6 +4,8 @@ before_install:
   - git clone https://github.com/j0r1/JThread.git && cd JThread && mkdir build && cd build && cmake ..  && make && sudo make install
   - cd /tmp
   - git clone https://github.com/ebarnard/JRTPLIB.git && cd JRTPLIB && mkdir build && cd build && cmake ..  && make && sudo make install
+  - cd /tmp
+  - git clone https://github.com/BelledonneCommunications/bcg729.git && cd bcg729 && mkdir build && cd build && cmake ..  && make && sudo make install
 install:
   - sudo apt install qt4-dev-tools libqtwebkit-dev libasound2-dev liblog4cpp5-dev
 before_script:
