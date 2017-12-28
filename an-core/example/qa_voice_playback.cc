@@ -1,6 +1,6 @@
-/**
+/*******************************************************************************
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2017 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
@@ -8,10 +8,10 @@
  * @brief    音频回放例程
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-07
+ * Last Modified:  2017-12-28
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- */
+ ******************************************************************************/
 #include <stdio.h>
 
 #include "logger.h"
@@ -26,26 +26,32 @@ int main(int argc, char *argv[])
 
 	VoicePlayback p("default");
 
-	int fd = open("test.pcm", O_RDONLY);
-
-	if (fd < 0)
+	FILE *pcm;
+	if ((pcm = fopen("test.pcm", "r")) == NULL)
 	{
-		LOG(ERROR) << "File open failed";
-		return -1;
+		return 0;
 	}
 
 	int input_buffer_size = p.default_buffer_size;
+	LOG(INFO) << p.default_buffer_size;
 	char *input_buffer;
+
+	int err;
 
 	input_buffer = (char *)malloc(input_buffer_size);
 
-	while (read(fd, input_buffer, input_buffer_size) > 0)
+	while ((err = fread(input_buffer,
+						sizeof(char),
+						input_buffer_size,
+						pcm)) > 0)
 	{
 		p.playback(input_buffer, input_buffer_size);
 	}
 
-	close(fd);
+	fclose(pcm);
 	free(input_buffer);
+
+	getchar();
 
 	return 0;
 }
