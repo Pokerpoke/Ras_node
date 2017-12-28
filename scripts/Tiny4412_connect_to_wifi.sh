@@ -1,6 +1,11 @@
 #!/bin/sh
 
 # 判断wpa配置文件是否存在，不存在则创建
+if [ ! -d /etc/wpa_supplicant ] 
+then
+    mkdir /etc/wpa_supplicant
+fi
+
 if [ ! -f /etc/wpa_supplicant/wpa_supplicant.conf ] 
 then
 cat > /etc/wpa_supplicant/wpa_supplicant.conf << EOF
