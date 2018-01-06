@@ -122,14 +122,14 @@
            <item>
             <widget class="QToolButton" name="voice_send">
              <property name="text">
-              <string>Voice_send</string>
+              <string>Voice_send_to 2.3</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="voice_receive">
              <property name="text">
-              <string>Voice_receive</string>
+              <string>Voice_send_to 2.4</string>
              </property>
             </widget>
            </item>

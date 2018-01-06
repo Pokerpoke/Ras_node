@@ -73,7 +73,7 @@ void DeveloperTools::stop_all()
 
 void DeveloperTools::voice_send()
 {
-    program = "/home/aero-node/voice-send 192.168.2.1";
+    program = "/home/aero-node/voice-call -i 192.168.2.3 -p 8338 -l 13374";
 
     cmd1->start(program);
 
@@ -82,7 +82,7 @@ void DeveloperTools::voice_send()
 
 void DeveloperTools::voice_receive()
 {
-    program = "/home/aero-node/voice-receive";
+    program = "/home/aero-node/voice-call -i 192.168.2.4 -p 13374 -l 8338";
 
     cmd2->start(program);
 

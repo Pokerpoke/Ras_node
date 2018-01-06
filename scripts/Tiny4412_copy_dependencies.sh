@@ -1,7 +1,25 @@
-#!/bin/sh
+#!/bin/bash
+################################################################################
+# 
+# Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
+# 
+# @author   姜阳 (j824544269@gmail.com)
+# @date     2017-12
+# @brief    
+# @version  0.0.1
+# 
+# Last Modified:  2018-01-04
+# Modified By:    姜阳 (j824544269@gmail.com)
+# 
+################################################################################
+
+CMAKE_SOURCE_DIR=$(dirname $(readlink -f "$0"))
+cd ${CMAKE_SOURCE_DIR}/..
+# update CMAKE_SOURCE_DIR
+CMAKE_SOURCE_DIR=$(pwd)
 
 # get the destation ip
-echo "Enter destination IP (Default : 192.168.0.22) : " 
+echo "Enter destination IP (Default : 192.168.0.22) : "
 read DESTIP
 
 if test -z ${DESTIP}
@@ -36,3 +54,6 @@ scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/li
 scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.a \
         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so* \
         root@${DESTIP}:/usr/lib/
+
+scp -rp ${CMAKE_SOURCE_DIR}/scripts/Tiny4412_connect_to_wifi.sh \
+        root@${DESTIP}:/home/scripts/

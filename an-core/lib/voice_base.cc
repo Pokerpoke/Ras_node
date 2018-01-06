@@ -1,6 +1,6 @@
-/**
+/*******************************************************************************
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
@@ -8,10 +8,10 @@
  * @brief    音频采集、回放基类，设定相关参数
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2018-01-05
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- */
+ ******************************************************************************/
 #include "logger.h"
 #include "voice_base.h"
 
@@ -32,7 +32,7 @@ VoiceBase::VoiceBase(const std::string &dev)
 	// channels = 1;
 	// rate = 44100;
 	rate = 8000;
-	frames = 32;
+	frames = 40;
 	soft_resample = 1;
 	format = SND_PCM_FORMAT_S16_LE;
 	access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
@@ -160,7 +160,8 @@ int VoiceBase::set_params()
 		LOG(INFO) << "Set rate to " << rrate << "Hz success.";
 		if (rrate != rate)
 		{
-			LOG(WARN) << "Rate " << rate << "Hz not available, get " << rrate << "Hz.";
+			LOG(WARN) << "Rate " << rate
+					  << "Hz not available, get " << rrate << "Hz.";
 		}
 	}
 

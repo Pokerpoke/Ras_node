@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 #ifdef ENABLE_DEBUG
     themes_dir += "an-gui/qt/themes/light.qss";
 #else
-    themes_dir += "themes/light.qss";
+    themes_dir += "themes/light-tiny4412.qss";
 #endif
 
     // Load an application style

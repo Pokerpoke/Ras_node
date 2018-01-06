@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-26
+ * Last Modified:  2018-01-05
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  ******************************************************************************/
@@ -21,16 +21,12 @@ extern "C" {
 }
 #endif
 
-#include <stdio.h>
-
 #include "logger.h"
 #include "voice_capture.h"
 #include "voice_playback.h"
 
 using namespace an::core;
 using namespace std;
-
-void enc();
 
 int main()
 {
@@ -44,51 +40,24 @@ int main()
 	bcg729DecoderChannelContextStruct *decoderChannelContext;
 	decoderChannelContext = initBcg729DecoderChannel();
 
-	int16_t input_buffer[80];
 	uint8_t output_buffer[10];
 	int16_t output_buffer2[80];
 	uint8_t output_buffer_size;
 
-	LOG(INFO) << sizeof(int);
-
-	// while (1)
-	for (size_t i = 0; i < 10; i++)
+	while (1)
 	{
-
 		c.capture();
-		char *temp;
-		temp = (char *)malloc(c.output_buffer_size);
-		memcpy(temp, c.output_buffer, c.output_buffer_size);
-		// memset(temp, 3, 80);
 
 		bcg729Encoder(encoderChannelContext,
-					  (int16_t *)temp,
+					  (int16_t *)c.output_buffer,
 					  output_buffer,
 					  &output_buffer_size);
 
-		printf("temp\n");
-		for (size_t i = 0; i < 80; i++)
-		{
-			printf("%hd ", temp[i]);
-		}
-		printf("\n");
+		bcg729Decoder(decoderChannelContext,
+					  output_buffer, 10, 0, 0, 0,
+					  output_buffer2);
 
-		printf("output_buffer\n");
-		for (size_t i = 0; i < 10; i++)
-		{
-			printf("%hd ", output_buffer[i]);
-		}
-		printf("\n");
-
-		bcg729Decoder(decoderChannelContext, output_buffer, 10, 1, 0, 0, output_buffer2);
-
-		printf("output_buffer2\n");
-		for (size_t i = 0; i < 128; i++)
-		{
-			printf("%d ", output_buffer2[i]);
-		}
-		printf("\n");
-		// p.playback((char *)output_buffer2, sizeof(output_buffer2));
+		p.playback((char *)output_buffer2, 80 * sizeof(int16_t));
 	}
 
 	getchar();

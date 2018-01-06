@@ -1,6 +1,6 @@
-/**
+/*******************************************************************************
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
@@ -8,10 +8,10 @@
  * @brief    音频捕获
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2018-01-04
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- */
+ ******************************************************************************/
 #include "logger.h"
 #include "voice_capture.h"
 
@@ -30,7 +30,8 @@ VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 	// frames_to_read = 32;
 
 	output_buffer_size = frames * bytes_per_frame;
-	output_buffer = (char *)malloc(output_buffer_size);
+	// output_buffer = (char *)malloc(output_buffer_size);
+	output_buffer = (char *)calloc(output_buffer_size, sizeof(char));
 
 	if (!DEVICE_OPENED)
 		open_device();
