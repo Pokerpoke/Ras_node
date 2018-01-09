@@ -18,39 +18,40 @@ using namespace std;
 using namespace an::core;
 int main()
 {
-	logger_init();
+    logger_init();
 
-	SystemInfo s;
-	s.update();
-	LOG(INFO) << "Print os info";
-	LOG(INFO) << s.os_info.sysname;
-	LOG(INFO) << s.os_info.nodename;
-	LOG(INFO) << s.os_info.release;
-	// LOG(INFO) << s.os_info.version;
-	LOG(INFO) << s.os_info.machine;
+    SystemInfo s;
+    s.update();
+    LOG(INFO) << "Print os info";
+    LOG(INFO) << s.os_info.sysname;
+    LOG(INFO) << s.os_info.nodename;
+    LOG(INFO) << s.os_info.release;
+    // LOG(INFO) << s.os_info.version;
+    LOG(INFO) << s.os_info.machine;
 
-	LOG(INFO) << "Print mem info";
-	// s.mem_info.totalram / 1024 / 1024 -> s.mem_info.totalram >> 20
-	LOG(INFO) << "Total : "
-			  << (s.mem_info.totalram >> 20)
-			  << " MB";
-	LOG(INFO) << "Total : "
-			  << (s.mem_info.freeram >> 20)
-			  << " MB";
-	LOG(INFO) << "Usage : "
-			  << (s.mem_info.totalram >> 20) / (s.mem_info.freeram >> 20)
-			  << "%";
+    LOG(INFO) << "Print mem info";
+    // s.mem_info.totalram / 1024 / 1024 -> s.mem_info.totalram >> 20
+    LOG(INFO) << "Total : "
+              << (s.mem_info.totalram >> 20)
+              << " MB";
+    LOG(INFO) << "Free : "
+              << (s.mem_info.freeram >> 20)
+              << " MB";
+    LOG(INFO) << "Free ram : "
+              << (double)(s.mem_info.freeram >> 20) /
+                     (double)(s.mem_info.totalram >> 20) * 100
+              << "%";
 
-	LOG(INFO) << "Print ip info";
-	// Tiny4412 don't support the follow syntax, sign.....
-	// for (auto i : s.ip_info)
-	map<string, string>::iterator i;
-	for (i = s.ip_info.begin(); i != s.ip_info.end(); i++)
-	{
-		LOG(INFO) << i->first
-				  << " : " << i->second;
-	}
+    LOG(INFO) << "Print ip info";
+    // Tiny4412 don't support the follow syntax, 😢
+    // for (auto i : s.ip_info)
+    map<string, string>::iterator i;
+    for (i = s.ip_info.begin(); i != s.ip_info.end(); i++)
+    {
+        LOG(INFO) << i->first
+                  << " : " << i->second;
+    }
 
-	getchar();
-	return 0;
+    getchar();
+    return 0;
 }

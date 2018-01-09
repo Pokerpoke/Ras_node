@@ -26,7 +26,7 @@ project(Aero-Node)
 # set version
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
-set(VERSION_DEBUG 3)
+set(VERSION_DEBUG 4)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_DEBUG}")
 
 cmake_minimum_required(VERSION 2.8.6)
@@ -73,7 +73,7 @@ include_directories(${JRTPLIB_INCLUDE_DIR})
 find_package(BCG729 REQUIRED)
 include_directories(${BCG729_INCLUDE_DIR})
 
-# 添加线程想关的库
+# 添加线程相关的库
 find_package(Threads REQUIRED)
 
 # 使用doxygen来生成文档
@@ -96,18 +96,22 @@ find_package(Doxygen)
         message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
     endif(DOXYGEN_FOUND)
 
+set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
+
 # 设置可执行文件输出目录
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/an-core/include
-    ${CMAKE_SOURCE_DIR}/an-transfer/include
-    ${CMAKE_SOURCE_DIR}/an-gui/qt/include
-)
+                    an-core/include
+                    an-codec/g729/include
+                    )
 
 add_subdirectory(an-core)
 add_subdirectory(an-gui)
 add_subdirectory(an-codec)
 # add_subdirectory(an-transfer)
+
+# build executable program
+add_subdirectory(bin)

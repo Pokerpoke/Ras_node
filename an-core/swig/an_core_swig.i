@@ -1,6 +1,6 @@
 /* system_info_swig.i */
 
-%module an_core
+%module an-core
 
 %{
 #include "system_info.h"

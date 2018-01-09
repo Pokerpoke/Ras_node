@@ -1,17 +1,16 @@
-/**
+/*******************************************************************************
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
- * @file
  * @author   姜阳 (j824544269@gmail.com)
  * @date     2017-11
  * @brief    音频回放
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
+ * Last Modified:  2018-01-08
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- */
+ ******************************************************************************/
 #include "logger.h"
 #include "voice_playback.h"
 
@@ -79,7 +78,8 @@ int VoicePlayback::open_device()
  * @todo	添加出错时的返回值，写入次数限制，避免死循环
  * 
  */
-int VoicePlayback::playback(const char *input_buffer, const long input_buffer_size) const
+int VoicePlayback::playback(const char *input_buffer,
+							const long input_buffer_size) const
 {
 	int err = 0;
 	long r = input_buffer_size / bytes_per_frame;
