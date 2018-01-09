@@ -53,7 +53,7 @@ make -j
 
 # copy files
 scp -rp ./bin/* root@${DESTIP}:/home/aero-node/
-scp ./lib/* root@${DESTIP}:/usr/lib/
+scp -p ./lib/* root@${DESTIP}:/usr/lib/
 scp -p ${CMAKE_SOURCE_DIR}/scripts/an-run root@${DESTIP}:/bin/
 
 # ssh -l root ${DESTIP} "an-run /home/aero-node/main"

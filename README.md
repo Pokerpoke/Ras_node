@@ -1,7 +1,6 @@
 # README
 
-[![Build Status](https://travis-ci.org/Pokerpoke/Ras_node.svg?branch=master)](https://travis-ci.org/Pokerpoke/Ras_node)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/633f642c57ff4768bac4a6deed91313d)](https://www.codacy.com/app/Pokerpoke/Ras_node?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Pokerpoke/Ras_node&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/Pokerpoke/Ras_node.svg?token=bwwRBmFu8PYsDXRZk1iU&branch=master)](https://travis-ci.com/Pokerpoke/Ras_node)
 
 ## 1.依赖
 
@@ -11,7 +10,7 @@
 
 - 文档生成：[Doxygen](www.doxygen.org/)
 
-    - Doxygen依赖[Graphviz](http://www.graphviz.org/)生成调用关系图
+    - Doxygen依赖[Graphviz](http://www.graphviz.org/)生成类关系图
 
     ```shell
     sudo apt install graphviz
@@ -27,32 +26,13 @@
 
     - [JRTPLIB](http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html)
 
-    ```shell
-    git clone https://github.com/j0r1/JRTPLIB.git
-    cd JRTPLIB
-    mkdir build
-    cd build
-    cmake ..
-    make
-    sudo make install
-    ```
-
     - JRTPLIB依赖[JThread](http://research.edm.uhasselt.be/jori/page/CS/Jthread.html)
 
-    ```shell
-    git clone https://github.com/j0r1/JThread.git
-    cd JThread
-    mkdir build
-    cd build
-    cmake ..
-    make
-    sudo make install
-    ```
+- 编码
 
+    - [BCG729](https://github.com/BelledonneCommunications/bcg729)
 
 ## 2.编译
-
-- 编译可执行程序
 
 ```shell
 mkdir build
@@ -84,6 +64,7 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 ```shell
 make doc
 ```
-- 在线API参考
+
+- API
 
 [Ras_node API](https://pokerpoke.github.io/Ras_node/)

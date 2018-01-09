@@ -38,11 +38,9 @@ fi
 # -c 配置文件
 wpa_supplicant -B -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
 
+# restart wlan0 to work
 ifconfig wlan0 down
 ifconfig wlan0 up
-
-# dhcp
-udhcpc -i wlan0
 
 # remove dsr
 lsmod | grep dsr
@@ -50,3 +48,6 @@ if [ $? -e 0 ]
 then
     rmmod dsr
 fi
+
+# dhcp
+udhcpc -i wlan0
