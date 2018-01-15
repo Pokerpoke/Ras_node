@@ -9,13 +9,19 @@
             - [类成员函数](#%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0)
             - [类成员变量](#%E7%B1%BB%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F)
             - [可执行文件](#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6)
+            - [单元测试](#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95)
             - [其他](#%E5%85%B6%E4%BB%96)
     - [Git](#git)
         - [Commit](#commit)
+        - [Release](#release)
         - [Issue](#issue)
     - [Shell Scripts](#shell-scripts)
+        - [变量](#%E5%8F%98%E9%87%8F)
+        - [函数](#%E5%87%BD%E6%95%B0)
+        - [注释](#%E6%B3%A8%E9%87%8A)
     - [Doxygen](#doxygen)
     - [CMake](#cmake)
+    - [Markdown](#markdown)
 
 ## C/C++
 
@@ -44,6 +50,9 @@
 
 ### 命名空间
 
+- 所有类、函数请放到`an`(aero node)命名空间下，并在`an`命名空间下进行分类
+- 不要再任何可以被`#include "foo.h"`的头文件下使用`using namespace std`等可能引入命名空间的语句
+
 ### 类
 
 #### 类名
@@ -64,17 +73,22 @@
 
 - 经过测试通过的可执行文件由小写字母加`-`组成，例如`send-file`
 
+#### 单元测试
+
 #### 其他
 
+- 不要使用记事本对程序文件进行编辑，记事本会引入一些不必要的字符
+- 除界面外尽量不要引入Qt相关的函数
 - 代码的列数尽量不要超过80列，这样在编辑器中浏览时不需要左右翻页的动作
 - 一个函数尽可能短，长度尽量不要超过一个屏幕，如果函数过长可以考虑分为多个小函数
 - 代码缩进尽量以空格缩进，以便在不同编辑器中获得相同的显示
 - 每个类需要添加相关`qa_`开头的例程，用以说明每个类的不同功能
-- 除界面外尽量不要引入Qt相关的函数
 
 ## Git
 
 ### Commit
+
+- Commits首行以一句话简述(140字符以内)，句首字母大写，另起一行写标识符，写明做出的修改
 
 | 标识     | 作用                       |
 | -------- | -------------------------- |
@@ -85,11 +99,56 @@
 | Refactor | 重构                       |
 | Test     | 测试的增减                 |
 | Chore    | 构建过程或者辅助工具的变动 |
+| Other    | 其他变动                   |
+
+例如
+
+```markdown
+Use callback for server and receiver
+Feat:
+- add voice-all
+- add callback method for server and receiver
+- add override method for server and receiver
+- add thread in CMake
+Style:
+- update header of some files
+Docs:
+- remove *.cc files from doxygen
+Refactor:
+- rewrite UDP TCP and SystemInfo
+Other:
+- move voice-receive and voice-send to example
+```
+
+### Release
+
+- 关于版本
+
+| 级别     | 说明                         |
+| -------- | ---------------------------- |
+| 主版本号 | 当你做了不兼容的 API 修改    |
+| 次版本号 | 当你做了向下兼容的功能性新增 |
+| 修订号   | 当你做了向下兼容的问题修正   |
+
+- 进行了重大功能性的修改并测试通过时可以发布Release版本
+- 版本发布后为可读属性，即需要修复bug时请发布新版本
 
 ### Issue
 
 ## Shell Scripts
 
+### 变量
+
+- 除变量名诸如`$1,$a`等只有一个数字、字母或符号的变量外，请尽量使用`{}`将变量包围，例如`${example_variable}`
+
+### 函数
+
+### 注释
+
 ## Doxygen
 
 ## CMake
+
+## Markdown
+
+- 请使用Markdown文件作为项目的说明文件
