@@ -74,12 +74,13 @@
 
 - 成员函数命名格式为小写字母加下划线，例如`open_device()`
 - 如果成员函数不会对传入参数进行修改，推荐添加`const`修饰符，例如`open_device(const std::string &dev)`
+- *[待定]* 目前使用`#ifdef ENABLE_DEBUG`来控制debug或者release(使用`#ifdef DEBUG`时会与log4cpp库产生冲突)
 
 #### 类成员变量
 
 - 尽量少的暴露共有变量以防被无意中修改
 - 不希望被更改的成员变量使用`const`或者`mutable`进行修饰
-- 私有成员变量以下划线开头，例如`_some_variable`
+- 私有成员变量以下划线开头或结尾，例如`_some_variable`或者`some_variable_`
 
 #### 可执行文件
 
@@ -172,7 +173,7 @@ Other:
 
 ### 其他
 
-- 尽量保证从不同目录运行脚本都能获得相同的效果
+- 尽量保证从不同目录运行脚本都能获得相同的效果，可以使用[变量](#%E5%8F%98%E9%87%8F)中提供的命令来获取脚本文件所在目录
 
 ## Doxygen
 

@@ -1,6 +1,6 @@
-/**
+/*******************************************************************************
  * 
- * Copyright (c) 2017-2018 南京航空航天大学 航空通信网络研究室
+ * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
@@ -8,10 +8,10 @@
  * @brief    日志记录头文件
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-09
+ * Last Modified:  2018-01-10
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- */
+ ******************************************************************************/
 #ifndef _LOGGER_H_
 #define _LOGGER_H_
 
@@ -61,16 +61,16 @@
  */
 inline void logger_init()
 {
-	log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
+    log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
 
-	log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
-	patternLayout->setConversionPattern("%d [%p] - %m%n");
+    log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
+    patternLayout->setConversionPattern("%d [%p] - %m%n");
 
-	appender->setLayout(patternLayout);
+    appender->setLayout(patternLayout);
 
-	log4cpp::Category &root = log4cpp::Category::getRoot();
-	root.setPriority(log4cpp::Priority::INFO);
-	root.addAppender(appender);
+    log4cpp::Category &root = log4cpp::Category::getRoot();
+    root.setPriority(log4cpp::Priority::INFO);
+    root.addAppender(appender);
 }
 
 /**
@@ -80,18 +80,18 @@ inline void logger_init()
  */
 inline void logger_init(const char *log_path)
 {
-	// log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
-	log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
-	// log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
+    // log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
+    log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
+    // log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
 
-	log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
-	patternLayout->setConversionPattern("%d [%p] - %m%n");
+    log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
+    patternLayout->setConversionPattern("%d [%p] - %m%n");
 
-	appender->setLayout(patternLayout);
+    appender->setLayout(patternLayout);
 
-	log4cpp::Category &root = log4cpp::Category::getRoot();
-	root.setPriority(log4cpp::Priority::NOTICE);
-	root.addAppender(appender);
+    log4cpp::Category &root = log4cpp::Category::getRoot();
+    root.setPriority(log4cpp::Priority::NOTICE);
+    root.addAppender(appender);
 }
 
 /**
@@ -102,19 +102,19 @@ inline void logger_init(const char *log_path)
  */
 inline void logger_init(const char *log_path, log4cpp::Priority::PriorityLevel p_level)
 {
-	// log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
-	log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
-	// log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
+    // log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
+    log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
+    // log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
 
-	log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
-	patternLayout->setConversionPattern("%d [%p] - %m%n");
+    log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
+    patternLayout->setConversionPattern("%d [%p] - %m%n");
 
-	appender->setLayout(patternLayout);
+    appender->setLayout(patternLayout);
 
-	log4cpp::Category &root = log4cpp::Category::getRoot();
-	// root.setPriority(log4cpp::Priority::NOTICE);
-	root.setPriority(p_level);
-	root.addAppender(appender);
+    log4cpp::Category &root = log4cpp::Category::getRoot();
+    // root.setPriority(log4cpp::Priority::NOTICE);
+    root.setPriority(p_level);
+    root.addAppender(appender);
 }
 
 /** 
@@ -124,18 +124,18 @@ inline void logger_init(const char *log_path, log4cpp::Priority::PriorityLevel p
  */
 inline void logger_init(log4cpp::Priority::PriorityLevel p_level)
 {
-	// log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
-	// log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
-	log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
+    // log4cpp::Appender *appender = new log4cpp::FileAppender("root", "/var/log/test.log");
+    // log4cpp::Appender *appender = new log4cpp::FileAppender("root", log_path);
+    log4cpp::Appender *appender = new log4cpp::OstreamAppender("root", &std::cout);
 
-	log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
-	patternLayout->setConversionPattern("%d [%p] - %m%n");
+    log4cpp::PatternLayout *patternLayout = new log4cpp::PatternLayout();
+    patternLayout->setConversionPattern("%d [%p] - %m%n");
 
-	appender->setLayout(patternLayout);
+    appender->setLayout(patternLayout);
 
-	log4cpp::Category &root = log4cpp::Category::getRoot();
-	root.setPriority(p_level);
-	root.addAppender(appender);
+    log4cpp::Category &root = log4cpp::Category::getRoot();
+    root.setPriority(p_level);
+    root.addAppender(appender);
 }
 
 #endif // !_LOGGER_H_

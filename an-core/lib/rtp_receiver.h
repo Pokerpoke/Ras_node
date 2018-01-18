@@ -29,8 +29,6 @@
 #include <stdlib.h>
 #include <functional>
 
-#include "logger.h"
-
 namespace an
 {
 namespace core
@@ -45,7 +43,7 @@ namespace core
 class RTPReceiver
 {
   public:
-	/** 
+    /** 
 	 * @brief   RTPReceiver构造函数
 	 * 
 	 * 构造函数，初始化相关配置。
@@ -53,14 +51,14 @@ class RTPReceiver
 	 * @param   [in]   _portbase  监听端口
 	 * 
 	 */
-	RTPReceiver(const int _portbase);
-	/** 
+    RTPReceiver(const int _portbase);
+    /** 
 	 * @brief   RTPReceiver析构函数
 	 * 
 	 */
-	virtual ~RTPReceiver();
+    virtual ~RTPReceiver();
 
-	/** 
+    /** 
 	 * @brief   开始监听
 	 * 
 	 * 使用了一个while(1)循环进行数据处理，提供了payload_process()
@@ -71,8 +69,8 @@ class RTPReceiver
 	 * @retval  -1  处理过程出现了错误，查看log以获取详细信息
 	 * 
 	 */
-	int start_listen();
-	/** 
+    int start_listen();
+    /** 
 	 * @brief   开始监听
 	 * 
 	 * 以回调函数的形式进行数据处理
@@ -81,35 +79,35 @@ class RTPReceiver
 	 * @retval  -1  处理过程出现了错误，查看log以获取详细信息
 	 * 
 	 */
-	int start_listen(std::function<void(void)> _payload_process);
+    int start_listen(std::function<void(void)> _payload_process);
 
-	/// 输出缓存
-	char *output_buffer;
-	/// 输出缓存大小
-	uint32_t output_buffer_size;
+    /// 输出缓存
+    char *output_buffer;
+    /// 输出缓存大小
+    uint32_t output_buffer_size;
 
-	/// 时间戳
-	double time_stamp;
-	/// 负载类型，参见[RFC3551](https://www.iana.org/assignments/rtp-parameters/rtp-parameters.xhtml)
-	int payload_type;
-	/// 监听端口
-	int portbase;
-	/// 是否填充
-	bool mark;
+    /// 时间戳
+    double time_stamp;
+    /// 负载类型，参见[RFC3551](https://www.iana.org/assignments/rtp-parameters/rtp-parameters.xhtml)
+    int payload_type;
+    /// 监听端口
+    int portbase;
+    /// 是否填充
+    bool mark;
 
   protected:
-	/** 
+    /** 
 	 * @brief   负载处理函数
 	 * 
 	 * 重新实现该成员函数以进行负载数据处理
 	 * 
 	 */
-	virtual void payload_process(){};
-	/// jrtp收到的包
-	jrtplib::RTPPacket *output_packet;
+    virtual void payload_process(){};
+    /// jrtp收到的包
+    jrtplib::RTPPacket *output_packet;
 
   private:
-	/** 
+    /** 
 	 * @brief   初始化函数
 	 * 
 	 * 进行相关初始化
@@ -119,17 +117,17 @@ class RTPReceiver
 	 * @retval  -1     失败
 	 * 
 	 */
-	int init();
+    int init();
 
-	/// jrtp会话
-	jrtplib::RTPSession session;
-	/// 传输参数
-	jrtplib::RTPUDPv4TransmissionParams transparams;
-	/// 会话参数
-	jrtplib::RTPSessionParams sessionparams;
+    /// jrtp会话
+    jrtplib::RTPSession session;
+    /// 传输参数
+    jrtplib::RTPUDPv4TransmissionParams transparams;
+    /// 会话参数
+    jrtplib::RTPSessionParams sessionparams;
 
-	/// 错误代码
-	int err;
+    /// 错误代码
+    int err;
 };
 }
 }
