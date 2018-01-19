@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
@@ -8,10 +8,10 @@
  * @brief    摄像头捕获类
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-18
+ * Last Modified:  2018-01-19
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- ******************************************************************************/
+ */
 #include <unistd.h>
 #include <string.h>
 #include <string>
@@ -28,6 +28,12 @@ namespace an
 {
 namespace core
 {
+/** 
+ * @brief   构造函数
+ * 
+ * @param[in]   dev 设备名称，例如"/dev/video0"
+ * 
+ */
 CamCapture::CamCapture(const std::string &dev)
     : _dev(dev.c_str())
 {
@@ -48,10 +54,14 @@ CamCapture::CamCapture(const std::string &dev)
     FD_SET(_fd, &_fds);
 
     INITED = false;
+    MEMORY_COPY = false;
 }
 
-/** 
- * @brief   初始化相机
+/**
+ * @brief   初始化函数
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::init()
@@ -75,7 +85,7 @@ int CamCapture::init()
 }
 
 /** 
- * @brief   打开摄像头
+ * @brief   打开设备
  * 
  * @retval  0	成功
  * @retval  -1	打开设备失败
@@ -119,7 +129,7 @@ int CamCapture::query_capabilities()
 }
 
 /** 
- * @brief   设置抓取图片格式
+ * @brief   设置图片格式
  * 
  * @retval	0	成功
  * @retval	-1	设置格式失败
@@ -144,7 +154,7 @@ int CamCapture::set_picture_format()
 }
 
 /** 
- * @brief   设置图片宽度
+ * @brief   设置图像宽度
  * 
  * @param[in]   width   宽度
  * @retval  0   成功
@@ -156,7 +166,7 @@ int CamCapture::set_pic_width(const int width)
 }
 
 /** 
- * @brief   设置图片高度
+ * @brief   设置图像高度
  * 
  * @param[in]   height  高度
  * @retval  0   成功
@@ -194,6 +204,9 @@ int CamCapture::request_buffers()
 /** 
  * @brief   查询缓存
  * 
+ * @retval  0   成功
+ * @retval  -1  失败
+ * 
  */
 int CamCapture::query_buffer()
 {
@@ -212,6 +225,13 @@ int CamCapture::query_buffer()
     return 0;
 }
 
+/**
+ * @brief   内存映射
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
+ * 
+ */
 int CamCapture::memory_map()
 {
     for (unsigned int i = 0; i < _req.count; i++)
@@ -235,6 +255,13 @@ int CamCapture::memory_map()
     return 0;
 }
 
+/**
+ * @brief   内存解映射
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
+ * 
+ */
 int CamCapture::memory_unmap()
 {
     for (int i = 0; i < _nbuffers; i++)
@@ -249,8 +276,11 @@ int CamCapture::memory_unmap()
     return 0;
 }
 
-/** 
- * @brief   缓存队列
+/**
+ * @brief   内存解映射
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::queue_buffer()
@@ -260,12 +290,17 @@ int CamCapture::queue_buffer()
         LOG(ERROR) << "Queue buffer failed.";
         return -1;
     }
+#ifdef ENABLE_DEBUG
     LOG(INFO) << "Queue buffer success.";
+#endif
     return 0;
 }
 
-/**	
- * @brief   打开串流
+/**
+ * @brief   开始串流
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::stream_on()
@@ -279,8 +314,11 @@ int CamCapture::stream_on()
     return 0;
 }
 
-/**	
+/**
  * @brief   关闭串流
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::stream_off()
@@ -294,13 +332,24 @@ int CamCapture::stream_off()
     return 0;
 }
 
+/**
+ * @brief   设置超时2s
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
+ * 
+ */
 int CamCapture::set_time_out()
 {
     return set_time_out(2);
 }
 
-/** 
- * @brief   设置访问设备超时
+/**
+ * @brief   设置超时
+ * 
+ * @param[in]   t   超时秒数
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::set_time_out(const int t)
@@ -316,15 +365,14 @@ int CamCapture::set_time_out(const int t)
     return 0;
 }
 
-void CamCapture::_data_process()
-{
-    output_buffer = nullptr;
-    output_buffer = malloc(output_buffer_size);
-    memcpy(output_buffer, buffers[_buf.index].start, output_buffer_size);
-};
-
-/**	
+/** 
  * @brief   捕获函数
+ * 
+ * output_buffer指向图像数据所在内存地址，output_buffer_size为地址长度
+ * 
+ * @param[in]   data_process    图像数据处理函数
+ * @retval  0   成功
+ * @retval  -1  失败
  * 
  */
 int CamCapture::capture(std::function<void(void)> data_process)
@@ -336,6 +384,7 @@ int CamCapture::capture(std::function<void(void)> data_process)
         LOG(ERROR) << "Read frame failed.";
         return -1;
     }
+
     output_buffer = buffers[_buf.index].start;
     output_buffer_size = buffers[_buf.index].length;
     data_process();
@@ -346,17 +395,51 @@ int CamCapture::capture(std::function<void(void)> data_process)
     return output_buffer_size;
 }
 
+/**
+ * @brief   捕获函数
+ * 
+ * 将图像数据复制到output_buffer中，output_buffer指向图像数据所在内存地址
+ * output_buffer_size为地址长度
+ * 
+ * @retval  0   成功
+ * @retval  -1  失败
+ * 
+ */
 int CamCapture::capture()
 {
-    return capture([&] {
-        _data_process();
-    });
+    if (!INITED)
+        init();
+    if (ioctl(_fd, VIDIOC_DQBUF, &_buf) < 0)
+    {
+        LOG(ERROR) << "Read frame failed.";
+        return -1;
+    }
+
+    output_buffer_size = buffers[_buf.index].length;
+    if (!MEMORY_COPY)
+    {
+        MEMORY_COPY = true;
+        output_buffer = malloc(output_buffer_size);
+    }
+    memcpy(output_buffer, buffers[_buf.index].start, output_buffer_size);
+#ifdef ENABLE_DEBUG
+    LOG(INFO) << "Read frame success.";
+#endif
+    queue_buffer();
+    return output_buffer_size;
 }
+
+/** 
+ * @brief   析构函数
+ * 
+ */
 CamCapture::~CamCapture()
 {
     stream_off();
     memory_unmap();
     delete[] buffers;
+    if (MEMORY_COPY)
+        free(output_buffer);
     close(_fd);
 }
 }

@@ -8,7 +8,7 @@
  * @brief    音频捕获
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-09
+ * Last Modified:  2018-01-19
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  * @example  qa_voice_capture_to_playback.cc
@@ -34,28 +34,28 @@ namespace core
 class VoiceCapture : public VoiceBase
 {
   public:
-	/// 输出数据缓存
-	char *output_buffer;
-	/// 输出缓存大小
-	unsigned int output_buffer_size;
-	// int frames_to_read;
-	/// 用于返回已读的帧数
-	int frames_readed;
+    /// 输出数据缓存
+    char *output_buffer;
+    /// 输出缓存大小
+    unsigned int output_buffer_size;
+    // int frames_to_read;
+    /// 用于返回已读的帧数
+    int frames_readed;
 
-	VoiceCapture(const std::string &dev);
-	~VoiceCapture();
+    VoiceCapture(const std::string &dev);
+    ~VoiceCapture();
 
-	friend std::ostream &operator<<(std::ostream &out, VoiceCapture &in);
+    friend std::ostream &operator<<(std::ostream &out, VoiceCapture &in);
 
-	/** 
+    /** 
 	 * @brief 打开设备
 	 * 
 	 * @retval	0	成功 
 	 * @retval	-1	失败	  
 	 * 
 	 */
-	int open_device();
-	/** 
+    int open_device();
+    /** 
 	 * @brief 音频捕获
 	 * 
 	 * 使用capture.output_buffer和capture.output_buffer_size来获取输出数据
@@ -63,10 +63,10 @@ class VoiceCapture : public VoiceBase
 	 * @todo 返回类或者结构体
 	 * 
 	 */
-	int capture();
+    int capture();
 
   private:
-	int err;
+    int err;
 };
 }
 }

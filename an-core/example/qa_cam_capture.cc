@@ -1,17 +1,17 @@
-/*******************************************************************************
+/**
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2018-01
- * @brief    
+ * @date     2017-07
+ * @brief    摄像头捕获例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-18
+ * Last Modified:  2018-01-19
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- ******************************************************************************/
+ */
 #include "cam_capture.h"
 #include "logger.h"
 
@@ -36,26 +36,26 @@ int main()
     fwrite(c.output_buffer, c.output_buffer_size, 1, fp);
     fclose(fp);
 
-    fp = fopen("test_lambda_stream.jpg", "wb");
-    c.capture();
-    while (1)
-    {
-        c.capture([&] {
-            fseek(fp, 0, SEEK_SET);
-            fwrite(c.output_buffer, c.output_buffer_size, 1, fp);
-        });
-    };
-    fclose(fp);
-
-    // fp = fopen("test_copy_stream.jpg", "wb");
+    // fp = fopen("test_lambda_stream.jpg", "wb");
     // c.capture();
     // while (1)
     // {
-    //     c.capture();
-    //     fseek(fp, 0, SEEK_SET);
-    //     fwrite(c.output_buffer, c.output_buffer_size, 1, fp);
+    //     c.capture([&] {
+    //         fseek(fp, 0, SEEK_SET);
+    //         fwrite(c.output_buffer, c.output_buffer_size, 1, fp);
+    //     });
     // };
     // fclose(fp);
+
+    fp = fopen("test_copy_stream.jpg", "wb");
+    c.capture();
+    while (1)
+    {
+        c.capture();
+        fseek(fp, 0, SEEK_SET);
+        fwrite(c.output_buffer, c.output_buffer_size, 1, fp);
+    };
+    fclose(fp);
 
     return 0;
 }

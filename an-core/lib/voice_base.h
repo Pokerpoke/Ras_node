@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
@@ -8,10 +8,10 @@
  * @brief    音频采集、回放基类，设定相关参数
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-05
+ * Last Modified:  2018-01-19
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- ******************************************************************************/
+ */
 #ifndef _VOICE_BASE_H_
 #define _VOICE_BASE_H_
 
@@ -31,55 +31,55 @@ namespace core
 class VoiceBase
 {
   public:
-	VoiceBase(const std::string &device);
-	virtual ~VoiceBase();
+    VoiceBase(const std::string &device);
+    virtual ~VoiceBase();
 
-	/// 码率
-	unsigned int rate;
-	/// 通道数
-	unsigned int channels;
-	/// 软件重采样
-	unsigned int soft_resample;
-	/// 每帧数据大小
-	mutable unsigned int bytes_per_frame;
-	/// 默认缓存大小
-	unsigned int default_buffer_size;
-	/// 默认时间段大小
-	unsigned int default_period_size;
-	/// 帧数
-	snd_pcm_uframes_t frames;
-	/// 缓存大小
-	snd_pcm_uframes_t buffer_size;
-	/// 缓存大小
-	snd_pcm_uframes_t buffer_frames;
-	/// 时间段大小
-	snd_pcm_uframes_t period_size;
-	/// 时间段大小
-	snd_pcm_uframes_t period_frames;
+    /// 码率
+    unsigned int rate;
+    /// 通道数
+    unsigned int channels;
+    /// 软件重采样
+    unsigned int soft_resample;
+    /// 每帧数据大小
+    mutable unsigned int bytes_per_frame;
+    /// 默认缓存大小
+    unsigned int default_buffer_size;
+    /// 默认时间段大小
+    unsigned int default_period_size;
+    /// 帧数
+    snd_pcm_uframes_t frames;
+    /// 缓存大小
+    snd_pcm_uframes_t buffer_size;
+    /// 缓存大小
+    snd_pcm_uframes_t buffer_frames;
+    /// 时间段大小
+    snd_pcm_uframes_t period_size;
+    /// 时间段大小
+    snd_pcm_uframes_t period_frames;
 
   protected:
-	/// 设备名称
-	const char *device;
+    /// 设备名称
+    const char *device;
 
-	/// 设备句柄
-	snd_pcm_t *handle;
-	/// 硬件参数结构体
-	snd_pcm_hw_params_t *params;
-	/// 采样格式
-	snd_pcm_format_t format;
-	/// 访问方式
-	snd_pcm_access_t access_type;
+    /// 设备句柄
+    snd_pcm_t *handle;
+    /// 硬件参数结构体
+    snd_pcm_hw_params_t *params;
+    /// 采样格式
+    snd_pcm_format_t format;
+    /// 访问方式
+    snd_pcm_access_t access_type;
 
-	// Flags
-	bool PARAMS_SETED;
-	// Flags
-	bool DEVICE_OPENED;
+    // Flags
+    bool PARAMS_SETED;
+    // Flags
+    bool DEVICE_OPENED;
 
-	int set_params();
-	virtual int open_device() = 0;
+    int set_params();
+    virtual int open_device() = 0;
 
   private:
-	int err;
+    int err;
 };
 }
 }
