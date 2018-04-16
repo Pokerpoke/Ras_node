@@ -21,4 +21,4 @@ target_link_libraries(aero-node an_gui_qt)
 
 # copy qss files
 file(COPY themes
-     DESTINATION ${EXECUTABLE_OUTPUT_PATH})
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

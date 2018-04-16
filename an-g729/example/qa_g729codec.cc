@@ -12,11 +12,11 @@
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  ******************************************************************************/
-#include "logger.h"
-#include "voice_capture.h"
-#include "voice_playback.h"
-#include "g729encoder.h"
-#include "g729decoder.h"
+#include "an-core/logger.h"
+#include "an-core/voice_capture.h"
+#include "an-core/voice_playback.h"
+#include "an-g729/g729encoder.h"
+#include "an-g729/g729decoder.h"
 
 using namespace an::core;
 using namespace an::codec;

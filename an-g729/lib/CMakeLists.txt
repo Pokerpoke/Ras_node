@@ -12,9 +12,9 @@
 # 
 ################################################################################
 
-aux_source_directory(. AN_CODEC_LIB)
+aux_source_directory(. AN_G729_LIB)
 add_library(an-g729 SHARED
-            ${AN_CODEC_LIB}
+            ${AN_G729_LIB}
             )
 
 target_link_libraries(an-g729

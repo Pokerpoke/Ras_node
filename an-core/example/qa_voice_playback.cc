@@ -14,8 +14,8 @@
  */
 #include <stdio.h>
 
-#include "logger.h"
-#include "voice_playback.h"
+#include "an-core/logger.h"
+#include "an-core/voice_playback.h"
 
 using namespace std;
 using namespace an::core;

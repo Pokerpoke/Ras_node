@@ -16,10 +16,15 @@
 # get scripts directory
 CMAKE_SOURCE_DIR=$(dirname $(readlink -f $0))
 cd ${CMAKE_SOURCE_DIR}/..
-# update work path
+# update cmake source path
 CMAKE_SOURCE_DIR=$(pwd)
 SYS_ROOT_DIR="/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root"
 cd scripts
+
+RED_COLOR='\033[1;31m'
+GREEN_COLOR='\033[1;32m'
+BLUE_COLOR='\033[1;34m'
+RES='\033[0m'
 
 # cross compile necessary libraries
 DEPENDENCIES=(
@@ -31,6 +36,7 @@ DEPENDENCIES=(
               "qt4-dev-tools"
               "libqtwebkit-dev"
               "libasound2-dev"
+              "swig3.0"
               )
 
 for DEP in ${DEPENDENCIES[@]} ; do
@@ -66,14 +72,12 @@ sudo tar xvzf ./target-qte-4.8.5-to-hostpc.tgz -C /
 tar xvzf log4cpp-1.1.3.tar.gz && cd log4cpp
 
 # build and clean for host
-# IMPORTANT: it will confilct while use suao apt install liblog4cpp
-# 
+# WARNING: it will confilct while use `sudo apt install liblog4cpp`
 # ./configure && make && sudo make install && make clean
 
 # build for cross compile toolschain
 ./configure --host=arm-linux \
-            --prefix=/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr \
-
+            --prefix=/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr
 make
 
 # it is unable to pass environment variable to sudo commands

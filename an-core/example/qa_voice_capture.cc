@@ -14,8 +14,8 @@
  */
 #include <fstream>
 
-#include "voice_capture.h"
-#include "logger.h"
+#include "an-core/voice_capture.h"
+#include "an-core/logger.h"
 
 using namespace std;
 using namespace an::core;

@@ -8,12 +8,12 @@
  * @brief    摄像头捕获例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-19
+ * Last Modified:  2018-04-14
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "cam_capture.h"
-#include "logger.h"
+#include "an-core/cam_capture.h"
+#include "an-core/logger.h"
 
 using namespace an::core;
 

@@ -73,6 +73,12 @@ include_directories(${JRTPLIB_INCLUDE_DIR})
 find_package(BCG729 REQUIRED)
 include_directories(${BCG729_INCLUDE_DIR})
 
+find_package(SWIG REQUIRED)
+include(${SWIG_USE_FILE})
+
+find_package(PythonLibs)
+include_directories(${PYTHON_INCLUDE_PATH})
+
 # 添加线程相关的库
 find_package(Threads REQUIRED)
 
@@ -99,19 +105,17 @@ find_package(Doxygen)
 set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
 
 # 设置可执行文件输出目录
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+# set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-include_directories(
-                    an-core/include
-                    an-codec/g729/include
+include_directories(an-core/include
+                    an-g729/include
                     )
 
 add_subdirectory(an-core)
 add_subdirectory(an-gui)
-add_subdirectory(an-codec)
-# add_subdirectory(an-transfer)
+add_subdirectory(an-g729)
 
 # build executable program
 add_subdirectory(bin)

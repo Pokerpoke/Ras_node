@@ -16,9 +16,9 @@
 #include <sched.h>
 #include <iostream>
 
-#include "rtp_receiver.h"
-#include "voice_playback.h"
-#include "logger.h"
+#include "an-core/rtp_receiver.h"
+#include "an-core/voice_playback.h"
+#include "an-core/logger.h"
 
 using namespace std;
 using namespace an::core;

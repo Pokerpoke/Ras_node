@@ -15,9 +15,9 @@
 #include <string>
 
 #include "config.h"
-#include "logger.h"
-#include "voice_capture.h"
-#include "rtp_sender.h"
+#include "an-core/logger.h"
+#include "an-core/voice_capture.h"
+#include "an-core/rtp_sender.h"
 
 int main(int argc, char *argv[])
 {

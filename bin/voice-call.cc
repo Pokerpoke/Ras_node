@@ -1,3 +1,17 @@
+/**
+ * 
+ * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
+ * 
+ * @file
+ * @author   姜阳 (j824544269@gmail.com)
+ * @date     2018-04
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2018-04-14
+ * Modified By:    姜阳 (j824544269@gmail.com)
+ * 
+ */
 /*******************************************************************************
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
@@ -16,13 +30,13 @@
 #include <getopt.h>
 #include <iostream>
 
-#include "logger.h"
-#include "voice_capture.h"
-#include "voice_playback.h"
-#include "rtp_sender.h"
-#include "rtp_receiver.h"
-#include "g729encoder.h"
-#include "g729decoder.h"
+#include "an-core/logger.h"
+#include "an-core/voice_capture.h"
+#include "an-core/voice_playback.h"
+#include "an-core/rtp_sender.h"
+#include "an-core/rtp_receiver.h"
+#include "an-g729/g729encoder.h"
+#include "an-g729/g729decoder.h"
 
 using namespace std;
 using namespace an::core;
