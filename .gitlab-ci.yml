@@ -1,2 +1,8 @@
 before_script:
   - apt-get update && apt-get install qt4-dev-tools libqtwebkit-dev libasound2-dev liblog4cpp5-dev
+
+aero-node:
+  script:
+    - mkdir build && cd build
+    - cmake ..
+    - make
