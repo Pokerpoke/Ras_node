@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  * 
@@ -8,10 +8,10 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-08
+ * Last Modified:  2018-04-16
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
- ******************************************************************************/
+ */
 #include <QApplication>
 #include <QWidget>
 #include <QFile>
@@ -21,7 +21,7 @@
 #include <string>
 
 #include "config.h"
-#include "an-core/logger.h"
+#include "aero-node/logger.h"
 
 #include "developer_tools.h"
 

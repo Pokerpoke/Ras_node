@@ -3,8 +3,8 @@
 %module an_core
 
 %{
-#include "an-core/system_info.h"
-#include "an-core/cam_capture.h"
+#include "aero-node/system_info.h"
+#include "aero-node/cam_capture.h"
 %}
 
 %include "../lib/system_info.cc"

@@ -15,9 +15,9 @@
 #include <stdio.h>
 #include <sched.h>
 
-#include "an-core/voice_playback.h"
-#include "an-core/voice_capture.h"
-#include "an-core/logger.h"
+#include "aero-node/voice_playback.h"
+#include "aero-node/voice_capture.h"
+#include "aero-node/logger.h"
 
 using namespace std;
 using namespace an::core;

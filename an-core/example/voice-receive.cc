@@ -26,8 +26,8 @@
 
 #include "config.h"
 
-#include "an-core/logger.h"
-#include "an-core/voice_playback.h"
+#include "aero-node/logger.h"
+#include "aero-node/voice_playback.h"
 
 using namespace jrtplib;
 using namespace an::core;

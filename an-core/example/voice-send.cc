@@ -15,9 +15,9 @@
 #include <string>
 
 #include "config.h"
-#include "an-core/logger.h"
-#include "an-core/voice_capture.h"
-#include "an-core/rtp_sender.h"
+#include "aero-node/logger.h"
+#include "aero-node/voice_capture.h"
+#include "aero-node/rtp_sender.h"
 
 int main(int argc, char *argv[])
 {

@@ -4,7 +4,7 @@
  * 
  * @file
  * @author   姜阳 (j824544269@gmail.com)
- * @date     2018-04
+ * @date     2017-12
  * @brief    
  * @version  0.0.1
  * 
@@ -12,29 +12,15 @@
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-/*******************************************************************************
- * 
- * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
- * 
- * @file
- * @author   姜阳 (j824544269@gmail.com)
- * @date     2017-12
- * @brief    
- * @version  0.0.1
- * 
- * Last Modified:  2018-01-09
- * Modified By:    姜阳 (j824544269@gmail.com)
- * 
- ******************************************************************************/
 #include <thread>
 #include <getopt.h>
 #include <iostream>
 
-#include "an-core/logger.h"
-#include "an-core/voice_capture.h"
-#include "an-core/voice_playback.h"
-#include "an-core/rtp_sender.h"
-#include "an-core/rtp_receiver.h"
+#include "aero-node/logger.h"
+#include "aero-node/voice_capture.h"
+#include "aero-node/voice_playback.h"
+#include "aero-node/rtp_sender.h"
+#include "aero-node/rtp_receiver.h"
 #include "an-g729/g729encoder.h"
 #include "an-g729/g729decoder.h"
 

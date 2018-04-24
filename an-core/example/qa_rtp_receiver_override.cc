@@ -16,9 +16,9 @@
 #include <sched.h>
 #include <iostream>
 
-#include "an-core/rtp_receiver.h"
-#include "an-core/voice_playback.h"
-#include "an-core/logger.h"
+#include "aero-node/rtp_receiver.h"
+#include "aero-node/voice_playback.h"
+#include "aero-node/logger.h"
 
 using namespace std;
 using namespace an::core;

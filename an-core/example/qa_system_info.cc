@@ -12,8 +12,8 @@
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "an-core/system_info.h"
-#include "an-core/logger.h"
+#include "aero-node/system_info.h"
+#include "aero-node/logger.h"
 using namespace std;
 using namespace an::core;
 int main()

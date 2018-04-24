@@ -15,8 +15,8 @@
 #include <iostream>
 #include <string>
 
-#include "an-core/tcp_client.h"
-#include "an-core/logger.h"
+#include "aero-node/tcp_client.h"
+#include "aero-node/logger.h"
 
 using namespace an::core;
 using namespace std;

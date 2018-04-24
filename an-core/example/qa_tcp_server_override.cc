@@ -14,8 +14,8 @@
  */
 #include <iostream>
 
-#include "an-core/logger.h"
-#include "an-core/tcp_server.h"
+#include "aero-node/logger.h"
+#include "aero-node/tcp_server.h"
 
 class TCPServer : public an::core::TCPServer
 {
