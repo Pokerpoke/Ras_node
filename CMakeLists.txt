@@ -39,13 +39,14 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 include(CheckIncludeFile)
 include(CheckIncludeFileCXX)
 
-configure_file(${CMAKE_SOURCE_DIR}/config.h.in 
-               ${CMAKE_BINARY_DIR}/config.h
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in 
+               ${CMAKE_CURRENT_BINARY_DIR}/aeronode-runtime/include/aeronode/config.h
                )
-include_directories(${CMAKE_BINARY_DIR})
+# include_directories(${CMAKE_BINARY_DIR})
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
-	add_definitions(-DENABLE_DEBUG)
+    add_definitions(-DENABLE_DEBUG)
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
 endif()
 
 # add module path
@@ -119,3 +120,12 @@ add_subdirectory(an-g729)
 
 # build executable program
 add_subdirectory(bin)
+
+################################################################################
+# install files
+################################################################################
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/aeronode-runtime/include/aeronode/config.h
+        DESTINATION ${AN_INCLUDE_DIR}/aeronode
+        COMPONENT "runtime_devel"
+        )
