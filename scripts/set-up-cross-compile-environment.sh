@@ -147,9 +147,9 @@ function git_cmake()
     cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
 }
 
-git_cmake http://192.168.0.9:8086/git/Pokerpoke/JThread.git
-git_cmake http://192.168.0.9:8086/git/Pokerpoke/JRTPLIB.git
-git_cmake http://192.168.0.9:8086/git/Pokerpoke/bcg729.git
+git_cmake http://192.168.0.9:8086/git/aero-node/JThread.git
+git_cmake http://192.168.0.9:8086/git/aero-node/JRTPLIB.git
+git_cmake http://192.168.0.9:8086/git/aero-node/bcg729.git
 
 # update ldconfig
 sudo ldconfig
