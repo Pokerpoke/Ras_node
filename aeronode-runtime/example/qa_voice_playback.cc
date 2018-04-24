@@ -8,14 +8,14 @@
  * @brief    音频回放例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-19
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #include <stdio.h>
 
-#include "aero-node/logger.h"
-#include "aero-node/voice_playback.h"
+#include "aeronode/logger.h"
+#include "aeronode/voice_playback.h"
 
 using namespace std;
 using namespace an::core;

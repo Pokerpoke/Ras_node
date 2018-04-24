@@ -8,12 +8,12 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-11
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "aero-node/system_info.h"
-#include "aero-node/logger.h"
+#include "aeronode/system_info.h"
+#include "aeronode/logger.h"
 using namespace std;
 using namespace an::core;
 int main()

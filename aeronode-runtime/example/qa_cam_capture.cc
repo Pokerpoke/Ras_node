@@ -8,12 +8,12 @@
  * @brief    摄像头捕获例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-14
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "aero-node/cam_capture.h"
-#include "aero-node/logger.h"
+#include "aeronode/cam_capture.h"
+#include "aeronode/logger.h"
 
 using namespace an::core;
 

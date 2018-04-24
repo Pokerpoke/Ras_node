@@ -109,11 +109,11 @@ set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
 # set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 # set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-include_directories(an-core/include
+include_directories(aeronode-runtime/include
                     an-g729/include
                     )
 
-add_subdirectory(an-core)
+add_subdirectory(aeronode-runtime)
 add_subdirectory(an-gui)
 add_subdirectory(an-g729)
 

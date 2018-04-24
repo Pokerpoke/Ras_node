@@ -8,16 +8,16 @@
  * @brief    音频捕获并回放例程
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-07
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #include <stdio.h>
 #include <sched.h>
 
-#include "aero-node/voice_playback.h"
-#include "aero-node/voice_capture.h"
-#include "aero-node/logger.h"
+#include "aeronode/voice_playback.h"
+#include "aeronode/voice_capture.h"
+#include "aeronode/logger.h"
 
 using namespace std;
 using namespace an::core;

@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-16
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -21,9 +21,9 @@ extern "C" {
 }
 #endif
 
-#include "aero-node/logger.h"
-#include "aero-node/voice_capture.h"
-#include "aero-node/voice_playback.h"
+#include "aeronode/logger.h"
+#include "aeronode/voice_capture.h"
+#include "aeronode/voice_playback.h"
 
 using namespace an::core;
 using namespace std;

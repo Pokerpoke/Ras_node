@@ -8,7 +8,7 @@
  * @brief    rtp接收，重载方式例程
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-14
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -16,9 +16,9 @@
 #include <sched.h>
 #include <iostream>
 
-#include "aero-node/rtp_receiver.h"
-#include "aero-node/voice_playback.h"
-#include "aero-node/logger.h"
+#include "aeronode/rtp_receiver.h"
+#include "aeronode/voice_playback.h"
+#include "aeronode/logger.h"
 
 using namespace std;
 using namespace an::core;
