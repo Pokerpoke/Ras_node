@@ -5,18 +5,17 @@ aero-node:
     - mkdir build && cd build
     - cmake -DCMAKE_BUILD_TYPE=Release ..
     - make
+    - make doc
 
 aero-node-debug:
   script:
     - mkdir debug && cd debug
-    - cmake -DCMAKE_BUILD_TYPE=Debug ../../
+    - cmake -DCMAKE_BUILD_TYPE=Debug ..
     - make
-
-aero-node-doc:
-  script:
-    - make doc
 
 aero-node-Tiny4412:
   script:
     - mkdir Tiny4412 && cd Tiny4412
-    - pwd
+    - cmake -DCMAKE_BUILD_TARGET=Tiny4412 \
+      -DCMAKE_BUILD_TYPE=Debug ..
+    - make
