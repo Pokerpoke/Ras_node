@@ -17,6 +17,6 @@ aero-node-doc:
     - make doc
 
 aero-node-Tiny4412:
-  scritp:
+  script:
     - mkdir Tiny4412 && cd Tiny4412
     - pwd
