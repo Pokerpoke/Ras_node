@@ -1,5 +1,5 @@
 aero-node:
-  image: aeronode-ci:latest
+  image: aeronode-ci:0.1
   script:
     - mkdir build && cd build
     - cmake ..
