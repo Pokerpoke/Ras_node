@@ -26,38 +26,6 @@ GREEN_COLOR='\033[1;32m'
 BLUE_COLOR='\033[1;34m'
 RES='\033[0m'
 
-# cross compile necessary libraries
-DEPENDENCIES=(
-              "git"
-              "lib32z1"
-              "cmake"
-              "build-essential"
-              "liblog4cpp5-dev"
-              "qt4-dev-tools"
-              "libqtwebkit-dev"
-              "libasound2-dev"
-              "swig3.0"
-              )
-
-for DEP in ${DEPENDENCIES[@]} ; do
-    dpkg --get-selections | grep "${DEP}"
-    if [ $? -ne 0 ]
-    then
-        echo "${DEP} is required, but not installed, going to install it."
-        sudo apt-get install -y ${DEP}
-        if [ $? -ne 0 ]
-        then
-            exit 1
-        fi
-    fi
-done
-
-# if exist, clean it
-if [ -d aero-node-tools ]
-then
-    rm -rf aero-node-tools
-fi
-
 mkdir ${CMAKE_SOURCE_DIR}/scripts/aero-node-tools && cd ${CMAKE_SOURCE_DIR}/scripts/aero-node-tools
 
 wget -c -t 5 http://192.168.0.9/share/aero-node-tools/log4cpp-1.1.3.tar.gz

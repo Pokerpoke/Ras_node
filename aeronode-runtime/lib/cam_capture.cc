@@ -8,12 +8,13 @@
  * @brief    摄像头捕获类
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-19
+ * Last Modified:  2018-04-24
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #include <unistd.h>
 #include <string.h>
+#include <cstdlib>
 #include <string>
 #include <linux/videodev2.h>
 #include <sys/ioctl.h>

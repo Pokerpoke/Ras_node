@@ -9,13 +9,14 @@ aero-node:
 
 aero-node-debug:
   script:
-    - mkdir debug && cd debug
+    - mkdir build && cd build
     - cmake -DCMAKE_BUILD_TYPE=Debug ..
     - make
 
 aero-node-Tiny4412:
   script:
-    - mkdir Tiny4412 && cd Tiny4412
+    - export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
+    - mkdir build && cd build
     - cmake -DCMAKE_BUILD_TARGET=Tiny4412 \
       -DCMAKE_BUILD_TYPE=Debug ..
     - make
