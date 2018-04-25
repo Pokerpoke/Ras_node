@@ -2,49 +2,51 @@
 
 前人种树，后人乘凉。
 
-- [Aero-Node贡献指南](#aero-node%E8%B4%A1%E7%8C%AE%E6%8C%87%E5%8D%97)
-    - [C/C++](#cc)
-        - [头文集](#%E5%A4%B4%E6%96%87%E9%9B%86)
-        - [文件](#%E6%96%87%E4%BB%B6)
-        - [命名空间](#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4)
-        - [类](#%E7%B1%BB)
-            - [类名](#%E7%B1%BB%E5%90%8D)
-            - [类成员函数](#%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0)
-            - [类成员变量](#%E7%B1%BB%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F)
-            - [可执行文件](#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6)
-            - [单元测试](#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95)
-        - [其他](#%E5%85%B6%E4%BB%96)
+**注** ：生成目录插件问题，使用英文作为导航
+
+- [Aero-Node贡献指南](#aero-node)
+    - [C/C++](#c-c)
+        - [Header](#header)
+        - [File](#file)
+        - [Namespace](#namespace)
+        - [Class](#class)
+            - [Name of Class](#name-of-class)
+            - [Class Member Function](#class-member-function)
+            - [Class Member Variable](#class-member-variable)
+            - [Executable File](#executable-file)
+            - [Unit Test](#unit-test)
+        - [Others](#others)
     - [Git](#git)
         - [Commit](#commit)
         - [Release](#release)
         - [Issue](#issue)
     - [Shell Scripts](#shell-scripts)
-        - [文件](#%E6%96%87%E4%BB%B6)
-        - [变量](#%E5%8F%98%E9%87%8F)
-        - [函数](#%E5%87%BD%E6%95%B0)
-        - [注释](#%E6%B3%A8%E9%87%8A)
-        - [其他](#%E5%85%B6%E4%BB%96)
+        - [File](#file)
+        - [Variable](#variable)
+        - [Function](#function)
+        - [Comment](#comment)
+        - [Others](#others)
     - [Doxygen](#doxygen)
     - [CMake](#cmake)
     - [Markdown](#markdown)
 
 ## C/C++
 
-### 头文集
+### Header
 
 - 头文件需要自洽，保证include了足够保证自身运行的头文件
 - 不要在头文件中定义全局变量
 - 不要在头文件中定义宏
 - 不要在头文件中使用`using namespace std`等语句，以免引起冲突
 
-### 文件
+### File
 
-- 命名格式为小写字母加下划线，例如`qa_example.cc, example.h`
+- 命名格式为小写字母加下划线，例如`qa_example.cc`, `example.h`
 - 例程统一以`qa_`(Quality Assurance)开头，并在文件名中表明功能
 - 文件头部添加以下申明，如下所示(@开头的为生成doxygen文档所需参数)
 
 ```c++
-/*******************************************************************************
+/**
  *
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
  *
@@ -57,39 +59,39 @@
  * Last Modified:  2018-01-09
  * Modified By:    姜阳 (j824544269@gmail.com)
  *
- ******************************************************************************/
+ */
 ```
 
-### 命名空间
+### Namespace
 
 - 所有类、函数请放到`an`(aero node)命名空间下，并在`an`命名空间下进行分类
 
-### 类
+### Class
 
-#### 类名
+#### Name of Class
 
 - 类名格式为单词首字母大写且无空格，例如`VoiceCapture`
 
-#### 类成员函数
+#### Class Member Function
 
 - 成员函数命名格式为小写字母加下划线，例如`open_device()`
 - 如果成员函数不会对传入参数进行修改，推荐添加`const`修饰符，例如`open_device(const std::string &dev)`
 - *[待定]* 目前使用`#ifdef ENABLE_DEBUG`来控制debug或者release(使用`#ifdef DEBUG`时会与log4cpp库产生冲突)
 
-#### 类成员变量
+#### Class Member Variable
 
 - 尽量少的暴露共有变量以防被无意中修改
 - 不希望被更改的成员变量使用`const`或者`mutable`进行修饰
 - 私有成员变量以下划线开头或结尾，例如`_some_variable`或者`some_variable_`
 
-#### 可执行文件
+#### Executable File
 
 - 未经过测试通过的可执行文件和例程以小写字母加`_`组成，例如`qa_send_file`
 - 经过测试通过的可执行文件由小写字母加`-`组成，例如`send-file`，并放入顶层目录`/bin`目录下
 
-#### 单元测试
+#### Unit Test
 
-### 其他
+### Others
 
 - 不要使用记事本对程序文件进行编辑，记事本会引入一些不必要的字符
 - 除界面外尽量不要引入Qt相关的函数
@@ -154,26 +156,26 @@ Other:
 
 ## Shell Scripts
 
-### 文件
+### File
 
 - 未经过多次测试的脚本使用`_`作为连字符，例如`some_test.sh`
 - 确保没有问题的脚本可以使用`-`作为连字符，并不加`sh`后缀，例如`an-run`
 - 在Ubuntu中运行的文件头部使用`#!/bin/bash`指定shell，在Tiny4412上运行的文件头部使用`#!/bin/sh`指定shell
 
-### 变量
+### Variable
 
 - 使用`SHELL_SCRIPT_DIR=$(dirname $(readlink -f $0))`来获取脚本文件所在目录
 - 除变量名诸如`$1,$a`等只有一个数字、字母或符号的变量外，请尽量使用`{}`将变量包围，例如`${example_variable}`
 
-### 函数
+### Function
 
-### 注释
+### Comment
 
 - 尽量提供详细的注释
 
-### 其他
+### Others
 
-- 尽量保证从不同目录运行脚本都能获得相同的效果，可以使用[变量](#%E5%8F%98%E9%87%8F)中提供的命令来获取脚本文件所在目录
+- 尽量保证从不同目录运行脚本都能获得相同的效果，可以使用[变量](#variable)中提供的命令来获取脚本文件所在目录
 
 ## Doxygen
 
