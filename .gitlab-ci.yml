@@ -3,6 +3,20 @@ image: 192.168.0.9:5000/aeronode-ci:0.1
 aero-node:
   script:
     - mkdir build && cd build
-    - cmake ..
+    - cmake -DCMAKE_BUILD_TYPE=Release ..
     - make
+
+aero-node-debug:
+  script:
+    - mkdir debug && cd debug
+    - cmake -DCMAKE_BUILD_TYPE=Debug ../../
+    - make
+
+aero-node-doc:
+  script:
     - make doc
+
+aero-node-Tiny4412:
+  scritp:
+    - mkdir Tiny4412 && cd Tiny4412
+    - pwd
