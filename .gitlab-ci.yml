@@ -1,5 +1,6 @@
+image: 192.168.0.9:5000/aeronode-ci:0.1
+
 aero-node:
-  image: aeronode-ci:0.1
   script:
     - mkdir build && cd build
     - cmake ..
