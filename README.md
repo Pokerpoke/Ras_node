@@ -1,6 +1,6 @@
 # README
 
-[![Build Status](https://travis-ci.com/Pokerpoke/Ras_node.svg?token=bwwRBmFu8PYsDXRZk1iU&branch=master)](https://travis-ci.com/Pokerpoke/Ras_node)
+[![pipeline status](http://192.168.0.9:8086/git/Pokerpoke/aero-node/badges/master/pipeline.svg)](http://192.168.0.9:8086/git/Pokerpoke/aero-node/commits/master)
 
 ## 依赖
 
