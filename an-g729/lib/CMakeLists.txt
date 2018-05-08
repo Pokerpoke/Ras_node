@@ -26,6 +26,6 @@ target_link_libraries(an-g729
 ################################################################################
 install(TARGETS
         an-g729
-        DESTINATION ${CMAKE_BINARY_DIR}/lib
+        DESTINATION ${AN_LIBRARIES_DIR}
         COMPONENT "an_g729_libraries"
         )

@@ -22,3 +22,12 @@ foreach(T_FILE_NAME ${EXAMPLE_EXECUTABLE})
         an-g729
 	)
 endforeach()
+
+################################################################################
+# install files
+################################################################################
+install(TARGETS
+        voice-call
+        DESTINATION ${AN_BINARIES_DIR}
+        COMPONENT "binaries"
+        )

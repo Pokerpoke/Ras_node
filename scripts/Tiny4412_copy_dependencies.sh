@@ -39,8 +39,8 @@ scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/in
 scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/bcg729 \
         root@${DESTIP}:/usr/include/bcg729
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/lib/liblog4cpp.a \
-        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/lib/liblog4cpp.so* \
+scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.a \
+        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.so* \
         root@${DESTIP}:/usr/lib/
 
 scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.a \
@@ -56,4 +56,4 @@ scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/li
         root@${DESTIP}:/usr/lib/
 
 scp -rp ${CMAKE_SOURCE_DIR}/scripts/Tiny4412_connect_to_wifi.sh \
-        root@${DESTIP}:/home/scripts/
+        root@${DESTIP}:/home/scripts/Tiny4412_connect_to_wifi.sh

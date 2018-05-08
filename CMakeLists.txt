@@ -105,6 +105,8 @@ find_package(Doxygen)
 
 set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
 set(AN_LIBRARIES_DIR lib CACHE PATH "Path to install libraries")
+set(AN_BINARIES_DIR bin CACHE PATH "Path to install binaries")
+set(AN_ETC_DIR etc CACHE PATH "Path to install etc directories")
 
 # 设置可执行文件输出目录
 # set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -112,6 +114,7 @@ set(AN_LIBRARIES_DIR lib CACHE PATH "Path to install libraries")
 # set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
 include_directories(aeronode-runtime/include
+                    ${CMAKE_BINARY_DIR}/include
                     an-g729/include
                     )
 
@@ -120,7 +123,7 @@ add_subdirectory(an-gui)
 add_subdirectory(an-g729)
 
 # build executable program
-add_subdirectory(bin)
+add_subdirectory(binary)
 
 ################################################################################
 # install files

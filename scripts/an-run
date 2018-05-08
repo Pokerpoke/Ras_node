@@ -19,6 +19,7 @@
 . /bin/setqt4env
 
 export LOGNAME=root
+export LD_LIBRARY_PATH=/usr/local/Trolltech/QtEmbedded-4.8.5-arm/lib:$LD_LIBRARY_PATH
 
 hotplug
 

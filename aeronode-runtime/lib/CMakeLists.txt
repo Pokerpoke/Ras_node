@@ -12,6 +12,6 @@ target_link_libraries(an-core
 ################################################################################
 install(TARGETS
         an-core
-        DESTINATION ${CMAKE_BINARY_DIR}/lib
+        DESTINATION ${AN_LIBRARIES_DIR}
         COMPONENT "an_core_libraries"
         )

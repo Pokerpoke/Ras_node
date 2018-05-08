@@ -9,7 +9,7 @@ target_link_libraries(an_gui_qt
                       an-core
                       Qt4::QtCore 
                       Qt4::QtGui
-                      Qt4::QtWebKit
+                    #   Qt4::QtWebKit
                       )
 
 ################################################################################
@@ -17,6 +17,6 @@ target_link_libraries(an_gui_qt
 ################################################################################
 install(TARGETS
         an_gui_qt
-        DESTINATION ${CMAKE_BINARY_DIR}/lib
+        DESTINATION ${AN_LIBRARIES_DIR}
         COMPONENT "an_gui_qt_libraries"
         )

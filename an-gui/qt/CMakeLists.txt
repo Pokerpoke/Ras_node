@@ -2,7 +2,7 @@
 find_package(Qt4 4.8 REQUIRED
              QtCore 
              QtGui 
-             QtWebKit
+            #  QtWebKit
 			 )
 
 include_directories(${QT_INCLUDES})
@@ -20,5 +20,18 @@ add_executable(aero-node aero-node.cc)
 target_link_libraries(aero-node an_gui_qt)
 
 # copy qss files
-file(COPY themes
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+# file(COPY themes
+#      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+################################################################################
+# install files
+################################################################################
+install(DIRECTORY themes
+        DESTINATION ${AN_ETC_DIR}
+        COMPONENT "themes")
+
+install(TARGETS
+        aero-node
+        DESTINATION ${AN_BINARIES_DIR}
+        COMPONENT "binaries"
+        )

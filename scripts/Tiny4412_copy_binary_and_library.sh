@@ -50,12 +50,15 @@ export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 # make
 # cmake -DCMAKE_BUILD_TYPE=Debug \
 cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/build/Tiny4412 \
       -DCMAKE_BUILD_TARGET=Tiny4412 ../../
-make -j
+make -j4
+make install
 
 # copy files
 scp -rp ./bin/* root@${DESTIP}:/home/aero-node/
-scp -p ./lib/* root@${DESTIP}:/usr/lib/
+scp -rp ./etc/* root@${DESTIP}:/home/aero-node/
+scp -rp ./lib/* root@${DESTIP}:/usr/lib/
 scp -p ${CMAKE_SOURCE_DIR}/scripts/an-run root@${DESTIP}:/bin/
 
 # ssh -l root ${DESTIP} "an-run /home/aero-node/main"
