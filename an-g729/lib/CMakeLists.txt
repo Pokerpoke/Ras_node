@@ -20,3 +20,12 @@ add_library(an-g729 SHARED
 target_link_libraries(an-g729
                       an-core
                       ${BCG729_LIBRARIES})
+
+################################################################################
+# install files
+################################################################################
+install(TARGETS
+        an-g729
+        DESTINATION ${CMAKE_BINARY_DIR}/lib
+        COMPONENT "an_g729_libraries"
+        )

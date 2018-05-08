@@ -104,6 +104,7 @@ find_package(Doxygen)
     endif(DOXYGEN_FOUND)
 
 set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
+set(AN_LIBRARIES_DIR lib CACHE PATH "Path to install libraries")
 
 # 设置可执行文件输出目录
 # set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

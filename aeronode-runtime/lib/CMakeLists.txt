@@ -6,3 +6,12 @@ target_link_libraries(an-core
 	${JRTPLIB_LIBRARIES}
 	${CMAKE_THREAD_LIBS_INIT}
 )
+
+################################################################################
+# install files
+################################################################################
+install(TARGETS
+        an-core
+        DESTINATION ${CMAKE_BINARY_DIR}/lib
+        COMPONENT "an_core_libraries"
+        )

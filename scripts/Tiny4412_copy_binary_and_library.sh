@@ -45,6 +45,8 @@ fi
 mkdir Tiny4412
 cd Tiny4412
 
+export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
+
 # make
 # cmake -DCMAKE_BUILD_TYPE=Debug \
 cmake -DCMAKE_BUILD_TYPE=Release \
