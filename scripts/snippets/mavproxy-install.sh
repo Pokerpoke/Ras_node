@@ -22,4 +22,5 @@ sudo apt-get install -y python-dev \
                         python-lxml \
                         python-yaml \
                         libxml2-dev
+
 sudo pip install MAVProxy

@@ -13,61 +13,97 @@
 #
 ################################################################################
 
-echo "Input dev address (default:/media/${USER}/boot and /dev/${USER}/rootfs) :"
-read MEDIA_ADDR
+IMAGE_NAME=2017-11-29-raspbian-stretch.img
+IMAGE_PATH=~/Downloads/${IMAGE_NAME}
+while getopts 'dp:m' OPT;
+do
+    case ${OPT} in
+        d)
+            wget -c -v http://192.168.0.9/share/system-images/${IMAGE_NAME} -O ~/Downloads/${IMAGE_NAME}
+            IMAGE_PATH=~/Downloads/${IMAGE_NAME}
+            ;;
+        p)
+            IMAGE_PATH=${OPTARG}
+            ;;
+        m)
+            if [ ! -d /media/${USER}/boot ]
+            then
+                sudo mkdir /media/${USER}/boot
+            fi
+            if [ ! -d /media/${USER}/rootfs ]
+            then
+                sudo mkdir /media/${USER}/rootfs
+            fi
+            LOOP_PATH=$(sudo losetup --show -f -P ${IMAGE_PATH})
+            echo "${LOOP_PATH}"
+            sudo mount ${LOOP_PATH}p1 /media/${USER}/boot
+            sudo mount ${LOOP_PATH}p2 /media/${USER}/rootfs
+            WAIT_FOR_UNMOUNT=true
+            ;;
+        ?)
+            echo "Useage :
+            -a use axel for high speed.
+            -d download image files from 192.168.0.9.
+            -p specify the image file path.
+            -m mount image files.
+            "
+            exit 0
+            ;;
+    esac
+done
 
-if [[ -z "${MEDIA_ADDR}" ]]
+
+SCRIPT_PATH=$(dirname $(readlink -f "$0"))
+
+echo "Input dev address (default:/media/${USER}/boot and /media/${USER}/rootfs) :"
+read MEDIA_PATH
+
+if [[ -z "${MEDIA_PATH}" ]]
 then
-   MEDIA_ADDR=/media/${USER}
+   MEDIA_PATH=/media/${USER}
 fi
 
-if [ ! -f ${MEDIA_ADDR}/boot/ssh ]
+if [ ! -f ${MEDIA_PATH}/boot/ssh ]
 then
-    sudo touch ${MEDIA_ADDR}/boot/ssh
+    sudo touch ${MEDIA_PATH}/boot/ssh
 fi
 echo "Enable ssh."
 
-sudo cat >> ${MEDIA_ADDR}/boot/config.txt << EOF
-
-lcd_rotate=2
-EOF
-
+sudo cp ${SCRIPT_PATH}/config.txt ${MEDIA_PATH}/boot/config.txt
 echo "Rotate LCD screen for 180 degree."
 
-cd ${MEDIA_ADDR}/rootfs/etc/wpa_supplicant
-if [ ! -f wpa_supplicant.conf ]
-then
-    sudo touch wpa_supplicant.conf
-fi
+sudo cp ${SCRIPT_PATH}/wpa_supplicant.conf ${MEDIA_PATH}/rootfs/etc/wpa_supplicant/wpa_supplicant.conf
+echo "Set WiFi access."
 
-sudo bash -c 'cat >> wpa_supplicant.conf << EOF
-
-network={
-    ssid="411-D-Link"
-    psk="aerolab411"
-    priority=1
-}
-
-network={
-    ssid="AeroNet411"
-    psk="aerolab411"
-    priority=2
-}
-EOF'
-echo "Set access to 411-D-Link and AeroNet411 wifi."
-
-cd ${MEDIA_ADDR}/rootfs/etc/apt
+cd ${MEDIA_PATH}/rootfs/etc/apt
 
 if [ -f ./sources.list.d/raspi.list ]
 then
     sudo mv ./sources.list.d/raspi.list ./sources.list.d/raspi.list.bak
 fi
-sudo mv sources.list sources.list.bak
+
+# sudo mv sources.list sources.list.bak
+sudo bash -c 'cat > sources.list.rpi << EOF
+deb http://mirrordirector.raspbian.org/raspbian/ stretch main contrib non-free rpi
+# Uncomment line below then "apt-get update" to enable "apt-get source"
+#deb-src http://archive.raspbian.org/raspbian/ stretch main contrib non-free rpi
+EOF'
+
 sudo bash -c 'cat > sources.list << EOF
 deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi
 #deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi
 EOF'
 echo "Change sources to USTC sources."
 
-sudo cp rpi-init.sh ${MEDIA_ADDR}/rootfs/etc/init.d/rpi-init.sh
-echo "Set up rpi-init.sh for first boot."
+# sudo cp ${SCRIPT_PATH}/rpi-init.sh ${MEDIA_PATH}/rootfs/etc/init.d/rpi-init.sh
+# echo "Set up rpi-init.sh for first boot."
+
+################################################################################
+# unmount and clear
+################################################################################
+if [ "${WAIT_FOR_UNMOUNT}" = true ] ;
+then
+   sudo umount ${MEDIA_PATH}/boot 
+   sudo umount ${MEDIA_PATH}/rootfs
+   sudo losetup -d ${LOOP_PATH}
+fi
