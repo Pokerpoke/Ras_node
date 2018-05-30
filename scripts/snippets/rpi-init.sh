@@ -14,12 +14,13 @@
 ################################################################################
 
 # SCRIPT_PATH=$(readlink -f "$0")
+sudo apt update
 sudo apt-get install -y git \
                    zsh \
                    htop \
                    tree \
                    vim \
-                   gstreamer1.0
+                   gstreamer-tools
 
 sh -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/snippets/docker-install.sh -O -)"
 sh -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/snippets/mavproxy-install.sh -O -)"
