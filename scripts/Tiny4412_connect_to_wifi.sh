@@ -13,6 +13,21 @@
 # 
 ################################################################################
 
+while getopts 'i:' OPT;
+do
+    case ${OPT} in
+        i)
+            INTERFACE=${OPTARG}
+            ;;
+        ?)
+            echo "Useage :
+            -i specify interface(default: wlan0)
+            "
+            exit 0
+            ;;
+    esac
+done
+
 # 判断wpa配置文件是否存在，不存在则创建
 if [ ! -d /etc/wpa_supplicant ] 
 then
@@ -36,11 +51,11 @@ fi
 # -D 驱动，wext通用驱动
 # -i interface 网卡接口
 # -c 配置文件
-wpa_supplicant -B -Dwext -iwlan0 -c/etc/wpa_supplicant/wpa_supplicant.conf
+wpa_supplicant -B -Dwext -i${INTERFACE} -c/etc/wpa_supplicant/wpa_supplicant.conf
 
-# restart wlan0 to work
-ifconfig wlan0 down
-ifconfig wlan0 up
+# restart ${INTERFACE} to work
+ifconfig ${INTERFACE} down
+ifconfig ${INTERFACE} up
 
 # remove dsr
 lsmod | grep dsr
@@ -50,4 +65,4 @@ then
 fi
 
 # dhcp
-udhcpc -i wlan0
+udhcpc -i ${INTERFACE}
