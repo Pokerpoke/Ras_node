@@ -12,9 +12,6 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
-
-# set -e
-
 INTERFACE=wlan0
 
 while getopts 'i:' OPT;
@@ -47,7 +44,14 @@ ap_scan=1
 network={
     ssid="411-D-Link"
     psk="aerolab411"
+    priority=1
 }
+
+# network={
+#     ssid="AeroNet411"
+#     psk="aerolab411"
+#     priority=2
+# }
 EOF
 fi
 
@@ -55,6 +59,10 @@ fi
 # -D 驱动，wext通用驱动
 # -i interface 网卡接口
 # -c 配置文件
+if [ -f /var/run/wpa_supplicant/wlan0 ]
+then
+    rm /var/run/wpa_supplicant/wlan0
+fi
 wpa_supplicant -B -Dwext -i${INTERFACE} -c/etc/wpa_supplicant/wpa_supplicant.conf
 
 # restart ${INTERFACE} to work
@@ -63,7 +71,7 @@ ifconfig ${INTERFACE} up
 
 # remove dsr
 lsmod | grep dsr
-if [ $? -e 0 ]
+if [ $? -eq 0 ]
 then
     rmmod dsr
 fi
