@@ -13,7 +13,9 @@
 #
 ################################################################################
 
-IMAGE_NAME=2017-11-29-raspbian-stretch.img
+set -e
+
+IMAGE_NAME=2018-04-18-raspbian-stretch.img
 IMAGE_PATH=~/Downloads/${IMAGE_NAME}
 while getopts 'dp:m' OPT;
 do
@@ -36,12 +38,13 @@ do
             fi
             LOOP_PATH=$(sudo losetup --show -f -P ${IMAGE_PATH})
             echo "${LOOP_PATH}"
-            sudo mount ${LOOP_PATH}p1 /media/${USER}/boot
-            sudo mount ${LOOP_PATH}p2 /media/${USER}/rootfs
+            sudo mount -w ${LOOP_PATH}p1 /media/${USER}/boot
+            sudo mount -w ${LOOP_PATH}p2 /media/${USER}/rootfs
             WAIT_FOR_UNMOUNT=true
             ;;
         ?)
-            echo "Useage :
+            echo "Usage :
+            default usage is ./image-init.sh -dm
             -a use axel for high speed.
             -d download image files from 192.168.0.9.
             -p specify the image file path.

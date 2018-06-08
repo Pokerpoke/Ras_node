@@ -20,7 +20,8 @@ sudo apt-get install -y git \
                    htop \
                    tree \
                    vim \
-                   gstreamer-tools
+                   gstreamer-tools \
+                   gstreamer1.0-tools
 
 sh -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/snippets/docker-install.sh -O -)"
 sh -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/snippets/mavproxy-install.sh -O -)"
