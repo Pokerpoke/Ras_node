@@ -31,6 +31,11 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_DEBUG}")
 
 cmake_minimum_required(VERSION 2.8.6)
 
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+    add_definitions(-DENABLE_DEBUG)
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
+endif()
+
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
@@ -42,12 +47,6 @@ include(CheckIncludeFileCXX)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in 
                ${CMAKE_CURRENT_BINARY_DIR}/aeronode-runtime/include/aeronode/config.h
                )
-# include_directories(${CMAKE_BINARY_DIR})
-
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
-    add_definitions(-DENABLE_DEBUG)
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
-endif()
 
 # add module path
 set(CMAKE_MODULE_PATH 
@@ -103,10 +102,10 @@ find_package(Doxygen)
         message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
     endif(DOXYGEN_FOUND)
 
-set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
-set(AN_LIBRARIES_DIR lib CACHE PATH "Path to install libraries")
-set(AN_BINARIES_DIR bin CACHE PATH "Path to install binaries")
-set(AN_ETC_DIR etc CACHE PATH "Path to install etc directories")
+set(AN_INCLUDE_DIR usr/include CACHE PATH "Path to install header files")
+set(AN_LIBRARIES_DIR usr/lib CACHE PATH "Path to install libraries")
+set(AN_BINARIES_DIR usr/bin CACHE PATH "Path to install binaries")
+set(AN_ETC_DIR usr/share/aero-node CACHE PATH "Path to install etc directories")
 
 # 设置可执行文件输出目录
 # set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

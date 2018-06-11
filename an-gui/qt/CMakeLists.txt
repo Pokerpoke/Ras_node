@@ -28,7 +28,7 @@ target_link_libraries(aero-node an_gui_qt)
 ################################################################################
 install(DIRECTORY themes
         DESTINATION ${AN_ETC_DIR}
-        COMPONENT "themes")
+        COMPONENT "aero-node/themes")
 
 install(TARGETS
         aero-node
