@@ -107,11 +107,6 @@ set(AN_LIBRARIES_DIR usr/lib CACHE PATH "Path to install libraries")
 set(AN_BINARIES_DIR usr/bin CACHE PATH "Path to install binaries")
 set(AN_ETC_DIR usr/share/aero-node CACHE PATH "Path to install etc directories")
 
-# 设置可执行文件输出目录
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-# set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-# set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-
 include_directories(aeronode-runtime/include
                     ${CMAKE_BINARY_DIR}/include
                     an-g729/include
