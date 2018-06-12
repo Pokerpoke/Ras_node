@@ -15,4 +15,22 @@
 #ifndef _CONFIG_PARSER_H_
 #define _CONFIG_PARSER_H_
 
+#include <string>
+#include "aeronode/config.h"
+#ifdef AN_TARGET_TINY4412
+#include "aeronode/config_ini.h"
+#else
+#include "aeronode/config_json.h"
+#endif
+
+#ifdef AN_TARGET_TINY4412
+// ConfigureINI ANConfigure("/etc/aeronode/configure.ini");
+
+an::core::ConfigureINI ANConfigure("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.ini");
+#else
+// ConfigureJSON ANConfigure("/etc/aeronode/configure.json");
+
+an::core::ConfigureJSON ANConfigure("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.json");
+#endif
+
 #endif // !_CONFIG_PARSER_H_

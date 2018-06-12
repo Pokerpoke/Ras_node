@@ -14,9 +14,11 @@
  */
 #include "aeronode/config.h"
 #include "aeronode/logger.h"
-#include "aeronode/config_ini.h"
+#include "aeronode/config_parser.h"
 
-#ifndef AN_TARGET_TINY4412
+#ifdef AN_TARGET_TINY4412
+#include "aeronode/config_ini.h"
+#else
 #include "aeronode/config_json.h"
 #endif // !AN_TARGET_TINY4412
 
@@ -26,17 +28,21 @@ int main(int argc, char const *argv[])
 {
     logger_init();
 
+#ifdef AN_TARGET_TINY4412
     ConfigureINI c_ini("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.ini");
 
     LOG(INFO) << c_ini.get_string("server", "ip", "192.168.0.1");
     LOG(INFO) << c_ini.get_integer("server", "listen_port", 8336);
 
-#ifndef AN_TARGET_TINY4412
+#else
     ConfigureJSON c_json("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.json");
 
     LOG(INFO) << c_json.get_string("video", "codec", "UNKNOWN");
     LOG(INFO) << c_json.get_integer("video", "height", 400);
 #endif // !AN_TARGET_TINY4412
+
+    LOG(INFO) << ANConfigure.get_integer("voice", "rate", 8000);
+    LOG(INFO) << ANConfigure.get_string("voice", "codec", "UNKNOWN");
 
     getchar();
 
