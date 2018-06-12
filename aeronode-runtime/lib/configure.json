@@ -1,0 +1,20 @@
+{
+    "server": {
+        "listen_port": 8338,
+        "ip": "192.168.0.22"
+    },
+    "video": {
+        "width": 600,
+        "height": 480.01,
+        "codec": "h264"
+    },
+    "voice": {
+        "channels": 2,
+        "rate": 8000,
+        "frames": 40,
+        "codec": "g729"
+    },
+    "client": {
+        "dest_ip": "192.168.0.23"
+    }
+}

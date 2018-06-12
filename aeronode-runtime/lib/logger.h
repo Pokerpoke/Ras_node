@@ -8,7 +8,7 @@
  * @brief    日志记录头文件
  * @version  0.0.1
  * 
- * Last Modified:  2018-01-19
+ * Last Modified:  2018-06-11
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -52,8 +52,12 @@
 #define AN_LOG_NOTSET log4cpp::Priority::NOTSET
 #endif // !AN_LOG_NOTSET
 
+#ifdef ENABLE_DEBUG
 // 使用 LOG(WARN) << "message" 来记录日志
 #define LOG(__level) log4cpp::Category::getRoot() << log4cpp::Priority::__level << "\n\t" << __FILE__ << " " << __LINE__ << ": "
+#else
+#define LOG(__level) log4cpp::Category::getRoot() << log4cpp::Priority::__level << " : "
+#endif
 
 /**
  * @brief 输出日志到std::cout

@@ -24,7 +24,7 @@ fi
 
 # get CMAKE_SOURCE_DIR
 CMAKE_SOURCE_DIR=$(dirname $(readlink -f "$0"))
-cd ${CMAKE_SOURCE_DIR}/..
+cd ${CMAKE_SOURCE_DIR}/../..
 
 # update CMAKE_SOURCE_DIR
 CMAKE_SOURCE_DIR=$(pwd)
@@ -56,9 +56,9 @@ make -j4
 make install
 
 # copy files
-scp -rp ./bin/* root@${DESTIP}:/home/aero-node/
-scp -rp ./etc/* root@${DESTIP}:/home/aero-node/
-scp -rp ./lib/* root@${DESTIP}:/usr/lib/
-scp -p ${CMAKE_SOURCE_DIR}/scripts/an-run root@${DESTIP}:/bin/
+scp -rp ./usr/bin/* root@${DESTIP}:/home/aero-node/
+scp -rp ./usr/share/* root@${DESTIP}:/home/aero-node/
+scp -rp ./usr/lib/* root@${DESTIP}:/usr/lib/
+# scp -p ${CMAKE_SOURCE_DIR}/scripts/an-run root@${DESTIP}:/bin/
 
 # ssh -l root ${DESTIP} "an-run /home/aero-node/main"

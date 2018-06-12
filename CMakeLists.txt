@@ -108,7 +108,7 @@ set(AN_BINARIES_DIR usr/bin CACHE PATH "Path to install binaries")
 set(AN_ETC_DIR usr/share/aero-node CACHE PATH "Path to install etc directories")
 
 include_directories(aeronode-runtime/include
-                    ${CMAKE_BINARY_DIR}/include
+                    ${CMAKE_BINARY_DIR}/aeronode-runtime/include
                     an-g729/include
                     )
 
@@ -123,7 +123,7 @@ add_subdirectory(binary)
 # install files
 ################################################################################
 install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/aeronode-runtime/include/aeronode/config.h
+        ${CMAKE_BINARY_DIR}/aeronode-runtime/include/aeronode/config.h
         DESTINATION ${AN_INCLUDE_DIR}/aeronode
         COMPONENT "runtime_devel"
         )

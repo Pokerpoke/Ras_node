@@ -14,7 +14,7 @@
 ################################################################################
 
 CMAKE_SOURCE_DIR=$(dirname $(readlink -f "$0"))
-cd ${CMAKE_SOURCE_DIR}/..
+cd ${CMAKE_SOURCE_DIR}/../..
 # update CMAKE_SOURCE_DIR
 CMAKE_SOURCE_DIR=$(pwd)
 

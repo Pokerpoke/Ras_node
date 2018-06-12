@@ -13,7 +13,7 @@
 # 
 ################################################################################
 
-base=aeronode
+base=aero-node
 
 # See how we were called.
 case "$1" in
@@ -24,7 +24,7 @@ case "$1" in
     stop)
         pid=`/bin/pidof ${base}`
         if [ -n "${pid}" ]; then
-                kill -9 ${pid}
+            kill -9 ${pid}
         fi
         ;;
     restart)
