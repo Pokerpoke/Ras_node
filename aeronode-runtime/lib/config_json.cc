@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-12
+ * Last Modified:  2018-06-13
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -33,28 +33,32 @@ std::string ConfigureJSON::get(const std::string &section,
                                const std::string &key,
                                const std::string &default_value) const
 {
-    return _config->at(section).at(key).is_string() ? _config->at(section).at(key).dump() : default_value;
+    return _config->at(section).at(key).is_string() ? _config->at(section).at(key).dump()
+                                                    : default_value;
 }
 
 std::string ConfigureJSON::get_string(const std::string &section,
                                       const std::string &key,
                                       const std::string &default_value) const
 {
-    return _config->at(section).at(key).is_string() ? _config->at(section).at(key).get<std::string>() : default_value;
+    return _config->at(section).at(key).is_string() ? _config->at(section).at(key).get<std::string>()
+                                                    : default_value;
 }
 
 int ConfigureJSON::get_integer(const std::string &section,
                                const std::string &key,
                                const int &default_value) const
 {
-    return _config->at(section).at(key).is_number() ? _config->at(section).at(key).get<int>() : default_value;
+    return _config->at(section).at(key).is_number() ? _config->at(section).at(key).get<int>()
+                                                    : default_value;
 }
 
 double ConfigureJSON::get_double(const std::string &section,
                                  const std::string &key,
                                  const double &default_value) const
 {
-    return _config->at(section).at(key).is_number() ? _config->at(section).at(key).get<double>() : default_value;
+    return _config->at(section).at(key).is_number() ? _config->at(section).at(key).get<double>()
+                                                    : default_value;
 }
 
 ConfigureJSON::~ConfigureJSON()
