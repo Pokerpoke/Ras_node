@@ -12,6 +12,7 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
+set -e
 
 # SCRIPT_PATH=$(readlink -f "$0")
 sudo apt update

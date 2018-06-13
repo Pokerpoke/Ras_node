@@ -12,6 +12,7 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
+set -e
 
 sudo apt-get update
 sudo apt-get install -y\
