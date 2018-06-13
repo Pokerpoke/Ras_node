@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-12
+ * Last Modified:  2018-06-13
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -16,6 +16,7 @@
 #define _CONFIG_PARSER_H_
 
 #include <string>
+
 #include "aeronode/config.h"
 #ifdef AN_TARGET_TINY4412
 #include "aeronode/config_ini.h"
