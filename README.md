@@ -10,19 +10,13 @@
 
 - 文档生成：[Doxygen](www.doxygen.org/)
 
-  - Doxygen依赖[Graphviz](http://www.graphviz.org/)生成类关系图
-
-    ```shell
-    sudo apt install graphviz
-    ```
-
 - 其他依赖：
+
+  - Doxygen依赖[Graphviz](http://www.graphviz.org/)生成类关系图
 
   - [ALSA](https://www.alsa-project.org/main/index.php/Main_Page)
 
-    ```shell
-    sudo apt install libasound2-dev
-    ```
+  - [bcg729](https://github.com/BelledonneCommunications/bcg729)
 
   - [JRTPLIB](http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html)
 
@@ -32,6 +26,14 @@
 
   - [BCG729](https://github.com/BelledonneCommunications/bcg729)
 
+### 安装依赖
+
+```shell
+sudo apt-get install -y cmake libasound2-dev doxygen graphviz liblog4cpp5-dev
+```
+
+Tiny4412交叉编译环境，请在实验室局域网环境下执行`scripts/set-up-cross-compile-environment.sh`
+
 ## 编译
 
 ```shell
@@ -39,6 +41,10 @@ mkdir build
 cd build
 cmake ..
 make
+# collect binaries and libraries
+make install
+# @TODO uncomment this line when complete
+# sudo make install
 ```
 
 示例程序位于`example`目录下
@@ -53,11 +59,15 @@ make
 
   - Tiny4412
 
-    修改`cmake/toolschain/CMakeLists.txt`中的`TOOL_CHAIN_DIR`为相应地址
+    *可选* 修改`cmake/toolschain/CMakeLists.txt`中的`TOOL_CHAIN_DIR`为相应地址
 
     ```shell
-    cmake -DCMAKE_BUILD_TARGET=Tiny4412 ..
+    cmake -DCMAKE_BUILD_TARGET=Tiny4412 -DCMAKE_BUILD_TYPE=Debug ..
     ```
+
+  - RPi
+
+    @TODO
 
 - 生成API文档
 
@@ -69,4 +79,6 @@ make
 
   [aero-node API](https://pokerpoke.github.io/Ras_node/)
 
-## Docker
+## 树莓派
+
+树莓派镜像初始化工具位于`scripts/RPi`目录下
