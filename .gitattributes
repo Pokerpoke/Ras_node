@@ -1,7 +1,19 @@
 # Whitespace rules
 # strict (no trailing, no tabs)
-*.cpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
-*.hpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
-*.c         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
-*.cc        whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
-*.h         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+# *.cpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+# *.hpp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+# *.c         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+# *.cc        whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+# *.h         whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+
+*.c             text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.cc            text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.cpp           text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.h             text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.hh            text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.hpp           text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.yml           text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.in            text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+CMakeLists.txt  text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.sh            text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
+*.md            text eol=lf whitespace=blank-at-eol,-blank-at-eof,-space-before-tab
