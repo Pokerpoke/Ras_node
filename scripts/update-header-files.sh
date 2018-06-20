@@ -30,7 +30,7 @@ function update-header-files()
         exit 1
     fi
 
-    rsync $1/lib/*.h $1/include/aeronode/
+    rsync $1/lib/*.h $1/include/$1/
 }
 
 rsync aeronode-runtime/lib/*.h aeronode-runtime/include/aeronode/
