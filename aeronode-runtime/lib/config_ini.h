@@ -18,7 +18,7 @@
 
 #include <string>
 
-#include "aeronode/INIReader.h"
+#include "aeronode/ini_reader.h"
 
 namespace an
 {

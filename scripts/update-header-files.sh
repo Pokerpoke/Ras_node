@@ -30,10 +30,10 @@ function update-header-files()
         exit 1
     fi
 
-    cp $1/lib/*.h $1/include/$1/
+    rsync $1/lib/*.h $1/include/aeronode/
 }
 
-cp aeronode-runtime/lib/*.h aeronode-runtime/include/aeronode/
+rsync aeronode-runtime/lib/*.h aeronode-runtime/include/aeronode/
 
 update-header-files an-g729
 # update-header-files an-gui
