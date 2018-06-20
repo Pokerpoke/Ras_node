@@ -13,6 +13,7 @@
  * 
  */
 
+#include <cstddef>
 #include "aeronode/logger.h"
 
 #include "config_ini.h"
