@@ -102,6 +102,7 @@ find_package(Doxygen)
         message(STATUS "Doxygen need to be installed to generate the doxygen documentation")
     endif(DOXYGEN_FOUND)
 
+# install paths
 set(AN_INCLUDE_DIR usr/include CACHE PATH "Path to install header files")
 set(AN_LIBRARIES_DIR usr/lib CACHE PATH "Path to install libraries")
 set(AN_BINARIES_DIR usr/bin CACHE PATH "Path to install binaries")
@@ -113,7 +114,7 @@ include_directories(aeronode-runtime/include
                     )
 
 add_subdirectory(aeronode-runtime)
-add_subdirectory(an-gui)
+add_subdirectory(an-qt)
 add_subdirectory(an-g729)
 
 # build executable program

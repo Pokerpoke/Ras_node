@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-12
+ * Last Modified:  2018-06-20
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -23,7 +23,7 @@
 #include "aeronode/config.h"
 #include "aeronode/logger.h"
 
-#include "developer_tools.h"
+#include "an-qt/developer_tools.h"
 
 using namespace std;
 using namespace an::gui::qt;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 
     string themes_dir;
 #ifdef ENABLE_DEBUG
-    themes_dir += "an-gui/qt/themes/light.qss";
+    themes_dir += "an-qt/themes/light.qss";
 #else
     themes_dir += "themes/light-tiny4412.qss";
 #endif

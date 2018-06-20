@@ -1,11 +1,11 @@
-aux_source_directory(. AN_GUI_QT_LIB)
+aux_source_directory(. AN_QT_LIB)
 
-add_library(an_gui_qt 
+add_library(an_qt 
             SHARED 
-            ${AN_GUI_QT_LIB}
+            ${AN_QT_LIB}
             )
 
-target_link_libraries(an_gui_qt
+target_link_libraries(an_qt
                       an-core
                       Qt4::QtCore 
                       Qt4::QtGui
@@ -16,7 +16,7 @@ target_link_libraries(an_gui_qt
 # install files
 ################################################################################
 install(TARGETS
-        an_gui_qt
+        an_qt
         DESTINATION ${AN_LIBRARIES_DIR}
-        COMPONENT "an_gui_qt_libraries"
+        COMPONENT "an_qt_libraries"
         )

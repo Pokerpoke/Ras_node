@@ -1,5 +1,5 @@
-include_directories(include())
+include_directories(include)
 
 add_subdirectory(lib)
 add_subdirectory(example)
-add_subdirectory(include/an-g729)
+add_subdirectory(include/aeronode/an-g729)
