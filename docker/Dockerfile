@@ -21,5 +21,10 @@ RUN apt-get update \
     graphviz \
     sudo \
     wget \
-    && apt-get clean \
-    && bash -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/set-up-cross-compile-environment.sh -O -)"
+    apt-utils \
+    && apt-get clean
+
+RUN git clone http://192.168.0.9:8086/git/Pokerpoke/aero-node.git \
+    && cd aero-node \
+    && ./script/set-up-cross-compile-environment.sh \
+    && cd .. && rm -rf aero-node
