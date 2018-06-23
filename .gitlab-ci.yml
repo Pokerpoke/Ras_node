@@ -1,22 +1,25 @@
-image: 192.168.0.9:5000/aeronode-ci:0.2
-
+image: 192.168.0.9:5000/aeronode-ci:latest
 aero-node:
   script:
     - mkdir build && cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release ..
+    - cmake -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_TEST ..
     - make
     - make doc
+    - make test
 
 aero-node-debug:
   script:
     - mkdir build && cd build
-    - cmake -DCMAKE_BUILD_TYPE=Debug ..
+    - cmake -DCMAKE_BUILD_TYPE=Debug \
+            -DENABLE_TEST ..
     - make
+    - make test
 
 aero-node-Tiny4412:
   script:
     - export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
     - mkdir build && cd build
     - cmake -DCMAKE_BUILD_TARGET=Tiny4412 \
-      -DCMAKE_BUILD_TYPE=Debug ..
+            -DCMAKE_BUILD_TYPE=Debug ..
     - make

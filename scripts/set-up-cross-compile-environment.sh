@@ -149,9 +149,45 @@ function git_cmake()
     cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
 }
 
+function git_cmake_no_cross_compile()
+{
+    if test -z "$1"
+    then
+        echo "please input git repository"
+        exit 1
+    fi
+
+    # if exist, clean it
+    cd ${CMAKE_SOURCE_DIR}/scripts 
+    if [ -d temp ]
+    then
+        rm -rf temp
+    fi
+
+    # preparation
+    PROJECT_DIR="${CMAKE_SOURCE_DIR}/scripts/temp"
+    git clone $1 temp
+    if [ $? -ne 0 ]
+    then
+        echo "git clone failed, plaese try again"
+        exit 1
+    fi
+    cd ${PROJECT_DIR}
+    # build for host
+    mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
+
+    # build for cross compile toolschain
+    # copy toolschain file
+    mkdir -p cmake/toolschain && cp -vR ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake ./cmake/toolschain/
+
+    # clean
+    cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
+}
+
 git_cmake http://192.168.0.9:8086/git/aero-node/JThread.git
 git_cmake http://192.168.0.9:8086/git/aero-node/JRTPLIB.git
 git_cmake http://192.168.0.9:8086/git/aero-node/bcg729.git
+git_cmake_no_cross_compile http://192.168.0.9:8086/git/aero-node/googletest.git
 
 # update ldconfig
 sudo ldconfig
