@@ -31,15 +31,16 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_DEBUG}")
 
 cmake_minimum_required(VERSION 2.8.6)
 
+# Enable test or not
+option(ENABLE_TEST "Enable test or not" OFF)
+
 # Check debug flag
 # #define confilt with log4cpp, so use ENABLE_DEBUG to enable debug
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
+    set(ENABLE_TEST ON)
 endif()
-
-# Enable test or not
-option(ENABLE_TEST "Enable test or not" OFF)
 
 # 使用C++11编译
 set(CMAKE_CXX_STANDARD 11)
@@ -122,11 +123,12 @@ include_directories(aeronode-runtime/include
 # unit test
 ################################################################################
 if(ENABLE_TEST)
-    find_package(GTest)
+    find_package(GTest REQUIRED)
         if(GTEST_FOUND)
             include(GoogleTest)
             include_directories(${GTEST_INCLUDE_DIR})
             enable_testing()
+            message(STATUS "Enable test")
         else (GTEST_FOUND)
             message(STATUS "Google test libraries is needs when enable test")
         endif(GTEST_FOUND)

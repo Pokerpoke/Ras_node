@@ -2,17 +2,14 @@ image: 192.168.0.9:5000/aeronode-ci:latest
 aero-node:
   script:
     - mkdir build && cd build
-    - cmake -DCMAKE_BUILD_TYPE=Release \
-            -DENABLE_TEST=True ..
+    - cmake -DCMAKE_BUILD_TYPE=Release ..
     - make -j6
     - make doc
-    - make test
 
 aero-node-debug:
   script:
     - mkdir build && cd build
-    - cmake -DCMAKE_BUILD_TYPE=Debug \
-            -DENABLE_TEST=True ..
+    - cmake -DCMAKE_BUILD_TYPE=Debug ..
     - make -j6
     - make test
 
