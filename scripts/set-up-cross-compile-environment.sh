@@ -14,8 +14,8 @@
 ################################################################################
 
 # get scripts directory
-CMAKE_SOURCE_DIR=$(dirname $(readlink -f $0))
-cd ${CMAKE_SOURCE_DIR}/..
+SCRIPT_DIR=$(dirname $(readlink -f $0))
+cd ${SCRIPT_DIR}/..
 # update cmake source path
 CMAKE_SOURCE_DIR=$(pwd)
 SYS_ROOT_DIR="/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root"
@@ -58,7 +58,7 @@ then
     rm -rf aero-node-tools
 fi
 
-mkdir ${CMAKE_SOURCE_DIR}/scripts/aero-node-tools && cd ${CMAKE_SOURCE_DIR}/scripts/aero-node-tools
+mkdir ${SCRIPT_DIR}/aero-node-tools && cd ${SCRIPT_DIR}/aero-node-tools
 
 wget -c -t 5 http://192.168.0.9/share/aero-node-tools/log4cpp-1.1.3.tar.gz
 wget -c -t 5 http://192.168.0.9/share/aero-node-tools/target-qte-4.8.5-to-hostpc.tgz
@@ -84,18 +84,18 @@ make
 
 # it is unable to pass environment variable to sudo commands
 # so, use a shell script to run make install
-cat > ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh << EOF
+cat > ${SCRIPT_DIR}/temp_make-install.sh << EOF
 #!/bin/bash
 
 export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 
 make install
 EOF
-sudo bash ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh
-rm ${CMAKE_SOURCE_DIR}/scripts/temp_make-install.sh
+sudo bash ${SCRIPT_DIR}/temp_make-install.sh
+rm ${SCRIPT_DIR}/temp_make-install.sh
 
 # clean
-cd ${CMAKE_SOURCE_DIR}/scripts 
+cd ${SCRIPT_DIR}
 rm -rf aero-node-tools
 
 # add to path
@@ -110,14 +110,14 @@ function git_cmake()
     fi
 
     # if exist, clean it
-    cd ${CMAKE_SOURCE_DIR}/scripts 
+    cd ${SCRIPT_DIR}
     if [ -d temp ]
     then
         rm -rf temp
     fi
 
     # preparation
-    PROJECT_DIR="${CMAKE_SOURCE_DIR}/scripts/temp"
+    PROJECT_DIR="${SCRIPT_DIR}/temp"
     git clone $1 temp
     if [ $? -ne 0 ]
     then
@@ -146,7 +146,7 @@ function git_cmake()
     make && sudo make install
 
     # clean
-    cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
+    cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
 }
 
 function git_cmake_no_cross_compile()
@@ -158,14 +158,14 @@ function git_cmake_no_cross_compile()
     fi
 
     # if exist, clean it
-    cd ${CMAKE_SOURCE_DIR}/scripts 
+    cd ${SCRIPT_DIR} 
     if [ -d temp ]
     then
         rm -rf temp
     fi
 
     # preparation
-    PROJECT_DIR="${CMAKE_SOURCE_DIR}/scripts/temp"
+    PROJECT_DIR="${SCRIPT_DIR}/temp"
     git clone $1 temp
     if [ $? -ne 0 ]
     then
@@ -177,7 +177,7 @@ function git_cmake_no_cross_compile()
     mkdir build && cd build && cmake .. && make && sudo make install
 
     # clean
-    cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}
+    cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
 }
 
 git_cmake http://192.168.0.9:8086/git/aero-node/JThread.git
