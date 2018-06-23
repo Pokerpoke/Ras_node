@@ -2,6 +2,5 @@ build
 .vs
 .vscode
 log
-test*
 temp_*
 CMakeSettings.json
