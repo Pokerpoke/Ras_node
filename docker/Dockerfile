@@ -22,4 +22,4 @@ RUN apt-get update \
     sudo \
     wget \
     && apt-get clean \
-    && sh -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/set-up-cross-compile-environment.sh -O -)"
+    && bash -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/set-up-cross-compile-environment.sh -O -)"
