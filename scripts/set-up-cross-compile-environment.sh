@@ -130,7 +130,7 @@ function git_cmake()
 
     # build for cross compile toolschain
     # copy toolschain file
-    mkdir -p cmake/toolschain && wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/cmake/toolschain/Tiny4412.cmake -O cmake/toolschain/Tiny4412.cmake
+    mkdir -p cmake/toolschain && wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/cmake/toolschain/Tiny4412.cmake -O ./cmake/toolschain/Tiny4412.cmake
 
     # insert cmake toolschain file path into CMakeLists.txt
     sed -i "1i \
@@ -174,11 +174,7 @@ function git_cmake_no_cross_compile()
     fi
     cd ${PROJECT_DIR}
     # build for host
-    mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
-
-    # build for cross compile toolschain
-    # copy toolschain file
-    mkdir -p cmake/toolschain && wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/cmake/toolschain/Tiny4412.cmake -O cmake/toolschain/Tiny4412.cmake
+    mkdir build && cd build && cmake .. && make && sudo make install
 
     # clean
     cd ${CMAKE_SOURCE_DIR}/scripts && rm -rf ${PROJECT_DIR}

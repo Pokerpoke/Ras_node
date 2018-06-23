@@ -21,7 +21,8 @@ RUN apt-get update \
     graphviz \
     sudo \
     wget \
-    apt-utils \
+    qt4-dev-tools \
+    libqtwebkit-dev \
     && apt-get clean
 
 RUN bash -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/set-up-cross-compile-environment.sh -O -)"
