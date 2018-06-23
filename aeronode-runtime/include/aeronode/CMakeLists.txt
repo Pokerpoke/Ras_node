@@ -16,5 +16,5 @@
 # Install
 ################################################################################
 install(DIRECTORY .
-        DESTINATION ${AN_INCLUDE_DIR}/aeronode/an-g729
+        DESTINATION ${AN_INCLUDE_DIR}/aeronode
         FILES_MATCHING PATTERN "*.h")

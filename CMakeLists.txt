@@ -130,7 +130,7 @@ if(ENABLE_TEST)
             enable_testing()
             message(STATUS "Enable test")
         else (GTEST_FOUND)
-            message(STATUS "Google test libraries is needs when enable test")
+            message(STATUS "Google test libraries is needed when enable test")
         endif(GTEST_FOUND)
 endif(ENABLE_TEST)
 
