@@ -21,7 +21,7 @@ cd ${SCRIPT_DIR}/..
 # update cmake source path
 CMAKE_SOURCE_DIR=$(pwd)
 SYS_ROOT_DIR="/opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root"
-cd scripts
+cd ${SCRIPT_DIR}
 
 RED_COLOR='\033[1;31m'
 GREEN_COLOR='\033[1;32m'
