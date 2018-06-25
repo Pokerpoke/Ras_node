@@ -12,6 +12,7 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
+set -e
 
 # get the destation ip
 echo "Enter destination IP (Default : 192.168.0.22) : " 

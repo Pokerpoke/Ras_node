@@ -23,6 +23,7 @@
 #include "aeronode/rtp_receiver.h"
 #include "aeronode/an-g729/g729encoder.h"
 #include "aeronode/an-g729/g729decoder.h"
+#include "aeronode/thread_pool.h"
 
 using namespace std;
 using namespace an::core;
@@ -74,8 +75,9 @@ int main(int argc, char **argv)
     RTPReceiver r(listen_port);
     G729Encoder enc;
     G729Decoder dec;
+    ThreadPool tp(10);
 
-    thread st([&] {
+    tp.push([&] {
         while (1)
         {
             c.capture();
@@ -84,16 +86,10 @@ int main(int argc, char **argv)
         }
     });
 
-    thread rt([&] { r.start_listen([&] {
+    tp.push([&] { r.start_listen([&] {
                         dec.decoder(r.output_buffer, r.output_buffer_size);
                         p.playback(dec.output_buffer, dec.output_buffer_size);
                     }); });
-
-    if (st.joinable())
-        st.join();
-
-    if (rt.joinable())
-        rt.join();
 
     return 0;
 }

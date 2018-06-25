@@ -13,8 +13,8 @@
 # 
 ################################################################################
 
-CMAKE_SOURCE_DIR=$(dirname $(readlink -f "$0"))
-cd ${CMAKE_SOURCE_DIR}/../..
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
+cd ${SCRIPT_DIR}/../..
 # update CMAKE_SOURCE_DIR
 CMAKE_SOURCE_DIR=$(pwd)
 

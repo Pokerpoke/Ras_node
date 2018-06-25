@@ -12,6 +12,8 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
+# exit when errors occur
+set -e
 
 # get scripts directory
 SCRIPT_DIR=$(dirname $(readlink -f $0))
@@ -30,7 +32,6 @@ RES='\033[0m'
 DEPENDENCIES=(
               "git"
               "lib32z1"
-              "cmake"
               "build-essential"
               "liblog4cpp5-dev"
               "qt4-dev-tools"
@@ -51,6 +52,27 @@ for DEP in ${DEPENDENCIES[@]} ; do
         fi
     fi
 done
+
+# if exist, clean it
+cd ${SCRIPT_DIR}
+if [ -d temp ]
+then
+    rm -rf temp
+fi
+
+# preparation
+PROJECT_DIR="${SCRIPT_DIR}/temp"
+git clone http://192.168.0.9:8086/git/Pokerpoke/CMake.git temp
+if [ $? -ne 0 ]
+then
+    echo "git clone failed, plaese try again"
+    exit 1
+fi
+cd ${PROJECT_DIR}
+# build for host
+./bootstrap && make && sudo make install && cd .. && rm -rf build
+# clean
+cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
 
 # if exist, clean it
 if [ -d aero-node-tools ]
