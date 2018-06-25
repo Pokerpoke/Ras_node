@@ -4,11 +4,11 @@
 # Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
 # 
 # @author   姜阳 (j824544269@gmail.com)
-# @date     2018-01
+# @date     2018-06
 # @brief    
 # @version  0.0.1
 # 
-# Last Modified:  2018-01-08
+# Last Modified:  2018-06-24
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
@@ -22,9 +22,9 @@ then
     DESTIP="192.168.0.22"
 fi
 
-# get CMAKE_SOURCE_DIR
-CMAKE_SOURCE_DIR=$(dirname $(readlink -f "$0"))
-cd ${CMAKE_SOURCE_DIR}/../..
+# get SCRIPT_DIR
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
+cd ${SCRIPT_DIR}/../..
 
 # update CMAKE_SOURCE_DIR
 CMAKE_SOURCE_DIR=$(pwd)
@@ -55,10 +55,8 @@ cmake -DCMAKE_BUILD_TYPE=Release \
 make -j4
 make install
 
-# copy files
-scp -rp ./usr/bin/* root@${DESTIP}:/home/aero-node/
-scp -rp ./usr/share/* root@${DESTIP}:/home/aero-node/
-scp -rp ./usr/lib/* root@${DESTIP}:/usr/lib/
-# scp -p ${CMAKE_SOURCE_DIR}/scripts/an-run root@${DESTIP}:/bin/
+tar -cvpf aero-node.tar usr/
 
-# ssh -l root ${DESTIP} "an-run /home/aero-node/main"
+scp aero-node.tar root@${DESTIP}:/home/
+
+ssh root@${DESTIP} "tar -xvpf /home/aero-node.tar -C /"

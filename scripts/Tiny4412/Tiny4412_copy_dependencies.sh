@@ -4,11 +4,11 @@
 # Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
 # 
 # @author   姜阳 (j824544269@gmail.com)
-# @date     2018-01
+# @date     2018-06
 # @brief    
 # @version  0.0.1
 # 
-# Last Modified:  2018-01-08
+# Last Modified:  2018-06-24
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
@@ -57,3 +57,6 @@ scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/li
 
 scp -rp ${CMAKE_SOURCE_DIR}/scripts/Tiny4412_connect_to_wifi.sh \
         root@${DESTIP}:/home/scripts/Tiny4412_connect_to_wifi.sh
+
+scp -rp ${CMAKE_SOURCE_DIR}/scripts/an-run \
+        root@${DESTIP}:/bin/an-run
