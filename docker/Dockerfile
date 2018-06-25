@@ -22,7 +22,9 @@ RUN apt-get update \
     sudo \
     wget \
     qt4-dev-tools \
+    build-essential \
     libqtwebkit-dev \
+    swig3.0 \
     && apt-get clean
 
 RUN bash -c "$(wget http://192.168.0.9/git/Pokerpoke/aero-node/raw/master/scripts/set-up-cross-compile-environment.sh -O -)"
