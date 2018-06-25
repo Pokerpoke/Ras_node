@@ -54,27 +54,6 @@ for DEP in ${DEPENDENCIES[@]} ; do
 done
 
 # if exist, clean it
-cd ${SCRIPT_DIR}
-if [ -d temp ]
-then
-    rm -rf temp
-fi
-
-# preparation
-PROJECT_DIR="${SCRIPT_DIR}/temp"
-git clone http://192.168.0.9:8086/git/Pokerpoke/CMake.git temp
-if [ $? -ne 0 ]
-then
-    echo "git clone failed, plaese try again"
-    exit 1
-fi
-cd ${PROJECT_DIR}
-# build for host
-./bootstrap && make && sudo make install && cd .. && rm -rf build
-# clean
-cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
-
-# if exist, clean it
 if [ -d aero-node-tools ]
 then
     rm -rf aero-node-tools
@@ -120,6 +99,27 @@ rm ${SCRIPT_DIR}/temp_make-install.sh
 cd ${SCRIPT_DIR}
 rm -rf aero-node-tools
 
+# if exist, clean it
+cd ${SCRIPT_DIR}
+if [ -d temp ]
+then
+    rm -rf temp
+fi
+
+# preparation
+PROJECT_DIR="${SCRIPT_DIR}/temp"
+git clone http://192.168.0.9:8086/git/Pokerpoke/CMake.git temp
+if [ $? -ne 0 ]
+then
+    echo "git clone failed, plaese try again"
+    exit 1
+fi
+cd ${PROJECT_DIR}
+# build for host
+./bootstrap && make -j6 && sudo make install && cd .. && rm -rf build
+# clean
+cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
+
 # add to path
 export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 
@@ -148,7 +148,7 @@ function git_cmake()
     fi
     cd ${PROJECT_DIR}
     # build for host
-    mkdir build && cd build && cmake .. && make && sudo make install && cd .. && rm -rf build
+    mkdir build && cd build && cmake .. && make -j6 && sudo make install && cd .. && rm -rf build
 
     # build for cross compile toolschain
     # copy toolschain file
@@ -196,7 +196,7 @@ function git_cmake_no_cross_compile()
     fi
     cd ${PROJECT_DIR}
     # build for host
-    mkdir build && cd build && cmake .. && make && sudo make install
+    mkdir build && cd build && cmake .. && make -j6 && sudo make install
 
     # clean
     cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
