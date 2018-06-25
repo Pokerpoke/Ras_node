@@ -39,7 +39,7 @@ option(ENABLE_TEST "Enable test or not" OFF)
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
-    # set(ENABLE_TEST ON)
+    set(ENABLE_TEST ON)
 endif()
 
 # 使用C++11编译
