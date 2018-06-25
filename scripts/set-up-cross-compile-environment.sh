@@ -12,8 +12,6 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
-# exit when errors occur
-set -e
 
 # get scripts directory
 SCRIPT_DIR=$(dirname $(readlink -f $0))
