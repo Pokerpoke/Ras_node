@@ -38,7 +38,7 @@ option(ENABLE_TEST "Enable test or not" OFF)
 # #define confilt with log4cpp, so use ENABLE_DEBUG to enable debug
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/usr)
     set(ENABLE_TEST ON)
 endif()
 
@@ -79,7 +79,7 @@ include_directories(${JRTPLIB_INCLUDE_DIR})
 find_package(BCG729 REQUIRED)
 include_directories(${BCG729_INCLUDE_DIR})
 
-find_package(SWIG REQUIRED)
+find_package(SWIG)
 include(${SWIG_USE_FILE})
 
 find_package(PythonLibs)
@@ -109,10 +109,10 @@ find_package(Doxygen)
     endif(DOXYGEN_FOUND)
 
 # install paths
-set(AN_INCLUDE_DIR usr/include CACHE PATH "Path to install header files")
-set(AN_LIBRARIES_DIR usr/lib CACHE PATH "Path to install libraries")
-set(AN_BINARIES_DIR usr/bin CACHE PATH "Path to install binaries")
-set(AN_ETC_DIR usr/share/aero-node CACHE PATH "Path to install etc directories")
+set(AN_INCLUDE_DIR include CACHE PATH "Path to install header files")
+set(AN_LIBRARIES_DIR lib CACHE PATH "Path to install libraries")
+set(AN_BINARIES_DIR bin CACHE PATH "Path to install binaries")
+set(AN_ETC_DIR share/aero-node CACHE PATH "Path to install etc directories")
 
 include_directories(aeronode-runtime/include
                     ${CMAKE_BINARY_DIR}/aeronode-runtime/include
@@ -149,3 +149,10 @@ install(FILES
         DESTINATION ${AN_INCLUDE_DIR}/aeronode
         COMPONENT "runtime_devel"
         )
+
+################################################################################
+# Deb package
+################################################################################
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+    include(ANDebPackage)
+endif()
