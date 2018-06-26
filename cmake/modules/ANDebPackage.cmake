@@ -7,7 +7,7 @@ set(CPACK_GENERATOR "DEB")
 #设置版本信息
 set(CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${VERSION_DEBUG}")
+set(CPACK_PACKAGE_VERSION_PATCH "${VERSION_PATCH}")
 
 #设置安装包的包名，打好的包将会是packagename-version-linux.deb，如果不设置，默认是工程名
 set(CPACK_PACKAGE_NAME "aero-node")
@@ -18,6 +18,7 @@ set(CPACK_DEBIAN_PACKAGE_NAME "aero-node")
 #设置架构
 set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "amd64")
 
+# @TODO: add all depends
 #设置依赖
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "liblog4cpp5 libasound2")
 

@@ -29,24 +29,24 @@ namespace core
 {
 class ThreadPool
 {
-public:
-  ThreadPool(size_t n_threads);
-  ~ThreadPool();
-  int push(std::function<void(void)> _task);
-  size_t size() const;
-  size_t tasks_remaining() const;
-  size_t workers_remaining() const;
+  public:
+    ThreadPool(size_t n_threads);
+    ~ThreadPool();
+    int push(std::function<void(void)> _task);
+    size_t size() const;
+    size_t tasks_remaining() const;
+    size_t workers_remaining() const;
 
-  ThreadPool &operator+=(std::function<void(void)> _task);
+    ThreadPool &operator+=(std::function<void(void)> _task);
 
-private:
-  size_t n_threads;
-  std::vector<std::thread> workers;
-  std::queue<std::function<void(void)>> tasks;
+  private:
+    size_t n_threads;
+    std::vector<std::thread> workers;
+    std::queue<std::function<void(void)>> tasks;
 
-  std::mutex queue_mutex;
-  std::condition_variable condition;
-  bool stop;
+    std::mutex queue_mutex;
+    std::condition_variable condition;
+    bool stop;
 };
 } // namespace core
 } // namespace an

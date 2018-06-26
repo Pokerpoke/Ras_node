@@ -26,20 +26,24 @@ project(Aero-Node)
 # set version
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
-set(VERSION_DEBUG 4)
-set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_DEBUG}")
+set(VERSION_PATCH 4)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
 cmake_minimum_required(VERSION 2.8.6)
 
-# Enable test or not
+# enable test or not
 option(ENABLE_TEST "Enable test or not" OFF)
+# enable GUI or not
+option(ENABLE_GUI "Enable GUI or not" OFF)
 
-# Check debug flag
-# #define confilt with log4cpp, so use ENABLE_DEBUG to enable debug
+# check debug flag
+# #define DEBUG confilt with log4cpp, so use ENABLE_DEBUG to enable debug
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/usr)
     set(ENABLE_TEST ON)
+    # @TODO: wait for gui
+    # set(ENABLE_GUI ON)
 endif()
 
 # 使用C++11编译
@@ -79,11 +83,12 @@ include_directories(${JRTPLIB_INCLUDE_DIR})
 find_package(BCG729 REQUIRED)
 include_directories(${BCG729_INCLUDE_DIR})
 
-find_package(SWIG)
-include(${SWIG_USE_FILE})
+# @TODO: wait for swig wraper for python
+# find_package(SWIG)
+# include(${SWIG_USE_FILE})
 
-find_package(PythonLibs)
-include_directories(${PYTHON_INCLUDE_PATH})
+# find_package(PythonLibs)
+# include_directories(${PYTHON_INCLUDE_PATH})
 
 # 添加线程相关的库
 find_package(Threads REQUIRED)
@@ -135,8 +140,12 @@ if(ENABLE_TEST)
 endif(ENABLE_TEST)
 
 add_subdirectory(aeronode-runtime)
-add_subdirectory(an-qt)
 add_subdirectory(an-g729)
+
+# build gui
+if(ENABLE_GUI)
+    add_subdirectory(an-qt)
+endif(ENABLE_GUI)
 
 # build executable program
 add_subdirectory(binary)
@@ -153,6 +162,7 @@ install(FILES
 ################################################################################
 # Deb package
 ################################################################################
+# @TODO: wait for package for ubuntu
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     include(ANDebPackage)
 endif()

@@ -31,8 +31,8 @@ set(CMAKE_AUTORCC ON)
 
 add_subdirectory(lib)
 
-add_executable(aero-node aero-node.cc)
-target_link_libraries(aero-node an_qt)
+add_executable(aero-node-gui aero-node-gui.cc)
+target_link_libraries(aero-node-gui an_qt)
 
 # copy qss files
 # file(COPY themes
@@ -46,7 +46,7 @@ install(DIRECTORY themes
         COMPONENT "aero-node/themes")
 
 install(TARGETS
-        aero-node
+        aero-node-gui
         DESTINATION ${AN_BINARIES_DIR}
         COMPONENT "binaries"
         )

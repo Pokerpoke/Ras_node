@@ -23,18 +23,18 @@ namespace core
 {
 class Task
 {
-public:
-  Task(std::function<void(void)> _task);
-  ~Task();
+  public:
+    Task(std::function<void(void)> _task);
+    ~Task();
 
-  int run();
-  bool terminate();
-  int is_running();
-  bool finished();
+    int run();
+    bool terminate();
+    int is_running();
+    bool finished();
 
-  Task &operator=(std::function<void(void)> _task);
+    Task &operator=(std::function<void(void)> _task);
 
-private:
+  private:
 };
 } // namespace core
 } // namespace an

@@ -8,7 +8,7 @@
  * @brief    UDP客户端
  * @version  0.0.1
  *
- * Last Modified:  2017-12-14
+ * Last Modified:  2018-06-25
  * Modified By:    姜阳 (j824544269@gmail.com)
  *
  */
@@ -37,20 +37,20 @@ namespace core
  * 
  */
 UDPClient::UDPClient(const char *dest_ip, const int dest_port)
-	: _dest_ip(dest_ip), _dest_port(dest_port)
+    : _dest_ip(dest_ip), _dest_port(dest_port)
 {
-	std::memset(&_server_addr, 0, sizeof(_server_addr));
+    std::memset(&_server_addr, 0, sizeof(_server_addr));
 
-	// 设置协议类型
-	_server_addr.sin_family = AF_INET;
-	// 设置目标端口
-	_server_addr.sin_port = htons(_dest_port);
-	// 设置目标IP
-	_server_addr.sin_addr.s_addr = inet_addr(_dest_ip);
+    // 设置协议类型
+    _server_addr.sin_family = AF_INET;
+    // 设置目标端口
+    _server_addr.sin_port = htons(_dest_port);
+    // 设置目标IP
+    _server_addr.sin_addr.s_addr = inet_addr(_dest_ip);
 
-	_SOCKET_CREATED = false;
+    _SOCKET_CREATED = false;
 
-	init();
+    init();
 }
 
 /** 
@@ -64,15 +64,15 @@ UDPClient::UDPClient(const char *dest_ip, const int dest_port)
  */
 int UDPClient::init()
 {
-	_SOCKET_CREATED = false;
-	// 设置传输模式
-	if ((_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
-	{
-		LOG(ERROR) << "Socket create failed.";
-		return -1;
-	}
-	_SOCKET_CREATED = true;
-	return 0;
+    _SOCKET_CREATED = false;
+    // 设置传输模式
+    if ((_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
+    {
+        LOG(ERROR) << "Socket create failed.";
+        return -1;
+    }
+    _SOCKET_CREATED = true;
+    return 0;
 }
 
 /** 
@@ -85,7 +85,7 @@ int UDPClient::init()
  */
 int UDPClient::write(const char *input_buffer)
 {
-	return write(input_buffer, sizeof(input_buffer));
+    return write(input_buffer, sizeof(input_buffer));
 }
 
 /** 
@@ -101,21 +101,21 @@ int UDPClient::write(const char *input_buffer, const int input_buffer_size)
 {
 
 #ifdef ENABLE_DEBUG
-	LOG(INFO) << "Sending data ...";
+    LOG(INFO) << "Sending data ...";
 #endif
 
-	if ((_err = sendto(_socket,							 // Socket
-					   input_buffer,					 // 发送信息
-					   input_buffer_size,				 // 信息大小
-					   0,								 // 标志位
-					   (struct sockaddr *)&_server_addr, // 接收端地址
-					   sizeof(_server_addr))) < 0)		 // 接收端地址大小
-	{
-		LOG(ERROR) << "Send data failed for: "
-				   << strerror(errno);
-		return -1;
-	}
-	return _err;
+    if ((_err = sendto(_socket,                          // Socket
+                       input_buffer,                     // 发送信息
+                       input_buffer_size,                // 信息大小
+                       0,                                // 标志位
+                       (struct sockaddr *)&_server_addr, // 接收端地址
+                       sizeof(_server_addr))) < 0)       // 接收端地址大小
+    {
+        LOG(ERROR) << "Send data failed for: "
+                   << strerror(errno);
+        return -1;
+    }
+    return _err;
 }
 
 /** 
@@ -126,7 +126,7 @@ int UDPClient::write(const char *input_buffer, const int input_buffer_size)
  */
 UDPClient::~UDPClient()
 {
-	close(_socket);
+    close(_socket);
 }
-}
-}
+} // namespace core
+} // namespace an

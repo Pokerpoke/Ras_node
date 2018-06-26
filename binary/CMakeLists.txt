@@ -28,6 +28,7 @@ endforeach()
 ################################################################################
 install(TARGETS
         voice-call
+        aero-node
         DESTINATION ${AN_BINARIES_DIR}
         COMPONENT "binaries"
         )
