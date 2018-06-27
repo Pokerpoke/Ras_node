@@ -8,14 +8,17 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-25
+ * Last Modified:  2018-06-26
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
+#include <chrono>
 #include "aeronode/task.h"
 #include "aeronode/task_queue.h"
 #include "aeronode/thread_pool.h"
 #include "aeronode/logger.h"
+#include "aeronode/signaling.h"
+#include <mutex>
 
 #include "aeronode/voice_capture.h"
 #include "aeronode/voice_playback.h"
@@ -37,24 +40,23 @@ int main(int argc, char const *argv[])
 {
     logger_init();
 
-    ThreadPool tp(10);
+    ThreadPool tp(4);
 
-    for (size_t i = 0; i < 10; i++)
+    Signaling s1;
+    Signaling s2;
+    s1.insert("test", "200");
+    s2.insert("test", "200");
+    mutex m;
+
+    for (size_t i = 0; i < 10000; i++)
     {
-        tp.push([i] {
-            LOG(INFO) << "hello" << i;
-        });
+        tp += [&] {
+            unique_lock<mutex> lock(m);
+            LOG(INFO) << stoi(s1.get("test")) + stoi(s2.get("test"));
+            s1.set("test", to_string(stoi(s1.get("test")) + 1));
+            s2.set("test", to_string(stoi(s2.get("test")) - 1));
+            this_thread::sleep_for(chrono::microseconds(i));
+        };
     }
-    tp += hello;
-
-    TaskQueue tq;
-    Task t(
-        []() -> void {
-            LOG(INFO) << "hello";
-        });
-    tq.add_task();
-    tq += t;
-
-    getchar();
     return 0;
 }

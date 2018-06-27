@@ -20,6 +20,7 @@ foreach(T_FILE_NAME ${EXAMPLE_EXECUTABLE})
 		an-core
 		${LOG4CPP_LIBRARIES}
 		${JRTPLIB_LIBRARIES}
-		${ALSA_LIBRARIES}
+        ${ALSA_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
 	)
 endforeach()

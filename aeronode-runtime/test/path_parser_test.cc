@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-22
+ * Last Modified:  2018-06-26
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -20,14 +20,7 @@ namespace
 TEST(PathParserTest, PathParserTest_First_Test)
 {
     an::core::PathParser p("/first/second/third");
-    EXPECT_STREQ("first", p.get_first().c_str());
-    EXPECT_STREQ("second", p.get_second().c_str());
-    EXPECT_STREQ("third", p.get_third().c_str());
-}
-
-TEST(PathParserTest, PathParserTest_Second_Test)
-{
-    an::core::PathParser p("/first/second/third");
+    EXPECT_STREQ("first", p.get(1).c_str());
     EXPECT_STREQ("first", p.get_first().c_str());
     EXPECT_STREQ("second", p.get_second().c_str());
     EXPECT_STREQ("third", p.get_third().c_str());
