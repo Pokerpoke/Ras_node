@@ -16,7 +16,6 @@
 #include "aeronode/logger.h"
 #include <string>
 #include <cstdio>
-#include "gtest/gtest.h"
 
 using namespace std;
 using namespace an::core;
@@ -25,9 +24,9 @@ int main(int argc, char const *argv[])
 {
     logger_init();
     Signaling s;
-    s.insert("test-key","test-value");
+    s.insert("test-key", "test-value");
     LOG(INFO) << s.get("test-key");
-    s.set("test-key","test-value-modified");
+    s.set("test-key", "test-value-modified");
     LOG(INFO) << s.get("test-key");
     s.remove("test-key");
     LOG(INFO) << s.get("test-key");

@@ -8,7 +8,7 @@
  * @brief    创建一个UDP服务端
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-25
+ * Last Modified:  2018-06-28
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  * @example	qa_udp_server.cc
@@ -21,6 +21,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <functional>
+#include <mutex>
 
 namespace an
 {
@@ -67,6 +68,8 @@ class UDPServer
 	 */
     int start_listen(std::function<void(void)> _payload_process);
 
+    int stop();
+
     /// 输出缓存
     char *output_buffer;
     /// 输出缓存大小
@@ -104,6 +107,8 @@ class UDPServer
 
     /// 标志位
     bool _SOCKET_CREATED;
+    bool _stop;
+    std::mutex _m;
 };
 } // namespace core
 } // namespace an

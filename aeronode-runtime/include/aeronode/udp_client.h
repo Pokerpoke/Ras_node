@@ -8,7 +8,7 @@
  * @brief    UDP客户端
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-14
+ * Last Modified:  2018-06-28
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  * @example	qa_udp_client.cc
@@ -30,7 +30,7 @@ namespace core
 class UDPClient
 {
   public:
-	/** 
+    /** 
 	 * @brief   构造函数
 	 * 
 	 * 初始化相关变量
@@ -39,16 +39,16 @@ class UDPClient
 	 * @param[in]	dest_port	目标端口
 	 * 
 	 */
-	UDPClient(const char *dest_ip, const int dest_port);
-	/** 
+    UDPClient(const char *dest_ip, const int dest_port);
+    /** 
 	 * @brief   析构函数
 	 * 
 	 * 关闭socket
 	 * 
 	 */
-	~UDPClient();
+    ~UDPClient();
 
-	/** 
+    /** 
 	 * @brief   发送数据
 	 * 
 	 * @param[in]    input_buffer	输入缓存
@@ -56,8 +56,8 @@ class UDPClient
 	 * @retval  -1    发送失败
 	 * 
 	 */
-	int write(const char *input_buffer);
-	/** 
+    int write(const char *input_buffer);
+    /** 
 	 * @brief   发送数据
 	 * 
 	 * @param[in]    input_buffer	输入缓存
@@ -66,10 +66,10 @@ class UDPClient
 	 * @retval  -1    发送失败
 	 * 
 	 */
-	int write(const char *input_buffer, const int input_buffer_size);
+    int write(const char *input_buffer, const int input_buffer_size);
 
   protected:
-	/** 
+    /** 
    * @brief   初始化函数
    * 
    * 创建套接字
@@ -78,24 +78,24 @@ class UDPClient
    * @retval  -1   失败
    * 
    */
-	int init();
+    int init();
 
   private:
-	/// 目标地址
-	const char *_dest_ip;
-	/// 目标端口
-	const int _dest_port;
-	/// 套接字
-	int _socket;
-	/// 错误代码
-	int _err;
-	/// 地址结构体
-	struct sockaddr_in _server_addr;
+    /// 目标地址
+    const char *_dest_ip;
+    /// 目标端口
+    const int _dest_port;
+    /// 套接字
+    int _socket;
+    /// 错误代码
+    int _err;
+    /// 地址结构体
+    struct sockaddr_in _server_addr;
 
-	/// 标志位
-	bool _SOCKET_CREATED;
+    /// 标志位
+    bool _SOCKET_CREATED;
 };
-}
-}
+} // namespace core
+} // namespace an
 
 #endif // !_UDP_CLIENT_H_

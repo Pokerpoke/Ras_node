@@ -51,7 +51,7 @@ export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 # make
 # cmake -DCMAKE_BUILD_TYPE=Debug \
 cmake -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/build/Tiny4412 \
+      -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/build/Tiny4412/usr \
       -DCMAKE_BUILD_TARGET=Tiny4412 ../../
 make -j4
 make install

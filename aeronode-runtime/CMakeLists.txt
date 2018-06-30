@@ -2,7 +2,10 @@ include_directories(include)
 
 add_subdirectory(lib)
 add_subdirectory(include/aeronode)
-add_subdirectory(example)
+
+if(ENABLE_EXAMPLE)
+    add_subdirectory(example)
+endif(ENABLE_EXAMPLE)
 
 if(ENABLE_TEST)
     add_subdirectory(test)

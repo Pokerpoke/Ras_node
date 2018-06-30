@@ -8,7 +8,7 @@
  * @brief    UDP服务端例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
+ * Last Modified:  2018-06-29
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -21,20 +21,25 @@ using namespace std;
 
 int main()
 {
-	logger_init();
-	int port = 13374;
+    logger_init();
+    int port = 13374;
 
-	UDPServer s(port);
+    UDPServer s(port);
 
-	thread t([&] {
-		s.start_listen([&] {
-			LOG(INFO) << s.output_buffer;
-		});
-	});
+    thread t([&] {
+        s.start_listen([&] {
+            LOG(INFO) << s.output_buffer;
+        });
+    });
 
-	LOG(INFO) << "Start listen ...";
+    LOG(INFO) << "Start listen ...";
 
-	t.join();
 
-	return 0;
+    s.stop();
+
+    t.detach();
+
+    getchar();
+
+    return 0;
 }

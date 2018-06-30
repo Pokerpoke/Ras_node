@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-26
+ * Last Modified:  2018-06-28
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -44,6 +44,7 @@ class Signaling
     bool set(const std::string &key,
              const int &value);
     bool remove(const std::string &key);
+    bool enable_heartbeat();
 
   private:
     std::map<std::string, std::string> signal;

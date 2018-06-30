@@ -17,8 +17,13 @@
 if(CMAKE_BUILD_TARGET STREQUAL Tiny4412)
     set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/toolschain/Tiny4412.cmake)
     set(AN_BUILD_TARGET "#define AN_TARGET_TINY4412")
+    set(AN_CMAKE_TARGET "Tiny4412")
+elseif(CMAKE_BUILD_TARGET STREQUAL Rpi)
+    set(AN_BUILD_TARGET "#define AN_TARGET_X86")
+    set(AN_CMAKE_TARGET "Rpi")
 else()
     set(AN_BUILD_TARGET "#define AN_TARGET_X86")
+    set(AN_CMAKE_TARGET "x86")
 endif()
 
 # project name
@@ -35,6 +40,10 @@ cmake_minimum_required(VERSION 2.8.6)
 option(ENABLE_TEST "Enable test or not" OFF)
 # enable GUI or not
 option(ENABLE_GUI "Enable GUI or not" OFF)
+# build examples or not
+option(ENABLE_EXAMPLE "Build examples or not" ON)
+# package or not
+option(ENABLE_PACKAGE "Build deb package or not" ON)
 
 # check debug flag
 # #define DEBUG confilt with log4cpp, so use ENABLE_DEBUG to enable debug
@@ -42,13 +51,23 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/usr)
     set(ENABLE_TEST ON)
+    set(ENABLE_EXAMPLE ON)
+    set(ENABLE_PACKAGE ON)
     # @TODO: wait for gui
     # set(ENABLE_GUI ON)
 endif()
 
+if(CMAKE_BUILD_TARGET STREQUAL "Tiny4412")
+    set(ENABLE_TEST OFF)
+    set(ENABLE_EXAMPLE OFF)
+    set(ENABLE_GUI ON)
+    set(ENABLE_PACKAGE OFF)
+endif(CMAKE_BUILD_TARGET STREQUAL "Tiny4412")
+
 # 使用C++11编译
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+# set(CMAKE_CXX_STANDARD 11)
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 # include some modules
 include(CheckIncludeFile)
@@ -163,6 +182,6 @@ install(FILES
 # Deb package
 ################################################################################
 # @TODO: wait for package for ubuntu
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
+if(ENABLE_PACKAGE)
     include(ANDebPackage)
-endif()
+endif(ENABLE_PACKAGE)

@@ -8,7 +8,7 @@
  * @brief    创建一个UDP服务端
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-14
+ * Last Modified:  2018-06-28
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  * @example	qa_udp_server.cc
@@ -21,6 +21,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <functional>
+#include <mutex>
 
 namespace an
 {
@@ -33,7 +34,7 @@ namespace core
 class UDPServer
 {
   public:
-	/** 
+    /** 
 	 * @brief   构造函数
 	 * 
 	 * 初始化相关变量
@@ -41,23 +42,23 @@ class UDPServer
 	 * @param[in]   server_port	监听端口
 	 * 
 	 */
-	UDPServer(const int server_port);
-	/**
+    UDPServer(const int server_port);
+    /**
 	 * @brief	析构函数
 	 * 
 	 * 关闭Socket
 	 * 
 	 */
-	~UDPServer();
+    ~UDPServer();
 
-	/** 
+    /** 
 	 * @brief   开始监听
 	 * 
 	 * 通过继承该类，并重载payload_process函数进行监听
 	 * 
 	 */
-	int start_listen();
-	/** 
+    int start_listen();
+    /** 
 	 * @brief   开始监听
 	 * 
 	 * 回调函数方式，传入函数指针或者lambda函数
@@ -65,15 +66,17 @@ class UDPServer
 	 * @param[in]	_payload_process	数据处理函数
 	 * 
 	 */
-	int start_listen(std::function<void(void)> _payload_process);
+    int start_listen(std::function<void(void)> _payload_process);
 
-	/// 输出缓存
-	char *output_buffer;
-	/// 输出缓存大小
-	int output_buffer_size;
+    int stop();
+
+    /// 输出缓存
+    char *output_buffer;
+    /// 输出缓存大小
+    int output_buffer_size;
 
   private:
-	/** 
+    /** 
 	 * @brief	初始化
 	 * 
 	 * @return  0,-1,-2
@@ -82,30 +85,32 @@ class UDPServer
 	 * @retval	-2	Socket绑定失败
 	 * 
 	 */
-	int init();
-	/** 
+    int init();
+    /** 
 	 * @brief	负载处理函数
 	 * 
 	 */
-	virtual void payload_process(){};
+    virtual void payload_process(){};
 
   private:
-	/// 套接字
-	int _socket;
-	/// 监听端口
-	int _server_port;
-	/// 错误代码
-	int _err;
-	/// 套接字长度
-	socklen_t _len;
+    /// 套接字
+    int _socket;
+    /// 监听端口
+    int _server_port;
+    /// 错误代码
+    int _err;
+    /// 套接字长度
+    socklen_t _len;
 
-	/// 地址结构体
-	struct sockaddr_in _server_addr;
+    /// 地址结构体
+    struct sockaddr_in _server_addr;
 
-	/// 标志位
-	bool _SOCKET_CREATED;
+    /// 标志位
+    bool _SOCKET_CREATED;
+    bool _stop;
+    std::mutex _m;
 };
-}
-}
+} // namespace core
+} // namespace an
 
 #endif // !_UDP_SERVER_H_
