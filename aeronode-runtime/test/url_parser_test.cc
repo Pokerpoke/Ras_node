@@ -8,18 +8,18 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-26
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "aeronode/path_parser.h"
+#include "aeronode/url_parser.h"
 #include "gtest/gtest.h"
 
 namespace
 {
-TEST(PathParserTest, PathParserTest_First_Test)
+TEST(UrlParserTest, UrlParserTest_First_Test)
 {
-    an::core::PathParser p("/first/second/third");
+    an::core::UrlParser p("/first/second/third");
     EXPECT_STREQ("first", p.get(1).c_str());
     EXPECT_STREQ("first", p.get_first().c_str());
     EXPECT_STREQ("second", p.get_second().c_str());

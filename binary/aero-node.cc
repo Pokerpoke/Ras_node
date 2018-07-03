@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-26
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -43,6 +43,18 @@ int main(int argc, char const *argv[])
 
     tp += [] { listen(); };
     tp += [] { send(); };
+
+    // configure_init
+    // Thread_Pool thread_pool
+    // UDP_start_listen --> (
+    //     signaling_parser
+    //     bind_port_and_wait_for_message
+    //     return_status
+    //     thread_pool += service -->(
+    //         create_local_socket
+    //     )
+
+    // )
 
     return 0;
 }

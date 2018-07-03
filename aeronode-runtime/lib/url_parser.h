@@ -8,12 +8,12 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-13
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#ifndef _PATH_PARSER_H_
-#define _PATH_PARSER_H_
+#ifndef _URL_PARSER_H_
+#define _URL_PARSER_H_
 
 #include <string>
 #include <vector>
@@ -22,22 +22,27 @@ namespace an
 {
 namespace core
 {
-class PathParser
+class UrlParser
 {
   public:
-    PathParser(const std::string &path);
-    ~PathParser();
+    UrlParser(const std::string &url);
+    ~UrlParser();
 
     std::string get(int _n);
     std::string get_first();
     std::string get_second();
     std::string get_third();
 
+    std::string get_id();
+    std::string get_port();
+    std::string get_request();
+    std::string get_param();
+
   private:
-    std::string _path;
+    std::string _url;
     std::vector<size_t> _splits;
 };
 } // namespace core
 } // namespace an
 
-#endif // !_PATH_PARSER_H_
+#endif // !_URL_PARSER_H_

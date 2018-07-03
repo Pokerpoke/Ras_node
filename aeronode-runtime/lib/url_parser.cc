@@ -8,50 +8,50 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-13
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
-#include "path_parser.h"
+#include "url_parser.h"
 #include "aeronode/logger.h"
 
 namespace an
 {
 namespace core
 {
-PathParser::PathParser(const std::string &path) : _path(path)
+UrlParser::UrlParser(const std::string &url) : _url(url)
 {
-    size_t _count = _path.find_first_of("/");
+    size_t _count = _url.find_first_of("/");
     while (_count != std::string::npos)
     {
         _splits.push_back(_count);
-        _count = _path.find_first_of("/", _count + 1);
+        _count = _url.find_first_of("/", _count + 1);
     }
 }
 
-std::string PathParser::get(int _n)
+std::string UrlParser::get(int _n)
 {
     return _n == 0 ? ("/")
-                   : _path.substr(_splits[_n - 1] + 1,
-                                  _splits[_n] - _splits[_n - 1] - 1);
+                   : _url.substr(_splits[_n - 1] + 1,
+                                 _splits[_n] - _splits[_n - 1] - 1);
 }
 
-std::string PathParser::get_first()
+std::string UrlParser::get_first()
 {
     return get(1);
 }
 
-std::string PathParser::get_second()
+std::string UrlParser::get_second()
 {
     return get(2);
 }
 
-std::string PathParser::get_third()
+std::string UrlParser::get_third()
 {
     return get(3);
 }
 
-PathParser::~PathParser()
+UrlParser::~UrlParser()
 {
 }
 } // namespace core

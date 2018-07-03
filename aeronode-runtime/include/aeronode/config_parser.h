@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-13
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -25,13 +25,21 @@
 #endif
 
 #ifdef AN_TARGET_TINY4412
-// ConfigureINI ANConfigure("/etc/aeronode/configure.ini");
-
-an::core::ConfigureINI ANConfigure("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.ini");
+class ConfigureParser : public an::core::ConfigureINI
+{
+  public:
+    ConfigureParser() : ConfigureINI("/etc/aero-node/configure.ini"){};
+    ConfigureParser(const std::string &path) : ConfigureINI(path){};
+    ~ConfigureParser(){};
+};
 #else
-// ConfigureJSON ANConfigure("/etc/aeronode/configure.json");
-
-an::core::ConfigureJSON ANConfigure("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.json");
+class ConfigureParser : public an::core::ConfigureJSON
+{
+  public:
+    ConfigureParser() : ConfigureJSON("/etc/aero-node/configure.json"){};
+    ConfigureParser(const std::string &path) : ConfigureJSON(path){};
+    ~ConfigureParser(){};
+};
 #endif
 
 #endif // !_CONFIG_PARSER_H_

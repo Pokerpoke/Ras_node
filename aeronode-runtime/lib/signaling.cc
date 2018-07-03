@@ -8,12 +8,13 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-30
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
 #include "signaling.h"
 #include <cstdlib>
+#include <cstdio>
 
 namespace an
 {
@@ -61,8 +62,26 @@ bool Signaling::set(const std::string &key,
                     const int &value)
 {
     std::unique_lock<std::mutex> lock(signaling_mutex);
-    signal[key] = std::to_string(value);
-    return signal[key] == std::to_string(value) ? true : false;
+    // no c++11 support...😢
+    // with c++11 supported can use to_string
+    std::string str;
+    signal[key] = sprintf(const_cast<char *>(str.c_str()), "%d", value);
+    return atoi(signal[key].c_str()) == value ? true : false;
+}
+
+int Signaling::encoder()
+{
+    return 0;
+}
+
+int Signaling::decoder()
+{
+    return 0;
+}
+
+bool Signaling::enable_heartbeat()
+{
+    return true;
 }
 
 bool Signaling::remove(const std::string &key)

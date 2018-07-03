@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-12
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -27,6 +27,7 @@ using namespace an::core;
 int main(int argc, char const *argv[])
 {
     logger_init();
+    ConfigureParser configure("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.json");
 
 #ifdef AN_TARGET_TINY4412
     ConfigureINI c_ini("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.ini");
@@ -41,8 +42,8 @@ int main(int argc, char const *argv[])
     LOG(INFO) << c_json.get_integer("video", "height", 400);
 #endif // !AN_TARGET_TINY4412
 
-    LOG(INFO) << ANConfigure.get_integer("voice", "rate", 8000);
-    LOG(INFO) << ANConfigure.get_string("voice", "codec", "UNKNOWN");
+    LOG(INFO) << configure.get_integer("voice", "rate", 8000);
+    LOG(INFO) << configure.get_string("voice", "codec", "UNKNOWN");
 
     getchar();
 

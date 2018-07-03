@@ -49,6 +49,7 @@ option(ENABLE_PACKAGE "Build deb package or not" ON)
 # #define DEBUG confilt with log4cpp, so use ENABLE_DEBUG to enable debug
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     add_definitions(-DENABLE_DEBUG)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/usr)
     set(ENABLE_TEST ON)
     set(ENABLE_EXAMPLE ON)
@@ -65,9 +66,8 @@ if(CMAKE_BUILD_TARGET STREQUAL "Tiny4412")
 endif(CMAKE_BUILD_TARGET STREQUAL "Tiny4412")
 
 # 使用C++11编译
-# set(CMAKE_CXX_STANDARD 11)
-# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 # include some modules
 include(CheckIncludeFile)

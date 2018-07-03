@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-28
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -50,6 +50,10 @@ class Signaling
     std::map<std::string, std::string> signal;
     std::mutex signaling_mutex;
     std::condition_variable signaling_condition;
+
+    // messages
+    /// url like requests, such as "/11:8338/voice?rate=8000&coder=g729"
+    std::string url;
 };
 } // namespace core
 } // namespace an

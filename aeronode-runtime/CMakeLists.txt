@@ -10,4 +10,7 @@ endif(ENABLE_EXAMPLE)
 if(ENABLE_TEST)
     add_subdirectory(test)
 endif(ENABLE_TEST)
-# add_subdirectory(swig)
+
+if(ENABLE_SWIG)
+    add_subdirectory(swig)
+endif(ENABLE_SWIG)
