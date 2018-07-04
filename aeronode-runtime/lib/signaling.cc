@@ -26,57 +26,57 @@ Signaling::Signaling()
 
 std::string Signaling::get(const std::string &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
-    return signal[value];
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
+    return _signal[value];
 }
 
 std::string Signaling::get_string(const std::string &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
-    return signal[value];
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
+    return _signal[value];
 }
 
 int Signaling::get_integer(const std::string &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
-    return atoi(signal[value].c_str());
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
+    return atoi(_signal[value].c_str());
 }
 
 bool Signaling::insert(const std::string &key,
                        const std::string &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
     using namespace std;
-    return signal.insert(pair<string, string>(key, value)).second;
+    return _signal.insert(pair<string, string>(key, value)).second;
 }
 
 bool Signaling::set(const std::string &key,
                     const std::string &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
-    signal[key] = value;
-    return signal[key] == value ? true : false;
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
+    _signal[key] = value;
+    return _signal[key] == value ? true : false;
 }
 
 bool Signaling::set(const std::string &key,
                     const int &value)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
     // no c++11 support...😢
     // with c++11 supported can use to_string
     std::string str;
-    signal[key] = sprintf(const_cast<char *>(str.c_str()), "%d", value);
-    return atoi(signal[key].c_str()) == value ? true : false;
+    _signal[key] = sprintf(const_cast<char *>(str.c_str()), "%d", value);
+    return atoi(_signal[key].c_str()) == value ? true : false;
 }
 
-int Signaling::encoder()
+std::string Signaling::encoder(const std::string &in)
 {
-    return 0;
+    return in;
 }
 
-int Signaling::decoder()
+std::string Signaling::decoder(const std::string &in)
 {
-    return 0;
+    return in;
 }
 
 bool Signaling::enable_heartbeat()
@@ -86,8 +86,8 @@ bool Signaling::enable_heartbeat()
 
 bool Signaling::remove(const std::string &key)
 {
-    std::unique_lock<std::mutex> lock(signaling_mutex);
-    return signal.erase(key);
+    std::unique_lock<std::mutex> lock(_signaling_mutex);
+    return _signal.erase(key);
 }
 
 Signaling::~Signaling()

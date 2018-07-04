@@ -8,7 +8,7 @@
  * @brief    UDP客户端
  * @version  0.0.1
  *
- * Last Modified:  2018-06-25
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  *
  */
@@ -101,7 +101,7 @@ int UDPClient::write(const char *input_buffer, const int input_buffer_size)
 {
 
 #ifdef ENABLE_DEBUG
-    LOG(INFO) << "Sending data ...";
+    LOG(DEBUG) << "Sending data ...";
 #endif
 
     if ((_err = sendto(_socket,                          // Socket

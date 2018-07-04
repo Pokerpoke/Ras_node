@@ -19,6 +19,7 @@
 #include <string>
 #include <mutex>
 #include <condition_variable>
+#include "aeronode/url_parser.h"
 
 namespace an
 {
@@ -31,8 +32,10 @@ class Signaling
     Signaling();
     ~Signaling();
 
-    int encoder();
-    int decoder();
+    // int encoder(const std::string &in);
+    std::string encoder(const std::string &in);
+    // int decoder(const std::string &in);
+    std::string decoder(const std::string &in);
 
     std::string get(const std::string &value);
     int get_integer(const std::string &value);
@@ -46,14 +49,16 @@ class Signaling
     bool remove(const std::string &key);
     bool enable_heartbeat();
 
+    an::core::UrlParser url_parser;
+
   private:
-    std::map<std::string, std::string> signal;
-    std::mutex signaling_mutex;
-    std::condition_variable signaling_condition;
+    std::map<std::string, std::string> _signal;
+    std::mutex _signaling_mutex;
+    std::condition_variable _signaling_condition;
 
     // messages
     /// url like requests, such as "/11:8338/voice?rate=8000&coder=g729"
-    std::string url;
+    std::string _url;
 };
 } // namespace core
 } // namespace an

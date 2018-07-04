@@ -8,7 +8,7 @@
  * @brief    UDP客户端例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -19,14 +19,14 @@ using namespace an::core;
 
 int main()
 {
-	logger_init();
+    logger_init();
 
-	UDPClient c("127.0.0.1", 13374);
-	for (int i = 0; i < 10; i++)
-	{
-		c.write("123\n", 4);
-	}
+    UDPClient c("127.0.0.1", 13374);
+    for (int i = 0; i < 10; i++)
+    {
+        LOG(INFO) << "sending data...";
+        c.write("123\n", 4);
+    }
 
-	getchar();
-	return 0;
+    return 0;
 }

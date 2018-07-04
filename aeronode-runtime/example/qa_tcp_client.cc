@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -23,17 +23,17 @@ using namespace std;
 
 int main()
 {
-	logger_init();
+    logger_init();
 
-	std::string data("123\n");
-	TCPClient s("127.0.0.1", 13374);
+    std::string data("12321312312312\n");
+    TCPClient s("127.0.0.1", 13374);
 
-	for (int i = 0; i < 10; i++)
-	{
-		LOG(INFO) << "Sending packet " << i;
-		s.write(data.c_str());
-	}
+    for (int i = 0; i < 10; i++)
+    {
+        LOG(INFO) << "Sending packet " << i;
+        s.write(data.c_str());
+    }
 
-	getchar();
-	return 0;
+    getchar();
+    return 0;
 }

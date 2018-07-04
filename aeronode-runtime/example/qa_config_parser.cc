@@ -38,12 +38,12 @@ int main(int argc, char const *argv[])
 #else
     ConfigureJSON c_json("/home/jiang/git/aero-node/aeronode-runtime/lib/configure.json");
 
-    LOG(INFO) << c_json.get_string("video", "codec", "UNKNOWN");
+    LOG(INFO) << c_json.get_string("video", "coder", "UNKNOWN");
     LOG(INFO) << c_json.get_integer("video", "height", 400);
 #endif // !AN_TARGET_TINY4412
 
     LOG(INFO) << configure.get_integer("voice", "rate", 8000);
-    LOG(INFO) << configure.get_string("voice", "codec", "UNKNOWN");
+    LOG(INFO) << configure.get_string("voice", "coder", "UNKNOWN");
 
     getchar();
 

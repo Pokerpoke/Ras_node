@@ -27,6 +27,7 @@
 #include "aeronode/voice_playback.h"
 #include "aeronode/an-g729/g729encoder.h"
 #include "aeronode/an-g729/g729decoder.h"
+#include "aeronode/signaling.h"
 
 using namespace std;
 using namespace an::core;
@@ -34,6 +35,7 @@ using namespace an::codec;
 
 void listen();
 void send();
+void server();
 
 int main(int argc, char const *argv[])
 {
@@ -41,7 +43,12 @@ int main(int argc, char const *argv[])
 
     ThreadPool tp(4);
 
-    tp += [] { listen(); };
+    // tp += [] { listen(); };
+
+    tp += [] {
+        server();
+    };
+
     tp += [] { send(); };
 
     // configure_init
@@ -59,26 +66,61 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-void listen()
+void server()
 {
-    RTPReceiver r(8338);
-    VoicePlayback vp("default");
-    G729Decoder dec;
-    r.start_listen([&r, &dec, &vp] {
-        dec.decoder(r.output_buffer, r.output_buffer_size);
-        vp.playback(dec.output_buffer, dec.output_buffer_size);
+    // UDPServer s(13374);
+    TCPServer s(13374);
+    Signaling sig;
+    s.start_listen([&s, &sig] {
+        LOG(INFO) << sig.decoder(s.output_buffer);
     });
+    // if(signaling.decoder(c.output_buffer)>0)
+    // if (s.output_buffer != 0)
+    // {
+    // LOG(INFO) << s.output_buffer;
+    // }
+    // if (signaling.decoder(c.output_buffer) > 0)
+    // {
+    //     siganling.response();
+    //     thread_pool += [] { signaling.url_parser.get_service(); };
+    // }
 }
+
+// void listen()
+// {
+//     RTPReceiver r(8338);
+//     VoicePlayback vp("default");
+//     G729Decoder dec;
+//     r.start_listen([&r, &dec, &vp] {
+//         dec.decoder(r.output_buffer, r.output_buffer_size);
+//         vp.playback(dec.output_buffer, dec.output_buffer_size);
+//     });
+// }
+// void send()
+// {
+//     UDPClient c("127.0.0.1", 8338);
+//     VoiceCapture vc("default");
+//     G729Encoder enc;
+//     while (1)
+//     {
+//         vc.capture();
+//         enc.encoder(vc.output_buffer, vc.output_buffer_size);
+//         c.write(enc.output_buffer,outputbu);
+//     }
+// }
 
 void send()
 {
-    RTPSender s("127.0.0.1", 8338);
-    VoiceCapture vc("default");
-    G729Encoder enc;
-    while (1)
+    // UDPClient c("127.0.0.1", 13374);
+    TCPClient c("127.0.0.1", 13374);
+    // VoiceCapture vc("default");
+    // G729Encoder enc;
+    // while (1)
+    for (int i = 0; i < 10; i++)
     {
-        vc.capture();
-        enc.encoder(vc.output_buffer, vc.output_buffer_size);
-        s.write(enc.output_buffer, enc.output_buffer_size);
+        // vc.capture();
+        // enc.encoder(vc.output_buffer, vc.output_buffer_size);
+        c.write("12312312323");
+        sleep(1);
     }
 }

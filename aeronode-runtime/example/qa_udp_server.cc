@@ -8,7 +8,7 @@
  * @brief    UDP服务端例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-29
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -34,12 +34,9 @@ int main()
 
     LOG(INFO) << "Start listen ...";
 
-
     s.stop();
 
-    t.detach();
-
-    getchar();
+    t.join();
 
     return 0;
 }

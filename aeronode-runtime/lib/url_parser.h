@@ -26,8 +26,10 @@ class UrlParser
 {
   public:
     UrlParser(const std::string &url);
+    UrlParser(){};
     ~UrlParser();
 
+    void parser(const std::string &url);
     std::string get(int _n);
     std::string get_first();
     std::string get_second();

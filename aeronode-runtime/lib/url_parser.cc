@@ -21,6 +21,11 @@ namespace core
 {
 UrlParser::UrlParser(const std::string &url) : _url(url)
 {
+    parser(_url);
+}
+
+void UrlParser::parser(const std::string &url)
+{
     size_t _count = _url.find_first_of("/");
     while (_count != std::string::npos)
     {

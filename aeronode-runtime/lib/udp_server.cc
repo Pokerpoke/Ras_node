@@ -8,7 +8,7 @@
  * @brief    创建一个UDP服务端
  * @version  0.0.1
  * 
- * Last Modified:  2018-06-28
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  */
@@ -53,7 +53,7 @@ UDPServer::UDPServer(const int server_port)
     _len = sizeof(_server_addr);
     output_buffer = (char *)malloc(output_buffer_size);
 
-    _stop=false;
+    _stop = false;
 
     init();
 }
@@ -121,8 +121,8 @@ int UDPServer::start_listen(std::function<void(void)> _payload_process)
                         output_buffer_size,               // 输出缓存大小
                         0,                                // 标志位
                         (struct sockaddr *)&_server_addr, // 发送方地址
-                        &_len);                      // 地址长度
-        if( _err < 0 || _stop )
+                        &_len);                           // 地址长度
+        if (_err < 0 || _stop)
         {
             if (_stop)
             {
@@ -140,9 +140,9 @@ int UDPServer::start_listen(std::function<void(void)> _payload_process)
             _payload_process();
             // clear
             memset(output_buffer, 0, output_buffer_size);
-            return _err;
         }
     }
+    return _err;
 }
 
 int UDPServer::stop()

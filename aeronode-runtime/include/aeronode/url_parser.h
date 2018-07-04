@@ -25,16 +25,23 @@ namespace core
 class UrlParser
 {
   public:
-    UrlParser(const std::string &path);
+    UrlParser(const std::string &url);
+    UrlParser(){};
     ~UrlParser();
 
+    void parser(const std::string &url);
     std::string get(int _n);
     std::string get_first();
     std::string get_second();
     std::string get_third();
 
+    std::string get_id();
+    std::string get_port();
+    std::string get_request();
+    std::string get_param();
+
   private:
-    std::string _path;
+    std::string _url;
     std::vector<size_t> _splits;
 };
 } // namespace core

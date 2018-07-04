@@ -8,7 +8,7 @@
  * @brief    创建一个TCP服务端，用以接受数据。
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-14
+ * Last Modified:  2018-07-03
  * Modified By:    姜阳 (j824544269@gmail.com)
  * 
  * @example	qa_tcp_server_callback.cc
@@ -41,27 +41,27 @@ namespace core
  * 
  */
 TCPServer::TCPServer(const int server_port)
-	: _server_port(server_port)
+    : _server_port(server_port)
 {
-	memset(&_server_addr, 0, sizeof(_server_addr));
+    memset(&_server_addr, 0, sizeof(_server_addr));
 
-	// 设置协议类型
-	_server_addr.sin_family = AF_INET;
-	// 设置目标IP
-	_server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	// 设置目标端口
-	_server_addr.sin_port = htons(server_port);
+    // 设置协议类型
+    _server_addr.sin_family = AF_INET;
+    // 设置目标IP
+    _server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    // 设置目标端口
+    _server_addr.sin_port = htons(server_port);
 
-	_backlog = 20;
-	_addrlen = 0;
+    _backlog = 20;
+    _addrlen = 0;
 
-	_SOCKET_CREATED = false;
-	_LISTEN_SOCKET_CLOSED = false;
-	_CONN_SOCKET_CLOSED = false;
+    _SOCKET_CREATED = false;
+    _LISTEN_SOCKET_CLOSED = false;
+    _CONN_SOCKET_CLOSED = false;
 
-	output_buffer_size = 4096;
+    output_buffer_size = 4096;
 
-	init();
+    init();
 }
 
 /**
@@ -76,34 +76,34 @@ TCPServer::TCPServer(const int server_port)
  */
 int TCPServer::init()
 {
-	_SOCKET_CREATED = false;
+    _SOCKET_CREATED = false;
 
-	if ((_listen_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-	{
-		LOG(ERROR) << "Create cocket error for: "
-				   << strerror(errno);
-		return -1;
-	}
-	else if (bind(_listen_socket,
-				  (struct sockaddr *)&_server_addr,
-				  sizeof(_server_addr)) < 0)
-	{
-		LOG(ERROR) << "Bind socket error for: "
-				   << strerror(errno);
-		return -2;
-	}
-	else if (listen(_listen_socket, _backlog) < 0)
-	{
-		LOG(ERROR) << "Listen socket error for: "
-				   << strerror(errno);
-		return -3;
-	}
-	else
-	{
-		LOG(INFO) << "Socket created success.";
-		_SOCKET_CREATED = true;
-		return 0;
-	}
+    if ((_listen_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        LOG(ERROR) << "Create cocket error for: "
+                   << strerror(errno);
+        return -1;
+    }
+    else if (bind(_listen_socket,
+                  (struct sockaddr *)&_server_addr,
+                  sizeof(_server_addr)) < 0)
+    {
+        LOG(ERROR) << "Bind socket error for: "
+                   << strerror(errno);
+        return -2;
+    }
+    else if (listen(_listen_socket, _backlog) < 0)
+    {
+        LOG(ERROR) << "Listen socket error for: "
+                   << strerror(errno);
+        return -3;
+    }
+    else
+    {
+        LOG(DEBUG) << "Socket created success.";
+        _SOCKET_CREATED = true;
+        return 0;
+    }
 }
 
 /** 
@@ -117,24 +117,24 @@ int TCPServer::init()
 bool TCPServer::connected()
 {
 #ifdef ENABLE_DEBUG
-	LOG(INFO) << "Waiting for client's request ...";
+    LOG(DEBUG) << "Waiting for client's request ...";
 #endif
-	_addrlen = sizeof(_client_addr);
-	memset(&_client_addr, 0, sizeof(_client_addr));
-	if ((_conn_socket = accept(_listen_socket,
-							   (struct sockaddr *)&_client_addr,
-							   (socklen_t *)&_addrlen)) < 0)
-	{
-		LOG(ERROR) << "Accept socket error for: "
-				   << strerror(errno);
-		return false;
-	}
-	else
-	{
-		LOG(INFO) << "Socket accepted: "
-				  << inet_ntoa(_client_addr.sin_addr);
-		return true;
-	}
+    _addrlen = sizeof(_client_addr);
+    memset(&_client_addr, 0, sizeof(_client_addr));
+    if ((_conn_socket = accept(_listen_socket,
+                               (struct sockaddr *)&_client_addr,
+                               (socklen_t *)&_addrlen)) < 0)
+    {
+        LOG(ERROR) << "Accept socket error for: "
+                   << strerror(errno);
+        return false;
+    }
+    else
+    {
+        LOG(DEBUG) << "Socket accepted: "
+                   << inet_ntoa(_client_addr.sin_addr);
+        return true;
+    }
 }
 
 /** 
@@ -145,9 +145,9 @@ bool TCPServer::connected()
  */
 int TCPServer::start_listen()
 {
-	return start_listen([&] {
-		this->payload_process();
-	});
+    return start_listen([&] {
+        this->payload_process();
+    });
 }
 
 /** 
@@ -160,27 +160,27 @@ int TCPServer::start_listen()
  */
 int TCPServer::start_listen(std::function<void(void)> _payload_process)
 {
-	int n;
-	while (1)
-	{
-		if (connected())
-		{
-			output_buffer = static_cast<char *>(malloc(output_buffer_size));
-			while ((n = recv(_conn_socket,
-							 output_buffer,
-							 output_buffer_size, 0)) > 0)
-			{
-				// 回调函数，处理数据
-				_payload_process();
-			}
-			if (n < 0)
-				LOG(ERROR) << "Recv error for: "
-						   << strerror(errno);
-		}
-		// @todo	退出循环处理
-	}
-	close(_conn_socket);
-	return 0;
+    int n;
+    while (1)
+    {
+        if (connected())
+        {
+            output_buffer = static_cast<char *>(malloc(output_buffer_size));
+            while ((n = recv(_conn_socket,
+                             output_buffer,
+                             output_buffer_size, 0)) > 0)
+            {
+                // 回调函数，处理数据
+                _payload_process();
+            }
+            if (n < 0)
+                LOG(ERROR) << "Recv error for: "
+                           << strerror(errno);
+        }
+        // @todo	退出循环处理
+    }
+    close(_conn_socket);
+    return 0;
 }
 
 /**
@@ -189,9 +189,9 @@ int TCPServer::start_listen(std::function<void(void)> _payload_process)
  */
 TCPServer::~TCPServer()
 {
-	close(_conn_socket);
-	close(_listen_socket);
-	free(output_buffer);
+    close(_conn_socket);
+    close(_listen_socket);
+    free(output_buffer);
 }
-}
-}
+} // namespace core
+} // namespace an
