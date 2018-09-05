@@ -29,7 +29,7 @@ do
     esac
 done
 
-# 判断wpa配置文件是否存在，不存在则创建
+# create configure file when there is no configure file
 if [ ! -d /etc/wpa_supplicant ] 
 then
     mkdir /etc/wpa_supplicant
@@ -44,21 +44,27 @@ ap_scan=1
 network={
     ssid="411-D-Link"
     psk="aerolab411"
-    priority=1
+    priority=2
 }
 
-# network={
-#     ssid="AeroNet411"
-#     psk="aerolab411"
-#     priority=2
-# }
+network={
+    ssid="AeroNet411"
+    psk="aerolab411"
+    priority=3
+}
+
+network={
+    ssid="409"
+    psk="aerolab409"
+    priority=1
+}
 EOF
 fi
 
-# -B 后台运行
-# -D 驱动，wext通用驱动
-# -i interface 网卡接口
-# -c 配置文件
+# -B run in background
+# -D drvier, wext means generic driver
+# -i interface, network interface
+# -c configure files
 if [ -f /var/run/wpa_supplicant/wlan0 ]
 then
     rm /var/run/wpa_supplicant/wlan0

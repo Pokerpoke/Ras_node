@@ -33,7 +33,7 @@ CMAKE_SOURCE_DIR=$(pwd)
 # go to build directory
 if [ ! -d ${CMAKE_SOURCE_DIR}/build ] 
 then
-   mkdir ${CMAKE_SOURCE_DIR}build 
+   mkdir ${CMAKE_SOURCE_DIR}/build 
 fi
 cd ${CMAKE_SOURCE_DIR}/build/
 
