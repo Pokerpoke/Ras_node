@@ -42,7 +42,7 @@ cp -p   /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/li
         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so*     \
         ./usr/lib/
 
-cp -p   ${CMAKE_SOURCE_DIR}/scripts/Tiny4412/connect-to-wifi ${CMAKE_SOURCE_DIR}/scripts/an-run          \
+cp -p   ${CMAKE_SOURCE_DIR}/scripts/Tiny4412/connect-to-wifi ${CMAKE_SOURCE_DIR}/scripts/Tiny4412/an-run \
         ./usr/bin/
 
 tar -cvpf aero-node-dependencies.tar usr/
