@@ -304,7 +304,27 @@ function git-tiny4412-bcg729()
 }
 function git-x86-cmake()
 {
-    git-cmake-x86 ${GIT_REPOSITORY_PREFIX}/cmake.git
+    # if exist, clean it
+    cd ${SCRIPT_DIR} 
+    if [ -d temp ]
+    then
+        rm -rf temp
+    fi
+
+    # preparation
+    PROJECT_DIR="${SCRIPT_DIR}/temp"
+    git clone ${GIT_REPOSITORY_PREFIX}/cmake.git temp
+    if [ $? -ne 0 ]
+    then
+        echo "git clone failed, plaese try again"
+        exit 1
+    fi
+    cd ${PROJECT_DIR}
+    # build for host
+    ./bootstrap && make && sudo make install
+
+    # clean
+    cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
 }
 function git-tiny4412-cmake()
 {
