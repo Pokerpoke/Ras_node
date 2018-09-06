@@ -27,4 +27,4 @@ RUN apt-get update \
     swig3.0 \
     && apt-get clean
 
-RUN bash -c "$(wget http://192.168.0.9:8086/git/aero-node/aero-node/raw/master/scripts/set-up-environment.sh -O -)"
+RUN bash -c "$(wget http://192.168.0.9:8086/git/aero-node/aero-node/raw/master/scripts/set-up-environment -O -)"
