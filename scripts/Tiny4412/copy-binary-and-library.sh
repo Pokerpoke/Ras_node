@@ -53,7 +53,7 @@ export PATH=/opt/FriendlyARM/toolschain/4.5.1/bin:$PATH
 cmake -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_PREFIX=${CMAKE_SOURCE_DIR}/build/Tiny4412/usr \
       -DCMAKE_BUILD_TARGET=Tiny4412 ../../
-make -j4
+make -j8
 make install
 
 tar -cvpf aero-node.tar usr/

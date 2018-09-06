@@ -1,39 +1,53 @@
 #!/bin/sh
 ################################################################################
 # 
-# Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
+# Copyright (c) 2018 NUAA AeroLab
 # 
-# @author   姜阳 (j824544269@gmail.com)
+# @author   Jiang Yang (j824544269@gmail.com)
 # @date     2018-01
-# @brief    
+# @brief    Set up wifi connection on Tiny4412.
 # @version  0.0.1
 # 
-# Last Modified:  2018-01-08
-# Modified By:    姜阳 (j824544269@gmail.com)
+# Last Modified:  2018-09-06
+# Modified By:    Jiang Yang (j824544269@gmail.com)
 # 
 ################################################################################
 INTERFACE=wlan0
 
-while getopts 'i:' OPT;
-do
-    case ${OPT} in
-        i)
-            INTERFACE=${OPTARG}
-            ;;
-        ?)
-            echo "Useage :
+function help()
+{
+   cat << HELP
+Set up wifi connection on Tiny4412.
+Useage : connect-to-wifi [-i:o]
             -i specify interface(default: wlan0)
-            "
-            exit 0
-            ;;
-    esac
-done
+            -o overwrite wpa_supplicant.conf
+HELP
+exit 0
+}
 
 # create configure file when there is no configure file
 if [ ! -d /etc/wpa_supplicant ] 
 then
     mkdir /etc/wpa_supplicant
 fi
+
+while getopts 'i:o' OPT;
+do
+    case ${OPT} in
+        i)
+            INTERFACE=${OPTARG}
+            ;;
+        o)
+            if [ -f /etc/wpa_supplicant/wpa_supplicant.conf ]
+            then
+                rm /etc/wpa_supplicant/wpa_supplicant.conf
+            fi
+            ;;
+        ?)
+            help
+            ;;
+    esac
+done
 
 if [ ! -f /etc/wpa_supplicant/wpa_supplicant.conf ] 
 then
@@ -81,6 +95,9 @@ if [ $? -eq 0 ]
 then
     rmmod dsr
 fi
+
+# wait for connection finished.
+sleep 5
 
 # dhcp
 udhcpc -i ${INTERFACE}

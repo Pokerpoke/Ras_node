@@ -27,36 +27,55 @@ then
     DESTIP="192.168.0.22"
 fi
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/log4cpp \
-        root@${DESTIP}:/usr/include/log4cpp
+cd ${CMAKE_SOURCE_DIR}/scripts && mkdir -p usr/lib && mkdir -p /usr/bin
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/jrtplib3 \
-        root@${DESTIP}:/usr/include/jrtplib
+cp  /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.a      \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.so*    \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.a         \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.so*       \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.a      \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.so*    \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.a       \
+    /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so*
+    ./lib/
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/jthread \
-        root@${DESTIP}:/usr/include/jthread
+cp ${CMAKE_SOURCE_DIR}/scripts/connect-to-wifi ${CMAKE_SOURCE_DIR}/scripts/an-run
+    ./bin/
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/bcg729 \
-        root@${DESTIP}:/usr/include/bcg729
+tar -cvpf aero-node-dependencies.tar usr/
+scp -rp aero-node-dependencies.tar root@${DESTIP}:/home/
+ssh root@${DESTIP} "tar -xvpf /home/aero-node.tar -C /"
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.a \
-        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.so* \
-        root@${DESTIP}:/usr/lib/
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/log4cpp \
+#         root@${DESTIP}:/usr/include/log4cpp
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.a \
-        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.so* \
-        root@${DESTIP}:/usr/lib/
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/jrtplib3 \
+#         root@${DESTIP}:/usr/include/jrtplib
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.a \
-        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.so* \
-        root@${DESTIP}:/usr/lib/
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/jthread \
+#         root@${DESTIP}:/usr/include/jthread
 
-scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.a \
-        /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so* \
-        root@${DESTIP}:/usr/lib/
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/include/bcg729 \
+#         root@${DESTIP}:/usr/include/bcg729
 
-scp -rp ${CMAKE_SOURCE_DIR}/scripts/Tiny4412_connect_to_wifi.sh \
-        root@${DESTIP}:/home/scripts/Tiny4412_connect_to_wifi.sh
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.a \
+#         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/liblog4cpp.so* \
+#         root@${DESTIP}:/usr/lib/
 
-scp -rp ${CMAKE_SOURCE_DIR}/scripts/an-run \
-        root@${DESTIP}:/bin/an-run
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.a \
+#         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjrtp.so* \
+#         root@${DESTIP}:/usr/lib/
+
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.a \
+#         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libjthread.so* \
+#         root@${DESTIP}:/usr/lib/
+
+# scp -rp /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.a \
+#         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so* \
+#         root@${DESTIP}:/usr/lib/
+
+# scp -rp ${CMAKE_SOURCE_DIR}/scripts/connect-to-wifi \
+#         root@${DESTIP}:/home/scripts/connect-to-wifi
+
+# scp -rp ${CMAKE_SOURCE_DIR}/scripts/an-run \
+#         root@${DESTIP}:/bin/an-run

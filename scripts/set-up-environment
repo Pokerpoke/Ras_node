@@ -1,15 +1,15 @@
 #!/bin/bash
 ################################################################################
 # 
-# Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
+# Copyright (c) 2018 NUAA AeroLab
 # 
-# @author   姜阳 (j824544269@gmail.com)
+# @author   Jiang Yang (j824544269@gmail.com)
 # @date     2018-01
-# @brief    
+# @brief    Set up environment, dependencies, cross compile tools chain and etc.
 # @version  0.0.1
 # 
-# Last Modified:  2018-01-08
-# Modified By:    姜阳 (j824544269@gmail.com)
+# Last Modified:  2018-09-06
+# Modified By:    Jiang Yang (j824544269@gmail.com)
 # 
 ################################################################################
 
@@ -41,10 +41,16 @@ function help()
     cat << HELP
 Set up cross compile environment for aero-node.
 
-USAGE: set-up-cross-compile-environment [-hg] all|host|log4cpp|jthread
+USAGE: set-up-cross-compile-environment [-hgp:t:]
 
 OPTIONS: -h help
          -g specify git address
+         -p specify target platform
+            [x86|tiny4412] 
+            default is all platform
+         -t specify target
+            [apt|bcg729|jthread|jrtplib|arm-linux-gcc|log4cpp|qte] 
+            default is all target
 
 EXAMPLE: set-up-cross-compile-environment all
 HELP
@@ -302,7 +308,7 @@ function git-tiny4412-bcg729()
 # Main funcition
 #
 ################################################################################
-while getopts "hg:t:p:" arg 
+while getopts "hg:p:t:" arg 
 do
     case ${arg} in
         h)
