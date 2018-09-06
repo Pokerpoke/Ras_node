@@ -27,7 +27,7 @@ cd ${SCRIPT_DIR}
 # git repository prefix
 GIT_REPOSITORY_PREFIX="http://192.168.0.9:8086/git/aero-node"
 # build target
-TARGET="apt cmake bcg729 jthread jrtplib arm-linux-gcc log4cpp qte"
+TARGET="apt cmake arm-linux-gcc log4cpp qte bcg729 jthread jrtplib"
 # build target platform
 TARGET_PLATFORM="x86 tiny4412"
 ################################################################################
@@ -321,7 +321,7 @@ function git-x86-cmake()
     fi
     cd ${PROJECT_DIR}
     # build for host
-    ./bootstrap && make && sudo make install
+    ./bootstrap && make -j8 && sudo make install
 
     # clean
     cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
