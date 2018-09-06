@@ -27,7 +27,7 @@ cd ${SCRIPT_DIR}
 # git repository prefix
 GIT_REPOSITORY_PREFIX="http://192.168.0.9:8086/git/aero-node"
 # build target
-TARGET="apt bcg729 jthread jrtplib arm-linux-gcc log4cpp qte cmake"
+TARGET="apt cmake bcg729 jthread jrtplib arm-linux-gcc log4cpp qte"
 # build target platform
 TARGET_PLATFORM="x86 tiny4412"
 ################################################################################
