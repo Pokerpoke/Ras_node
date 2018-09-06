@@ -12,6 +12,7 @@
 # Modified By:    姜阳 (j824544269@gmail.com)
 # 
 ################################################################################
+set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 cd ${SCRIPT_DIR}/../..
@@ -41,8 +42,8 @@ cp -p   /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/li
         /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/sys-root/usr/lib/libbcg729.so*     \
         ./usr/lib/
 
-cp ${CMAKE_SOURCE_DIR}/scripts/Tiny4412/connect-to-wifi ${CMAKE_SOURCE_DIR}/scripts/an-run          \
-    ./usr/bin/
+cp -p   ${CMAKE_SOURCE_DIR}/scripts/Tiny4412/connect-to-wifi ${CMAKE_SOURCE_DIR}/scripts/an-run          \
+        ./usr/bin/
 
 tar -cvpf aero-node-dependencies.tar usr/
 scp -rp aero-node-dependencies.tar root@${DESTIP}:/home/
