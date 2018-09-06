@@ -5,7 +5,7 @@
 # 
 # @author   姜阳 (j824544269@gmail.com)
 # @date     2018-06
-# @brief    
+# @brief    Build aero-node project and copy to Tiny4412.
 # @version  0.0.1
 # 
 # Last Modified:  2018-06-24

@@ -5,7 +5,7 @@
 # 
 # @author   姜阳 (j824544269@gmail.com)
 # @date     2018-06
-# @brief    
+# @brief    Update header files of each module, such as an-g729.
 # @version  0.0.1
 # 
 # Last Modified:  2018-06-11

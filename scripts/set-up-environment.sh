@@ -6,6 +6,7 @@
 # @author   Jiang Yang (j824544269@gmail.com)
 # @date     2018-01
 # @brief    Set up environment, dependencies, cross compile tools chain and etc.
+#           @TODO Maybe can use python scripts for further usage.
 # @version  0.0.1
 # 
 # Last Modified:  2018-09-06
@@ -164,10 +165,12 @@ function git-x86-arm-linux-gcc()
     cd ${SCRIPT_DIR}
     rm -rf aero-node-tools
 }
+
 function git-tiny4412-arm-linux-gcc()
 {
     echo
 }
+
 function git-x86-qte()
 {
     # if exist, clean it
@@ -185,6 +188,7 @@ function git-x86-qte()
     cd ${SCRIPT_DIR}
     rm -rf aero-node-tools
 }
+
 function git-tiny4412-qte()
 {
     echo
