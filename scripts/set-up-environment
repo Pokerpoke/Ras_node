@@ -27,7 +27,7 @@ cd ${SCRIPT_DIR}
 # git repository prefix
 GIT_REPOSITORY_PREFIX="http://192.168.0.9:8086/git/aero-node"
 # build target
-TARGET="apt bcg729 jthread jrtplib arm-linux-gcc log4cpp qte"
+TARGET="apt bcg729 jthread jrtplib arm-linux-gcc log4cpp qte cmake"
 # build target platform
 TARGET_PLATFORM="x86 tiny4412"
 ################################################################################
@@ -301,6 +301,14 @@ function git-x86-bcg729()
 function git-tiny4412-bcg729()
 {
     git-cmake-tiny4412 ${GIT_REPOSITORY_PREFIX}/bcg729.git
+}
+function git-x86-cmake()
+{
+    git-cmake-x86 ${GIT_REPOSITORY_PREFIX}/cmake.git
+}
+function git-tiny4412-cmake()
+{
+    echo
 }
 ################################################################################
 #
