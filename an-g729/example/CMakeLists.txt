@@ -17,7 +17,8 @@ foreach(T_FILE_NAME ${EXAMPLE_EXECUTABLE})
 	get_filename_component(EXECUTABLE_NAME ${T_FILE_NAME} NAME_WE)
 	add_executable(${EXECUTABLE_NAME} ${T_FILE_NAME})
 	target_link_libraries(${EXECUTABLE_NAME}
-		an-core
+        an-core
+        an-media
 		an-g729
 	)
 endforeach()

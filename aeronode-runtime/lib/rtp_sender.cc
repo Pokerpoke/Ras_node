@@ -8,8 +8,8 @@
  * @brief    RTP发送类
  * @version  0.0.1
  * 
- * Last Modified:  2017-12-02
- * Modified By:    姜阳 (j824544269@gmail.com)
+ * Last Modified:  2018-10-24
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #include "rtp_sender.h"
@@ -72,11 +72,24 @@ int RTPSender::init()
 int RTPSender::write(const char *input_buffer,
                      const int input_buffer_size)
 {
+    // int r = input_buffer_size;
+    // if (r < MTU)
+    // {
     if ((err = session.SendPacket((char *)input_buffer, input_buffer_size)) < 0)
     {
         LOG(ERROR) << jrtplib::RTPGetErrorString(err);
         return -1;
     }
+    // }
+    // else
+    // {
+    //     while (r > 0)
+    //     {
+    //         err = session.SendPacket((char *)input_buffer + (input_buffer_size - r), 1200);
+    //         r -= 1200;
+    //         LOG(INFO) << r;
+    //     }
+    // }
 
     return 0;
 }
@@ -85,5 +98,5 @@ RTPSender::~RTPSender()
 {
     session.BYEDestroy(jrtplib::RTPTime(10, 0), 0, 0);
 }
-}
-}
+} // namespace core
+} // namespace an

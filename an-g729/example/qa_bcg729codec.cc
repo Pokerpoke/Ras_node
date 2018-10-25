@@ -8,12 +8,13 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
- * Modified By:    姜阳 (j824544269@gmail.com)
+ * Last Modified:  2018-10-23
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 #include <bcg729/encoder.h>
 #include <bcg729/decoder.h>
@@ -22,46 +23,46 @@ extern "C" {
 #endif
 
 #include "aeronode/logger.h"
-#include "aeronode/voice_capture.h"
-#include "aeronode/voice_playback.h"
+#include "aeronode/an-media/voice_capture.h"
+#include "aeronode/an-media/voice_playback.h"
 
-using namespace an::core;
+using namespace an::media;
 using namespace std;
 
 int main()
 {
-	logger_init();
-	VoiceCapture c("default");
-	VoicePlayback p("default");
+    logger_init();
+    VoiceCapture c("default");
+    VoicePlayback p("default");
 
-	bcg729EncoderChannelContextStruct *encoderChannelContext;
-	encoderChannelContext = initBcg729EncoderChannel(0);
+    bcg729EncoderChannelContextStruct *encoderChannelContext;
+    encoderChannelContext = initBcg729EncoderChannel(0);
 
-	bcg729DecoderChannelContextStruct *decoderChannelContext;
-	decoderChannelContext = initBcg729DecoderChannel();
+    bcg729DecoderChannelContextStruct *decoderChannelContext;
+    decoderChannelContext = initBcg729DecoderChannel();
 
-	uint8_t output_buffer[10];
-	int16_t output_buffer2[80];
-	uint8_t output_buffer_size;
+    uint8_t output_buffer[10];
+    int16_t output_buffer2[80];
+    uint8_t output_buffer_size;
 
-	while (1)
-	{
-		c.capture();
+    while (1)
+    {
+        c.capture();
 
-		bcg729Encoder(encoderChannelContext,
-					  (int16_t *)c.output_buffer,
-					  output_buffer,
-					  &output_buffer_size);
+        bcg729Encoder(encoderChannelContext,
+                      (int16_t *)c.output_buffer,
+                      output_buffer,
+                      &output_buffer_size);
 
-		bcg729Decoder(decoderChannelContext,
-					  output_buffer, 10, 0, 0, 0,
-					  output_buffer2);
+        bcg729Decoder(decoderChannelContext,
+                      output_buffer, 10, 0, 0, 0,
+                      output_buffer2);
 
-		p.playback((char *)output_buffer2, 80 * sizeof(int16_t));
-	}
+        p.playback((char *)output_buffer2, 80 * sizeof(int16_t));
+    }
 
-	getchar();
-	closeBcg729EncoderChannel(encoderChannelContext);
-	closeBcg729DecoderChannel(decoderChannelContext);
-	return 0;
+    getchar();
+    closeBcg729EncoderChannel(encoderChannelContext);
+    closeBcg729DecoderChannel(decoderChannelContext);
+    return 0;
 }

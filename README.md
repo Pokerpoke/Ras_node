@@ -32,7 +32,7 @@
 sudo apt-get install -y cmake libasound2-dev doxygen graphviz liblog4cpp5-dev
 ```
 
-Tiny4412交叉编译环境，请在实验室局域网环境下执行`scripts/set-up-cross-compile-environment.sh`
+Tiny4412交叉编译环境，请在实验室局域网环境下执行`scripts/set-up-environment.sh`
 
 ## 编译
 

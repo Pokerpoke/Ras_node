@@ -25,6 +25,7 @@ cd ${CMAKE_SOURCE_DIR}
 function update-header-files()
 {
     if test -z "$1"
+    
     then
         echo "please input module name"
         exit 1

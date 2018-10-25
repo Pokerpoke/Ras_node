@@ -3,14 +3,13 @@
 # 
 # Copyright (c) 2018 NUAA AeroLab
 # 
-# @author   Jiang Yang (j824544269@gmail.com)
+# @author   Jiang Yang (pokerpoke@qq.com)
 # @date     2018-01
-# @brief    Set up environment, dependencies, cross compile tools chain and etc.
-#           @TODO Maybe can use python scripts for further usage.
+# @brief    
 # @version  0.0.1
 # 
-# Last Modified:  2018-09-06
-# Modified By:    Jiang Yang (j824544269@gmail.com)
+# Last Modified:  2018-10-22
+# Modified By:    Jiang Yang (pokerpoke@qq.com)
 # 
 ################################################################################
 
@@ -28,7 +27,7 @@ cd ${SCRIPT_DIR}
 # git repository prefix
 GIT_REPOSITORY_PREFIX="http://192.168.0.9:8086/git/aero-node"
 # build target
-TARGET="apt cmake arm-linux-gcc log4cpp qte bcg729 jthread jrtplib"
+TARGET="apt arm-linux-gcc log4cpp qte bcg729 jthread jrtplib"
 # build target platform
 TARGET_PLATFORM="x86 tiny4412"
 ################################################################################
@@ -72,6 +71,7 @@ function git-x86-apt()
                 "qt4-dev-tools"
                 "libasound2-dev"
                 "swig3.0"
+                "cmake"
                 )
 
     for DEP in ${DEPENDENCIES[@]} ; do
@@ -306,34 +306,6 @@ function git-tiny4412-bcg729()
 {
     git-cmake-tiny4412 ${GIT_REPOSITORY_PREFIX}/bcg729.git
 }
-function git-x86-cmake()
-{
-    # if exist, clean it
-    cd ${SCRIPT_DIR} 
-    if [ -d temp ]
-    then
-        rm -rf temp
-    fi
-
-    # preparation
-    PROJECT_DIR="${SCRIPT_DIR}/temp"
-    git clone ${GIT_REPOSITORY_PREFIX}/cmake.git temp
-    if [ $? -ne 0 ]
-    then
-        echo "git clone failed, plaese try again"
-        exit 1
-    fi
-    cd ${PROJECT_DIR}
-    # build for host
-    ./bootstrap && make -j8 && sudo make install
-
-    # clean
-    cd ${SCRIPT_DIR} && rm -rf ${PROJECT_DIR}
-}
-function git-tiny4412-cmake()
-{
-    echo
-}
 ################################################################################
 #
 # Main funcition
@@ -374,3 +346,5 @@ do
         git-${_target_platform}-${_target}
     done
 done
+
+sudo ldconfig

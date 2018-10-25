@@ -141,6 +141,7 @@ set(AN_ETC_DIR share/aero-node CACHE PATH "Path to install etc directories")
 include_directories(aeronode-runtime/include
                     ${CMAKE_BINARY_DIR}/aeronode-runtime/include
                     an-g729/include
+                    an-media/include
                     )
 
 ################################################################################
@@ -160,6 +161,7 @@ endif(ENABLE_TEST)
 
 add_subdirectory(aeronode-runtime)
 add_subdirectory(an-g729)
+add_subdirectory(an-media)
 
 # build gui
 if(ENABLE_GUI)
