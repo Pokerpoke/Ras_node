@@ -37,4 +37,5 @@ function update-header-files()
 rsync aeronode-runtime/lib/*.h aeronode-runtime/include/aeronode/
 
 update-header-files an-g729
+# update-header-files an-media
 # update-header-files an-gui

@@ -8,8 +8,8 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
- * Modified By:    姜阳 (j824544269@gmail.com)
+ * Last Modified:  2018-10-26
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #include <stdlib.h>
@@ -19,7 +19,7 @@
 
 namespace an
 {
-namespace codec
+namespace g729
 {
 G729Decoder::G729Decoder()
 {
@@ -52,5 +52,5 @@ G729Decoder::~G729Decoder()
     closeBcg729DecoderChannel(decoderChannelContext);
     free(output_buffer);
 }
-}
-}
+} // namespace g729
+} // namespace an

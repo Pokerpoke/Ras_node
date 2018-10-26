@@ -8,7 +8,7 @@
  * @brief    音频采集、回放基类，设定相关参数
  * @version  0.0.1
  * 
- * Last Modified:  2018-10-24
+ * Last Modified:  2018-10-26
  * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
@@ -30,23 +30,23 @@ VoiceBase::VoiceBase(const std::string &dev)
     device = dev.c_str();
     channels = 2;
     rate = 8000;
-    frames = 256;
     soft_resample = 1;
     format = SND_PCM_FORMAT_S16_LE;
     access_type = SND_PCM_ACCESS_RW_INTERLEAVED;
+    // 16 bits per sample
+    // 32 bits = 4 Bytes per frame
+    // frames * 4 < MTU = 1500 (most networks) -> frames = 256
+    frames = 480;
 
     DEVICE_OPENED = false;
     PARAMS_SETED = false;
 
-    // 16 bits
     bits_per_sample = snd_pcm_format_physical_width(format);
-    // 32 bits = 4 Bytes
     bits_per_frame = bits_per_sample * channels;
-    // 256 * 4 < MTU -> frames = 256
-    default_output_buffer_size = frames * bits_per_frame / 8;
+    default_output_buffer_size = frames * bits_per_frame / 8; // in byte
 
     buffer_frames = frames * 8;
-    period_frames = 0;
+    period_frames = buffer_frames / 4;
     period_time = 0;
     buffer_time = 0;
 }
@@ -99,7 +99,9 @@ int VoiceBase::set_params()
         LOG(INFO) << "Initialize parameters success.";
     }
 
-    if ((err = snd_pcm_hw_params_set_rate_resample(handle, params, soft_resample)) < 0)
+    if ((err = snd_pcm_hw_params_set_rate_resample(handle,
+                                                   params,
+                                                   soft_resample)) < 0)
     {
         LOG(ERROR) << "Set resample error for : "
                    << snd_strerror(err);
@@ -157,7 +159,8 @@ int VoiceBase::set_params()
     rrate = rate;
     if ((err = snd_pcm_hw_params_set_rate_near(handle,
                                                params,
-                                               &rrate, 0)) < 0)
+                                               &rrate,
+                                               0)) < 0)
     {
         LOG(ERROR) << "Set rate error for : "
                    << snd_strerror(err);
@@ -165,18 +168,18 @@ int VoiceBase::set_params()
     }
     else
     {
-        LOG(INFO) << "Set rate to " << rrate << "Hz success.";
-        if (rrate != rate)
-        {
+        if (rrate == rate)
+            LOG(INFO) << "Set rate to " << rrate << "Hz success.";
+        else
             LOG(WARN) << "Rate " << rate
                       << "Hz not available, get " << rrate << "Hz.";
-        }
     }
 
     if (buffer_time == 0 && buffer_frames == 0)
     {
         err = snd_pcm_hw_params_get_buffer_time_max(params,
-                                                    &buffer_time, 0);
+                                                    &buffer_time,
+                                                    0);
         assert(err >= 0);
         if (buffer_time > 500000)
             buffer_time = 500000;
@@ -202,7 +205,8 @@ int VoiceBase::set_params()
     if (buffer_time > 0)
     {
         err = snd_pcm_hw_params_set_buffer_time_near(handle, params,
-                                                     &buffer_time, 0);
+                                                     &buffer_time,
+                                                     0);
     }
     else
     {
@@ -276,6 +280,15 @@ int VoiceBase::set_params()
     period_frames = t_period_frames;
     LOG(INFO) << "Period size seted to " << t_period_frames << " frames.";
     return 0;
-} // namespace media
+}
+
+void VoiceBase::set_silence(char *data, int size)
+{
+    int err = snd_pcm_format_set_silence(format,
+                                         data,
+                                         size * 8 / bits_per_frame);
+    if (err < 0)
+        LOG(ERROR) << "Set silence failed.";
+}
 } // namespace media
 } // namespace an

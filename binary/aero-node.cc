@@ -8,7 +8,7 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-10-23
+ * Last Modified:  2018-10-26
  * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
@@ -31,7 +31,7 @@
 
 using namespace std;
 using namespace an::core;
-using namespace an::codec;
+using namespace an::g729;
 
 void listen();
 void send();

@@ -8,13 +8,12 @@
  * @brief    音频捕获并回放例程
  * @version  0.0.1
  * 
- * Last Modified:  2018-10-24
+ * Last Modified:  2018-10-25
  * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #include "aeronode/an-media/voice_playback.h"
 #include "aeronode/an-media/voice_capture.h"
-#include "aeronode/an-media/bandpass_filter.h"
 #include "aeronode/logger.h"
 
 using namespace std;
@@ -30,7 +29,6 @@ int main()
     while (1)
     {
         c.capture();
-        // f.filter(c.output_buffer, c.frames_readed);
         p.playback(c.output_buffer, c.output_buffer_size);
     }
 

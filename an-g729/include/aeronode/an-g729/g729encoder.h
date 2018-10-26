@@ -26,7 +26,7 @@ extern "C" {
 
 namespace an
 {
-namespace codec
+namespace g729
 {
 class G729Encoder
 {

@@ -8,8 +8,8 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-24
- * Modified By:    姜阳 (j824544269@gmail.com)
+ * Last Modified:  2018-10-26
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #include <stdlib.h>
@@ -19,7 +19,7 @@
 
 namespace an
 {
-namespace codec
+namespace g729
 {
 G729Encoder::G729Encoder()
 {
@@ -27,7 +27,7 @@ G729Encoder::G729Encoder()
     encoderChannelContext = initBcg729EncoderChannel(0);
 
     output_buffer_size = 10;
-    output_buffer = (char *)malloc(output_buffer_size);
+    output_buffer = (char *)calloc(output_buffer_size, sizeof(char));
 }
 
 int G729Encoder::encoder(const char *input_buffer,
@@ -64,5 +64,5 @@ G729Encoder::~G729Encoder()
     closeBcg729EncoderChannel(encoderChannelContext);
     free(output_buffer);
 }
-}
-}
+} // namespace g729
+} // namespace an

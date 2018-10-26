@@ -8,7 +8,7 @@
  * @brief    音频采集、回放基类，设定相关参数
  * @version  0.0.1
  * 
- * Last Modified:  2018-10-24
+ * Last Modified:  2018-10-26
  * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
@@ -33,6 +33,7 @@ class VoiceBase
   public:
     VoiceBase(const std::string &device = "default");
     virtual ~VoiceBase();
+    void set_silence(char *data, int size);
 
     /// 码率
     int rate;

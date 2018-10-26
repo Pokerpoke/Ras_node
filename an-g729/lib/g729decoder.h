@@ -8,15 +8,16 @@
  * @brief    
  * @version  0.0.1
  * 
- * Last Modified:  2018-04-16
- * Modified By:    姜阳 (j824544269@gmail.com)
+ * Last Modified:  2018-10-26
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  */
 #ifndef _G729DECODER_H_
 #define _G729DECODER_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 #include <bcg729/decoder.h>
 #ifdef __cplusplus
@@ -25,7 +26,7 @@ extern "C" {
 
 namespace an
 {
-namespace codec
+namespace g729
 {
 class G729Decoder
 {
@@ -44,7 +45,7 @@ class G729Decoder
 
   private:
 };
-}
-}
+} // namespace g729
+} // namespace an
 
 #endif // !_G729DECODER_H_

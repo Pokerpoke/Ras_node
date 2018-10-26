@@ -8,7 +8,7 @@
  * @brief    音频回放
  * @version  0.0.1
  * 
- * Last Modified:  2018-10-23
+ * Last Modified:  2018-10-25
  * Modified By:    Jiang Yang (pokerpoke@qq.com)
  * 
  * @example  qa_voice_playback.cc
@@ -42,6 +42,8 @@ class VoicePlayback : public VoiceBase
 
   private:
     int err;
+    char *silence;
+    int silence_frames;
 };
 } // namespace media
 } // namespace an

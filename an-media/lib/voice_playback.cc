@@ -1,3 +1,17 @@
+/**
+ * 
+ * Copyright (c) 2018 NUAA AeroLab
+ * 
+ * @file
+ * @author   Jiang Yang (pokerpoke@qq.com)
+ * @date     2018-10
+ * @brief    
+ * @version  0.0.1
+ * 
+ * Last Modified:  2018-10-26
+ * Modified By:    Jiang Yang (pokerpoke@qq.com)
+ * 
+ */
 /*******************************************************************************
  * 
  * Copyright (c) 2018 南京航空航天大学 航空通信网络研究室
@@ -30,6 +44,15 @@ VoicePlayback::VoicePlayback(const std::string &dev) : VoiceBase(dev)
         open_device();
     if (!PARAMS_SETED)
         set_params();
+
+    int err;
+
+    silence_frames = 256;
+    silence = (char *)calloc(silence_frames * 4, sizeof(char));
+    if ((err = snd_pcm_format_set_silence(format, silence, silence_frames * 2)) < 0)
+        LOG(INFO) << "Set silence failed.";
+    snd_pcm_writei(handle, silence, silence_frames);
+    snd_pcm_writei(handle, silence, silence_frames);
 }
 
 /** 
@@ -38,6 +61,7 @@ VoicePlayback::VoicePlayback(const std::string &dev) : VoiceBase(dev)
  */
 VoicePlayback::~VoicePlayback()
 {
+    free(silence);
 }
 
 /** 
@@ -64,13 +88,6 @@ int VoicePlayback::open_device()
         DEVICE_OPENED = true;
     }
 
-    // int err;
-    // char *buffer = (char *)calloc(default_output_buffer_size, sizeof(char));
-    // if ((err = snd_pcm_format_set_silence(format, buffer, default_output_buffer_size)) < 0)
-    //     LOG(INFO) << "Set silence failed.";
-    // snd_pcm_writei(handle, buffer, frames);
-    // snd_pcm_writei(handle, buffer, frames);
-    // free(buffer);
     return 0;
 }
 
@@ -85,31 +102,29 @@ int VoicePlayback::open_device()
  * @todo	添加出错时的返回值，写入次数限制，避免死循环
  * 
  */
-int VoicePlayback::playback(const char *input_buffer,
+int VoicePlayback::playback(const char *_input_buffer,
                             const long input_buffer_size) const
 {
+    // snd_pcm_writei(handle, silence, 32);
     int err = 0;
+    char *input_buffer = const_cast<char *>(_input_buffer);
     long r = input_buffer_size / bits_per_frame * 8;
 
     while (r > 0)
     {
+        snd_pcm_wait(handle, 100);
         do
         {
             err = snd_pcm_writei(handle,
                                  input_buffer,
                                  frames);
-            snd_pcm_wait(handle, 100);
             // Underrun happened
             if (err == -EPIPE)
             {
+                LOG(WARN) << "PCM underrun happened.";
                 snd_pcm_prepare(handle);
                 continue;
             }
-            // if (err < 0)
-            // {
-            // 	LOG(ERROR) << "Write buffer error for: " << snd_strerror(err);
-            // 	return -1;
-            // }
         } while (err < 0);
         r -= err;
         input_buffer += err * bits_per_frame / 8;

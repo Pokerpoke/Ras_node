@@ -29,7 +29,7 @@
 
 using namespace std;
 using namespace an::core;
-using namespace an::codec;
+using namespace an::g729;
 
 void hello()
 {

@@ -27,7 +27,6 @@ namespace media
  */
 VoiceCapture::VoiceCapture(const std::string &dev) : VoiceBase(dev)
 {
-    // frames_to_read = 32;
     if (!DEVICE_OPENED)
         open_device();
     if (!PARAMS_SETED)
@@ -87,12 +86,12 @@ int VoiceCapture::capture()
     {
         int err;
 
-        // snd_pcm_format_set_silence(format, output_buffer, output_buffer_size);
         if ((frames_readed = snd_pcm_readi(handle, output_buffer, frames)) < 0)
         {
             // Overrun happened
             if (frames_readed == -EPIPE)
             {
+                LOG(WARN) << "PCM overrun happened.";
                 snd_pcm_prepare(handle);
                 continue;
             }
@@ -101,16 +100,9 @@ int VoiceCapture::capture()
         }
         else
         {
-            snd_pcm_wait(handle, 100);
 #ifdef ENABLE_DEBUG
             LOG(INFO) << "Read frames success.";
 #endif
-            // LOG(INFO) << frames_readed;
-            // if (frames_readed < frames)
-            //     snd_pcm_format_set_silence(format,
-            //                                output_buffer + frames_readed * bits_per_frame / 8,
-            //                                (output_buffer_size - frames_readed) * 2);
-            // LOG(INFO) << frames_readed;
             return frames_readed;
         }
     }

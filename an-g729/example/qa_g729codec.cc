@@ -19,7 +19,7 @@
 #include "aeronode/an-g729/g729decoder.h"
 
 using namespace an::media;
-using namespace an::codec;
+using namespace an::g729;
 
 int main()
 {
