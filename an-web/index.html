@@ -29,7 +29,7 @@
     <script type="text/javascript" src="js/aeronode.js"></script>
     <nav class="light-blue">
         <div class="nav-wrapper white">
-            <a href="#!" class="brand-logo blue-text text-darken-2 center">AeroNode</a>
+            <a href="#!" class="brand-logo blue-text center">AeroNode</a>
             <a href="#" data-target="sidenav-left" class="sidenav-trigger">
                 <i class="material-icons blue-text">menu</i>
             </a>
@@ -40,7 +40,7 @@
             <object id="front-page-logo" type="image/svg+xml" data="src/images/aeronode-logo.svg" width="150">
                 "Your browser does not support svg."
             </object>
-            <a href="/" class="center">Aero Node</a>
+            <a href="/" class="center blue-text">Aero Node</a>
         </li>
         <li class="bold"><a href="#aeronode-cases">应用场景</a></li>
         <li class="bold"><a href="#aeronode-video">转播视频</a></li>
@@ -52,9 +52,56 @@
             <div class="col s12 m12 l12 offset-l2">
                 <div class="row">
                     <div class="col s12">
+                        <div id="aeronode-cases" class="section">
+                            <p>
+                                <h4 class="header blue-text">
+                                    应用场景
+                                </h4>
+                                <div class="divider"></div>
+                                典型应用场景
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="center section">
+                            <object type="image/svg+xml" data="src/images/earthquake.svg" width="150" height="150">
+                                "Your browser does not support svg."
+                            </object>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            地震
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="center section">
+                            <object type="image/svg+xml" data="src/images/communication.svg" width="150" height="150">
+                                "Your browser does not support svg."
+                            </object>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            地震
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="center section">
+                            <object type="image/svg+xml" data="src/images/ap.svg" width="150" height="150">
+                                "Your browser does not support svg."
+                            </object>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="section">
+                            地震
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col s12">
                         <div id="aeronode-video" class="section">
                             <p>
-                                <h4 class="header blue-text text-darken-2">
+                                <h4 class="header blue-text">
                                     AeroNode后台管理系统
                                 </h4>
                                 <div class="divider"></div>
@@ -92,23 +139,57 @@
                         <div class="col s12">
                             <div id="aeronode-information" class="section">
                                 <p>
-                                    <h4 class="header">
-                                        节点信息
+                                    <h4 class="header blue-text">
+                                        节点参数
                                     </h4>
                                     <div class="divider"></div>
-                                    节点详细信息
+                                    节点基本参数
                                 </p>
                             </div>
                             <div class="section">
                                 <table class="highlight">
-                                    <thead>
-                                        <tr>
-                                            <th>频率</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         <tr>
-                                            <th>3GHz</th>
+                                            <th>核心板</th>
+                                            <td>友善之臂 Tiny4412</td>
+                                            <th>处理器</th>
+                                            <td>Samsung Exynos4412</td>
+                                        </tr>
+                                        <tr>
+                                            <th>主频</th>
+                                            <td>1.5 GHz</td>
+                                            <th>核心数</th>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <th>RAM</th>
+                                            <td>1GB DDR3</td>
+                                            <th>ROM</th>
+                                            <td>4GB Emmc</td>
+                                        </tr>
+                                        <tr>
+                                            <th>USB</th>
+                                            <td>2 * USB 2.0</td>
+                                            <th>音频</th>
+                                            <td>3.5mm 耳机和麦克风</td>
+                                        </tr>
+                                        <tr>
+                                            <th>网络</th>
+                                            <td>有线、2.4G / 5G WiFi</td>
+                                            <th>重量(含显示屏、电池)</th>
+                                            <td>800g</td>
+                                        </tr>
+                                        <tr>
+                                            <th>单跳传输距离</th>
+                                            <td>200m</td>
+                                            <th>传输跳数</th>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <th>功率放大器</th>
+                                            <td>33dBm</td>
+                                            <th>天线</th>
+                                            <td>6dB全向天线</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -143,7 +224,7 @@
                     </div>
                     <div class="footer-copyright">
                         <div class="container">
-                            © 2014 Copyright NUAA AeroLab
+                            © 2018 Copyright NUAA AeroLab
                         </div>
                     </div>
                 </footer>
