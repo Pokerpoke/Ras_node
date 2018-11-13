@@ -6,6 +6,8 @@
     <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="shortcut icon" href="src/images/aeronode-logo.png" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="src/images/aeronode-logo.png" type="image/vnd.microsoft.icon" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,13 +26,7 @@
     <!-- START HEADER -->
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <!-- <script type="text/javascript" src="js/aeronode.js"></script> -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
-        });
-    </script>
+    <script type="text/javascript" src="js/aeronode.js"></script>
     <nav class="light-blue">
         <div class="nav-wrapper white">
             <a href="#!" class="brand-logo blue-text text-darken-2 center">AeroNode</a>
@@ -40,19 +36,23 @@
         </div>
     </nav>
     <ul id="sidenav-left" class="sidenav sidenav-fixed">
-        <li class="logo">
-            <a href="#">AeroNode</a>
+        <li class="logo center">
+            <object id="front-page-logo" type="image/svg+xml" data="src/images/aeronode-logo.svg" width="150">
+                "Your browser does not support svg."
+            </object>
+            <a href="/" class="center">Aero Node</a>
         </li>
-        <li class="bold"><a href="#">应用场景</a></li>
-        <li class="bold"><a href="#">节点管理</a></li>
-        <li class="bold"><a href="#">节点信息</a></li>
+        <li class="bold"><a href="#aeronode-cases">应用场景</a></li>
+        <li class="bold"><a href="#aeronode-video">转播视频</a></li>
+        <li class="bold"><a href="#aeronode-information">节点信息</a></li>
     </ul>
+
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12 offset-l2">
                 <div class="row">
                     <div class="col s12">
-                        <div class="section">
+                        <div id="aeronode-video" class="section">
                             <p>
                                 <h4 class="header blue-text text-darken-2">
                                     AeroNode后台管理系统
@@ -62,63 +62,93 @@
                             </p>
                         </div>
                     </div>
-                    <div class="section">
-                        <div class="col s12 m6 l4">
-                            <video class="responsive-video" controls>
-                                <source src="src/videos/test.mp4">
-                                测试用视频
-                            </video>
+                    <div class="col s12 ">
+                        <div class="row">
+                            <div class="col s12 m6 l4">
+                                <video class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                            </div>
                         </div>
-                        <div class="col s12 m6 l4">
-                            <video class="responsive-video" controls>
-                                <source src="src/videos/test.mp4">
-                                测试用视频
-                            </video>
-                        </div>
-                        <div class="col s12 m6 l4">
-                            <video class="responsive-video" controls>
-                                <source src="src/videos/test.mp4">
-                                测试用视频
-                            </video>
-                        </div>
-                        <div class="col s12 m6 l4">
-                            <video class="responsive-video" controls>
-                                <source src="src/videos/test.mp4">
-                                测试用视频
-                            </video>
-                        </div>
-                        <div class="col s12 section">
-                        </div>
-                    </div>
-                    <div class="col s12">
-                        <div class="section">
-                            <p>
-                                <h4 class="header">
-                                    节点信息
-                                </h4>
-                                <div class="divider"></div>
-                                节点详细信息
-                            </p>
-                        </div>
-                        <div class="section">
-                            <table class="highlight">
-                                <thead>
-                                    <tr>
-                                        <th>频率</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>3GHz</th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col s12">
+                            <div id="aeronode-information" class="section">
+                                <p>
+                                    <h4 class="header">
+                                        节点信息
+                                    </h4>
+                                    <div class="divider"></div>
+                                    节点详细信息
+                                </p>
+                            </div>
+                            <div class="section">
+                                <table class="highlight">
+                                    <thead>
+                                        <tr>
+                                            <th>频率</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>3GHz</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <footer class="page-footer blue">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col l6 s12">
+                                <h5 class="white-text">Aero Node</h5>
+                                <p class="grey-text text-lighten-4">南京航空航天大学</p>
+                                <p class="grey-text text-lighten-4">航空通信网络实验室</p>
+                            </div>
+                            <div class="col l4 offset-l2 s12">
+                                <h5 class="white-text">相关链接</h5>
+                                <ul>
+                                    <li>
+                                        <a class="grey-text text-lighten-3" href="http://www.nuaa.edu.cn/">
+                                            南京航空航天大学
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="grey-text text-lighten-3" href="http://aeronet.nuaa.edu.cn/">
+                                            航空自组织网络协议在线仿真
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright">
+                        <div class="container">
+                            © 2014 Copyright NUAA AeroLab
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
