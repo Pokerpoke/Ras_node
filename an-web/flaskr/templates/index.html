@@ -5,9 +5,9 @@
     <!--Import Google Icon Font-->
     <link href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.min.css" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-    <link rel="shortcut icon" href="src/images/aeronode-logo.png" type="image/vnd.microsoft.icon" />
-    <link rel="icon" href="src/images/aeronode-logo.png" type="image/vnd.microsoft.icon" />
+    <link type="text/css" rel="stylesheet" href={{ url_for('static', filename='css/materialize.min.css') }} media="screen,projection" />
+    <link rel="shortcut icon" href={{ url_for('static', filename='src/images/favicon.png') }} type="image/vnd.microsoft.icon" />
+    <link rel="icon" href={{ url_for('static', filename='src/images/favicon.png') }} type="image/vnd.microsoft.icon" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -25,8 +25,10 @@
     <!-- //////////////////////////////////////////////////////////////////////////// -->
     <!-- START HEADER -->
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/aeronode.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script type="text/javascript" src={{ url_for('static', filename='js/materialize.min.js') }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename='js/aeronode.js') }}></script>
     <nav class="light-blue">
         <div class="nav-wrapper white">
             <a href="#!" class="brand-logo blue-text center">AeroNode</a>
@@ -37,7 +39,7 @@
     </nav>
     <ul id="sidenav-left" class="sidenav sidenav-fixed">
         <li class="logo center">
-            <object id="front-page-logo" type="image/svg+xml" data="src/images/aeronode-logo.svg" width="150">
+            <object id="front-page-logo" type="image/svg+xml" data={{ url_for('static', filename='src/images/aeronode-logo.svg') }} width="150">
                 "Your browser does not support svg."
             </object>
             <a href="/" class="center blue-text">Aero Node</a>
@@ -52,6 +54,15 @@
             <div class="col s12 m12 l12 offset-l2">
                 <div class="row">
                     <div class="col s12">
+                        <div id="aeronode-introduction" class="section">
+                            <p>
+                                本系统为面向抢险救灾的无线自组网通信/监控系统，目的是为灾后救援工作提供强有力的信息化支撑，保障抢险救灾任务的顺利进行。在信息化迅猛发展的新时代，社会的各个领域在发生着深刻的变革，装备的优良直接关系着军队的战斗力，本系统充分利用了信息化平台强大的运算能力，实现了信息的快速化处理。系统由手持、车载、机载自组网终端和后台监控服务器组成，不同类型的自组网终端可以适应不同的灾区环境，三种类型的自组网终端可以实现一定范围的区域覆盖，形成应急通信网络，自组网终端可以采集视频、话音、图片等多种类型数据，终端采集到的数据可以以多跳路由的形式发送至后台服务器，客户端以IP化的方式访问服务器，即可查看前方的具体信息。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
                         <div id="aeronode-cases" class="section">
                             <p>
                                 <h4 class="header blue-text">
@@ -62,37 +73,46 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col s12 m4 l4">
-                        <div class="center section">
-                            <object type="image/svg+xml" data="src/images/earthquake.svg" width="150" height="150">
-                                "Your browser does not support svg."
-                            </object>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="section">
-                            地震
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="center section">
-                            <object type="image/svg+xml" data="src/images/communication.svg" width="150" height="150">
-                                "Your browser does not support svg."
-                            </object>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="section">
-                            地震
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src={{ url_for('static', filename='src/images/earthquake.jpg') }}>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">地震<i class="material-icons right">more_vert</i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">地震<i class="material-icons right">close</i></span>
+                                <p>地震发生时通信基站可能会受损，此时常规通讯手段无法正常通信。</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col s12 m4 l4">
-                        <div class="center section">
-                            <object type="image/svg+xml" data="src/images/ap.svg" width="150" height="150">
-                                "Your browser does not support svg."
-                            </object>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src={{ url_for('static', filename='src/images/fire.jpg') }}>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">火灾<i class="material-icons right">more_vert</i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">火灾<i class="material-icons right">close</i></span>
+                                <p>火灾时常规通讯手段无法进入建筑物内部。</p>
+                            </div>
                         </div>
-                        <div class="divider"></div>
-                        <div class="section">
-                            地震
+                    </div>
+                    <div class="col s12 m6 l4">
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src={{ url_for('static', filename='src/images/mudflow.jpg') }}>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">泥石流<i class="material-icons right">more_vert</i></span>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">泥石流<i class="material-icons right">close</i></span>
+                                <p>泥石流多发于山林地区，基站信号受地形干扰严重，基站有一定受损可能性。</p>
+                            </div>
                         </div>
                     </div>
 
@@ -113,7 +133,7 @@
                         <div class="row">
                             <div class="col s12 m6 l4">
                                 <video class="responsive-video" controls>
-                                    <source src="src/videos/test.mp4">
+                                    <source src={{ url_for('static', filename='src/videos/test.mp4') }}>
                                     测试用视频
                                 </video>
                             </div>
@@ -122,6 +142,8 @@
                                     <source src="src/videos/test.mp4">
                                     测试用视频
                                 </video>
+                                <button id="8" onclick="request(8)" disabled="disabled" class="btn">节点8</button> 
+                                <button onclick="video8.load()" class="btn">刷新</button>
                             </div>
                             <div class="col s12 m6 l4">
                                 <video class="responsive-video" controls>
