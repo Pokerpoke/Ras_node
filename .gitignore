@@ -1,7 +1,22 @@
-build
-.vs
-.vscode
+# cmake build directory
+build/
+# visual studio
+.vs/
+# visual studio code
+.vscode/
+# log files
 log
+*.log
+# temp files for debug
 temp_*
-temp
-CMakeSettings.json
+temp/
+# python
+venv/
+*.pyc
+__pycache__/
+instance/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+*.egg-info/
