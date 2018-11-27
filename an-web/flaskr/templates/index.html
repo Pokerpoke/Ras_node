@@ -14,7 +14,7 @@
     <title>AeroNode后台管理系统</title>
 </head>
 
-<body>
+<body onload="flushNodeList()">
     <!-- Start Page Loading -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -138,12 +138,12 @@
                                 </video>
                             </div>
                             <div class="col s12 m6 l4">
-                                <video class="responsive-video" controls>
+                                <video id="video9" class="responsive-video" controls>
                                     <source src="src/videos/test.mp4">
                                     测试用视频
                                 </video>
-                                <button id="8" onclick="request(8)" disabled="disabled" class="btn">节点8</button> 
-                                <button onclick="video8.load()" class="btn">刷新</button>
+                                <button id="9" onclick="request(9)" disabled="disabled" class="btn">节点9</button> 
+                                <button onclick="video9.load()" class="btn">刷新</button>
                             </div>
                             <div class="col s12 m6 l4">
                                 <video class="responsive-video" controls>

@@ -5,7 +5,7 @@
 Copyright (c) 2018 NUAA AeroLab
 
 @file
-@author   Jiang Yang (pokerpoke@qq.com)
+@author   pikaqiu (2233930937@qq.com)
 @date     2018-11
 @brief    
 @version  0.0.1

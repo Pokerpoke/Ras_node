@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 # -*- coding:utf-8 -*-
 """
 
@@ -33,7 +33,7 @@ logger.setLevel(logging.DEBUG)
 # create a handler, write to log.txt
 # logging.FileHandler(self, filename, mode='a', encoding=None, delay=0)
 # A handler class which writes formatted logging records to disk files.
-fileHandler = logging.FileHandler('heartbeat.log')
+fileHandler = logging.FileHandler('heartbeat-log.txt')
 fileHandler.setLevel(logging.INFO)
 
 # create another handler, for stdout in terminal
@@ -102,7 +102,7 @@ class HeartBeat(object):
                     else:
                         if  tmp['upload'] == True:
                             cmd = "vlc --extraintf=http:logger --verbose=2 --file-logging --logfile=vlc-log.txt"
-                            cmd+=" file:///%s/vlc/sdp/%s.sdp"% (self.current_path, tmp['node'])
+                            cmd+=" file://%s/vlc/sdp/%s.sdp"% (self.current_path, tmp['node'])
                             cmd+=" :sout='#transcode{vcodec=theo,vb=800,acodec=vorb,ab=128,channels=2,samplerate=44100,scodec=none}"
                             cmd+=":http{dst=:%s/demo.ogg}'" % (tmp['node']+8080)
                             cmd+=" :no-sout-all :sout-keep vlc://quit"
@@ -128,7 +128,7 @@ class HeartBeat(object):
     #向节点num请求视频
     def selectNode(self,num,call):
         #call true为请求网络视频 false为停止接收
-        d = dict(node=num, port=8000+num, request=call)
+        d = dict(node=num, port=8000+num*2, request=call)
         d_string=json.dumps(d)
         return d_string
 
@@ -143,7 +143,8 @@ class HeartBeat(object):
                 response = urllib2.urlopen(req)
                 request_msg=response.read().decode('utf-8')
                 if request_msg == 'ok':
-                    logger.debug('Data:%s'% request_msg)# 获取服务器返回的页面信息 
+                    pass
+                    # logger.debug('Data:%s'% request_msg)# 获取服务器返回的页面信息 
                 else :
                     #寻找节点上传视频
                     request = json.loads(request_msg)
@@ -193,5 +194,5 @@ class HeartBeat(object):
         self.server.close()
         logger.debug('server had stopped work')
 if __name__ == '__main__':
-    heartbeat=HeartBeat("0.0.0.0",8090)
+    heartbeat=HeartBeat("0.0.0.0",6000)
     heartbeat.start()

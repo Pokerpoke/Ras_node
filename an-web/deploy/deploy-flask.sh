@@ -12,7 +12,7 @@
 # Modified By:    Jiang Yang (pokerpoke@qq.com)
 # 
 ################################################################################
-set -e
+sudo apt-get install -y python3-venv
 
 # get scripts directory
 CMAKE_SOURCE_DIR=$(dirname $(readlink -f $0))
