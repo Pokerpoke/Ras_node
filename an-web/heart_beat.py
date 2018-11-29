@@ -33,7 +33,7 @@ logger.setLevel(logging.DEBUG)
 # create a handler, write to log.txt
 # logging.FileHandler(self, filename, mode='a', encoding=None, delay=0)
 # A handler class which writes formatted logging records to disk files.
-fileHandler = logging.FileHandler('heartbeat-log.txt')
+fileHandler = logging.FileHandler('heartbeat.log')
 fileHandler.setLevel(logging.INFO)
 
 # create another handler, for stdout in terminal
