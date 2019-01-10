@@ -20,7 +20,7 @@ while getopts 'dp:m' OPT;
 do
     case ${OPT} in
         d)
-            wget -c -v http://192.168.0.9/share/system-images/${IMAGE_NAME} -O ~/Downloads/${IMAGE_NAME}
+            wget -c -v http://192.168.0.9/share/0.%E6%9D%82/2.%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F/${IMAGE_NAME} -O ~/Downloads/${IMAGE_NAME}
             IMAGE_PATH=~/Downloads/${IMAGE_NAME}
             ;;
         p)
