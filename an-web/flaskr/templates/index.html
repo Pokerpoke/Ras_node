@@ -11,10 +11,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AeroNode后台管理系统</title>
+    <title>长空雁应急通信系统</title>
 </head>
 
-<body>
+<body onload="flushNodeList()">
     <!-- Start Page Loading -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -31,7 +31,7 @@
     <script type="text/javascript" src={{ url_for('static', filename='js/aeronode.js') }}></script>
     <nav class="light-blue">
         <div class="nav-wrapper white">
-            <a href="#!" class="brand-logo blue-text center">AeroNode</a>
+            <a href="#!" class="brand-logo blue-text center">长空雁</a>
             <a href="#" data-target="sidenav-left" class="sidenav-trigger">
                 <i class="material-icons blue-text">menu</i>
             </a>
@@ -39,14 +39,11 @@
     </nav>
     <ul id="sidenav-left" class="sidenav sidenav-fixed">
         <li class="logo center">
-            <object id="front-page-logo" type="image/svg+xml" data={{ url_for('static', filename='src/images/aeronode-logo.svg') }} width="150">
-                "Your browser does not support svg."
-            </object>
-            <a href="/" class="center blue-text">Aero Node</a>
+            <img src={{ url_for('static', filename='src/images/aeronode-logo.png') }} width="150">
         </li>
-        <li class="bold"><a href="#aeronode-cases">应用场景</a></li>
-        <li class="bold"><a href="#aeronode-video">转播视频</a></li>
-        <li class="bold"><a href="#aeronode-information">节点信息</a></li>
+        <li class="bold"><a href="#aeronode-cases">典型应用场景</a></li>
+        <li class="bold"><a href="#aeronode-video">长空雁后台管理系统</a></li>
+        <li class="bold"><a href="#aeronode-information">自组网终端信息</a></li>
     </ul>
 
     <div class="container">
@@ -66,10 +63,10 @@
                         <div id="aeronode-cases" class="section">
                             <p>
                                 <h4 class="header blue-text">
-                                    应用场景
+                                    典型应用场景
                                 </h4>
                                 <div class="divider"></div>
-                                典型应用场景
+                                这些场景下往往伴随通信基站的受损或毁坏，需要快速搭建通信网络，同时，网络拓扑存在不确定性，部分节点可能会失效。使用传统的通信方式一旦中心节点被破环，整个网络即遭到破坏。
                             </p>
                         </div>
                     </div>
@@ -122,50 +119,150 @@
                         <div id="aeronode-video" class="section">
                             <p>
                                 <h4 class="header blue-text">
-                                    AeroNode后台管理系统
+                                    长空雁后台管理系统
                                 </h4>
                                 <div class="divider"></div>
-                                在这里查看视频
+                                监控终端状态，接收终端回传的视频。
                             </p>
                         </div>
                     </div>
                     <div class="col s12 ">
                         <div class="row">
                             <div class="col s12 m6 l4">
-                                <video class="responsive-video" controls>
-                                    <source src={{ url_for('static', filename='src/videos/test.mp4') }}>
-                                    测试用视频
-                                </video>
-                            </div>
-                            <div class="col s12 m6 l4">
-                                <video class="responsive-video" controls>
+                                <video id="video1" class="responsive-video" controls>
                                     <source src="src/videos/test.mp4">
                                     测试用视频
                                 </video>
-                                <button id="8" onclick="request(8)" disabled="disabled" class="btn">节点8</button> 
-                                <button onclick="video8.load()" class="btn">刷新</button>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="1" onclick="request(1)" disabled="disabled" class="btn">节点1</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video1.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col s12 m6 l4">
-                                <video class="responsive-video" controls>
+                                <video id="video2" class="responsive-video" controls>
                                     <source src="src/videos/test.mp4">
                                     测试用视频
                                 </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="2" onclick="request(2)" disabled="disabled" class="btn">节点2</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video2.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col s12 m6 l4">
-                                <video class="responsive-video" controls>
+                                <video id="video3" class="responsive-video" controls>
                                     <source src="src/videos/test.mp4">
                                     测试用视频
                                 </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="3" onclick="request(3)" disabled="disabled" class="btn">节点3</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video3.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video4" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="4" onclick="request(4)" disabled="disabled" class="btn">节点4</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video4.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video5" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="5" onclick="request(5)" disabled="disabled" class="btn">节点5</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video5.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video6" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="6" onclick="request(6)" disabled="disabled" class="btn">节点6</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video6.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video7" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="7" onclick="request(7)" disabled="disabled" class="btn">节点7</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video7.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video8" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="8" onclick="request(8)" disabled="disabled" class="btn">节点8</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video8.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 l4">
+                                <video id="video9" class="responsive-video" controls>
+                                    <source src="src/videos/test.mp4">
+                                    测试用视频
+                                </video>
+                                <div class="row">
+                                    <div class="col s3 m3 l3">
+                                    <button id="9" onclick="request(9)" disabled="disabled" class="btn">节点9</button> 
+                                    </div>
+                                    <div class="col s3 m3 l3">
+                                    <button onclick="video9.load()" class="btn">刷新</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col s12">
                             <div id="aeronode-information" class="section">
                                 <p>
                                     <h4 class="header blue-text">
-                                        节点参数
+                                        自组网终端参数
                                     </h4>
                                     <div class="divider"></div>
-                                    节点基本参数
+                                    自组网终端基本参数。
                                 </p>
                             </div>
                             <div class="section">
@@ -223,7 +320,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col l6 s12">
-                                <h5 class="white-text">Aero Node</h5>
+                                <h5 class="white-text">长空雁应急通信系统</h5>
                                 <p class="grey-text text-lighten-4">南京航空航天大学</p>
                                 <p class="grey-text text-lighten-4">航空通信网络实验室</p>
                             </div>

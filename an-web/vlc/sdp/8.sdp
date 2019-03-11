@@ -1,4 +1,4 @@
-m=video 8008 RTP/AVP 96  
+m=video 8016 RTP/AVP 96  
 a=rtpmap:96 H264/90000  
 a=decode_buf=300  
 a=framerate:20  
